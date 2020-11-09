@@ -1,0 +1,31 @@
+﻿@using Models.Graficos
+
+
+<RadzenChart>
+    <RadzenPieSeries Data="@Dados" Title="@Titulo"
+                     CategoryProperty="@PropriedadeLegenda"
+                     ValueProperty="@PropriedadeValor">
+
+    </RadzenPieSeries>
+    <RadzenLegend Position="LegendPosition.Right" Visible="true"></RadzenLegend>
+</RadzenChart>
+
+@code {
+    [Parameter]
+    public IList<PieSerie> Dados { get; set; }
+
+    [Parameter]
+    public string Titulo { get; set; }
+
+    [Parameter]
+    public string PropriedadeLegenda { get; set; }
+
+    [Parameter]
+    public string PropriedadeValor { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+}

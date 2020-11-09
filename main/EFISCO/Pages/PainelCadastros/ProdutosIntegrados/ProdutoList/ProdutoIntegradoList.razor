@@ -1,0 +1,59 @@
+﻿
+
+@inject BLL.Cadastros.Produtos.Interfaces.IProdutoIntegradoService produtoService;
+@inject BLL.TOTVS.Cadastros.Interfaces.IProdutoVersusFornecedorTotvsService produtoFornecedor;
+
+<RadzenGrid TItem="ProdutoIntegrado"
+            AllowFiltering="true"
+            AllowSorting="true"
+            
+            Data="ProdutosIntegrados">
+    <Columns>
+        <RadzenGridColumn  TItem="ProdutoIntegrado" Title="Editar">
+            <Template Context="produto">
+                <RadzenButton Icon="@MatIconNames.Edit" Size="Radzen.ButtonSize.Small" Click="@(async (args)=> await AmarrarCadastro(produto))"></RadzenButton>
+            </Template>
+        </RadzenGridColumn>
+        <RadzenGridColumn TItem="ProdutoIntegrado" Property="Produto.xProd" Title="Produto"/>
+        <RadzenGridColumn TItem="ProdutoIntegrado" Property="Produto.cProd" Title="Cod. Ref. Fornecedor"/>
+        <RadzenGridColumn TItem="ProdutoIntegrado" Property="CnpjFornecedor" Title="Cnpj"/>
+        <RadzenGridColumn TItem="ProdutoIntegrado" Property="Produto.NCM" Title="NCM"/>
+        <RadzenGridColumn TItem="ProdutoIntegrado" Property="Produto.uCom" Title="Unidade"/>
+    </Columns>    
+</RadzenGrid>
+
+
+@code {
+
+    [Parameter]
+    public IList<ProdutoIntegrado> ProdutosIntegrados { get; set; }
+
+    [Parameter]
+    public bool ShouldReload { get; set; }
+
+    [Parameter]
+    public EventCallback<ProdutoIntegrado> RowSelectedCallBack { get; set; }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        ProdutosIntegrados = await this.produtoService.GetNaoIntegrados();
+    }
+    protected override async Task OnParametersSetAsync()
+    {
+        if (ShouldReload)
+        {
+            ProdutosIntegrados = await this.produtoService.GetNaoIntegrados();
+        }
+    }
+
+
+   
+
+    private async Task AmarrarCadastro(ProdutoIntegrado produto)
+    {
+        await this.RowSelectedCallBack.InvokeAsync(produto);
+    }
+
+}

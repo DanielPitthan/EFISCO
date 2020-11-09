@@ -1,0 +1,115 @@
+﻿
+
+@inject BLL.TOTVS.Cadastros.Interfaces.IProdutoTotvsService produtoTotvsService;
+@inject BLL.TOTVS.Cadastros.Interfaces.IProdutoVersusFornecedorTotvsService produtoVsFornecedorService;
+@inject BLL.TOTVS.Cadastros.Interfaces.IFornecedorTotvsService fornecedorTotvsService;
+
+<Modal @ref="modalRef">
+    <ModalContent Size="ModalSize.Large">
+        <ModalHeader>
+            <h4>Amarração Produto vs Fornecedor</h4>
+        </ModalHeader>
+        <ModalBody>
+            <Table Striped="true">
+                <TableHeader>
+                    <Blazorise.TableRow>
+                        <TableHeaderCell>Referencia.</TableHeaderCell>
+                        <TableHeaderCell>NCM.</TableHeaderCell>
+                        <TableHeaderCell>Produto.</TableHeaderCell>
+                        <TableHeaderCell>Cod. Protheus</TableHeaderCell>
+                        <TableHeaderCell>Descrição</TableHeaderCell>
+                        <TableHeaderCell>Amarração</TableHeaderCell>
+                    </Blazorise.TableRow>
+                </TableHeader>
+                <Blazorise.TableBody>
+                    @if (Produtos != null)
+                    {
+                        @foreach (var produto in Produtos)
+                        {
+                            <Blazorise.TableRow>
+                                <TableRowCell>  @ProdutoIntegrado.Produto.cProd</TableRowCell>
+                                <TableRowCell>  @ProdutoIntegrado.Produto.NCM</TableRowCell>
+                                <TableRowCell>  @ProdutoIntegrado.Produto.xProd</TableRowCell>
+                                <TableRowCell>   @produto.B1_COD</TableRowCell>
+                                <TableRowCell>   @produto.B1_DESC</TableRowCell>
+                                <TableRowCell>
+                                    <MatButton Icon="leak_add"
+                                               @onclick="@(async ()=> await Amarrar(ProdutoIntegrado,produto))">Amarrar</MatButton>
+                                </TableRowCell>
+                            </Blazorise.TableRow>
+                        }
+                    }
+                </Blazorise.TableBody>
+            </Table>
+        </ModalBody>
+        <ModalFooter>
+            <MatButton @onclick="FecharModal">Fechar</MatButton>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
+
+<MatSnackbar IsOpen="exibeAviso">
+    <MatSnackbarContent>
+        <p>@aviso</p>
+    </MatSnackbarContent>
+    <MatSnackbarActions>
+        <MatButton Raised="true" @onclick="@(()=>exibeAviso=false)">OK</MatButton>
+    </MatSnackbarActions>
+</MatSnackbar>
+
+@code {
+
+    [Parameter]
+    public bool Show { get; set; }
+
+
+    [Parameter]
+    public ProdutoIntegrado ProdutoIntegrado { get; set; }
+
+    [Parameter]
+    public IList<ProdutoTotvs> Produtos { get; set; } = new List<ProdutoTotvs>();
+
+    [Parameter]
+    public EventCallback<bool> AmarracaoFianlizadaCallBack { get; set; }
+
+    private Modal modalRef { get; set; }
+    private string aviso = "";
+    private bool exibeAviso = false;
+
+    protected override void OnParametersSet()
+    {
+        if (Show)
+            modalRef.Show();
+    }
+
+    protected override void OnInitialized()
+    {
+        Produtos = new List<ProdutoTotvs>();
+    }
+
+    private void FecharModal()
+    {
+        modalRef.Hide();
+    }
+
+    private async Task Amarrar(ProdutoIntegrado produto, ProdutoTotvs produtoTotvs)
+    {
+        var fornecedor  =  await this.fornecedorTotvsService.LocateByCnpj(produto.CodigoTotvsEmpresaFilial,produto.CnpjFornecedor);
+
+        if (fornecedor == null)
+        {
+            aviso = "Fornecedor não cadastrado no Protheus, não é pssível fazer a amarração ";
+            exibeAviso = true;
+        }
+
+
+        produto.CodigoProdutoTOTVS = produtoTotvs.B1_COD;
+        var result = await this.produtoVsFornecedorService.AmarrarFornecedor(produto);
+
+        FecharModal();
+
+        await this.AmarracaoFianlizadaCallBack.InvokeAsync(result);
+        this.StateHasChanged();
+    }
+}

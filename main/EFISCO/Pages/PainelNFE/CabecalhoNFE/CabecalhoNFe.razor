@@ -1,0 +1,92 @@
+﻿@using XmlNFe.Nfes
+
+
+    <table class="table table-bordered ">
+        <thead class="thead-light">
+            <tr>
+                <th>Fornecedor</th>
+                <th>CNPJ</th>
+                <th>IE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@NFe.infNFe.emit.xNome</td>
+                <td>@NFe.infNFe.emit.CNPJ</td>
+                <td>@NFe.infNFe.emit.IE</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered ">
+        <thead class="thead-light">
+            <tr>
+                <th>UF</th>
+                <th>Endereço</th>
+                <th>Município</th>
+                <th>Bairro</th>
+                <th>CEP</th>
+                <th>NF</th>
+                <th>Serie</th>
+                <th>Emissão</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@NFe.infNFe.emit.enderEmit.xLgr</td>
+                <td>@NFe.infNFe.emit.enderEmit.xMun</td>
+                <td>@NFe.infNFe.emit.enderEmit.xBairro</td>
+                <td>@NFe.infNFe.emit.enderEmit.CEP</td>
+                <td>@NFe.infNFe.ide.cNF</td>
+                <td>@NFe.infNFe.ide.serie</td>
+                <td>@NFe.infNFe.ide.dEmi - @NFe.infNFe.ide.dhEmi</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered ">
+        <thead class="thead-light">
+            <tr>
+                <th>NF</th>
+                <th>Serie</th>
+                <th>Emissão</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@NFe.infNFe.ide.cNF</td>
+                <td>@NFe.infNFe.ide.serie</td>
+                <td>@NFe.infNFe.ide.dEmi - @NFe.infNFe.ide.dhEmi</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered ">
+        <thead class="thead-light">
+            <tr>
+                <th>Natureza</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@NFe.infNFe.ide.natOp</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-bordered ">
+        <thead class="thead-light">
+            <tr>
+                <th>Modalidade</th>
+                <th>Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@NFe.infNFe.ide.mod</td>
+                <td>@NFe.infNFe.ide.tpNF</td>
+            </tr>
+        </tbody>
+    </table>
+    
+        @code {
+            [Parameter]
+            public NFe NFe { get; set; }
+        }

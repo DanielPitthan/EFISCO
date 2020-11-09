@@ -1,0 +1,16 @@
+﻿
+@using System.IO
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment webHosting;
+<MatButton @onclick="Download">Modelo</MatButton>
+
+@code {
+    [Inject]
+    BlazorDownloadFile.IBlazorDownloadFileService BlazorDownloadFileService { get; set; }
+
+    private async Task Download()
+    {
+        byte[] bytesOfFile = File.ReadAllBytes(Path.Combine(webHosting.WebRootPath, @"_content\\Modelos\\Excel\\XmlValidados.xlsx"));
+        await BlazorDownloadFileService.DownloadFile("XmlValidados_MODELO.xlsx", bytesOfFile, "application/octet-stream");
+    }
+
+}

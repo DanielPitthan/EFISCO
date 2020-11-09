@@ -1,0 +1,23 @@
+﻿@using BLL.NFE.Interfaces;
+
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment webHosting;
+@inject INfeDownloadListService downloadNfeService;
+
+
+
+<MatButton @onclick="Download">Exportar</MatButton>
+
+
+
+@code {
+
+    [Inject]
+    BlazorDownloadFile.IBlazorDownloadFileService BlazorDownloadFileService { get; set; }
+
+    private async Task Download()
+    {
+        var bytes = await downloadNfeService.DownloadList();
+        await BlazorDownloadFileService.DownloadFile("planilha.xlsx", bytes, "application/octet-stream");
+    }
+
+}

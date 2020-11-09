@@ -1,0 +1,42 @@
+﻿@using XmlNFe.Nfes
+
+<table class="table table-bordered ">
+    <thead class="thead-light">
+        <tr>
+            <th>Codigo</th>
+            <th>Produto</th>
+            
+            <th>NCM</th>
+            <th>CFOP</th>
+            <th>UN</th>
+            <th>Quant</th>
+            <th>V. Unit</th>
+            <th>V. Total</th>
+            <th>Pedido</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var det in @NFe.infNFe.det)
+        {
+        <tr>
+            <td>@det.prod.cProd</td>
+            <td>@det.prod.xProd</td>
+            <td>@det.prod.NCM</td>
+            <td>@det.prod.CFOP</td>
+            <td>@det.prod.uCom</td>
+            <td>@det.prod.qCom</td>
+            <td>@det.prod.vUnCom</td>
+            <td>@det.prod.vProd</td>
+            <td>
+                <MatTextField @bind-Value="det.prod.xPed" Outlined="true" HelperText="Informe o pedido de compras"></MatTextField>
+            </td>
+        </tr>
+
+        }
+
+    </tbody>
+</table>
+@code {
+    [Parameter]
+    public NFe NFe { get; set; }
+}

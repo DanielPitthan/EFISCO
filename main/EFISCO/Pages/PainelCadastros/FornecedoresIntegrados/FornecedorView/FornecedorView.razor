@@ -1,0 +1,144 @@
+﻿@using Models.TOTVS.Cadastros.ClienteFornecedor
+@inject BLL.TOTVS.Cadastros.Interfaces.IFornecedorTotvsService forncedorTotvsService;
+
+<Modal @ref="modalRef" ScrollToTop="false">
+    <ModalContent Size="ModalSize.ExtraLarge">
+        <ModalHeader Class="grey lighten-3">
+            <ModalTitle>Cadastro do Emitente</ModalTitle>
+        </ModalHeader>
+        <ModalBody>
+            <div class="row">
+                <MatTextField FullWidth="true" Disabled="true" @bind-Value="Emitente.xNome" Label="Razao Social"></MatTextField>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <MatTextField FullWidth="true" Disabled="true" @bind-Value="Emitente.CNPJ" Label="CNPJ"></MatTextField>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <MatTextField FullWidth="true" Disabled="true" @bind-Value="Emitente.IE" Label="IE"></MatTextField>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <MatTextField FullWidth="true" Disabled="true" @bind-Value="Emitente.CNAE" Label="CNAE"></MatTextField>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <MatTextField FullWidth="true" Disabled="true" @bind-Value="Emitente.enderEmit.ProxyUF" Label="Estado"></MatTextField>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <MatTextField FullWidth="true" Disabled="true" @bind-Value="Emitente.enderEmit.xMun" Label="Cidade"></MatTextField>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <MatTextField FullWidth="true" Disabled="true" @bind-Value="Emitente.enderEmit.cMun" Label="Código Ibge"></MatTextField>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <MatTextField FullWidth="true" Disabled="true" @bind-Value="Emitente.enderEmit.CEP" Label="CEP"></MatTextField>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <MatTextField FullWidth="true" Disabled="true" @bind-Value="Emitente.enderEmit.xBairro" Label="Bairro"></MatTextField>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <MatTextField FullWidth="true" Disabled="true" @bind-Value="Emitente.enderEmit.xLgr" Label="Endereço"></MatTextField>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <MatTextField FullWidth="true" Disabled="true" @bind-Value="Emitente.enderEmit.nro" Label="Número"></MatTextField>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <MatTextField FullWidth="true" Disabled="true" @bind-Value="Emitente.enderEmit.xPais" Label="País"></MatTextField>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <MatTextField FullWidth="true" Disabled="true" @bind-Value="Emitente.enderEmit.xCpl" Label="Complemento"></MatTextField>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <MatTextField FullWidth="true" Disabled="true" @bind-Value="Emitente.enderEmit.fone" Label="Telefone"></MatTextField>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <MatTextField FullWidth="true" Disabled="false" @bind-Value="natureza" Label="Natureza"></MatTextField>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <MatTextField FullWidth="true" Disabled="false" @bind-Value="conta" Label="Conta Contábil"></MatTextField>
+                </div>
+            </div>
+        </ModalBody>
+        <ModalFooter>
+            @if (Opcao == Opcoes.Incluir)
+            {
+                <MatButton @onclick="@(async ()=> await Cadastrar())">Cadastrar</MatButton>
+            }
+            <MatButton @onclick="@(async ()=> await FecharModal())">Fechar</MatButton>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
+
+@code {
+    [Parameter]
+    public emit Emitente { get; set; }
+    [Parameter]
+    public bool OpenModal { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ModalCallBack { get; set; }
+
+    [Parameter]
+    public Opcoes Opcao { get; set; }
+
+    private string natureza = "50002";
+
+    private string conta = "21201001";
+
+
+    private Modal modalRef;
+
+
+
+    protected override void OnInitialized()
+    {
+        Emitente = new emit() { enderEmit = new enderEmit() };
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (OpenModal)
+        {
+            modalRef.Show();
+        }
+    }
+
+    private async Task Cadastrar()
+    {
+        var fornecedor = new FornecedorTotvs()
+        {
+            A2_NOME = Emitente.xNome,
+            A2_NREDUZ = Emitente.xNome,
+            A2_EST = Emitente.enderEmit.ProxyUF,
+            A2_END = Emitente.enderEmit.xLgr,
+            A2_COD_MUN = Convert.ToString(Emitente.enderEmit.cMun),
+            A2_MUN = Emitente.enderEmit.xMun,
+            A2_CEP = Emitente.enderEmit.CEP,
+            A2_CGC = Emitente.CNPJ,
+            A2_INSCR = Emitente.IE,
+            A2_TEL = Convert.ToString(Emitente.enderEmit.fone),
+            //A2_ENDCOMP = 25
+            A2_COMPLEM = Emitente.enderEmit.xCpl,
+            A2_BAIRRO = Emitente.enderEmit.xBairro,
+            A2_NATUREZ = natureza,
+            A2_CONTA = conta,
+
+        };
+        await forncedorTotvsService.Cadastrar(fornecedor,Emitente.Id);
+        await FecharModal();
+    }
+
+    private async Task FecharModal()
+    {
+        modalRef.Hide();
+        await ModalCallBack.InvokeAsync(true);
+    }
+}

@@ -1,0 +1,46 @@
+﻿@page "/produtoIntegrado"
+
+@using Models.TOTVS.Cadastros.Produtos;
+
+@inject BLL.TOTVS.Cadastros.Interfaces.IProdutoTotvsService produtoTotvsService;
+
+<EFISCO.Pages.Components.Titulos.NavbarTitulo Titulo="Produtos "></EFISCO.Pages.Components.Titulos.NavbarTitulo>
+<ProdutoIntegradoList RowSelectedCallBack="RowSelectedCallBack"
+                      ShouldReload="@Reload"></ProdutoIntegradoList>
+
+
+<AmarrarFornecedor Show="@ShowAmarrarFornecedor"
+                   Produtos="@Produtos"
+                   ProdutoIntegrado="@produto"
+                   AmarracaoFianlizadaCallBack="AmarracaoCallback">
+</AmarrarFornecedor>
+
+
+
+
+@code {
+
+    private bool Reload { get; set; }
+    private bool ShowAmarrarFornecedor;
+
+    private IList<ProdutoTotvs> Produtos { get; set; }
+    private ProdutoIntegrado produto;
+    private string aviso = "";
+    private bool exibeAviso = false;
+
+
+    private async Task RowSelectedCallBack(ProdutoIntegrado _produto)
+    {
+
+        this.produto = _produto;
+        Produtos = await this.produtoTotvsService
+               .GetAllByNCM(_produto.CodigoTotvsEmpresaFilial, _produto.Produto.NCM);
+        ShowAmarrarFornecedor = true;
+    }
+
+    private async Task AmarracaoCallback(bool IsOk)
+    {
+        Reload = IsOk;
+       
+    }
+}

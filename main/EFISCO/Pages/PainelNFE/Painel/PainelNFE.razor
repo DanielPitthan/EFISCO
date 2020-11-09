@@ -1,0 +1,60 @@
+﻿@page "/PainelNFE/{Chave}"
+
+@using XmlNFe.Nfes
+
+@inject BLL.NFE.Interfaces.INFeXmlService nfeXlmService;
+@inject NavigationManager naviagtionManager;
+<!--Main-->
+<NavbarTitulo Titulo="@Titulo"></NavbarTitulo>
+<br />
+<div class="container">
+    <div class="row">
+        <CabecalhoNFe NFe="@NFe"></CabecalhoNFe>
+        <ItensNFe NFe="@NFe"></ItensNFe>
+        <RodapeNFe NFe="@NFe"></RodapeNFe>
+    </div>
+</div>
+<hr />
+<MatSnackbar IsOpen="abreAviso">
+    <MatSnackbarContent>
+        <p>Formulário salvo com sucesso!</p>
+    </MatSnackbarContent>
+    <MatSnackbarActions>
+        <MatButton Raised="true" @onclick="@(()=>abreAviso=false)">OK</MatButton>
+    </MatSnackbarActions>
+</MatSnackbar>
+<div class="container">
+    <MatButton Icon="@MatIconNames.Save" @onclick="@(async ()=> await Salvar())">Salvar</MatButton>
+    <MatButton Icon="@MatIconNames.Save" @onclick="Voltar" Raised="true">Voltar</MatButton>
+</div>
+@code {
+    [Parameter]
+    public string Chave { get; set; }
+
+
+
+    private NFe NFe { get; set; }
+    private string Titulo = "";
+    private bool abreAviso;
+
+    protected override void OnParametersSet()
+    {
+        NFe = nfeXlmService.GetNfeByChave(Chave);
+        Titulo = $"NFe :{Chave}";
+    }
+
+
+    private async Task Salvar()
+    {
+        if (await nfeXlmService.Atualiza(NFe))
+        {
+            abreAviso = true;
+        }
+
+    }
+
+    private void Voltar()
+    {
+        naviagtionManager.NavigateTo("/painelImportacaoXML");
+    }
+}

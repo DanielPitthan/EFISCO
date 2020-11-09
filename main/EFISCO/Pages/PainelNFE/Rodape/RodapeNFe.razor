@@ -1,0 +1,44 @@
+﻿@using XmlNFe.Nfes
+
+
+
+<table class="table table-bordered ">
+    <thead class="thead-light">
+        <tr>
+            <th>Base de Cálculo</th>
+            <th>Icms</th>
+            <th>Pis</th>
+            <th>Cofins</th>
+            <th>IPI</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@NFe.infNFe.total.ICMSTot.vBC</td>
+            <td>@NFe.infNFe.total.ICMSTot.vICMS</td>
+            <td>@NFe.infNFe.total.ICMSTot.vPIS</td>
+            <td>@NFe.infNFe.total.ICMSTot.vCOFINS</td>
+            <td>@NFe.infNFe.total.ICMSTot.vIPI</td>
+            <td>@NFe.infNFe.total.ICMSTot.vNF</td>  
+        </tr>
+    </tbody>
+</table>
+<table class="table table-bordered ">
+    <thead class="thead-light">
+        <tr>
+            <th>Informações Fiscais</th>
+            <th>Informações Adicionais</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@NFe.infNFe.infAdic.infAdFisco</td>
+            <td>@NFe.infNFe.infAdic.infCpl</td>
+        </tr>
+    </tbody>
+</table>
+@code {
+    [Parameter]
+    public NFe NFe { get; set; }
+}

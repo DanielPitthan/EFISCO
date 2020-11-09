@@ -1,0 +1,62 @@
+﻿@inject BLL.Cadastros.Fornecedores.Interfaces.IEmitenteIntegradoService emitenteService
+
+@using XmlNFe.Nfes.Informacoes.Emitente
+
+<RadzenGrid Data="@EmitenteIntegrados"
+            AllowFiltering="true"
+            AllowSorting="true"
+            TItem="EmitenteIntegrado"
+            RowSelect="@(async args => await PreCadastro(args.Emitente))">
+    <Columns>
+        <RadzenGridColumn TItem="EmitenteIntegrado" Property="IntegradaoTOTVS" Title="Integrado">
+            <Template Context="emitente">
+                <RadzenButton Icon="@MatIconNames.Edit" Size="Radzen.ButtonSize.Small" Click="@(async (args)=> await PreCadastro(emitente.Emitente))"></RadzenButton>
+            </Template>
+        </RadzenGridColumn>
+        <RadzenGridColumn TItem="EmitenteIntegrado" Property="Emitente.CNPJ" Title="Cnpj"></RadzenGridColumn>
+        <RadzenGridColumn TItem="EmitenteIntegrado" Property="CodigoTotvsEmpresaFilial" Title="Filial"></RadzenGridColumn>
+        <RadzenGridColumn TItem="EmitenteIntegrado" Property="Emitente.xNome" Title="Razão Social"></RadzenGridColumn>
+        <RadzenGridColumn TItem="EmitenteIntegrado" Property="Emitente.xNome" Title="Razão Social"></RadzenGridColumn>
+    </Columns>
+</RadzenGrid>
+
+
+
+@code {
+
+    [Parameter]
+    public EventCallback<emit> RowSelectCallBack { get; set; }
+    [Parameter]
+    public EventCallback<emit> EditCallBack { get; set; }
+
+
+    [Parameter]
+    public EventCallback<bool> ReloadCallBack { get; set; }
+
+    [Parameter]
+    public bool Reload { get; set; }
+
+    IList<EmitenteIntegrado> EmitenteIntegrados { get; set; }
+    private emit Emitente;
+
+    protected override async Task OnInitializedAsync()
+    {
+        EmitenteIntegrados = await emitenteService.ListarNaoIntegradosAsync();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Reload)
+        {
+            EmitenteIntegrados = await emitenteService.ListarNaoIntegradosAsync();
+            await ReloadCallBack.InvokeAsync(true);
+        }
+
+    }
+
+    private async Task PreCadastro(emit emit)
+    {
+        await RowSelectCallBack.InvokeAsync(emit);
+        await EditCallBack.InvokeAsync(emit);
+    }
+}

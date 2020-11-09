@@ -1,0 +1,133 @@
+﻿@page "/"
+
+@inject NavigationManager nav;
+
+<div class="container">
+    <br />
+    <br />
+    <RadzenPanel AllowCollapse="true">
+        <HeaderTemplate>
+            <span style="float:left;">
+                <RadzenIcon Icon="menu" /><b style="font-size:20px">Processo de Importação de Xml</b>
+            </span>
+        </HeaderTemplate>
+        <ChildContent>
+            <RadzenCard>
+                <table class="table-responsive">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="col-12">
+                                    <div class="row justify-content-center">
+                                        <RadzenIcon Icon="south"></RadzenIcon>
+                                    </div>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col-12">
+                                    <div class="row justify-content-center">
+                                        <RadzenButton Icon="cloud_upload" ButtonStyle="Radzen.ButtonStyle.Primary"
+                                                      Click="@(()=> nav.NavigateTo("/nfeXmlUpload"))"></RadzenButton>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row justify-content-center">
+                                        <p>Upload de Xml</p>
+                                    </div>
+                                </div>
+
+                            </td>
+                            <td>
+                                <div class="col-12">
+                                    <div class="row justify-content-center">
+                                        <RadzenIcon Icon="east"></RadzenIcon>                                                                                
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-12">
+                                    <div class="row justify-content-center">
+                                        <RadzenButton Icon="tv" ButtonStyle="Radzen.ButtonStyle.Secondary"
+                                                      Click="@(()=> nav.NavigateTo("/painelImportacaoXML"))"></RadzenButton>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row justify-content-center">
+                                        <p>Painel de Importação</p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <div class="col-12">
+                                    <div class="row justify-content-center">
+                                        <RadzenIcon Icon="south"></RadzenIcon>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <div class="col-12">
+                                    <div class="row justify-content-center">
+                                        <RadzenButton Icon="outlined_flag" ButtonStyle="Radzen.ButtonStyle.Warning"
+                                                      Click="@(()=> nav.NavigateTo("/painelAuditoria"))"></RadzenButton>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row justify-content-center">
+                                        <p>Auditoria</p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+                <br />
+                <MatDivider></MatDivider>
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-4">
+                        <div class="row justify-content-center">
+                            <RadzenButton Icon="business" ButtonStyle="Radzen.ButtonStyle.Info"
+                                          Click="@(()=> nav.NavigateTo("/painelFornecedor"))"></RadzenButton>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row justify-content-center">
+                            <RadzenButton Icon="miscellaneous_services" ButtonStyle="Radzen.ButtonStyle.Info"
+                                          Click="@(()=> nav.NavigateTo("/produtoIntegrado"))"></RadzenButton>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="row justify-content-center">
+                            <p>Emitentes divergentes</p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row justify-content-center">
+                            <p>Produtos Divergentes</p>
+                        </div>
+                    </div>
+                </div>
+            </RadzenCard>
+        </ChildContent>
+    </RadzenPanel>
+</div>
+
+@code{
+
+}

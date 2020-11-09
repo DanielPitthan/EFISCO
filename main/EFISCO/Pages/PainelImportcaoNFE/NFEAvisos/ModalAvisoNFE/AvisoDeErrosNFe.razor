@@ -1,0 +1,122 @@
+﻿
+
+@inject BLL.NFE.Interfaces.INFeXmlService nfeXmlService
+@inject BLL.NFE.Interfaces.INFeFilesMensagensService mensagensService
+@inject NavigationManager navigationManager;
+
+@if (Activate)
+{
+    <div class="modal fade show" id="myModal" style="display:block" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header alert alert-danger">
+                    <h5 class="modal-title">@Titulo</h5>
+                    <button type="button" class="close" @onclick="Fechar">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <table class="table table-hover">
+                        <thead class="table-secondary">
+                            <tr>
+                                <td><b>Id</b></td>
+                                <td><b>Inclusão</b></td>
+                                <td><b>Texto</b></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var erro in Mensagens)
+                            {
+                                <tr>
+                                    <td>@erro.Id</td>
+                                    <td>@erro.DataInclusao</td>
+                                    <td>@erro.Texto</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" @onclick="Fechar">OK</button>
+                    <button type="button" class="btn btn-outline-secondary" @onclick="VizualizarNF">Visualizar NF</button>
+                    <button type="button" class="btn btn-outline-primary" @onclick="Revalidar">
+                        @if (validando)
+                        {
+                            <span class="@validaClass" role="status" aria-hidden="true"></span>
+                            <span>Validando...</span>
+                        }
+                        else
+                        {
+                            <span>Revalidar</span>
+                        }
+
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@code {
+    [Parameter]
+    public string Titulo { get; set; }
+
+    [Parameter]
+    public IList<NFeFilesMensagens> Mensagens { get; set; }
+
+    [Parameter]
+    public bool Activate { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> FinishExecutionCallback { get; set; }
+
+    [Parameter]
+    public int Id { get; set; }
+
+
+    private bool validando;
+    private string validaClass = "";
+
+    protected override void OnParametersSet()
+    {
+        if (Mensagens.Count > 0)
+            Activate = true;
+    }
+
+
+
+
+    private void VizualizarNF()
+    {
+        var chaveNFE = Mensagens.Select(x => x.ChaveNFe).FirstOrDefault();
+        navigationManager.NavigateTo($"/PainelNFE/{chaveNFE}");
+    }
+
+    private async void Revalidar()
+    {
+        validando = true;
+        validaClass = "spinner-grow spinner-grow-sm";
+        var chaveNFE = Mensagens.Select(x => x.ChaveNFe).FirstOrDefault();
+        await nfeXmlService.Revalidar(chaveNFE);
+
+        Mensagens = await mensagensService.ListarErroDoArquivoAsync(chaveNFE);
+        validando = false;
+        validaClass = "";
+        await FinishExecutionCallback.InvokeAsync(true);
+        this.StateHasChanged();
+    }
+
+    private async Task Fechar()
+    {
+        Activate = false;
+        await FinishExecutionCallback.InvokeAsync(Activate);
+        Mensagens.Clear();
+    }
+}

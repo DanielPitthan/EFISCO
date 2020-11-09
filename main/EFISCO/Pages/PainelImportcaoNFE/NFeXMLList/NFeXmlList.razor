@@ -1,0 +1,117 @@
+﻿@using Radzen.Blazor.Rendering
+
+
+@inject BLL.NFE.Interfaces.INFeXmlService nfeXmlService
+@inject BLL.Infra.Interface.IParametroService parametrosService
+@inject BLL.NFE.Interfaces.INFeFilesMensagensService mensagensService
+@inject NavigationManager naviagtionManager;
+
+<RadzenGrid AllowFiltering="true" AllowPaging="true" PageSize="25"
+            AllowSorting="true" Data="@Arquivos" TItem="NFeFiles" RowDoubleClick="@(async (args)=> await AbrirPreviewNF(args.ChaveAcesso))">
+    <Columns>
+        <RadzenGridColumn TItem="NFeFiles" Property="AutoValidado" Title="Divergência">
+            <Template Context="nfeFile">
+                @if (nfeFile.AutoValidado == false)
+                {
+                    <RadzenButton Icon="warning" Click="@(args=> ListarErros(nfeFile))"></RadzenButton>
+                }
+                else
+                {
+                    <MatIcon Icon="@MatIconNames.Check_circle" Style="color:green"></MatIcon>
+                }
+
+            </Template>
+        </RadzenGridColumn>
+        <RadzenGridColumn TItem="NFeFiles" Property="Validado" Title="Auditado">
+            <Template>
+                <RadzenCheckBox @bind-Value="@context.Validado" @onclick:preventDefault Disabled="true"></RadzenCheckBox>
+            </Template>
+        </RadzenGridColumn>
+        <RadzenGridColumn TItem="NFeFiles" Property="Processada" Title="Processado">
+            <Template>
+                <RadzenCheckBox @bind-Value="@context.Processada" @onclick:preventDefault Disabled="true"></RadzenCheckBox>
+            </Template>
+        </RadzenGridColumn>
+        <RadzenGridColumn TItem="NFeFiles" Property="Arquivo" Title="Arquivo" />
+        <RadzenGridColumn TItem="NFeFiles" Property="ChaveAcesso" Title="Chave de Acesso" />
+        <RadzenGridColumn TItem="NFeFiles" Property="DataInclusao" Title="Dt Inclusão" />
+        <RadzenGridColumn TItem="NFeFiles" Property="DataEmnissaoNfe" Title="Emissao NFe" />
+        <RadzenGridColumn TItem="NFeFiles" Property="NumeroNota" Title="N. NFe" />
+        <RadzenGridColumn TItem="NFeFiles" Property="Serie" Title="Serie" />
+        <RadzenGridColumn TItem="NFeFiles" Property="CnpjFornecedor" Title="CNPJ Fornece" />
+        <RadzenGridColumn TItem="NFeFiles" Property="Fornecedor" Title="Fornecedor" />
+        <RadzenGridColumn TItem="NFeFiles" Property="ValorTotal" Title="Vlr Total" />
+
+    </Columns>
+</RadzenGrid>
+
+<AvisoDeErrosNFe Mensagens="@Mensagens"
+                 Titulo="@TituloErro"
+                 FinishExecutionCallback="ModalInativo" Activate="modalAtivo">
+
+</AvisoDeErrosNFe>
+
+
+@code {
+
+    [Parameter]
+    public EventCallback<IList<NFeFiles>> ArquivosCarregados { get; set; }
+
+    [Parameter]
+    public bool Reload { get; set; }
+
+    [Parameter]
+    public bool ListarApenasValidados { get; set; }
+
+    [Parameter]
+    public bool ListarApenasNaoValidados { get; set; }
+
+    private string TituloErro;
+    private IList<NFeFiles> Arquivos = new List<NFeFiles>();
+    private IList<NFeFilesMensagens> Mensagens { get; set; } = new List<NFeFilesMensagens>();
+    private bool modalAtivo = false;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        //this.ListarApenasValidados = false;
+        //this.ListarApenasNaoValidados = false;
+        await ListarXML();
+        Mensagens = new List<NFeFilesMensagens>();
+    }
+
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Reload)
+        {
+            await ListarXML();
+        }
+    }
+
+
+    private async Task ListarXML()
+    {
+        Arquivos = await nfeXmlService.ListarXMLSNaoProcessados(ListarApenasValidados, ListarApenasNaoValidados);
+
+        await ArquivosCarregados.InvokeAsync(Arquivos);
+    }
+
+    private async Task ListarErros(NFeFiles _nfeFiles)
+    {
+        TituloErro = $"Divergências da Chave: {_nfeFiles.ChaveAcesso}";
+        Mensagens.Clear();
+        Mensagens = await mensagensService.ListarErroDoArquivoAsync(_nfeFiles);
+    }
+
+    private void ModalInativo(bool finishToLoad)
+    {
+        modalAtivo = finishToLoad;
+        Reload = true;
+    }
+
+    private async Task AbrirPreviewNF(string chave)
+    {
+        naviagtionManager.NavigateTo($"/PainelNFE/{chave}");
+    }
+}

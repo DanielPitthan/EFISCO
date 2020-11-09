@@ -1,0 +1,128 @@
+﻿@page "/painelImportacaoXML"
+@using System.Net.Mime;
+@using Microsoft.AspNetCore.Mvc;
+@using Models.Graficos
+
+
+@inject NavigationManager navigationManager;
+
+
+    <NavbarTitulo Titulo="Painel de importação de XML"></NavbarTitulo>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-lg-6 col-sm-12">
+                <p>Porcessamento dos Arquivos XML</p>
+                <NfeXmlGraficoProcessado Dados="@pieSeries" PropriedadeLegenda="Serie" PropriedadeValor="Valor" Titulo="Registros"></NfeXmlGraficoProcessado>
+
+
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-12">
+                <p>Total de Arquivos pendentes</p>
+                <NfeXmlGraficoTotais Dados="@barSeries" PropriedadeLegenda="Serie" PropriedadeValor="Valor" Titulo="Total"></NfeXmlGraficoTotais>
+            </div>
+        </div>
+        <div class="row">
+            <NFeXmlList Reload="@reloadList"
+                        ArquivosCarregados="@AtualizaListaArquivosCallBack"
+                        ListarApenasNaoValidados="true" ListarApenasValidados="false">
+
+            </NFeXmlList>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12 col-md-6 col-sm-12 col-lg-6">
+                <NfeDownloadList></NfeDownloadList>
+            </div>
+        </div>
+    </div>
+
+
+    @code {
+        private bool modalValidacaoAberto = false;
+        private bool reloadList = false;
+        private IList<PieSerie> pieSeries = new List<PieSerie>();
+        private IList<BarSerie> barSeries = new List<BarSerie>();
+
+
+
+        protected override async Task OnInitializedAsync()
+        {
+            pieSeries.Add(new PieSerie()
+            {
+                Serie = "Processados",
+                Valor = 0
+            });
+
+            pieSeries.Add(new PieSerie()
+            {
+                Serie = "Não Processados",
+                Valor = 0
+            });
+        }
+
+
+
+        //private void UploadCallBack(bool finishUpload)
+        //{
+        //    reloadList = finishUpload;
+        //}
+
+        private void AbrirModalValidacao()
+        {
+            this.modalValidacaoAberto = true;
+        }
+
+        private void CallBackValidacaoFinalizou(bool IsFinished)
+        {
+
+            reloadList = IsFinished;
+        }
+
+        private void CallBackModalValidacao(bool isOpen)
+        {
+            if (!isOpen)
+                this.modalValidacaoAberto = false;
+        }
+
+        private void AtualizaListaArquivosCallBack(IList<NFeFiles> arquivos)
+        {
+            if (reloadList)
+                reloadList = false;
+
+            pieSeries.Clear();
+            barSeries.Clear();
+
+            int validos = arquivos.Where(x => x.Validado).Count();
+            int naoValidos = arquivos.Where(x => !x.Validado).Count();
+            decimal validosValor = arquivos.Where(x => x.Validado).Sum(x => x.ValorTotal);
+            decimal naoValidosValor = arquivos.Where(x => !x.Validado).Sum(x => x.ValorTotal);
+
+
+            pieSeries.Add(new PieSerie()
+            {
+                Serie = "Validados",
+                Valor = validos
+            });
+
+            pieSeries.Add(new PieSerie()
+            {
+                Serie = "Não Validados",
+                Valor = naoValidos == 0 ? 1 : naoValidos
+            }); ;
+
+
+            barSeries.Add(new BarSerie()
+            {
+                Serie = "Validados",
+                Valor = validosValor
+            });
+
+            barSeries.Add(new BarSerie()
+            {
+                Serie = "Não Validados",
+                Valor = naoValidosValor == 0 ? 1 : naoValidosValor
+            });
+        }
+
+
+    }

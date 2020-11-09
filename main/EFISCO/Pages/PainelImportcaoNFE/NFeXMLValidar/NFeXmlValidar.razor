@@ -1,0 +1,109 @@
+﻿
+@using EFISCO.Pages.PainelImportcaoNFE.NfeDownload
+@using System.IO;
+@using Models.FileStoranges;
+
+@inject Microsoft.Extensions.Hosting.IHostEnvironment enviroment;
+@inject EFISCO.Areas.UploadFiles.Upload uploadFilesService;
+@inject BLL.NFE.Interfaces.INFeXmlService nfeService;
+
+
+<MatDialog IsOpen="@AbrirModal" IsOpenChanged="ReturnCallBack" @ref="matDialog">
+    <MatDialogTitle Style="width:280px;">Validar XML(s)</MatDialogTitle>
+    <MatDialogContent>
+        <p><MatIcon Icon="@IconeOK" Style="color:green;"></MatIcon> @MatFileUploadtext</p>
+        <MatFileUpload Label="Upload" OnChange="@UploadFile"></MatFileUpload>
+        <MatProgressBar Indeterminate="@MatProgressBarIndeterminate"></MatProgressBar>
+    </MatDialogContent>
+    <MatDialogActions>
+        <NfeXmlDownloadValidacao></NfeXmlDownloadValidacao>
+        <MatButton Outlined="true" Icon="@MatIconNames.Cloud_upload" @onclick="Importar">Importar</MatButton>
+    </MatDialogActions>
+</MatDialog>
+
+@code {
+    [Parameter]
+    public bool AbrirModal { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> DialogCallBack { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> IsUploadCompleted { get; set; }
+
+    private ExcelResult excelResult = new ExcelResult();
+    private string MatFileUploadtext = "Faça o upload da planilha com as chaves para validar";
+    private string IconeOK = "";
+
+    private bool botaoInativoImportar = true;
+    private bool MatProgressBarIndeterminate = false;
+
+    MatDialog matDialog;
+
+    private IList<FileStorange> arquivosAImportar = new List<FileStorange>();
+    private IList<FileStorange> arquivosImportados = new List<FileStorange>();
+
+    protected async Task ReturnCallBack()
+    {
+        if (!matDialog.IsOpen)
+            await this.DialogCallBack.InvokeAsync(matDialog.IsOpen);
+    }
+
+
+    /// <summary>
+    /// Faz o upload da planilha de excel
+    /// </summary>
+    /// <param name="files"></param>
+    /// <returns></returns>
+    private async Task UploadFile(IMatFileUploadEntry[] files)
+    {
+        botaoInativoImportar = true;
+        MatProgressBarIndeterminate = true;
+        string pathToSaveofTheDay = Path.Combine(enviroment.ContentRootPath, "wwwroot", $@"Upload\XML\{DateTime.Now.Year}\{DateTime.Now.Month}\{DateTime.Now.Day}");
+
+
+        if (!Directory.Exists(pathToSaveofTheDay))
+            Directory.CreateDirectory(pathToSaveofTheDay);
+
+
+        foreach (var file in files)
+        {
+            string extension = Path.GetExtension(file.Name);
+            string newFileName = $"{Guid.NewGuid()}{extension}";
+            string filePath = Path.Combine(pathToSaveofTheDay, newFileName);
+
+            using (var fileStrean = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+            {
+                await file.WriteToStreamAsync(fileStrean);
+            }
+
+            arquivosAImportar.Add(new FileStorange()
+            {
+                Path = filePath,
+                FileName = newFileName,
+                OriginalFileName = file.Name,
+                FileType = extension
+
+            });
+        }
+        botaoInativoImportar = false;
+        MatProgressBarIndeterminate = false;
+        Array.Clear(files, 0, files.Length);
+    }
+
+
+    private async Task Importar()
+    {
+        arquivosImportados = await this.uploadFilesService.ProcessarArquivos(arquivosAImportar);
+
+        if (arquivosImportados != null)
+        {
+
+            excelResult = await this.nfeService.ValidarArquivos(arquivosImportados);
+            MatFileUploadtext = excelResult.ResultMessage;
+            IconeOK = MatIconNames.Check;
+            await IsUploadCompleted.InvokeAsync(excelResult.Result);
+        }
+
+    }
+}

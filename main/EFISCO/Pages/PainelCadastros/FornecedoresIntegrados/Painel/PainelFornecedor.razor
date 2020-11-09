@@ -1,0 +1,52 @@
+﻿@page "/painelFornecedor"
+
+<NavbarTitulo Titulo="Emitentes não cadastrados"></NavbarTitulo>
+
+<div class="container-fluid">
+    <EmitentesNaoIntegradosList RowSelectCallBack="EmitenteSelecionadoCallBack"
+                                Reload="@ReloadList"
+                                ReloadCallBack="RealodCallBack"
+                                EditCallBack="EmitenteEditCallBack" />
+</div>
+
+<FornecedorView OpenModal="@IsOpenModal"
+                ModalCallBack="VisualizarFornecedorCallBack"
+                Emitente="@EmitenteSelecionado"
+                Opcao="@Opcao">
+
+</FornecedorView>
+
+@code {
+
+    private emit EmitenteSelecionado;
+    private bool IsOpenModal;
+    private bool ReloadList;
+    private Opcoes Opcao { get; set; }
+
+    private async Task EmitenteSelecionadoCallBack(emit emit) => EmitenteSelecionado = emit;
+
+
+    private async Task EmitenteEditCallBack(emit emit)
+    {
+        EmitenteSelecionado = emit;
+        IsOpenModal = true;
+    }
+
+    private void VisualizarFornecedor(Opcoes opcao)
+    {
+
+        IsOpenModal = true;
+    }
+
+    private void VisualizarFornecedorCallBack(bool IsClose)
+    {
+        IsOpenModal = !IsClose;
+        ReloadList = true;
+    }
+    private void RealodCallBack(bool finish)
+    {
+
+        ReloadList = false;
+    }
+
+}

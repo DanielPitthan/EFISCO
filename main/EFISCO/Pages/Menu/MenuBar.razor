@@ -1,0 +1,50 @@
+﻿@inject NavigationManager navigatorManager;
+
+<MatThemeProvider Theme="tema">
+    <MatAppBarContainer>
+        <MatAppBar Fixed="true">
+            <MatAppBarRow>
+                <MatAppBarSection>
+                    <MatIconButton Icon="menu" @onclick="AbrirMenuLateral"></MatIconButton>
+                    <MatAppBarTitle>E-FISCAL</MatAppBarTitle>
+                </MatAppBarSection>
+                <MatAppBarSection Align="@MatAppBarSectionAlign.End">
+                    <MatIconButton Icon="home"  @onclick="GoHome"></MatIconButton>
+                    <MatIconButton Icon="exit_to_app"></MatIconButton>
+                </MatAppBarSection>
+            </MatAppBarRow>
+        </MatAppBar>
+        <MatAppBarContent>
+            <!--Placebo-->
+        </MatAppBarContent>
+    </MatAppBarContainer>
+</MatThemeProvider>
+
+
+
+@code {
+    [Parameter]
+    public MatDrawer MatDrawer { get; set; }
+
+    private void AbrirMenuLateral()
+    {
+        MatDrawer.Opened = !MatDrawer.Opened;
+    }
+
+
+    private void GoHome()
+    {
+        navigatorManager.NavigateTo("/");
+    }
+
+    MatTheme tema = new MatTheme()
+    {
+        Primary = MatThemeColors.LightBlue._400.Value,
+        Secondary = MatThemeColors.LightBlue._800.Value,
+    };
+
+    private void Exit()
+    {
+        navigatorManager.NavigateTo("http://192.168.1.15:10300/");
+    }
+}

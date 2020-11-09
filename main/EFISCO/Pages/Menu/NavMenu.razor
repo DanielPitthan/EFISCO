@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Components
+
+
+<MatNavMenu>
+    <MatNavSubMenu>
+        <MatNavSubMenuHeader Title="Importação de XML">
+            <MatNavItem AllowSelection="false">Integração de XML </MatNavItem>
+        </MatNavSubMenuHeader>
+        <MatNavSubMenuList>
+            <MatButton Icon="cloud_upload" Link="nfeXmlUpload">Importar XML</MatButton>
+            <MatButton Icon="tv" Link="painelImportacaoXML">Painel de Importação</MatButton>
+        </MatNavSubMenuList>       
+    </MatNavSubMenu>
+    <MatNavSubMenu>
+        <MatNavSubMenuHeader Title="Divergencias Cadastrais">
+            <MatNavItem AllowSelection="false">Divergencias Cadastrais</MatNavItem>
+        </MatNavSubMenuHeader>
+        <MatNavSubMenuList>
+            <MatButton Icon="business" Link="painelFornecedor">Emitentes divergentes</MatButton>
+            <MatButton Icon="miscellaneous_services" Link="produtoIntegrado">Produtos Divergentes </MatButton>
+        </MatNavSubMenuList>
+    </MatNavSubMenu>
+    <MatNavSubMenu>
+        <MatNavSubMenuHeader Title="Auditoria">
+            <MatNavItem>Auditoria</MatNavItem>
+        </MatNavSubMenuHeader>
+        <MatNavSubMenuList>
+            <MatButton Icon="outlined_flag" Link="painelAuditoria">Auditar</MatButton>
+        </MatNavSubMenuList>
+    </MatNavSubMenu>
+</MatNavMenu>
+
+
+
+@code
+{
+
+}

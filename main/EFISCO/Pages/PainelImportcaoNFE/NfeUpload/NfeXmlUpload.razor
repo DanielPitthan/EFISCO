@@ -1,0 +1,74 @@
+﻿@page "/nfeXmlUpload"
+
+@inject BLL.NFE.Interfaces.INFeXmlService xmlNfeService;
+@inject NavigationManager navigationService;
+
+<style>
+    span.ui-fileupload-choose.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left {
+        height: 50px;
+        background-color: @cssButtonUpload;
+        color:@cssButtonUploadColor;
+    }
+</style>
+
+<NavbarTitulo Titulo="Importação de XML"></NavbarTitulo>
+<div class="container">
+    <RadzenUpload Multiple="true"
+                  Progress="@(async (args) =>  await OnProgress(args, ""))"
+                  Url="upload/multiple"
+                  ChooseText="@textButtonUpload" Style="width:100%;" Auto="true"
+                  Complete="UploadFinish"
+                  @ref="radzenUpload">
+    </RadzenUpload>
+    <RadzenProgressBar @bind-Value="@xmlNfeService.StatusOfCurrentProcess" Style="margin-bottom: 20px" />
+
+</div>
+
+@code {
+
+    [Parameter]
+    public EventCallback<bool> UploadFinishCallBack { get; set; }
+
+    private RadzenUpload radzenUpload;
+
+    private int progress;
+    private string info;
+    private string textButtonUpload = "";
+    private string cssButtonUpload = "";
+    private string cssButtonUploadColor = "white";
+
+    protected override void OnInitialized()
+    {
+        textButtonUpload = "Solte os arquivos aqui";
+        cssButtonUpload = "dodgerblue";
+        base.OnInitialized();
+    }
+
+
+
+
+    private async Task OnProgress(dynamic args, string t)
+    {
+        if ((int)args.Progress >= 100)
+        {
+            textButtonUpload = "Arquivos carregados com sucesso. Processando...";
+            cssButtonUpload = "#ffcf00";
+            cssButtonUploadColor = "black";
+
+        }
+    }
+
+    private async Task UploadFinish()
+    {
+        await xmlNfeService.ProcessarArquivos();
+
+        textButtonUpload = "Solte os arquivos aqui";
+        cssButtonUpload = "dodgerblue";
+        cssButtonUploadColor = "white";
+
+       await  UploadFinishCallBack.InvokeAsync(true);
+        navigationService.NavigateTo("/painelImportacaoXML");
+
+    }
+   
+}

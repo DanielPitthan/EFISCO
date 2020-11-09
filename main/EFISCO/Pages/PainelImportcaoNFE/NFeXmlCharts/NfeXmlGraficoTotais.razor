@@ -1,0 +1,36 @@
+﻿@using Models.Graficos
+@using System.Globalization
+
+
+<RadzenChart>
+    <RadzenColumnSeries Data="@Dados"
+                        Title="@Titulo"
+                        CategoryProperty="@PropriedadeLegenda"
+                        ValueProperty="@PropriedadeValor">
+
+    </RadzenColumnSeries>
+    <RadzenAxisTitle Text="@Titulo"></RadzenAxisTitle>
+    <RadzenValueAxis Formatter="@FormatAsBR"></RadzenValueAxis>
+    <RadzenLegend Position="LegendPosition.Right" Visible="true"></RadzenLegend>
+</RadzenChart>
+
+@code {
+    [Parameter]
+    public IList<BarSerie> Dados { get; set; }
+
+    [Parameter]
+    public string Titulo { get; set; }
+
+    [Parameter]
+    public string PropriedadeLegenda { get; set; }
+
+    [Parameter]
+    public string PropriedadeValor { get; set; }
+
+
+    string FormatAsBR(object value)
+    {
+        return ((double)value).ToString("C0", CultureInfo.CreateSpecificCulture("pt-BR"));
+    }
+
+}
