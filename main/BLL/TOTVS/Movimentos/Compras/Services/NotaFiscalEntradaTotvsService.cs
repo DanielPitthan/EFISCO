@@ -22,7 +22,7 @@ namespace BLL.TOTVS.Movimentos.Compras.Services
         public async Task<NotaFiscalEntradaCabecalhoTotvs> GetByChave(string chave)
         {
             NotaFiscalEntradaCabecalhoTotvs nota = await this.notaFiscalEntradaDAO.All()
-                  .Where(x => x.F1_CHVNFE.Equals(chave))
+                  .Where(x => x.F1_CHVNFE.Equals(chave) && x.D_E_L_E_T_=="")
                   .FirstOrDefaultAsync();
             return nota;
         }

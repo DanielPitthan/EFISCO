@@ -16,6 +16,7 @@ namespace Models.TOTVS.Movimentos.Compras
         public string F1_TIPO { get; set; }
         public string F1_DTDIGIT { get; set; }
         public string F1_ESPECIE { get; set; }
+        public string D_E_L_E_T_ { get; set; }
 
     }
 }

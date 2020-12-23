@@ -26,18 +26,18 @@ namespace BLL.TOTVS.Cadastros.Servicos
 
         public async Task<bool> Cadastrar(FornecedorTotvs fornecedor, int emitId)
         {
-            var recno = this.fornecedorTotvsDAO.All().Max(r => r.R_E_C_N_O_);
-            var codigo = this.fornecedorTotvsDAO.GetMaxCod();
-
+            //var recno = this.fornecedorTotvsDAO.All().Max(r => r.R_E_C_N_O_);
+         
             EmitenteIntegrado Emitente = await emitenteService.Get(emitId);
+           // var codigo = this.fornecedorTotvsDAO.GetMaxCod(Emitente.CodigoTotvsEmpresaFilial.Substring(0, 2));
 
-            fornecedor.R_E_C_N_O_ = recno + 1;
-            fornecedor.A2_COD = codigo;//Soma1.GetNextNum(codigo);
+            //fornecedor.R_E_C_N_O_ = recno + 1;
+           // fornecedor.A2_COD = codigo;//Soma1.GetNextNum(codigo);
             fornecedor.A2_LOJA = "01";
             fornecedor.A2_CODPAIS = "01058";// BRASIL
             fornecedor.A2_PAIS = "105";// BRASIL
             fornecedor.A2_TIPO = "J";
-            fornecedor.A2_FILIAL = Emitente.CodigoTotvsEmpresaFilial;
+            fornecedor.A2_FILIAL = Emitente.CodigoTotvsEmpresaFilial.Substring(0,2);
 
             //Grava o fornecedor
             var success = await this.fornecedorTotvsDAO.AddRawSql(fornecedor);

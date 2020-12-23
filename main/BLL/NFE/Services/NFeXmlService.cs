@@ -628,6 +628,7 @@ namespace BLL.NFE.Services
         {
             NFeFiles nfeFiles = await this.nFeFilesDAO.GetAll()
                                         .Where(n => n.ChaveAcesso == chaveNFE)
+                                        .AsNoTracking()
                                         .FirstOrDefaultAsync();
             await Revalidar(nfeFiles);
         }

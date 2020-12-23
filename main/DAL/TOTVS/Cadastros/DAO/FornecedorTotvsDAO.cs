@@ -1,6 +1,8 @@
 ﻿using ContextBinds.EntityCore;
 using DAL.DAOBase;
 using DAL.TOTVS.Cadastros.Interfaces;
+using Dapper;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Models.TOTVS.Cadastros.ClienteFornecedor;
 using System;
@@ -22,10 +24,12 @@ namespace DAL.TOTVS.Cadastros.DAO
         {
             FornecedorTotvs fornecedor = item as FornecedorTotvs;
             var query = FornecedorQuery.Insert(fornecedor);
+          
             var fornecedorInserido = await this.Contexto.SA2010
                                                         .FromSqlRaw(query)
                                                         .ToListAsync();
             return fornecedorInserido != null;
+
         }
 
         public IQueryable<FornecedorTotvs> All()
@@ -33,10 +37,10 @@ namespace DAL.TOTVS.Cadastros.DAO
             return this.Contexto.SA2010;
         }
 
-        public string GetMaxCod()
+        public string GetMaxCod(string filial)
         {
             var MaxCode = this.Contexto.SA2010
-                                         .FromSqlRaw(FornecedorQuery.MaxCode())
+                                         .FromSqlRaw(FornecedorQuery.MaxCode(filial))
                                          .FirstOrDefault();
             return MaxCode.A2_COD;
         }

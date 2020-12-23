@@ -5,11 +5,11 @@ using System.Text;
 
 namespace DAL.TOTVS.Cadastros.DAO
 {
-    public class FornecedorQuery
-    {
-        public static string Insert(FornecedorTotvs fornecedor)
-        {
-            string query = @$"exec InsertSA2
+	public class FornecedorQuery
+	{
+		public static string Insert(FornecedorTotvs fornecedor)
+		{
+			string query = @$"exec InsertSA2
 		'{fornecedor.A2_NOME}',	
 		'{fornecedor.A2_NREDUZ}',	
 		'{fornecedor.A2_EST}',		
@@ -29,20 +29,23 @@ namespace DAL.TOTVS.Cadastros.DAO
 		'{fornecedor.A2_LOJA}',	
 		'{fornecedor.A2_CODPAIS}',		
 		'{fornecedor.A2_PAIS}',	
-		'{fornecedor.A2_TIPO}'	";
+		'{fornecedor.A2_TIPO}',
+		'{fornecedor.A2_FILIAL}'";
 
-            return query;
-        }
+			return query;
+		}
 
-		public static string MaxCode()
-        {
-			return @"SELECT * FROM SA2010
-                                                                WHERE A2_COD = (SELECT MAX(A2_COD) FROM SA2010
-                                                                WHERE A2_COD NOT IN('ESTADO', 'INPS', 'INPS01', 'INPS01', 'INPS26', 'INPS56', 
-                                                                'INPS57', 'INPS59', 'INPS63', 'INPS70', 'MUNIC', 'UNIAO', 'UNIAO', 'UNIAO', 
-                                                                'UNIAO', 'ESTADO', 'INPS', 'MUNIC', 'UNIAO'))
-                                                        ";
+		public static string MaxCode(string filial)
+		{
+			return $@"SELECT * FROM SA2010
+					WHERE 
+					A2_FILIAL='{filial}' 
+					AND A2_COD = (SELECT MAX(A2_COD) FROM SA2010
+					WHERE A2_COD NOT IN('ESTADO', 'INPS', 'INPS01', 'INPS01', 'INPS26', 'INPS56', 
+					'INPS57', 'INPS59', 'INPS63', 'INPS70', 'MUNIC', 'UNIAO', 'UNIAO', 'UNIAO', 
+					'UNIAO', 'ESTADO', 'INPS', 'MUNIC', 'UNIAO'))
+														";
 
 		}
-    }
+	}
 }

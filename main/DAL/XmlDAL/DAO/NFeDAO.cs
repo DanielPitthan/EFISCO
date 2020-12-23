@@ -118,7 +118,6 @@ namespace DAL.XmlDAL.DAO
                 this.Contexto.Entry(localContext).State = EntityState.Detached;
             }
             this.Contexto.Entry(nfe).State = EntityState.Modified;
-            //  this.Contexto.NFe.Update(nfe);
             var rowsAffecteds = await this.Contexto.SaveChangesAsync().ConfigureAwait(false);
             return rowsAffecteds > 0;
         }
