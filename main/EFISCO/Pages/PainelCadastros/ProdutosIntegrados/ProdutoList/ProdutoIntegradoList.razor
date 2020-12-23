@@ -2,12 +2,13 @@
 
 @inject BLL.Cadastros.Produtos.Interfaces.IProdutoIntegradoService produtoService;
 @inject BLL.TOTVS.Cadastros.Interfaces.IProdutoVersusFornecedorTotvsService produtoFornecedor;
+@inject BLL.TOTVS.Cadastros.Interfaces.IFornecedorTotvsService fornecedorService; 
 
 <RadzenGrid TItem="ProdutoIntegrado"
             AllowFiltering="true"
             AllowSorting="true"
             
-            Data="ProdutosIntegrados">
+            Data="_produtosIntegrados">
     <Columns>
         <RadzenGridColumn  TItem="ProdutoIntegrado" Title="Editar">
             <Template Context="produto">
@@ -16,7 +17,11 @@
         </RadzenGridColumn>
         <RadzenGridColumn TItem="ProdutoIntegrado" Property="Produto.xProd" Title="Produto"/>
         <RadzenGridColumn TItem="ProdutoIntegrado" Property="Produto.cProd" Title="Cod. Ref. Fornecedor"/>
-        <RadzenGridColumn TItem="ProdutoIntegrado" Property="CnpjFornecedor" Title="Cnpj"/>
+        <RadzenGridColumn TItem="ProdutoIntegrado" Property="CnpjFornecedor" Title="Fornecedor">
+            <Template Context="produto">
+               @GetFornecedor(produto.CnpjFornecedor, produto.CodigoTotvsEmpresaFilial)
+            </Template>
+        </RadzenGridColumn>
         <RadzenGridColumn TItem="ProdutoIntegrado" Property="Produto.NCM" Title="NCM"/>
         <RadzenGridColumn TItem="ProdutoIntegrado" Property="Produto.uCom" Title="Unidade"/>
     </Columns>    
@@ -25,8 +30,8 @@
 
 @code {
 
-    [Parameter]
-    public IList<ProdutoIntegrado> ProdutosIntegrados { get; set; }
+
+    private  IList<ProdutoIntegrado> _produtosIntegrados { get; set; }
 
     [Parameter]
     public bool ShouldReload { get; set; }
@@ -38,18 +43,27 @@
 
     protected override async Task OnInitializedAsync()
     {
-        ProdutosIntegrados = await this.produtoService.GetNaoIntegrados();
+        _produtosIntegrados = await this.produtoService.GetNaoIntegrados();
     }
     protected override async Task OnParametersSetAsync()
     {
         if (ShouldReload)
         {
-            ProdutosIntegrados = await this.produtoService.GetNaoIntegrados();
+            _produtosIntegrados = await this.produtoService.GetNaoIntegrados();
         }
+
     }
 
 
-   
+    private string GetFornecedor(string cnpj, string filial)
+    {
+        var fornecedor = fornecedorService.LocateByCnpj( filial.Substring(0,2), cnpj);
+        if (fornecedor != null)
+        {
+            return $"{fornecedor.A2_CGC}-{fornecedor.A2_NOME}";
+        }
+        return cnpj;
+    }
 
     private async Task AmarrarCadastro(ProdutoIntegrado produto)
     {

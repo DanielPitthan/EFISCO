@@ -31,7 +31,7 @@ namespace BLL.TOTVS.Cadastros.Servicos
         public async Task<bool> AmarrarFornecedor(ProdutoIntegrado produtoIntegrado)
         {
           
-            var fornecedor = await this.fornecedorTotvsService.LocateByCnpj(produtoIntegrado.CodigoTotvsEmpresaFilial,produtoIntegrado.CnpjFornecedor);
+            var fornecedor = await this.fornecedorTotvsService.LocateByCnpjAsync(produtoIntegrado.CodigoTotvsEmpresaFilial,produtoIntegrado.CnpjFornecedor);
 
            var produtoVsFornecedor =  await this.produtoFornecedorDAO.All()
                         .Where(p => p.A5_FILIAL == produtoIntegrado.CodigoTotvsEmpresaFilial

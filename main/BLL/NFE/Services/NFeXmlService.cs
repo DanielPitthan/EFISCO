@@ -384,7 +384,7 @@ namespace BLL.NFE.Services
                 IList<ProdutoTotvs> produtos = await this.produtoTotvsService
                                                          .GetAllByNCM(nfeFiles.Empresa.CodigoTotvsEmpresaFilial, produto.prod.NCM);
 
-                FornecedorTotvs fornecedor = await this.fornecedorService.LocateByCnpj(nfeFiles
+                FornecedorTotvs fornecedor = await this.fornecedorService.LocateByCnpjAsync(nfeFiles
                                                                                         .Empresa.CodigoTotvsEmpresaFilial.Substring(0, 2),
                                                                                         nfeFiles.CnpjFornecedor);
 
@@ -450,7 +450,7 @@ namespace BLL.NFE.Services
         {
             List<NFeFilesMensagens> mensagensIntegracao = new List<NFeFilesMensagens>();
 
-            var fornecedorExiste = await this.fornecedorService.LocateByCnpj(nfeFiles.Empresa.CodigoTotvsEmpresaFilial, nfeFiles.CnpjFornecedor);
+            var fornecedorExiste = await this.fornecedorService.LocateByCnpjAsync(nfeFiles.Empresa.CodigoTotvsEmpresaFilial, nfeFiles.CnpjFornecedor);
             if (fornecedorExiste == null)
             {
 

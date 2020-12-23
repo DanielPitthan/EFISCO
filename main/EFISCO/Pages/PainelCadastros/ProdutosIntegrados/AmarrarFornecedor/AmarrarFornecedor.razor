@@ -10,37 +10,41 @@
             <h4>Amarração Produto vs Fornecedor</h4>
         </ModalHeader>
         <ModalBody>
-            <Table Striped="true">
-                <TableHeader>
-                    <Blazorise.TableRow>
-                        <TableHeaderCell>Referencia.</TableHeaderCell>
-                        <TableHeaderCell>NCM.</TableHeaderCell>
-                        <TableHeaderCell>Produto.</TableHeaderCell>
-                        <TableHeaderCell>Cod. Protheus</TableHeaderCell>
-                        <TableHeaderCell>Descrição</TableHeaderCell>
-                        <TableHeaderCell>Amarração</TableHeaderCell>
-                    </Blazorise.TableRow>
-                </TableHeader>
-                <Blazorise.TableBody>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th colspan="3" class="bg-light">Emitente</th>
+                        <th colspan="3" class="bg-info">Protheus</th>
+                    </tr>
+                    <tr>
+                        <th>Referencia.</th>
+                        <th>NCM.</th>
+                        <th>Produto.</th>
+                        <th>Cod. Protheus</th>
+                        <th>Descrição</th>
+                        <th>Amarração</th>
+                    </tr>
+                </thead>
+                <tbody>
                     @if (Produtos != null)
                     {
                         @foreach (var produto in Produtos)
                         {
-                            <Blazorise.TableRow>
-                                <TableRowCell>  @ProdutoIntegrado.Produto.cProd</TableRowCell>
-                                <TableRowCell>  @ProdutoIntegrado.Produto.NCM</TableRowCell>
-                                <TableRowCell>  @ProdutoIntegrado.Produto.xProd</TableRowCell>
-                                <TableRowCell>   @produto.B1_COD</TableRowCell>
-                                <TableRowCell>   @produto.B1_DESC</TableRowCell>
-                                <TableRowCell>
+                            <tr>
+                                <td>  @ProdutoIntegrado.Produto.cProd</td>
+                                <td>  @ProdutoIntegrado.Produto.NCM</td>
+                                <td>  @ProdutoIntegrado.Produto.xProd</td>
+                                <td>   @produto.B1_COD</td>
+                                <td>   @produto.B1_DESC</td>
+                                <td>
                                     <MatButton Icon="leak_add"
                                                @onclick="@(async ()=> await Amarrar(ProdutoIntegrado,produto))">Amarrar</MatButton>
-                                </TableRowCell>
-                            </Blazorise.TableRow>
+                                </td>
+                            </tr>
                         }
                     }
-                </Blazorise.TableBody>
-            </Table>
+                </tbody>
+            </table>
         </ModalBody>
         <ModalFooter>
             <MatButton @onclick="FecharModal">Fechar</MatButton>
@@ -95,11 +99,11 @@
 
     private async Task Amarrar(ProdutoIntegrado produto, ProdutoTotvs produtoTotvs)
     {
-        var fornecedor  =  await this.fornecedorTotvsService.LocateByCnpj(produto.CodigoTotvsEmpresaFilial,produto.CnpjFornecedor);
+        var fornecedor = await this.fornecedorTotvsService.LocateByCnpjAsync(produto.CodigoTotvsEmpresaFilial, produto.CnpjFornecedor);
 
         if (fornecedor == null)
         {
-            aviso = "Fornecedor não cadastrado no Protheus, não é pssível fazer a amarração ";
+            aviso = "Fornecedor não cadastrado no Protheus, não é possível fazer a amarração ";
             exibeAviso = true;
             modalRef.Hide();
             return;
@@ -109,9 +113,9 @@
         produto.CodigoProdutoTOTVS = produtoTotvs.B1_COD;
         var result = await this.produtoVsFornecedorService.AmarrarFornecedor(produto);
 
-        FecharModal();
+        modalRef.Hide();
 
         await this.AmarracaoFianlizadaCallBack.InvokeAsync(result);
-        this.StateHasChanged();
+        
     }
 }

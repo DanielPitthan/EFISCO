@@ -51,11 +51,18 @@ namespace BLL.TOTVS.Cadastros.Servicos
             return success;
         }
 
-        public async Task<FornecedorTotvs> LocateByCnpj(string filial, string cnpj)
+        public async Task<FornecedorTotvs> LocateByCnpjAsync(string filial, string cnpj)
         {
             FornecedorTotvs fornecedor = await this.fornecedorTotvsDAO.All()
                 .Where(x => x.A2_CGC == cnpj )
                 .FirstOrDefaultAsync();
+            return fornecedor;
+        }
+        public FornecedorTotvs LocateByCnpj(string filial, string cnpj)
+        {
+            FornecedorTotvs fornecedor = this.fornecedorTotvsDAO.All()
+                .Where(x => x.A2_CGC == cnpj )
+                .FirstOrDefault();
             return fornecedor;
         }
 
