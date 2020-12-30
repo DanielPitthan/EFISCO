@@ -57,6 +57,7 @@ namespace BLL.Cadastros.Produtos.Services
             IList<ProdutoIntegrado> produtos = await this.produtoIntegradoDAO.All()
                                                      .Where(p => p.IntegradaoTOTVS == false)
                                                      .Include(prod=> prod.Produto)
+                                                     .AsNoTracking()
                                                      .ToListAsync();
             return produtos;
         }

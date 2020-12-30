@@ -6,7 +6,7 @@
 @inject BLL.NFE.Interfaces.INFeFilesMensagensService mensagensService
 @inject NavigationManager naviagtionManager;
 
-<RadzenGrid AllowFiltering="true" AllowPaging="true" PageSize="25"
+<RadzenGrid AllowFiltering="true" AllowPaging="true" PageSize="50" 
             AllowSorting="true" Data="@Arquivos" TItem="NFeFiles" RowDoubleClick="@(async (args)=> await AbrirPreviewNF(args.ChaveAcesso))">
     <Columns>
         <RadzenGridColumn TItem="NFeFiles" Property="AutoValidado" Title="Divergência">
@@ -47,7 +47,8 @@
 
 <AvisoDeErrosNFe Mensagens="@Mensagens"
                  Titulo="@TituloErro"
-                 FinishExecutionCallback="ModalInativo" Activate="modalAtivo">
+                 FinishExecutionCallback="ModalInativo" Activate="modalAtivo"
+                 ChaveNfe="@chaveNfe">
 
 </AvisoDeErrosNFe>
 
@@ -59,6 +60,7 @@
 
     [Parameter]
     public bool Reload { get; set; }
+    private bool _reload;
 
     [Parameter]
     public bool ListarApenasValidados { get; set; }
@@ -70,12 +72,11 @@
     private IList<NFeFiles> Arquivos = new List<NFeFiles>();
     private IList<NFeFilesMensagens> Mensagens { get; set; } = new List<NFeFilesMensagens>();
     private bool modalAtivo = false;
+    private string chaveNfe="";
 
 
     protected override async Task OnInitializedAsync()
     {
-        //this.ListarApenasValidados = false;
-        //this.ListarApenasNaoValidados = false;
         await ListarXML();
         Mensagens = new List<NFeFilesMensagens>();
     }
@@ -83,7 +84,9 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        if (Reload)
+        _reload = Reload;
+
+        if (_reload)
         {
             await ListarXML();
         }
@@ -93,21 +96,25 @@
     private async Task ListarXML()
     {
         Arquivos = await nfeXmlService.ListarXMLSNaoProcessados(ListarApenasValidados, ListarApenasNaoValidados);
-
         await ArquivosCarregados.InvokeAsync(Arquivos);
     }
 
     private async Task ListarErros(NFeFiles _nfeFiles)
     {
+        chaveNfe = _nfeFiles.ChaveAcesso;
         TituloErro = $"Divergências da Chave: {_nfeFiles.ChaveAcesso}";
+
         Mensagens.Clear();
         Mensagens = await mensagensService.ListarErroDoArquivoAsync(_nfeFiles);
+        modalAtivo = true;
+
     }
 
-    private void ModalInativo(bool finishToLoad)
+    private async void ModalInativo(bool finishToLoad)
     {
-        modalAtivo = finishToLoad;
-        Reload = true;
+
+        modalAtivo = false;
+        await ListarXML();
     }
 
     private async Task AbrirPreviewNF(string chave)

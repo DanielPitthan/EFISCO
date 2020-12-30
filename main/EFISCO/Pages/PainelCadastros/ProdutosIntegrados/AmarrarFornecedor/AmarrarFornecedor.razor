@@ -66,13 +66,15 @@
 
     [Parameter]
     public bool Show { get; set; }
+    private bool _showDialog;
 
 
     [Parameter]
     public ProdutoIntegrado ProdutoIntegrado { get; set; }
 
     [Parameter]
-    public IList<ProdutoTotvs> Produtos { get; set; } = new List<ProdutoTotvs>();
+    public IList<ProdutoTotvs> Produtos { get; set; }
+    private IList<ProdutoTotvs> _produtos = new List<ProdutoTotvs>();
 
     [Parameter]
     public EventCallback<bool> AmarracaoFianlizadaCallBack { get; set; }
@@ -83,18 +85,34 @@
 
     protected override void OnParametersSet()
     {
-        if (Show)
-            modalRef.Show();
+
+        if (Produtos == null)
+        {
+            _produtos = new List<ProdutoTotvs>();
+        }
+        else
+        {
+            _produtos = Produtos;
+        }
+        if (modalRef != null)
+        {
+            if (Show)
+            {
+                modalRef.Show();
+            }
+            else
+            {
+                modalRef.Hide();
+            }
+        }
+
     }
 
-    protected override void OnInitialized()
-    {
-        Produtos = new List<ProdutoTotvs>();
-    }
 
     private void FecharModal()
     {
-        modalRef.Hide();
+        modalRef.Show();
+
     }
 
     private async Task Amarrar(ProdutoIntegrado produto, ProdutoTotvs produtoTotvs)
@@ -105,17 +123,14 @@
         {
             aviso = "Fornecedor não cadastrado no Protheus, não é possível fazer a amarração ";
             exibeAviso = true;
-            modalRef.Hide();
+            FecharModal();
             return;
         }
-
 
         produto.CodigoProdutoTOTVS = produtoTotvs.B1_COD;
         var result = await this.produtoVsFornecedorService.AmarrarFornecedor(produto);
 
-        modalRef.Hide();
-
         await this.AmarracaoFianlizadaCallBack.InvokeAsync(result);
-        
+
     }
 }

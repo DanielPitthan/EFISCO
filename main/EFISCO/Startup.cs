@@ -63,18 +63,21 @@ namespace EFISCO
 
             services.AddDbContext<ContextEF>(options =>
             {
-                options.UseSqlServer(ConecxaoAtiva.StringConnectionBaseWebFrame());
+                options.UseSqlServer(ConecxaoAtiva.StringConnectionBaseWebFrame())
+                 .EnableSensitiveDataLogging(); 
             }, ServiceLifetime.Transient);
 
 
             services.AddDbContext<ContextEFNFeXml>(options =>
             {
-                options.UseSqlServer(ConecxaoAtiva.StringConnectionBaseNfe());
+                options.UseSqlServer(ConecxaoAtiva.StringConnectionBaseNfe())
+                 .EnableSensitiveDataLogging();
             }, ServiceLifetime.Transient);
 
             services.AddDbContext<ContextTOTVS>(options =>
             {
-                options.UseSqlServer(ConecxaoAtiva.StringConnectionBaseTotvs());
+                options.UseSqlServer(ConecxaoAtiva.StringConnectionBaseTotvs())
+                 .EnableSensitiveDataLogging();
             }, ServiceLifetime.Transient);
 
             services

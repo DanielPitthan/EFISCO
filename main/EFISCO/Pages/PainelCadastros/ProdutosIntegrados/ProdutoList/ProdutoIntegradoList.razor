@@ -7,7 +7,8 @@
 <RadzenGrid TItem="ProdutoIntegrado"
             AllowFiltering="true"
             AllowSorting="true"
-            
+            AllowPaging="true"
+            PageSize="50"
             Data="_produtosIntegrados">
     <Columns>
         <RadzenGridColumn  TItem="ProdutoIntegrado" Title="Editar">
@@ -18,9 +19,7 @@
         <RadzenGridColumn TItem="ProdutoIntegrado" Property="Produto.xProd" Title="Produto"/>
         <RadzenGridColumn TItem="ProdutoIntegrado" Property="Produto.cProd" Title="Cod. Ref. Fornecedor"/>
         <RadzenGridColumn TItem="ProdutoIntegrado" Property="CnpjFornecedor" Title="Fornecedor">
-            <Template Context="produto">
-               @GetFornecedor(produto.CnpjFornecedor, produto.CodigoTotvsEmpresaFilial)
-            </Template>
+           
         </RadzenGridColumn>
         <RadzenGridColumn TItem="ProdutoIntegrado" Property="Produto.NCM" Title="NCM"/>
         <RadzenGridColumn TItem="ProdutoIntegrado" Property="Produto.uCom" Title="Unidade"/>

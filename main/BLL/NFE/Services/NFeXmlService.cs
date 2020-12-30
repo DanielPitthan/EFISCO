@@ -191,13 +191,7 @@ namespace BLL.NFE.Services
                 nfeFiles.Validado = false;
 
 
-                #region Validações
-                //Validação após gravar  nFeFiles               
 
-                mensagensDeErro.AddRange(await ValidaNFE(notaFiscalLidaXML, nfeFiles));
-                nfeFiles.AutoValidado = !(mensagensDeErro.Count > 0);
-
-                #endregion
 
                 //Importa o NF-e
                 if (notaImportada != null)
@@ -209,6 +203,16 @@ namespace BLL.NFE.Services
                 {
                     await this.nFeDAO.AddAsync(notaFiscalLidaXML);
                 }
+
+
+
+                #region Validações
+                //Validação após gravar  Nf-e               
+
+                mensagensDeErro.AddRange(await ValidaNFE(notaFiscalLidaXML, nfeFiles));
+                nfeFiles.AutoValidado = !(mensagensDeErro.Count > 0);
+
+                #endregion
 
 
                 //Atualiza ou insere NFeFile
@@ -239,6 +243,61 @@ namespace BLL.NFE.Services
         }
 
 
+
+        private async Task<List<NFeFilesMensagens>> ValidaNFE(NFe notaXml, NFeFiles nfeFiles)
+        {
+            List<NFeFilesMensagens> mensagensIntegracao = new List<NFeFilesMensagens>();
+
+            try
+            {
+                mensagensIntegracao.AddRange(await ValidaNotaJaLancada(notaXml, nfeFiles));
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ValidaNotaJaLancada {ex.Message}");
+            }
+
+            try
+            {
+                mensagensIntegracao.AddRange(await ValidaFornecedor(nfeFiles, notaXml));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ValidaFornecedor {ex.Message}");
+            }
+
+            try
+            {
+                if (mensagensIntegracao.Count == 0)
+                    mensagensIntegracao.AddRange(await ValidaProduto(notaXml, nfeFiles));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ValidaProduto {ex.Message}");
+            }
+
+            try
+            {
+                // Sem Tem xPed ?
+                if (notaXml.infNFe.det.Any(x => !string.IsNullOrEmpty(x.prod.xPed)))
+                {
+                    mensagensIntegracao.AddRange(await ValidaPedido(notaXml, nfeFiles));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ValidaPedido {ex.Message}");
+            }
+
+
+
+           
+
+
+            return mensagensIntegracao;
+        }
+
         /// <summary>
         /// Valida se NF já foi lançada no TOTVS Protheus
         /// </summary>
@@ -255,6 +314,7 @@ namespace BLL.NFE.Services
             {
                 mensagensDeErro.Add(new NFeFilesMensagens()
                 {
+                    NFeFiles = nfeFiles,
                     Ativo = true,
                     DataInclusao = DateTime.Now,
                     ChaveNFe = nfeFiles.ChaveAcesso,
@@ -264,26 +324,6 @@ namespace BLL.NFE.Services
             return mensagensDeErro;
         }
 
-        private async Task<List<NFeFilesMensagens>> ValidaNFE(NFe notaXml, NFeFiles nfeFiles)
-        {
-            List<NFeFilesMensagens> mensagensIntegracao = new List<NFeFilesMensagens>();
-
-            mensagensIntegracao.AddRange(await ValidaNotaJaLancada( notaXml, nfeFiles));
-
-            mensagensIntegracao.AddRange(await ValidaFornecedor(nfeFiles, notaXml));
-
-            if (mensagensIntegracao.Count == 0)
-                mensagensIntegracao.AddRange(await ValidaProduto(notaXml, nfeFiles));
-
-
-            // Sem Tem xPed ?
-            if (notaXml.infNFe.det.Any(x => !string.IsNullOrEmpty(x.prod.xPed)))
-            {
-                mensagensIntegracao.AddRange(await ValidaPedido(notaXml, nfeFiles));
-            }
-
-            return mensagensIntegracao;
-        }
 
 
         /// <summary>
@@ -301,6 +341,7 @@ namespace BLL.NFE.Services
                 {
                     mensagens.Add(new NFeFilesMensagens()
                     {
+                        NFeFiles = nfeFiles,
                         Ativo = true,
                         DataInclusao = DateTime.Now,
                         Texto = $"Item sem pedido de compras {detalhe.prod.cProd} - {detalhe.prod.xProd} ",
@@ -314,6 +355,7 @@ namespace BLL.NFE.Services
                 {
                     mensagens.Add(new NFeFilesMensagens()
                     {
+                        NFeFiles = nfeFiles,
                         Ativo = true,
                         DataInclusao = DateTime.Now,
                         Texto = $"Pedido de compras {detalhe.prod.xPed} não localizado na base do Protheus",
@@ -335,6 +377,7 @@ namespace BLL.NFE.Services
                     {
                         mensagens.Add(new NFeFilesMensagens()
                         {
+                            NFeFiles = nfeFiles,
                             Ativo = true,
                             DataInclusao = DateTime.Now,
                             Texto = $"Item {produtoFornecedor.A5_PRODUTO} não localizado no pedido de compras. Pedido: {detalhe.prod.xPed}",
@@ -350,6 +393,7 @@ namespace BLL.NFE.Services
                     {
                         mensagens.Add(new NFeFilesMensagens()
                         {
+                            NFeFiles = nfeFiles,
                             Ativo = true,
                             DataInclusao = DateTime.Now,
                             Texto = $"Item {produtoFornecedor.A5_PRODUTO} com preço divergente do pedido de compras. Pedido: {detalhe.prod.xPed} Unitário no pedido R$ {pedido.C7_PRECO} Unitário na NF {detalhe.prod.vUnCom}",
@@ -396,6 +440,7 @@ namespace BLL.NFE.Services
 
                     mensagensIntegracao.Add(new NFeFilesMensagens()
                     {
+                        NFeFiles = nfeFiles,
                         Ativo = true,
                         DataInclusao = DateTime.Now,
                         ChaveNFe = nfeFiles.ChaveAcesso,
@@ -406,6 +451,7 @@ namespace BLL.NFE.Services
                 {
                     mensagensIntegracao.Add(new NFeFilesMensagens()
                     {
+                        NFeFiles = nfeFiles,
                         Ativo = true,
                         DataInclusao = DateTime.Now,
                         ChaveNFe = nfeFiles.ChaveAcesso,
@@ -457,6 +503,7 @@ namespace BLL.NFE.Services
 
                 mensagensIntegracao.Add(new NFeFilesMensagens()
                 {
+                    NFeFiles = nfeFiles,
                     Ativo = true,
                     DataInclusao = DateTime.Now,
                     ChaveNFe = nfeFiles.ChaveAcesso,
@@ -478,7 +525,7 @@ namespace BLL.NFE.Services
 
         public async Task<IList<NFe>> ObterNotasByFiles(IList<NFeFiles> files)
         {
-          
+
             List<NFe> NFEs = (from nfe in this.nFeDAO.GetAll()
                               join arquivo in files on nfe.infNFe.Id equals arquivo.ChaveAcesso
                               select nfe).ToList();
@@ -619,8 +666,15 @@ namespace BLL.NFE.Services
 
             file.Processado = false;
             await this.fileStorangeDAO.UpdateAsync(file);
+            try
+            {
+                await this.ProcessarArquivos();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro await this.ProcessarArquivos() {ex.Message} ");
+            }
 
-            await this.ProcessarArquivos();
         }
 
 

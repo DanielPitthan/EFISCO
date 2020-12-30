@@ -39,6 +39,7 @@ namespace BLL.TOTVS.Cadastros.Servicos
                                && p.A5_LOJA ==fornecedor.A2_LOJA
                                && p.A5_PRODUTO==produtoIntegrado.CodigoProdutoTOTVS
                                )
+                        .AsNoTracking()
                         .ToListAsync();
             if (produtoVsFornecedor.Count==0)
             {
@@ -55,7 +56,8 @@ namespace BLL.TOTVS.Cadastros.Servicos
         {
             var produtoVersusFornecedor = await produtoFornecedorDAO.All()
                  .Where(a5 => a5.A5_FILIAL == filial && a5.A5_FORNECE == codigoFornecedor && a5.A5_CODPRF == codigoReferencia)
-                 .SingleOrDefaultAsync();
+                 .AsNoTracking()
+                 .FirstOrDefaultAsync();
             return produtoVersusFornecedor;
         }
     }

@@ -23,6 +23,7 @@ namespace BLL.TOTVS.Cadastros.Servicos
         {
             IList<ProdutoTotvs> produtos = await this.produtoTotvsDAO.All()
                .Where(p => p.B1_POSIPI == ncm && p.B1_FILIAL == filial)
+               .AsNoTracking()
                .ToListAsync();
             return produtos;
         }
@@ -31,7 +32,8 @@ namespace BLL.TOTVS.Cadastros.Servicos
         {
             ProdutoTotvs produto = await this.produtoTotvsDAO.All()
                 .Where(p => p.B1_COD == referencia && p.B1_FILIAL==filial)
-                .SingleOrDefaultAsync();
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
             return produto;
         }
     }

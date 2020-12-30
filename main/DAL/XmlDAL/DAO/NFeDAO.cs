@@ -130,6 +130,7 @@ namespace DAL.XmlDAL.DAO
                                                                         join infNFe as inf with(nolock) on det.infNFeId = inf.infNFeId
                                                                         join NFe as nfe with(nolock) on inf.infNFeId = nfe.infNFeId
                                                                         where nfe.Id = {nfe.Id}")
+                                                                        .AsNoTracking()
                                                                         .ToListAsync();
             return produtos;
 

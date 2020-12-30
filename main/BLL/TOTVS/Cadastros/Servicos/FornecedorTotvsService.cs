@@ -55,6 +55,7 @@ namespace BLL.TOTVS.Cadastros.Servicos
         {
             FornecedorTotvs fornecedor = await this.fornecedorTotvsDAO.All()
                 .Where(x => x.A2_CGC == cnpj )
+                .AsNoTracking()
                 .FirstOrDefaultAsync();
             return fornecedor;
         }
@@ -62,6 +63,7 @@ namespace BLL.TOTVS.Cadastros.Servicos
         {
             FornecedorTotvs fornecedor = this.fornecedorTotvsDAO.All()
                 .Where(x => x.A2_CGC == cnpj )
+                .AsNoTracking()
                 .FirstOrDefault();
             return fornecedor;
         }

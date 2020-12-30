@@ -4,7 +4,7 @@
 @inject BLL.NFE.Interfaces.INFeFilesMensagensService mensagensService
 @inject NavigationManager navigationManager;
 
-@if (Activate)
+@if (_activate)
 {
     <div class="modal fade show" id="myModal" style="display:block" aria-modal="true" role="dialog">
         <div class="modal-dialog modal-xl">
@@ -27,7 +27,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var erro in Mensagens)
+                            @foreach (var erro in _mensagens)
                             {
                                 <tr>
                                     <td>@erro.Id</td>
@@ -61,7 +61,13 @@
         </div>
     </div>
 }
-
+@if (!string.IsNullOrEmpty(exceptionError))
+{
+<div class="alert alert-danger">
+    @exceptionError;
+</div>
+  
+}
 
 
 @code {
@@ -70,9 +76,11 @@
 
     [Parameter]
     public IList<NFeFilesMensagens> Mensagens { get; set; }
+    private IList<NFeFilesMensagens> _mensagens { get; set; }
 
     [Parameter]
     public bool Activate { get; set; }
+    private bool _activate { get; set; }
 
     [Parameter]
     public EventCallback<bool> FinishExecutionCallback { get; set; }
@@ -80,43 +88,58 @@
     [Parameter]
     public int Id { get; set; }
 
+    [Parameter]
+    public string ChaveNfe { get; set; }
+
+    private string _chaveNfe="";
+
 
     private bool validando;
     private string validaClass = "";
+    private string exceptionError = "";
 
     protected override void OnParametersSet()
     {
-        if (Mensagens.Count > 0)
-            Activate = true;
+        _chaveNfe = ChaveNfe;
+        _activate = Activate;
+        _mensagens = Mensagens;
+
     }
-
-
 
 
     private void VizualizarNF()
     {
-        var chaveNFE = Mensagens.Select(x => x.ChaveNFe).FirstOrDefault();
-        navigationManager.NavigateTo($"/PainelNFE/{chaveNFE}");
+
+        navigationManager.NavigateTo($"/PainelNFE/{_chaveNfe}");
     }
 
     private async void Revalidar()
     {
         validando = true;
         validaClass = "spinner-grow spinner-grow-sm";
-        var chaveNFE = Mensagens.Select(x => x.ChaveNFe).FirstOrDefault();
-        await nfeXmlService.Revalidar(chaveNFE);
+        try
+        {
+            await nfeXmlService.Revalidar(_chaveNfe);
+        }catch(Exception ex)
+        {
+            exceptionError = ex.Message;
+        }
 
-        Mensagens = await mensagensService.ListarErroDoArquivoAsync(chaveNFE);
+
+
+        _mensagens = await mensagensService.ListarErroDoArquivoAsync(_chaveNfe);
         validando = false;
         validaClass = "";
-        await FinishExecutionCallback.InvokeAsync(true);
         this.StateHasChanged();
+
+        //await FinishExecutionCallback.InvokeAsync(true);
     }
 
     private async Task Fechar()
     {
-        Activate = false;
-        await FinishExecutionCallback.InvokeAsync(Activate);
-        Mensagens.Clear();
+        _mensagens.Clear();
+        _activate = false;
+        await FinishExecutionCallback.InvokeAsync(_activate);
+
     }
 }

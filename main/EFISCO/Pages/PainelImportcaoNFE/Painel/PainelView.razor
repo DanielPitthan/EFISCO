@@ -42,7 +42,7 @@
         private bool reloadList = false;
         private IList<PieSerie> pieSeries = new List<PieSerie>();
         private IList<BarSerie> barSeries = new List<BarSerie>();
-
+       
 
 
         protected override async Task OnInitializedAsync()
@@ -58,14 +58,7 @@
                 Serie = "Não Processados",
                 Valor = 0
             });
-        }
-
-
-
-        //private void UploadCallBack(bool finishUpload)
-        //{
-        //    reloadList = finishUpload;
-        //}
+        }       
 
         private void AbrirModalValidacao()
         {
@@ -86,6 +79,8 @@
 
         private void AtualizaListaArquivosCallBack(IList<NFeFiles> arquivos)
         {
+          
+
             if (reloadList)
                 reloadList = false;
 
@@ -122,6 +117,8 @@
                 Serie = "Não Validados",
                 Valor = naoValidosValor == 0 ? 1 : naoValidosValor
             });
+
+            this.StateHasChanged();
         }
 
 
