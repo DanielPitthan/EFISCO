@@ -6,8 +6,9 @@
 @inject BLL.NFE.Interfaces.INFeFilesMensagensService mensagensService
 @inject NavigationManager naviagtionManager;
 
-<RadzenGrid AllowFiltering="true" AllowPaging="true" PageSize="50" 
-            AllowSorting="true" Data="@Arquivos" TItem="NFeFiles" RowDoubleClick="@(async (args)=> await AbrirPreviewNF(args.ChaveAcesso))">
+<RadzenGrid AllowFiltering="true" AllowPaging="true" PageSize="50"
+            AllowSorting="true" Data="@Arquivos" TItem="NFeFiles" RowDoubleClick="@(async (args)=> await AbrirPreviewNF(args.ChaveAcesso))"
+            @ref="radzenGrid">
     <Columns>
         <RadzenGridColumn TItem="NFeFiles" Property="AutoValidado" Title="Divergência">
             <Template Context="nfeFile">
@@ -32,14 +33,13 @@
                 <RadzenCheckBox @bind-Value="@context.Processada" @onclick:preventDefault Disabled="true"></RadzenCheckBox>
             </Template>
         </RadzenGridColumn>
-        <RadzenGridColumn TItem="NFeFiles" Property="Arquivo" Title="Arquivo" />
-        <RadzenGridColumn TItem="NFeFiles" Property="ChaveAcesso" Title="Chave de Acesso" />
-        <RadzenGridColumn TItem="NFeFiles" Property="DataInclusao" Title="Dt Inclusão" />
-        <RadzenGridColumn TItem="NFeFiles" Property="DataEmnissaoNfe" Title="Emissao NFe" />
-        <RadzenGridColumn TItem="NFeFiles" Property="NumeroNota" Title="N. NFe" />
+        <RadzenGridColumn TItem="NFeFiles" Property="ChaveAcesso" Title="Chave de Acesso"  Width="400px"/>
+        <RadzenGridColumn TItem="NFeFiles" Property="DataInclusao" Title="Dt Inclusão" Width="200px"/>
+        <RadzenGridColumn TItem="NFeFiles" Property="DataEmnissaoNfe" Title="Emissao NFe" Width="200px"/>
+        <RadzenGridColumn TItem="NFeFiles" Property="NumeroNota" Title="N. NFe" Width="200px"/>
         <RadzenGridColumn TItem="NFeFiles" Property="Serie" Title="Serie" />
         <RadzenGridColumn TItem="NFeFiles" Property="CnpjFornecedor" Title="CNPJ Fornece" />
-        <RadzenGridColumn TItem="NFeFiles" Property="Fornecedor" Title="Fornecedor" />
+        <RadzenGridColumn TItem="NFeFiles" Property="Fornecedor" Title="Fornecedor" Width="300px"/>
         <RadzenGridColumn TItem="NFeFiles" Property="ValorTotal" Title="Vlr Total" />
 
     </Columns>
@@ -66,13 +66,14 @@
     public bool ListarApenasValidados { get; set; }
 
     [Parameter]
-    public bool ListarApenasNaoValidados { get; set; }
+    public bool ListarApenasAuditados { get; set; }
 
     private string TituloErro;
     private IList<NFeFiles> Arquivos = new List<NFeFiles>();
     private IList<NFeFilesMensagens> Mensagens { get; set; } = new List<NFeFilesMensagens>();
     private bool modalAtivo = false;
-    private string chaveNfe="";
+    private string chaveNfe = "";
+    private RadzenGrid<NFeFiles> radzenGrid;
 
 
     protected override async Task OnInitializedAsync()
@@ -89,14 +90,17 @@
         if (_reload)
         {
             await ListarXML();
+            await radzenGrid.Reload();
+            this.StateHasChanged();
         }
     }
 
 
     private async Task ListarXML()
     {
-        Arquivos = await nfeXmlService.ListarXMLSNaoProcessados(ListarApenasValidados, ListarApenasNaoValidados);
+        Arquivos = await nfeXmlService.ListarXMLSNaoProcessados(ListarApenasValidados, ListarApenasAuditados);
         await ArquivosCarregados.InvokeAsync(Arquivos);
+        this.StateHasChanged();
     }
 
     private async Task ListarErros(NFeFiles _nfeFiles)

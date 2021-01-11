@@ -23,6 +23,7 @@ namespace DAL.XmlDAL.Interfaces
         Task<bool> UpdateAsync(NFe nfe);
 
         Task<IList<prod>> GetProduto(NFe nfe);
-        
+
+
     }
 }

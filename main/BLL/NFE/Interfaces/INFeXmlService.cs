@@ -15,12 +15,12 @@ namespace BLL.NFE.Interfaces
         public int EndOfProcess { get; set; }
 
         public Task<NFeFiles> ObterNFEFilesPelaChave(string chaveNfe);
-        public Task<IList<NFeFiles>> ListarXMLSNaoProcessados(bool apenasValidos = false, bool apenasNaoValidados = false);
+        public Task<IList<NFeFiles>> ListarXMLSNaoProcessados(bool apenasValidos = false, bool apenasAuditado = false);
         public Task<IList<NFeFiles>> ListarXMLSProcessados(bool apenasValidos = false, bool apenasNaoValidados = false);
         public Task<IList<NFeFiles>> ListarTodosXML(bool apenasValidos = false, bool apenasNaoValidados = false);
         public Task ProcessarArquivos();
         public Task<ExcelResult> ValidarArquivos(IList<FileStorange> fileStoranges);     
-        public Task<IList<NFe>> ObterNotasByFiles(IList<NFeFiles> files);
+        public Task<IList<NFe>> ObterNotasByFiles();
         public Task Revalidar(NFeFiles nfeFiles);
         public Task Revalidar(string chaveNFE);
         public NFe GetNfeByChave(string chave);

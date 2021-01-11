@@ -7,17 +7,32 @@
 
 <MatButton @onclick="Download">Exportar</MatButton>
 
-
+@if (!string.IsNullOrEmpty(erroMessage))
+{
+    @erroMessage
+}
 
 @code {
 
     [Inject]
     BlazorDownloadFile.IBlazorDownloadFileService BlazorDownloadFileService { get; set; }
 
+    private string erroMessage = "";
+
     private async Task Download()
     {
-        var bytes = await downloadNfeService.DownloadList();
-        await BlazorDownloadFileService.DownloadFile("planilha.xlsx", bytes, "application/octet-stream");
+        try
+        {
+            var bytes = await downloadNfeService.DownloadList();
+            await BlazorDownloadFileService.DownloadFile("planilha.xlsx", bytes, "application/octet-stream");
+        }
+        catch (Exception ex)
+        {
+
+            erroMessage = ex.Message;
+        }
+
+
     }
 
 }

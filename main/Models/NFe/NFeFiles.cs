@@ -15,7 +15,10 @@ namespace Models.NFe
         public string Arquivo { get; set; }
         public string Path { get; set; }
         public string ChaveAcesso { get; set; }
-        public bool Processada { get; set; }
+        /// <summary>
+        /// Integrado ao ERP
+        /// </summary>
+        public bool Processada { get; set; } 
         public DateTime DataInclusao { get; set; }
         public DateTime DataEmnissaoNfe { get; set; }
         public DateTime? DataProcessamento { get; set; }
@@ -24,8 +27,14 @@ namespace Models.NFe
         public string CnpjFornecedor { get; set; }
         public string Fornecedor { get; set; }
         public decimal ValorTotal { get; set; }
+        /// <summary>
+        /// Aditado
+        /// </summary>
         public bool Validado { get; set; }
         public virtual Empresa Empresa { get; set; }
+        /// <summary>
+        /// Validado automáticamente pelo sistema
+        /// </summary>
         public bool? AutoValidado { get; set; }
 
     }

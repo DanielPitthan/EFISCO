@@ -2,6 +2,8 @@
 using DAL.DAOBaseNfeXml;
 using DAL.XmlDAL.Helpers;
 using DAL.XmlDAL.Interfaces;
+using Dapper;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
@@ -11,6 +13,7 @@ using System.Threading.Tasks;
 using XmlNFe.Nfes;
 using XmlNFe.Nfes.Informacoes;
 using XmlNFe.Nfes.Informacoes.Detalhe;
+using XmlNFe.Nfes.Informacoes.Identificacao;
 
 namespace DAL.XmlDAL.DAO
 {
@@ -20,14 +23,12 @@ namespace DAL.XmlDAL.DAO
 
         public async Task<NFe> CarregarXML(string xml)
         {
-            //string xml2 = FuncoesXml.ObterNodeDeArquivoXml(typeof(NFe).Name, @"D:\Projetos\EFISCO\EFISCO\master\EFISCO\wwwroot\Upload\XML\2020\6\24\00bfb875-8ea9-494d-8cf1-505f2c83ea1d.xml");
-
             var nfe = FuncoesXml.XmlStringParaClasse<NFe>(xml);
             nfe.infNFe.Id = nfe.infNFe.Id.Substring(3, 44);
             return nfe;
         }
 
-
+      
         public IQueryable<NFe> GetAll()
         {
             var notas = this.Contexto.NFe
@@ -62,7 +63,7 @@ namespace DAL.XmlDAL.DAO
 
                 .Include(inf => inf.infNFe.det)
                     .ThenInclude(det => det.prod)
-                //  .ThenInclude(prod => prod.comb);
+                // .ThenInclude(prod => prod.comb)
 
                 .Include(inf => inf.infNFe.det)
                     .ThenInclude(det => det.impostoDevol)
@@ -95,9 +96,8 @@ namespace DAL.XmlDAL.DAO
                     .ThenInclude(cob => cob.fat)
 
                 .Include(inf => inf.infNFe.pag)
-                .Include(inf => inf.infNFe.infAdic);
-
-
+                .Include(inf => inf.infNFe.infAdic)
+                .AsNoTracking();
 
 
             return notas;

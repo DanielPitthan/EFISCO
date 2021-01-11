@@ -21,13 +21,8 @@ namespace BLL.Cadastros.Fornecedores.Services
 
         public async Task<bool> AdicionarAsync(EmitenteIntegrado emitente)
         {
-            var fornecedor = await this.emitenteDAO.All()
-                                        .Where(x => x.Emitente.CNPJ == emitente.Emitente.CNPJ)
-                                        .SingleOrDefaultAsync();
-            if (fornecedor == null)
-                return await this.emitenteDAO.AddSysnc(emitente);
 
-            return await AtualizarAsync(fornecedor);
+            return await this.emitenteDAO.AddSysnc(emitente);
         }
 
         public async Task<bool> AtualizarAsync(EmitenteIntegrado emitente)
@@ -46,7 +41,8 @@ namespace BLL.Cadastros.Fornecedores.Services
                                                      .Include(e => e.Emitente)
                                                      .ThenInclude(ende => ende.enderEmit)
                                                      .Where(x => x.Emitente.Id == emitId)
-                                                     .SingleOrDefaultAsync();
+                                                     .AsNoTracking()
+                                                     .FirstOrDefaultAsync();
             return emitente;
         }
 
@@ -54,8 +50,8 @@ namespace BLL.Cadastros.Fornecedores.Services
         {
             IList<EmitenteIntegrado> emitentes = await this.emitenteDAO.All()
                                                     .Where(x => x.IntegradaoTOTVS == false)
-                                                    .Include(e=> e.Emitente)
-                                                    .ThenInclude(ende=> ende.enderEmit)
+                                                    .Include(e => e.Emitente)
+                                                    .ThenInclude(ende => ende.enderEmit)
                                                     .ToListAsync();
             return emitentes;
         }

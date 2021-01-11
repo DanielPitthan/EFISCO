@@ -1,13 +1,17 @@
 ﻿using BLL.NFE.Interfaces;
+using DAL.XmlDAL.Interfaces;
 using DFe.Classes.Flags;
+using Models.NFe;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XmlNFe.Nfes;
 using XmlNFe.Nfes.Informacoes.Destinatario;
 using XmlNFe.Nfes.Informacoes.Emitente;
 using XmlNFe.Nfes.Informacoes.Identificacao.Tipos;
@@ -19,14 +23,30 @@ namespace BLL.NFE.Services
     {
         private INFeXmlService nFeXmlService;
 
-        public NfeDownloadService(INFeXmlService _nFeXmlService)
+
+        public NfeDownloadService(INFeXmlService _nFeXmlService
+                                 )
         {
             this.nFeXmlService = _nFeXmlService;
+
         }
 
         public async Task<byte[]> DownloadList()
         {
-            var Nfes = await this.nFeXmlService.ObterNotasByFiles(await nFeXmlService.ListarXMLSNaoProcessados(false, true));
+            IList<NFe> Nfes;
+            
+            try
+            {
+                Nfes = await this.nFeXmlService.ObterNotasByFiles();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
@@ -254,6 +274,7 @@ namespace BLL.NFE.Services
 
                 byte[] bytesOfFile = excel.GetAsByteArray();
                 return bytesOfFile;
+
             }
         }
     }
