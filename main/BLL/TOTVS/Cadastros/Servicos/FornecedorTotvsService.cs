@@ -29,10 +29,11 @@ namespace BLL.TOTVS.Cadastros.Servicos
             //var recno = this.fornecedorTotvsDAO.All().Max(r => r.R_E_C_N_O_);
          
             EmitenteIntegrado Emitente = await emitenteService.Get(emitId);
-           // var codigo = this.fornecedorTotvsDAO.GetMaxCod(Emitente.CodigoTotvsEmpresaFilial.Substring(0, 2));
+            // var codigo = this.fornecedorTotvsDAO.GetMaxCod(Emitente.CodigoTotvsEmpresaFilial.Substring(0, 2));
 
             //fornecedor.R_E_C_N_O_ = recno + 1;
-           // fornecedor.A2_COD = codigo;//Soma1.GetNextNum(codigo);
+            // fornecedor.A2_COD = codigo;//Soma1.GetNextNum(codigo);
+            fornecedor.A2_MUN = fornecedor.A2_MUN.Replace("'", "");
             fornecedor.A2_LOJA = "01";
             fornecedor.A2_CODPAIS = "01058";// BRASIL
             fornecedor.A2_PAIS = "105";// BRASIL
