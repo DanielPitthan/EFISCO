@@ -24,11 +24,11 @@ namespace DAL.TOTVS.Cadastros.DAO
         {
             FornecedorTotvs fornecedor = item as FornecedorTotvs;
             var query = FornecedorQuery.Insert(fornecedor);
-          
-            var fornecedorInserido = await this.Contexto.SA2010
-                                                        .FromSqlRaw(query)
-                                                        .ToListAsync();
-            return fornecedorInserido != null;
+
+            var fornecedorInserido =  await this.Contexto.Database.ExecuteSqlRawAsync(query);
+
+
+            return fornecedorInserido > 0;
 
         }
 

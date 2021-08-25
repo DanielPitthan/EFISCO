@@ -2,24 +2,26 @@
 
 
 
-<div class="row">
-        <h4>Top @top Fornecedores </h4>
-        <RadzenChart>
-            <RadzenPieSeries Data="@TopFornecedores"
-                             Title="Top Fornecedore"
-                             CategoryProperty="Fornecedor"
-                             ValueProperty="Total" />
-            <RadzenValueAxis>
-                <RadzenAxisTitle Text="@Titulo()" />
-            </RadzenValueAxis>
-            <RadzenCategoryAxis>
-                <RadzenAxisTitle Text="Forneceodres" />
-            </RadzenCategoryAxis>
-        </RadzenChart>
+
+<div style="text-align:center;">
+    <h4>Top @top Fornecedores </h4>
 </div>
-<div class="row">
-        <RadzenSlider @bind-Value=@top TValue="int" Min="10" Max="50" Change=@(args => OnChange(args)) Step="10" />
-</div>
+<br />
+
+<RadzenChart>
+    <RadzenPieSeries Data="@TopFornecedores"
+                     Title="Top Fornecedore"
+                     CategoryProperty="Fornecedor"
+                     ValueProperty="Total" />
+    <RadzenValueAxis>
+        <RadzenAxisTitle Text="@Titulo()" />
+    </RadzenValueAxis>
+    <RadzenCategoryAxis>
+        <RadzenAxisTitle Text="Forneceodres" />
+    </RadzenCategoryAxis>
+</RadzenChart>
+<br />
+<RadzenSlider @bind-Value=@top TValue="int" Min="10" Max="50" Change=@(args => OnChange(args)) Step="10"  Style="width:100%;"/>
 
 @code {
 
@@ -65,7 +67,7 @@
     private void OnChange(dynamic value)
     {
         top = value;
-        TopFornecedores =  GetTop(top);
+        TopFornecedores = GetTop(top);
         //this.StateHasChanged
     }
 }
