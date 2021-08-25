@@ -125,7 +125,7 @@ namespace BLL.NFE.Services
             return arquivos;
         }
 
-        public async Task<IList<NFeFiles>> ListarTodosXML(bool apenasValidos = false, bool apenasNaoValidados = false)
+        public async Task<IList<NFeFiles>> ListarTodosXML()
         {
             IQueryable<NFeFiles> query = this.nFeFilesDAO.GetAll();
 
@@ -167,7 +167,7 @@ namespace BLL.NFE.Services
 
                 NFe notaImportada = await this.nFeDAO.GetAll()
                                                 .Where(x => x.infNFe.Id == notaFiscalLidaXML.infNFe.Id)//Chave da NF
-                                                .SingleOrDefaultAsync();
+                                                .FirstOrDefaultAsync();
 
 
 
@@ -175,7 +175,7 @@ namespace BLL.NFE.Services
                 NFeFiles arquivoJaExiste = await this.nFeFilesDAO
                                                  .GetAll()
                                                  .Where(x => x.ChaveAcesso == notaFiscalLidaXML.infNFe.Id)
-                                                 .SingleOrDefaultAsync();
+                                                 .FirstOrDefaultAsync();
 
                 #endregion
 
@@ -738,7 +738,13 @@ namespace BLL.NFE.Services
             return await this.nFeDAO.UpdateAsync(nfe);
         }
 
+        
+        IQueryable<NFeFiles> INFeXmlService.ListarTodosXMLQuery()
+        {
+            return this.nFeFilesDAO.GetAll();
+        }
 
+       
     }
 }
 

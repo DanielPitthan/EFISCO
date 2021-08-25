@@ -1,0 +1,20 @@
+﻿@inherits EFISCO.Pages.Dashboards.Kpis.Components.NfeKPIBase
+
+<RadzenCard>
+    <div class="row">
+        <div class="col">
+            <h3>Processados</h3>
+        </div>
+        <div class="col">
+            <h3> @TotalJaProcessadas</h3>           
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col">
+         @TotalJaProcessadasValor.ToString("C2")
+        </div>        
+    </div>   
+</RadzenCard>
+    @code {
+
+    }

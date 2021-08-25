@@ -40,14 +40,15 @@
         </div>
         </div>
         <div class="row" style="padding-bottom:2rem;">
-            <div class="col-12 col-md-6 col-sm-12 col-lg-6">
+            <div class="col">
                 <NfeDownloadList></NfeDownloadList>
             </div>
         </div>
         <div class="row">
             <NFeXmlList Reload="@reloadList"
                         ArquivosCarregados="@AtualizaListaArquivosCallBack"
-                        ListarApenasAuditados="false" ListarApenasValidados="false">
+                        ListarApenasAuditados="false" ListarApenasValidados="false" 
+                        ListarProcessados="@exibeImportados">
 
             </NFeXmlList>
         </div>
@@ -55,6 +56,7 @@
 
 
 @code {
+    private bool exibeImportados = false;
     private bool modalValidacaoAberto = false;
     private bool reloadList = false;
     private IList<PieSerie> pieSeries = new List<PieSerie>();

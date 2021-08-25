@@ -119,7 +119,9 @@
             A2_NREDUZ = Emitente.xNome,
             A2_EST = Emitente.enderEmit.ProxyUF,
             A2_END = Emitente.enderEmit.xLgr,
-            A2_COD_MUN = Convert.ToString(Emitente.enderEmit.cMun),
+            A2_COD_MUN = Convert.ToString(Emitente.enderEmit.cMun)
+                                .Substring(2, 5),
+
             A2_MUN = Emitente.enderEmit.xMun,
             A2_CEP = Emitente.enderEmit.CEP,
             A2_CGC = Emitente.CNPJ,
@@ -132,7 +134,7 @@
             A2_CONTA = conta,
 
         };
-        await forncedorTotvsService.Cadastrar(fornecedor,Emitente.Id);
+        await forncedorTotvsService.Cadastrar(fornecedor, Emitente.Id);
         await FecharModal();
     }
 

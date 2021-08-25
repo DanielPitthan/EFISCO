@@ -6,44 +6,51 @@
 @inject BLL.NFE.Interfaces.INFeFilesMensagensService mensagensService
 @inject NavigationManager naviagtionManager;
 
-<RadzenGrid AllowFiltering="true" AllowPaging="true" PageSize="50"
-            AllowSorting="true" Data="@Arquivos" TItem="NFeFiles" RowDoubleClick="@(async (args)=> await AbrirPreviewNF(args.ChaveAcesso))"
-            @ref="radzenGrid">
-    <Columns>
-        <RadzenGridColumn TItem="NFeFiles" Property="AutoValidado" Title="Divergência">
-            <Template Context="nfeFile">
-                @if (nfeFile.AutoValidado == false)
-                {
-                    <RadzenButton Icon="warning" Click="@(args=> ListarErros(nfeFile))"></RadzenButton>
-                }
-                else
-                {
-                    <MatIcon Icon="@MatIconNames.Check_circle" Style="color:green"></MatIcon>
-                }
+@if (!processando)
+{
+    <RadzenGrid AllowFiltering="true" AllowPaging="true" PageSize="50"
+                AllowSorting="true" Data="@Arquivos" TItem="NFeFiles" RowDoubleClick="@(async (args)=> await AbrirPreviewNF(args.ChaveAcesso))"
+                @ref="radzenGrid">
+        <Columns>
+            <RadzenGridColumn TItem="NFeFiles" Property="AutoValidado" Title="Divergência">
+                <Template Context="nfeFile">
+                    @if (nfeFile.AutoValidado == false)
+                    {
+                        <RadzenButton Icon="warning" Click="@(args=> ListarErros(nfeFile))"></RadzenButton>
+                    }
+                    else
+                    {
+                        <MatIcon Icon="@MatIconNames.Check_circle" Style="color:green"></MatIcon>
+                    }
 
-            </Template>
-        </RadzenGridColumn>
-        <RadzenGridColumn TItem="NFeFiles" Property="Validado" Title="Auditado">
-            <Template>
-                <RadzenCheckBox @bind-Value="@context.Validado" @onclick:preventDefault Disabled="true"></RadzenCheckBox>
-            </Template>
-        </RadzenGridColumn>
-        <RadzenGridColumn TItem="NFeFiles" Property="Processada" Title="Processado">
-            <Template>
-                <RadzenCheckBox @bind-Value="@context.Processada" @onclick:preventDefault Disabled="true"></RadzenCheckBox>
-            </Template>
-        </RadzenGridColumn>
-        <RadzenGridColumn TItem="NFeFiles" Property="ChaveAcesso" Title="Chave de Acesso"  Width="400px"/>
-        <RadzenGridColumn TItem="NFeFiles" Property="DataInclusao" Title="Dt Inclusão" Width="200px"/>
-        <RadzenGridColumn TItem="NFeFiles" Property="DataEmnissaoNfe" Title="Emissao NFe" Width="200px"/>
-        <RadzenGridColumn TItem="NFeFiles" Property="NumeroNota" Title="N. NFe" Width="200px"/>
-        <RadzenGridColumn TItem="NFeFiles" Property="Serie" Title="Serie" />
-        <RadzenGridColumn TItem="NFeFiles" Property="CnpjFornecedor" Title="CNPJ Fornece" />
-        <RadzenGridColumn TItem="NFeFiles" Property="Fornecedor" Title="Fornecedor" Width="300px"/>
-        <RadzenGridColumn TItem="NFeFiles" Property="ValorTotal" Title="Vlr Total" />
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="NFeFiles" Property="Validado" Title="Auditado">
+                <Template>
+                    <RadzenCheckBox @bind-Value="@context.Validado" @onclick:preventDefault Disabled="true"></RadzenCheckBox>
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="NFeFiles" Property="Processada" Title="Processado">
+                <Template>
+                    <RadzenCheckBox @bind-Value="@context.Processada" @onclick:preventDefault Disabled="true"></RadzenCheckBox>
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="NFeFiles" Property="ChaveAcesso" Title="Chave de Acesso" Width="400px" />
+            <RadzenGridColumn TItem="NFeFiles" Property="DataInclusao" Title="Dt Inclusão" Width="200px" />
+            <RadzenGridColumn TItem="NFeFiles" Property="DataEmnissaoNfe" Title="Emissao NFe" Width="200px" />
+            <RadzenGridColumn TItem="NFeFiles" Property="NumeroNota" Title="N. NFe" Width="200px" />
+            <RadzenGridColumn TItem="NFeFiles" Property="Serie" Title="Serie" />
+            <RadzenGridColumn TItem="NFeFiles" Property="CnpjFornecedor" Title="CNPJ Fornece" />
+            <RadzenGridColumn TItem="NFeFiles" Property="Fornecedor" Title="Fornecedor" Width="300px" />
+            <RadzenGridColumn TItem="NFeFiles" Property="ValorTotal" Title="Vlr Total" />
 
-    </Columns>
-</RadzenGrid>
+        </Columns>
+    </RadzenGrid>
+}
+else
+{
+    <RadzenProgressBar Value="100" ShowValue="false" Mode="Radzen.ProgressBarMode.Indeterminate" Style="margin-bottom: 20px" />
+}
 
 <AvisoDeErrosNFe Mensagens="@Mensagens"
                  Titulo="@TituloErro"
@@ -67,6 +74,11 @@
 
     [Parameter]
     public bool ListarApenasAuditados { get; set; }
+
+    [Parameter]
+    public bool ListarProcessados { get; set; }
+
+    private bool processando = false;
 
     private string TituloErro;
     private IList<NFeFiles> Arquivos = new List<NFeFiles>();
@@ -99,6 +111,8 @@
     private async Task ListarXML()
     {
         Arquivos = await nfeXmlService.ListarXMLSNaoProcessados(ListarApenasValidados, ListarApenasAuditados);
+
+
         await ArquivosCarregados.InvokeAsync(Arquivos);
         this.StateHasChanged();
     }

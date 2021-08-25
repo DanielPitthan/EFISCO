@@ -1,0 +1,71 @@
+﻿@inject BLL.NFE.Interfaces.INFeXmlService nfeService
+
+
+
+<div class="row">
+        <h4>Top @top Fornecedores </h4>
+        <RadzenChart>
+            <RadzenPieSeries Data="@TopFornecedores"
+                             Title="Top Fornecedore"
+                             CategoryProperty="Fornecedor"
+                             ValueProperty="Total" />
+            <RadzenValueAxis>
+                <RadzenAxisTitle Text="@Titulo()" />
+            </RadzenValueAxis>
+            <RadzenCategoryAxis>
+                <RadzenAxisTitle Text="Forneceodres" />
+            </RadzenCategoryAxis>
+        </RadzenChart>
+</div>
+<div class="row">
+        <RadzenSlider @bind-Value=@top TValue="int" Min="10" Max="50" Change=@(args => OnChange(args)) Step="10" />
+</div>
+
+@code {
+
+    IList<TopFornecedores> TopFornecedores = new List<TopFornecedores>();
+    private int top = 10;
+
+
+    private string Titulo()
+    {
+        return $"Top {top}";
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        TopFornecedores = GetTop(10);
+
+    }
+
+
+    private IList<TopFornecedores> GetTop(int top)
+    {
+        return nfeService.ListarTodosXMLQuery()
+                          .GroupBy(g => new
+                          {
+                              Cnpj = g.CnpjFornecedor,
+                              Fornecedor = g.Fornecedor
+
+                          })
+                          .Select(x => new TopFornecedores
+                          {
+                              Cnpj = x.Key.Cnpj,
+                              Fornecedor = x.Key.Fornecedor,
+                              Quantidade = x.Count(),
+                              Total = x.Sum(s => s.ValorTotal)
+
+                          })
+                          .OrderByDescending(x => x.Total)
+                          .Take(top)
+                          .ToList();
+    }
+
+    private void OnChange(dynamic value)
+    {
+        top = value;
+        TopFornecedores =  GetTop(top);
+        //this.StateHasChanged
+    }
+}

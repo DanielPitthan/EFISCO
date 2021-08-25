@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Models.Relatorios.Ativo;
 using Models.TOTVS.Cadastros;
 using Models.TOTVS.Cadastros.ClienteFornecedor;
 using Models.TOTVS.Cadastros.Produtos;
@@ -15,7 +16,7 @@ namespace ContextBinds.EntityCore
         public ContextTOTVS(DbContextOptions options) : base(options)
         {
         }
-
+        public DbSet<AtivoVsNotaFiscal> AtivoVsNotaFiscals { get; set; }
         public DbSet<NotaFiscalEntradaCabecalhoTotvs> SF1010 { get; set; }
         public DbSet<FornecedorTotvs> SA2010 { get; set; }
         public DbSet<ClienteTotvs> SA1010 { get; set; }
@@ -34,6 +35,7 @@ namespace ContextBinds.EntityCore
             modelBuilder.Entity<ProdutoVersusFornecedorTotvs>().HasNoKey();
             modelBuilder.Entity<PedidoDeCompraTotvs>().HasNoKey();
             modelBuilder.Entity<NotaFiscalEntradaCabecalhoTotvs>().HasNoKey();
+            modelBuilder.Entity<AtivoVsNotaFiscal>().HasNoKey();
         }
     }
 }

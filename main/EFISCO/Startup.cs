@@ -42,6 +42,10 @@ using BLL.Cadastros.Produtos.Interfaces;
 using DAL.Cadastros.Produtos.Interfaces;
 using BLL.Cadastros.Produtos.Services;
 using BlazorDownloadFile;
+using DAL.TOTVS.Relatorios.Interfaces;
+using DAL.TOTVS.Relatorios.DAO;
+using BLL.TOTVS.Relatorios.Interfaces;
+using BLL.TOTVS.Relatorios.Services;
 
 namespace EFISCO
 {
@@ -91,6 +95,8 @@ namespace EFISCO
             services.AddBlazorDownloadFile(ServiceLifetime.Scoped);
 
             #region Injeção de Dependencias    
+            services.AddTransient<IAtivoVsNotaFiscalService, AtivoVsNotaFiscalService>();
+            services.AddTransient<IAtivoVsNotaFiscalDAO, AtivoVsNotaFiscalDAO>();
             services.AddTransient<Radzen.DialogService>();
             services.AddTransient<INfeDownloadListService, NfeDownloadService>();
             services.AddTransient<IProdutoIntegradoDAO, ProdutoIntegradoDAO>();
@@ -138,8 +144,8 @@ namespace EFISCO
                 app.UseHsts();
             }
 
-            app.ApplicationServices
-                  .UseBootstrapProviders();
+            //app.ApplicationServices
+            //      .UseBootstrapProviders();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

@@ -22,7 +22,16 @@
     </RadzenUpload>
     <RadzenProgressBar @bind-Value="@xmlNfeService.StatusOfCurrentProcess" Style="margin-bottom: 20px" />
 
+
+    @if (!string.IsNullOrEmpty(Error))
+    {
+        <Div class="alert alert-danger">
+            @Error
+        </Div>
+    }
 </div>
+
+
 
 @code {
 
@@ -36,6 +45,7 @@
     private string textButtonUpload = "";
     private string cssButtonUpload = "";
     private string cssButtonUploadColor = "white";
+    private string Error = "";
 
     protected override void OnInitialized()
     {
@@ -54,21 +64,32 @@
             textButtonUpload = "Arquivos carregados com sucesso. Processando...";
             cssButtonUpload = "#ffcf00";
             cssButtonUploadColor = "black";
+            this.StateHasChanged();
 
         }
     }
 
     private async Task UploadFinish()
     {
-        await xmlNfeService.ProcessarArquivos();
+        try
+        {
+            await xmlNfeService.ProcessarArquivos();
+        }
+        catch (Exception ex)
+        {
+            Error = ex.Message;
+            this.StateHasChanged();
+        }
+
+
 
         textButtonUpload = "Solte os arquivos aqui";
         cssButtonUpload = "dodgerblue";
         cssButtonUploadColor = "white";
 
-       await  UploadFinishCallBack.InvokeAsync(true);
+        await UploadFinishCallBack.InvokeAsync(true);
         navigationService.NavigateTo("/painelImportacaoXML");
 
     }
-   
+
 }
