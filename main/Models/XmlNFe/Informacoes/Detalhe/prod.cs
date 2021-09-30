@@ -31,10 +31,7 @@
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
 
-using System.Collections.Generic;
 using System.Xml.Serialization;
-using XmlNFe.Nfes.Informacoes.Detalhe.DeclaracaoImportacao;
-using XmlNFe.Nfes.Informacoes.Detalhe.Exportacao;
 using XmlNFe.Nfes.Informacoes.Detalhe.ProdEspecifico;
 
 namespace XmlNFe.Nfes.Informacoes.Detalhe
@@ -43,12 +40,12 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
     {
         public prod()
         {
-           // NVE = new List<string>();
+            // NVE = new List<string>();
         }
         [XmlIgnore]
         public int Id { get; set; }
         private string _nRecopi;
-        private ProdutoEspecifico _produtoEspecifico;
+        private readonly ProdutoEspecifico _produtoEspecifico;
         private decimal _qcom;
         private decimal _qtrib;
         private decimal _vprod;
@@ -71,8 +68,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         /// </summary>
         public string cEAN
         {
-            get { return _cEan ?? string.Empty; } //Sempre serializar o campo cEAN, mesmo que não tenha valor 
-            set { _cEan = value ?? string.Empty; }
+            get => _cEan ?? string.Empty;  //Sempre serializar o campo cEAN, mesmo que não tenha valor 
+            set => _cEan = value ?? string.Empty;
         }
 
         /// <summary>
@@ -90,8 +87,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         ///     105a - Nomenclatura de Valor aduaneio e Estatístico
         ///     <para>Ocorrência: 0-8</para>
         /// </summary>
-       // [XmlElement("NVE")]
-       // public List<string> NVE { get; set; }
+        // [XmlElement("NVE")]
+        // public List<string> NVE { get; set; }
 
         /// <summary>
         /// I05c - Código CEST
@@ -106,10 +103,7 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         /// </summary>
         public indEscala? indEscala { get; set; }
 
-        public bool indEscalaSpecified
-        {
-            get { return indEscala.HasValue; }
-        }
+        public bool indEscalaSpecified => indEscala.HasValue;
 
         /// <summary>
         /// Versão 4.00
@@ -144,8 +138,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         /// </summary>
         public decimal qCom
         {
-            get { return _qcom; }
-            set { _qcom = value.Arredondar(4); }
+            get => _qcom;
+            set => _qcom = value.Arredondar(4);
         }
 
         /// <summary>
@@ -153,8 +147,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         /// </summary>
         public decimal vUnCom
         {
-            get { return _vUnCom; }
-            set { _vUnCom = value.Arredondar(10); }
+            get => _vUnCom;
+            set => _vUnCom = value.Arredondar(10);
         }
 
         /// <summary>
@@ -162,8 +156,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         /// </summary>
         public decimal vProd
         {
-            get { return _vprod; }
-            set { _vprod = value.Arredondar(2); }
+            get => _vprod;
+            set => _vprod = value.Arredondar(2);
         }
 
         /// <summary>
@@ -171,8 +165,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         /// </summary>
         public string cEANTrib
         {
-            get { return _cEanTrib ?? string.Empty; } //Sempre serializar o campo cEANTrib, mesmo que não tenha valor 
-            set { _cEanTrib = value ?? string.Empty; }
+            get => _cEanTrib ?? string.Empty;  //Sempre serializar o campo cEANTrib, mesmo que não tenha valor 
+            set => _cEanTrib = value ?? string.Empty;
         }
 
         /// <summary>
@@ -185,8 +179,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         /// </summary>
         public decimal qTrib
         {
-            get { return _qtrib; }
-            set { _qtrib = value.Arredondar(4); }
+            get => _qtrib;
+            set => _qtrib = value.Arredondar(4);
         }
 
         /// <summary>
@@ -194,8 +188,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         /// </summary>
         public decimal vUnTrib
         {
-            get { return _vUnTrib; }
-            set { _vUnTrib = value.Arredondar(10); }
+            get => _vUnTrib;
+            set => _vUnTrib = value.Arredondar(10);
         }
 
         /// <summary>
@@ -203,8 +197,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         /// </summary>
         public decimal? vFrete
         {
-            get { return _vFrete.Arredondar(2); }
-            set { _vFrete = value.Arredondar(2); }
+            get => _vFrete.Arredondar(2);
+            set => _vFrete = value.Arredondar(2);
         }
 
         /// <summary>
@@ -212,8 +206,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         /// </summary>
         public decimal? vSeg
         {
-            get { return _vSeg.Arredondar(2); }
-            set { _vSeg = value.Arredondar(2); }
+            get => _vSeg.Arredondar(2);
+            set => _vSeg = value.Arredondar(2);
         }
 
         /// <summary>
@@ -221,8 +215,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         /// </summary>
         public decimal? vDesc
         {
-            get { return _vDesc.Arredondar(2); }
-            set { _vDesc = value.Arredondar(2); }
+            get => _vDesc.Arredondar(2);
+            set => _vDesc = value.Arredondar(2);
         }
 
         /// <summary>
@@ -230,8 +224,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         /// </summary>
         public decimal? vOutro
         {
-            get { return _vOutro.Arredondar(2); }
-            set { _vOutro = value.Arredondar(2); }
+            get => _vOutro.Arredondar(2);
+            set => _vOutro = value.Arredondar(2);
         }
 
         /// <summary>
@@ -284,7 +278,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         //  [XmlElement("arma", typeof(arma))]
         [XmlElement("comb", typeof(comb))]
         public comb comb
-        { get;set;
+        {
+            get; set;
             //get { return _produtoEspecifico; }
             //set
             //{
@@ -298,10 +293,14 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         /// </summary>
         public string nRECOPI
         {
-            get { return _nRecopi; }
+            get => _nRecopi;
             set
             {
-                if (string.IsNullOrEmpty(value)) return;
+                if (string.IsNullOrEmpty(value))
+                {
+                    return;
+                }
+
                 comb = null;
                 //ProdutoEspecifico = null; //ProdutoEspecifico e nRECOPI são mutuamente exclusivos
                 _nRecopi = value;

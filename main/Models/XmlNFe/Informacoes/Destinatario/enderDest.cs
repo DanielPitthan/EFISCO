@@ -85,16 +85,21 @@ namespace XmlNFe.Nfes.Informacoes.Destinatario
         /// </summary>
         public string CEP
         {
-            get { return _cep; }
+            get => _cep;
             set
             {
                 if (!string.IsNullOrEmpty(value))
                 {
                     value = value.Replace("-", "");
                     if (!value.All(char.IsDigit))
+                    {
                         throw new Exception(@"enderDest\CEP deve receber somente números!");
+                    }
+
                     if (value.Length != 8)
+                    {
                         throw new Exception(string.Format(@"enderDest\CEP deve ter 8 números. Tamanho informado: {0}!", value.Length));
+                    }
                 }
                 _cep = value;
             }

@@ -1,7 +1,5 @@
 ﻿using Models.NFe;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BLL.NFE.Interfaces
@@ -19,6 +17,6 @@ namespace BLL.NFE.Interfaces
         /// </summary>
         /// <param name="chaveNFE"></param>
         /// <returns></returns>
-        Task<IList<NFeFilesMensagens>> ListarErroDoArquivoAsync(string  chaveNFE);
+        Task<IList<NFeFilesMensagens>> ListarErroDoArquivoAsync(string chaveNFE);
     }
 }

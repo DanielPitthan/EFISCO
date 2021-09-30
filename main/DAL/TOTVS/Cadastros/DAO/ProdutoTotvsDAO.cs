@@ -3,9 +3,7 @@ using DAL.DAOBase;
 using DAL.TOTVS.Cadastros.Interfaces;
 using Models.TOTVS.Cadastros.Produtos;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL.TOTVS.Cadastros.DAO
@@ -23,7 +21,7 @@ namespace DAL.TOTVS.Cadastros.DAO
 
         public IQueryable<ProdutoTotvs> All()
         {
-            return this.Contexto.SB1010;
+            return Contexto.SB1010;
         }
     }
 }

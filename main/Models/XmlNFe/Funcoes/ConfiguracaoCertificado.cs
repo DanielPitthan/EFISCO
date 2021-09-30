@@ -65,7 +65,7 @@ namespace DFe.Utils
         /// </summary>
         public TipoCertificado TipoCertificado
         {
-            get { return _tipoCertificado; }
+            get => _tipoCertificado;
             set
             {
                 Serial = null;
@@ -81,16 +81,24 @@ namespace DFe.Utils
         /// </summary>
         public string Serial
         {
-            get { return _serial; }
+            get => _serial;
             set
             {
                 if (!string.IsNullOrEmpty(value) && TipoCertificado == TipoCertificado.A1Arquivo)
+                {
                     throw new Exception(string.Format("Para {0} o {1} não deve ser informado!", TipoCertificado.Descricao(), this.ObterPropriedadeInfo(c => c.Serial).Name));
+                }
 
-                if (value == _serial) return;
+                if (value == _serial)
+                {
+                    return;
+                }
+
                 _serial = value;
                 if (!string.IsNullOrEmpty(value))
+                {
                     Arquivo = null;
+                }
             }
         }
 
@@ -99,10 +107,14 @@ namespace DFe.Utils
         /// </summary>
         public byte[] ArrayBytesArquivo
         {
-            get { return _arrayBytesArquivo; }
+            get => _arrayBytesArquivo;
             set
             {
-                if (value == _arrayBytesArquivo) return;
+                if (value == _arrayBytesArquivo)
+                {
+                    return;
+                }
+
                 _arrayBytesArquivo = value;
             }
         }
@@ -113,15 +125,24 @@ namespace DFe.Utils
         /// </summary>
         public string Arquivo
         {
-            get { return _arquivo; }
+            get => _arquivo;
             set
             {
                 if (!string.IsNullOrEmpty(value) && TipoCertificado != TipoCertificado.A1Arquivo)
+                {
                     throw new Exception(string.Format("Para {0} o {1} não deve ser informado!", TipoCertificado.Descricao(), this.ObterPropriedadeInfo(c => c.Arquivo).Name));
-                if (value == _arquivo) return;
+                }
+
+                if (value == _arquivo)
+                {
+                    return;
+                }
+
                 _arquivo = value;
                 if (!string.IsNullOrEmpty(value))
+                {
                     Serial = null;
+                }
             }
         }
 
@@ -132,12 +153,19 @@ namespace DFe.Utils
         /// </summary>
         public string Senha
         {
-            get { return _senha; }
+            get => _senha;
             set
             {
                 if (!string.IsNullOrEmpty(value) && TipoCertificado == TipoCertificado.A1Repositorio)
+                {
                     throw new Exception(string.Format("Para {0} o {1} não deve ser informada!", TipoCertificado.Descricao(), this.ObterPropriedadeInfo(c => c.Senha).Name));
-                if (value == _senha) return;
+                }
+
+                if (value == _senha)
+                {
+                    return;
+                }
+
                 _senha = value;
             }
         }
@@ -147,10 +175,14 @@ namespace DFe.Utils
         /// </summary>
         public string CacheId
         {
-            get { return _cacheId; }
+            get => _cacheId;
             set
             {
-                if (value == _cacheId) return;
+                if (value == _cacheId)
+                {
+                    return;
+                }
+
                 _cacheId = value;
             }
         }

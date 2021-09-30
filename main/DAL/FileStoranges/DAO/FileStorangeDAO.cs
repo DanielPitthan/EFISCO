@@ -3,9 +3,8 @@ using DAL.DAOBaseNfeXml;
 using DAL.FileStoranges.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Models.FileStoranges;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DAL.FileStoranges.DAO
 {
@@ -17,7 +16,16 @@ namespace DAL.FileStoranges.DAO
 
         public DbSet<FileStorange> GetAll()
         {
-            return this.Contexto.FileStorange;
+            return Contexto.FileStorange;
+        }
+
+        public async Task<FileStorange> GetByFileNameAndType(string fileName, string type)
+        {
+            FileStorange arquivos = await GetAll()
+                   .AsNoTracking()
+                   .Where(x => x.OriginalFileName == fileName && x.FileType == type)
+                   .FirstOrDefaultAsync();
+            return arquivos;
         }
     }
 }

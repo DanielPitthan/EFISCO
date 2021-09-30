@@ -3,9 +3,7 @@ using DAL.DAOBase;
 using DAL.TOTVS.Movimentos.Interfaces;
 using Models.TOTVS.Movimentos;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL.TOTVS.Movimentos.DAO
@@ -23,7 +21,7 @@ namespace DAL.TOTVS.Movimentos.DAO
 
         public IQueryable<PedidoDeCompraTotvs> All()
         {
-            return this.Contexto.SC7010;
+            return Contexto.SC7010;
         }
     }
 }

@@ -30,8 +30,8 @@
 /* http://www.zeusautomacao.com.br/                                             */
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
-using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
 using System.Xml.Serialization;
+using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
 
 namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
 {
@@ -69,8 +69,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 3)]
         public decimal? vBCSTRet
         {
-            get { return _vBcstRet.Arredondar(2); }
-            set { _vBcstRet = value.Arredondar(2); }
+            get => _vBcstRet.Arredondar(2);
+            set => _vBcstRet = value.Arredondar(2);
         }
 
         public bool ShouldSerializevBCSTRet()
@@ -84,20 +84,17 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 4)]
         public decimal? pST
         {
-            get { return _pSt.Arredondar(4); }
-            set { _pSt = value.Arredondar(4); }
+            get => _pSt.Arredondar(4);
+            set => _pSt = value.Arredondar(4);
         }
 
-        public bool pSTSpecified
-        {
-            get { return _pSt.HasValue; }
-        }
+        public bool pSTSpecified => _pSt.HasValue;
 
         [XmlElement(Order = 5)]
         public decimal? vICMSSubstituto
         {
-            get { return _vIcmsSubstituto.Arredondar(2); }
-            set { _vIcmsSubstituto = value.Arredondar(2); }
+            get => _vIcmsSubstituto.Arredondar(2);
+            set => _vIcmsSubstituto = value.Arredondar(2);
         }
 
         public bool ShouldSerializevICMSSubstituto()
@@ -111,8 +108,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 6)]
         public decimal? vICMSSTRet
         {
-            get { return _vIcmsstRet.Arredondar(2); }
-            set { _vIcmsstRet = value.Arredondar(2); }
+            get => _vIcmsstRet.Arredondar(2);
+            set => _vIcmsstRet = value.Arredondar(2);
         }
 
         public bool ShouldSerializevICMSSTRet()
@@ -127,14 +124,11 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 7)]
         public decimal? vBCFCPSTRet
         {
-            get { return _vBcfcpstRet.Arredondar(2); }
-            set { _vBcfcpstRet = value.Arredondar(2); }
+            get => _vBcfcpstRet.Arredondar(2);
+            set => _vBcfcpstRet = value.Arredondar(2);
         }
 
-        public bool vBCFCPSTRetSpecified
-        {
-            get { return vBCFCPSTRet.HasValue; }
-        }
+        public bool vBCFCPSTRetSpecified => vBCFCPSTRet.HasValue;
 
         /// <summary>
         /// N27b - Percentual do FCP retido anteriormente por Substituição Tributária
@@ -142,14 +136,11 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 8)]
         public decimal? pFCPSTRet
         {
-            get { return _pFcpstRet.Arredondar(4); }
-            set { _pFcpstRet = value.Arredondar(4); }
+            get => _pFcpstRet.Arredondar(4);
+            set => _pFcpstRet = value.Arredondar(4);
         }
 
-        public bool pFCPSTRetSpecified
-        {
-            get { return pFCPSTRet.HasValue; }
-        }
+        public bool pFCPSTRetSpecified => pFCPSTRet.HasValue;
 
         /// <summary>
         /// N27d - Valor do FCP retido anteriormente por Substituição Tributária
@@ -157,14 +148,11 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 9)]
         public decimal? vFCPSTRet
         {
-            get { return _vFcpstRet.Arredondar(2); }
-            set { _vFcpstRet = value.Arredondar(2); }
+            get => _vFcpstRet.Arredondar(2);
+            set => _vFcpstRet = value.Arredondar(2);
         }
 
-        public bool vFCPSTRetSpecified
-        {
-            get { return vFCPSTRet.HasValue; }
-        }
+        public bool vFCPSTRetSpecified => vFCPSTRet.HasValue;
 
         /// <summary>
         ///     N34 - Percentual de redução da base de cálculo efetiva 
@@ -172,8 +160,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 10)]
         public decimal? pRedBCEfet
         {
-            get { return _pRedBCEfet.Arredondar(4); }
-            set { _pRedBCEfet = value.Arredondar(4); }
+            get => _pRedBCEfet.Arredondar(4);
+            set => _pRedBCEfet = value.Arredondar(4);
         }
 
         public bool ShouldSerializepRedBCEfet()
@@ -187,8 +175,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 11)]
         public decimal? vBCEfet
         {
-            get { return _vBCEfet.Arredondar(2); }
-            set { _vBCEfet = value.Arredondar(2); }
+            get => _vBCEfet.Arredondar(2);
+            set => _vBCEfet = value.Arredondar(2);
         }
 
         public bool ShouldSerializevBCEfet()
@@ -202,8 +190,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 12)]
         public decimal? pICMSEfet
         {
-            get { return _pICMSEfet.Arredondar(4); }
-            set { _pICMSEfet = value.Arredondar(4); }
+            get => _pICMSEfet.Arredondar(4);
+            set => _pICMSEfet = value.Arredondar(4);
         }
 
         public bool ShouldSerializepICMSEfet()
@@ -217,8 +205,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 13)]
         public decimal? vICMSEfet
         {
-            get { return _vICMSEfet.Arredondar(2); }
-            set { _vICMSEfet = value.Arredondar(2); }
+            get => _vICMSEfet.Arredondar(2);
+            set => _vICMSEfet = value.Arredondar(2);
         }
 
         public bool ShouldSerializevICMSEfet()

@@ -46,10 +46,7 @@ namespace XmlNFe.Nfes.Informacoes.Transporte
         /// </summary>
         public ModalidadeFrete? modFrete { get; set; }
 
-        public bool modFreteSpecified
-        {
-            get { return modFrete.HasValue; }
-        }
+        public bool modFreteSpecified => modFrete.HasValue;
 
         /// <summary>
         ///     X03 - Grupo Transportador

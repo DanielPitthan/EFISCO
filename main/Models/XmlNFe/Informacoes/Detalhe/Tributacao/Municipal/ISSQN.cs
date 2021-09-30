@@ -52,8 +52,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Municipal
         /// </summary>
         public decimal vBC
         {
-            get { return _vBc; }
-            set { _vBc = value.Arredondar(2); }
+            get => _vBc;
+            set => _vBc = value.Arredondar(2);
         }
 
         /// <summary>
@@ -61,8 +61,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Municipal
         /// </summary>
         public decimal vAliq
         {
-            get { return _vAliq; }
-            set { _vAliq = value.Arredondar(2); }
+            get => _vAliq;
+            set => _vAliq = value.Arredondar(2);
         }
 
         /// <summary>
@@ -70,8 +70,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Municipal
         /// </summary>
         public decimal vISSQN
         {
-            get { return _vIssqn; }
-            set { _vIssqn = value.Arredondar(2); }
+            get => _vIssqn;
+            set => _vIssqn = value.Arredondar(2);
         }
 
         /// <summary>
@@ -89,8 +89,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Municipal
         /// </summary>
         public decimal? vDeducao
         {
-            get { return _vDeducao.Arredondar(2); }
-            set { _vDeducao = value.Arredondar(2); }
+            get => _vDeducao.Arredondar(2);
+            set => _vDeducao = value.Arredondar(2);
         }
 
         /// <summary>
@@ -98,8 +98,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Municipal
         /// </summary>
         public decimal? vOutro
         {
-            get { return _vOutro.Arredondar(2); }
-            set { _vOutro = value.Arredondar(2); }
+            get => _vOutro.Arredondar(2);
+            set => _vOutro = value.Arredondar(2);
         }
 
         /// <summary>
@@ -107,8 +107,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Municipal
         /// </summary>
         public decimal? vDescIncond
         {
-            get { return _vDescIncond.Arredondar(2); }
-            set { _vDescIncond = value.Arredondar(2); }
+            get => _vDescIncond.Arredondar(2);
+            set => _vDescIncond = value.Arredondar(2);
         }
 
         /// <summary>
@@ -116,8 +116,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Municipal
         /// </summary>
         public decimal? vDescCond
         {
-            get { return _vDescCond.Arredondar(2); }
-            set { _vDescCond = value.Arredondar(2); }
+            get => _vDescCond.Arredondar(2);
+            set => _vDescCond = value.Arredondar(2);
         }
 
         /// <summary>
@@ -125,14 +125,14 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Municipal
         /// </summary>
         public decimal? vISSRet
         {
-            get { return _vIssRet.Arredondar(2); }
-            set { _vIssRet = value.Arredondar(2); }
+            get => _vIssRet.Arredondar(2);
+            set => _vIssRet = value.Arredondar(2);
         }
 
         /// <summary>
         ///     U12 - Indicador da exigibilidade do ISS
         /// </summary>
-        public IndicadorISS indISS{ get; set; }
+        public IndicadorISS indISS { get; set; }
 
         /// <summary>
         ///     U13 - Código do serviço prestado dentro do município

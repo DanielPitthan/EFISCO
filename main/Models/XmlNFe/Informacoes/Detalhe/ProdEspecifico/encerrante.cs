@@ -65,8 +65,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.ProdEspecifico
         /// </summary>
         public decimal vEncIni
         {
-            get { return _vEncIni; }
-            set { _vEncIni = value.Arredondar(3); }
+            get => _vEncIni;
+            set => _vEncIni = value.Arredondar(3);
         }
 
         /// <summary>
@@ -74,8 +74,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.ProdEspecifico
         /// </summary>
         public decimal vEncFin
         {
-            get { return _vEncFin; }
-            set { _vEncFin = value.Arredondar(3); }
+            get => _vEncFin;
+            set => _vEncFin = value.Arredondar(3);
         }
     }
 }

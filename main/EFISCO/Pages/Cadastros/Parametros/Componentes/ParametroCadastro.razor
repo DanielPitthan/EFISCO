@@ -1,0 +1,61 @@
+﻿@page "/ParametroCadastro"
+@inject BLL.Infra.Interface.IParametroService parametroService;
+
+<EFISCO.Pages.Components.Titulos.NavbarTitulo Titulo="Cadastro de Parâmetros"></EFISCO.Pages.Components.Titulos.NavbarTitulo>
+
+@if (!string.IsNullOrEmpty(Error))
+{
+    <div class="alert alert-danger alert-dismissible">
+        <b>Erro : </b> @Error
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(Sucesso))
+{
+    <div class="alert alert-success alert-dismissible">
+        @Sucesso
+    </div>
+}
+
+<div class="container">
+    <div class="row">
+        <label>Codigo</label>
+        <RadzenTextBox @bind-Value="parametro.Codigo" Placeholder="Código"></RadzenTextBox>
+        <label>Descrição</label>
+        <RadzenTextBox @bind-Value="parametro.Descricao" Placeholder="Descrição do Parâmetro"></RadzenTextBox>
+        <label>Valor</label>
+        <RadzenTextBox @bind-Value="parametro.Valor" Placeholder="Valor"></RadzenTextBox>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4 col-lg-4">
+            <RadzenButton Click="@(async ()=> await Gravar())">Gravar</RadzenButton>
+        </div>
+    </div>
+</div>
+
+
+@code {
+
+    [Parameter]
+    public Parametro Parametro { get; set; }
+
+    private Parametro parametro = new Parametro();
+
+    private string Error = "";
+    private string Sucesso = "";
+
+
+    protected override void OnParametersSet()
+    {
+        this.parametro = Parametro;
+    }
+
+    private async Task Gravar()
+    {
+        var result = await parametroService.MergeAsync(parametro);
+        if (result)
+        {
+            Sucesso = "Parâmetro garvado como Sucesso!";
+        }
+    }
+}

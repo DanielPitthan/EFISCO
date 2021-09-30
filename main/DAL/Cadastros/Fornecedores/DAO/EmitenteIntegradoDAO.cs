@@ -2,10 +2,7 @@
 using DAL.Cadastros.Fornecedores.Interfaces;
 using DAL.DAOBaseNfeXml;
 using Models.Cadastros.Fornecedores;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DAL.Cadastros.Fornecedores.DAO
 {
@@ -17,7 +14,7 @@ namespace DAL.Cadastros.Fornecedores.DAO
 
         public IQueryable<EmitenteIntegrado> All()
         {
-            return this.Contexto.EmitenteIntegrado;
+            return Contexto.EmitenteIntegrado;
         }
     }
 }

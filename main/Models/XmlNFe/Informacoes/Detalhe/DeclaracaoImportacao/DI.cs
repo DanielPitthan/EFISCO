@@ -31,10 +31,10 @@
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
 
+using DFe.Utils;
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using DFe.Utils;
 
 namespace XmlNFe.Nfes.Informacoes.Detalhe.DeclaracaoImportacao
 {
@@ -62,10 +62,10 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.DeclaracaoImportacao
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string ProxydDI
         {
-            get { return dDI.ParaDataString(); }
-            set { dDI = DateTime.Parse(value); }
+            get => dDI.ParaDataString();
+            set => dDI = DateTime.Parse(value);
         }
-        
+
         /// <summary>
         ///     I21 - Local de desembaraço
         /// </summary>
@@ -89,8 +89,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.DeclaracaoImportacao
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string ProxydDesemb
         {
-            get { return dDesemb.ParaDataString(); }
-            set { dDesemb = DateTime.Parse(value); }
+            get => dDesemb.ParaDataString();
+            set => dDesemb = DateTime.Parse(value);
         }
 
         /// <summary>
@@ -103,8 +103,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.DeclaracaoImportacao
         /// </summary>
         public decimal? vAFRMM
         {
-            get { return _vAfrmm.Arredondar(2); }
-            set { _vAfrmm = value.Arredondar(2); }
+            get => _vAfrmm.Arredondar(2);
+            set => _vAfrmm = value.Arredondar(2);
         }
 
         /// <summary>

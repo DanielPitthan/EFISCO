@@ -1,51 +1,13 @@
+using BlazorDownloadFile;
+using Blazorise;
+using Blazorise.Bootstrap;
+using ContextBinds.EntityCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ContextBinds.EntityCore;
-using Microsoft.EntityFrameworkCore;
-using DAL.XmlDAL.Interfaces;
-using DAL.XmlDAL.DAO;
-using BLL.NFE.Interfaces;
-using BLL.NFE.Services;
-using DAL.Infra.Interfaces;
-using DAL.Infra.DAO;
-using BLL.Infra.Interface;
-using BLL.Infra.Services;
-using System.Net.Http;
-using DAL.FileStoranges.Interfaces;
-using DAL.FileStoranges.DAO;
-using EFISCO.Areas.UploadFiles;
-using BLL.Empresas.Interfaces;
-using BLL.Empresas.Services;
-using DAL.Empresas.DAO;
-using DAL.Empresas.Interfaces;
-using DAL.TOTVS.Cadastros.Interfaces;
-using DAL.TOTVS.Cadastros.DAO;
-using BLL.TOTVS.Cadastros.Interfaces;
-using BLL.TOTVS.Cadastros.Servicos;
-using DAL.TOTVS.Movimentos.Interfaces;
-using DAL.TOTVS.Movimentos.DAO;
-using BLL.TOTVS.Movimentos.Compras.Interfaces;
-using BLL.TOTVS.Movimentos.Compras.Services;
-using DAL.TOTVS.Movimentos.Compras.Interfaces;
-using DAL.TOTVS.Movimentos.Compras.DAO;
-using DAL.Cadastros.Fornecedores.Interfaces;
-using DAL.Cadastros.Fornecedores.DAO;
-using BLL.Cadastros.Fornecedores.Interfaces;
-using BLL.Cadastros.Fornecedores.Services;
-using Blazorise;
-using Blazorise.Bootstrap;
-using DAL.Cadastros.Produtos.DAO;
-using BLL.Cadastros.Produtos.Interfaces;
-using DAL.Cadastros.Produtos.Interfaces;
-using BLL.Cadastros.Produtos.Services;
-using BlazorDownloadFile;
-using DAL.TOTVS.Relatorios.Interfaces;
-using DAL.TOTVS.Relatorios.DAO;
-using BLL.TOTVS.Relatorios.Interfaces;
-using BLL.TOTVS.Relatorios.Services;
 
 namespace EFISCO
 {
@@ -65,11 +27,11 @@ namespace EFISCO
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            services.AddDbContext<ContextEF>(options =>
-            {
-                options.UseSqlServer(ConecxaoAtiva.StringConnectionBaseWebFrame())
-                 .EnableSensitiveDataLogging(); 
-            }, ServiceLifetime.Transient);
+            //services.AddDbContext<ContextEF>(options =>
+            //{
+            //    options.UseSqlServer(ConecxaoAtiva.StringConnectionBaseWebFrame())
+            //     .EnableSensitiveDataLogging(); 
+            //}, ServiceLifetime.Transient);
 
 
             services.AddDbContext<ContextEFNFeXml>(options =>
@@ -95,38 +57,8 @@ namespace EFISCO
             services.AddBlazorDownloadFile(ServiceLifetime.Scoped);
 
             #region Injeção de Dependencias    
-            services.AddTransient<IAtivoVsNotaFiscalService, AtivoVsNotaFiscalService>();
-            services.AddTransient<IAtivoVsNotaFiscalDAO, AtivoVsNotaFiscalDAO>();
-            services.AddTransient<Radzen.DialogService>();
-            services.AddTransient<INfeDownloadListService, NfeDownloadService>();
-            services.AddTransient<IProdutoIntegradoDAO, ProdutoIntegradoDAO>();
-            services.AddTransient<IProdutoIntegradoService, ProdutoIntegradoService>();
-            services.AddTransient<IEmitenteIntegradoService, EmitenteIntegradoService>();
-            services.AddTransient<IEmitenteIntegradoDAO, EmitenteIntegradoDAO>();
-            services.AddTransient<INotaFiscalEntradaTotvsService, NotaFiscalEntradaTotvsService>();
-            services.AddTransient<INotaFiscalEntradaCabecalhoTotvsDAO, NotaFiscalEntradaCabecalhoDAO>();
-            services.AddTransient<IPedidoDeCompraTotvsDAO, PedidoDeComprasTotvsDAO>();
-            services.AddTransient<IPedidoDeCompraTotvsService, PedidoDeCompraTotvsService>();
-            services.AddTransient<INFeFilesMensagensService, NFeFilesMensagensService>();
-            services.AddTransient<IProdutoVersusFornecedorTotvsDAO, ProdutoVersusFornecedorTotvsDAO>();
-            services.AddTransient<IProdutoVersusFornecedorTotvsService, ProdutoVersusFornecedorTotvsService>();
-            services.AddTransient<INFeFilesMensagensDAO, NFeFilesMensagensDAO>();
-            services.AddTransient<IFornecedorTotvsDAO, FornecedorTotvsDAO>();
-            services.AddTransient<IFornecedorTotvsService, FornecedorTotvsService>();
-            services.AddTransient<IProdutoTotvsDAO, ProdutoTotvsDAO>();
-            services.AddTransient<IProdutoTotvsService, ProdutoTotvsService>();
-            services.AddTransient<IEmpresaDAO, EmpresaDAO>();
-            services.AddTransient<IEmpresaService, EmpresaService>();
-            services.AddTransient<IFileStorangeDAO, FileStorangeDAO>();
-            services.AddTransient<HttpClient>();
-            services.AddTransient<INFeDAO, NFeDAO>();
-            services.AddTransient<INFeXmlService, NFeXmlService>();
-            services.AddTransient<IParametros, ParametroDAO>();
-            services.AddTransient<IParametroService, ParametrosServices>();
-            services.AddTransient<INFeFilesDAO, NFeFilesDAO>();
-            services.AddTransient<Upload>();
-
-
+            Dependencias dependencias = new Dependencias(services);
+            services = dependencias.Get();
             #endregion
         }
 

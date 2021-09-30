@@ -60,8 +60,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.DeclaracaoImportacao
         /// </summary>
         public decimal? vDescDI
         {
-            get { return _vDescDi.Arredondar(2); }
-            set { _vDescDi = value.Arredondar(2); }
+            get => _vDescDi.Arredondar(2);
+            set => _vDescDi = value.Arredondar(2);
         }
 
         /// <summary>

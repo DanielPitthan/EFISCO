@@ -15,9 +15,9 @@ namespace DFe.Utils
         /// <returns></returns>
         public static T ObterAtributo<T>(this Enum value) where T : Attribute
         {
-            var type = value.GetType();
-            var memberInfo = type.GetMember(value.ToString());
-            var attributes = memberInfo[0].GetCustomAttributes(typeof(T), false);
+            Type type = value.GetType();
+            System.Reflection.MemberInfo[] memberInfo = type.GetMember(value.ToString());
+            object[] attributes = memberInfo[0].GetCustomAttributes(typeof(T), false);
             return (T)attributes[0];
         }
 
@@ -29,7 +29,7 @@ namespace DFe.Utils
         /// <returns></returns>
         public static string Descricao(this Enum value)
         {
-            var attribute = value.ObterAtributo<DescriptionAttribute>();
+            DescriptionAttribute attribute = value.ObterAtributo<DescriptionAttribute>();
             return attribute == null ? value.ToString() : attribute.Description;
         }
 
@@ -41,7 +41,7 @@ namespace DFe.Utils
         /// <returns></returns>
         public static string XmlDescricao(this Enum value)
         {
-            var attribute = value.ObterAtributo<XmlEnumAttribute>();
+            XmlEnumAttribute attribute = value.ObterAtributo<XmlEnumAttribute>();
             return attribute == null ? value.ToString() : attribute.Name.ToString();
         }
     }

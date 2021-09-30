@@ -40,7 +40,7 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao
         public static decimal GetIcmsDesonValue(this ICMSBasico icms)
         {
             return GetPropDecimalValue(icms, "vICMSDeson");
-        }        
+        }
 
         public static decimal GetIcmsValue(this ICMSBasico icms)
         {
@@ -66,13 +66,13 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao
         {
             return GetPropDecimalValue(cofins, "vCOFINS");
         }
-        
+
         private static OrigemMercadoria GetPropOrigemMercadoriaValue(object instance, string propName)
         {
             try
             {
-                var property = instance.GetType().GetProperty(propName, BindingFlags.Public | BindingFlags.Instance);
-                return (OrigemMercadoria) (property != null ? (OrigemMercadoria?) property.GetValue(instance, null) : OrigemMercadoria.OmNacional);
+                PropertyInfo property = instance.GetType().GetProperty(propName, BindingFlags.Public | BindingFlags.Instance);
+                return (OrigemMercadoria)(property != null ? (OrigemMercadoria?)property.GetValue(instance, null) : OrigemMercadoria.OmNacional);
             }
             catch (Exception)
             {
@@ -84,8 +84,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao
         {
             try
             {
-                var property = instance.GetType().GetProperty(propName, BindingFlags.Public | BindingFlags.Instance);
-                return (Csticms) (property != null ? (Csticms?) property.GetValue(instance, null) : Csticms.Cst90);
+                PropertyInfo property = instance.GetType().GetProperty(propName, BindingFlags.Public | BindingFlags.Instance);
+                return (Csticms)(property != null ? (Csticms?)property.GetValue(instance, null) : Csticms.Cst90);
             }
             catch (Exception)
             {
@@ -97,8 +97,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao
         {
             try
             {
-                var property = instance.GetType().GetProperty(propName, BindingFlags.Public | BindingFlags.Instance);
-                return (Csosnicms) (property != null ? (Csosnicms?) property.GetValue(instance, null) : Csosnicms.Csosn900);
+                PropertyInfo property = instance.GetType().GetProperty(propName, BindingFlags.Public | BindingFlags.Instance);
+                return (Csosnicms)(property != null ? (Csosnicms?)property.GetValue(instance, null) : Csosnicms.Csosn900);
             }
             catch (Exception)
             {
@@ -110,7 +110,7 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao
         {
             try
             {
-                var property = instance.GetType().GetProperty(propName, BindingFlags.Public | BindingFlags.Instance);
+                PropertyInfo property = instance.GetType().GetProperty(propName, BindingFlags.Public | BindingFlags.Instance);
 
                 if (property != null)
                 {

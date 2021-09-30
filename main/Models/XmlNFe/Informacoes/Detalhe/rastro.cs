@@ -1,6 +1,6 @@
-﻿using System;
+﻿using DFe.Utils;
+using System;
 using System.Xml.Serialization;
-using DFe.Utils;
 
 namespace XmlNFe.Nfes.Informacoes.Detalhe
 {
@@ -22,8 +22,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         /// </summary>
         public decimal qLote
         {
-            get { return _qLote.Arredondar(3); }
-            set { _qLote = value.Arredondar(3); }
+            get => _qLote.Arredondar(3);
+            set => _qLote = value.Arredondar(3);
         }
 
         /// <summary>
@@ -37,8 +37,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string ProxydFab
         {
-            get { return dFab.ParaDataString(); }
-            set { dFab = DateTime.Parse(value); }
+            get => dFab.ParaDataString();
+            set => dFab = DateTime.Parse(value);
         }
 
         /// <summary>
@@ -52,8 +52,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string ProxydVal
         {
-            get { return dVal.ParaDataString(); }
-            set { dVal = DateTime.Parse(value); }
+            get => dVal.ParaDataString();
+            set => dVal = DateTime.Parse(value);
         }
 
         /// <summary>

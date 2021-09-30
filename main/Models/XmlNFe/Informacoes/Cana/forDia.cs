@@ -54,8 +54,8 @@ namespace XmlNFe.Nfes.Informacoes.Cana
         /// </summary>
         public decimal qtde
         {
-            get { return _qtde; }
-            set { _qtde = value.Arredondar(10); }
+            get => _qtde;
+            set => _qtde = value.Arredondar(10);
         }
 
         /// <summary>
@@ -63,8 +63,8 @@ namespace XmlNFe.Nfes.Informacoes.Cana
         /// </summary>
         public decimal qTotMes
         {
-            get { return _qTotMes; }
-            set { _qTotMes = value.Arredondar(10); }
+            get => _qTotMes;
+            set => _qTotMes = value.Arredondar(10);
         }
 
         /// <summary>
@@ -72,8 +72,8 @@ namespace XmlNFe.Nfes.Informacoes.Cana
         /// </summary>
         public decimal qTotAnt
         {
-            get { return _qTotAnt; }
-            set { _qTotAnt = value.Arredondar(10); }
+            get => _qTotAnt;
+            set => _qTotAnt = value.Arredondar(10);
         }
 
         /// <summary>
@@ -81,8 +81,8 @@ namespace XmlNFe.Nfes.Informacoes.Cana
         /// </summary>
         public decimal qTotGer
         {
-            get { return _qTotGer; }
-            set { _qTotGer = value.Arredondar(10); }
+            get => _qTotGer;
+            set => _qTotGer = value.Arredondar(10);
         }
     }
 }

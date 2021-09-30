@@ -48,13 +48,15 @@ namespace DFe.Utils
         /// <typeparam name="TDestino"></typeparam>
         /// <param name="objetoOrigem"></param>
         /// <param name="objetoDestino"></param>
-        public static void CopiarPropriedades<TDestino, TOrigem>(this TDestino objetoDestino, TOrigem objetoOrigem) where TDestino: class where TOrigem : class
+        public static void CopiarPropriedades<TDestino, TOrigem>(this TDestino objetoDestino, TOrigem objetoOrigem) where TDestino : class where TOrigem : class
         {
-            foreach (var attributo in objetoOrigem.GetType().GetProperties().Where(p => p.CanRead))
+            foreach (PropertyInfo attributo in objetoOrigem.GetType().GetProperties().Where(p => p.CanRead))
             {
-                var propertyInfo = objetoDestino.GetType().GetProperty(attributo.Name, BindingFlags.Public | BindingFlags.Instance);
+                PropertyInfo propertyInfo = objetoDestino.GetType().GetProperty(attributo.Name, BindingFlags.Public | BindingFlags.Instance);
                 if (propertyInfo != null && propertyInfo.CanWrite)
+                {
                     propertyInfo.SetValue(objetoDestino, attributo.GetValue(objetoOrigem, null), null);
+                }
             }
         }
 
@@ -69,18 +71,24 @@ namespace DFe.Utils
         /// <returns>Retorna um objeto do tipo PropertyInfo com as informações da propriedade, como nome, tipo, etc</returns>
         public static PropertyInfo ObterPropriedadeInfo<TSource, TProperty>(this TSource source, Expression<Func<TSource, TProperty>> propertyLambda)
         {
-            var type = typeof(TSource);
+            Type type = typeof(TSource);
 
-            var member = propertyLambda.Body as MemberExpression;
+            MemberExpression member = propertyLambda.Body as MemberExpression;
             if (member == null)
+            {
                 throw new ArgumentException(string.Format("A expressão '{0}' se refere a um método, não a uma propriedade!", propertyLambda));
+            }
 
-            var propInfo = member.Member as PropertyInfo;
+            PropertyInfo propInfo = member.Member as PropertyInfo;
             if (propInfo == null)
+            {
                 throw new ArgumentException(string.Format("A expressão '{0}' se refere a um campo, não a uma propriedade!", propertyLambda));
+            }
 
             if (propInfo.ReflectedType != null && (type != propInfo.ReflectedType && !type.IsSubclassOf(propInfo.ReflectedType)))
+            {
                 throw new ArgumentException(string.Format("A expressão '{0}' refere-se a uma propriedade, mas não é do tipo {1}!", propertyLambda, type));
+            }
 
             return propInfo;
         }
@@ -94,11 +102,11 @@ namespace DFe.Utils
         public static Dictionary<string, object> LerPropriedades<T>(this T objeto) where T : class
         {
             //A função pode ser melhorada para trazer recursivamente as propriedades dos objetos filhos
-            var dicionario = new Dictionary<string, object>();
+            Dictionary<string, object> dicionario = new Dictionary<string, object>();
 
-            foreach (var attributo in objeto.GetType().GetProperties())
+            foreach (PropertyInfo attributo in objeto.GetType().GetProperties())
             {
-                var value = attributo.GetValue(objeto, null);
+                object value = attributo.GetValue(objeto, null);
                 dicionario.Add(attributo.Name, value);
             }
 

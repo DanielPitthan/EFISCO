@@ -30,8 +30,8 @@
 /* http://www.zeusautomacao.com.br/                                             */
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
-using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
 using System.Xml.Serialization;
+using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
 
 namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
 {
@@ -80,8 +80,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 4)]
         public decimal pRedBC
         {
-            get { return _pRedBc; }
-            set { _pRedBc = value.Arredondar(4); }
+            get => _pRedBc;
+            set => _pRedBc = value.Arredondar(4);
         }
 
         /// <summary>
@@ -90,8 +90,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 5)]
         public decimal vBC
         {
-            get { return _vBc; }
-            set { _vBc = value.Arredondar(2); }
+            get => _vBc;
+            set => _vBc = value.Arredondar(2);
         }
 
         /// <summary>
@@ -100,8 +100,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 6)]
         public decimal pICMS
         {
-            get { return _pIcms; }
-            set { _pIcms = value.Arredondar(4); }
+            get => _pIcms;
+            set => _pIcms = value.Arredondar(4);
         }
 
         /// <summary>
@@ -110,8 +110,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 7)]
         public decimal vICMS
         {
-            get { return _vIcms; }
-            set { _vIcms = value.Arredondar(2); }
+            get => _vIcms;
+            set => _vIcms = value.Arredondar(2);
         }
 
         /// <summary>
@@ -121,14 +121,11 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 8)]
         public decimal? vBCFCP
         {
-            get { return _vBcfcp.Arredondar(2); }
-            set { _vBcfcp = value.Arredondar(2); }
+            get => _vBcfcp.Arredondar(2);
+            set => _vBcfcp = value.Arredondar(2);
         }
 
-        public bool vBCFCPSpecified
-        {
-            get { return vBCFCP.HasValue; }
-        }
+        public bool vBCFCPSpecified => vBCFCP.HasValue;
 
         /// <summary>
         /// N17b - Percentual do Fundo de Combate à Pobreza (FCP)
@@ -137,14 +134,11 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 9)]
         public decimal? pFCP
         {
-            get { return _pFcp.Arredondar(4); }
-            set { _pFcp = value.Arredondar(4); }
+            get => _pFcp.Arredondar(4);
+            set => _pFcp = value.Arredondar(4);
         }
 
-        public bool pFCPSpecified
-        {
-            get { return pFCP.HasValue; }
-        }
+        public bool pFCPSpecified => pFCP.HasValue;
 
         /// <summary>
         /// N17c - Valor do Fundo de Combate à Pobreza (FCP)
@@ -153,14 +147,11 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 10)]
         public decimal? vFCP
         {
-            get { return _vFcp.Arredondar(2); }
-            set { _vFcp = value.Arredondar(2); }
+            get => _vFcp.Arredondar(2);
+            set => _vFcp = value.Arredondar(2);
         }
 
-        public bool vFCPSpecified
-        {
-            get { return vFCP.HasValue; }
-        }
+        public bool vFCPSpecified => vFCP.HasValue;
 
         /// <summary>
         ///     N18 - Modalidade de determinação da BC do ICMS ST
@@ -174,8 +165,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 12)]
         public decimal? pMVAST
         {
-            get { return _pMvast.Arredondar(4); }
-            set { _pMvast = value.Arredondar(4); }
+            get => _pMvast.Arredondar(4);
+            set => _pMvast = value.Arredondar(4);
         }
 
         /// <summary>
@@ -184,8 +175,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 13)]
         public decimal? pRedBCST
         {
-            get { return _pRedBcst.Arredondar(4); }
-            set { _pRedBcst = value.Arredondar(4); }
+            get => _pRedBcst.Arredondar(4);
+            set => _pRedBcst = value.Arredondar(4);
         }
 
         /// <summary>
@@ -194,8 +185,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 14)]
         public decimal vBCST
         {
-            get { return _vBcst; }
-            set { _vBcst = value.Arredondar(2); }
+            get => _vBcst;
+            set => _vBcst = value.Arredondar(2);
         }
 
         /// <summary>
@@ -204,8 +195,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 15)]
         public decimal pICMSST
         {
-            get { return _pIcmsst; }
-            set { _pIcmsst = value.Arredondar(4); }
+            get => _pIcmsst;
+            set => _pIcmsst = value.Arredondar(4);
         }
 
         /// <summary>
@@ -214,8 +205,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 16)]
         public decimal vICMSST
         {
-            get { return _vIcmsst; }
-            set { _vIcmsst = value.Arredondar(2); }
+            get => _vIcmsst;
+            set => _vIcmsst = value.Arredondar(2);
         }
 
         /// <summary>
@@ -225,14 +216,11 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 17)]
         public decimal? vBCFCPST
         {
-            get { return _vBcfcpst.Arredondar(2); }
-            set { _vBcfcpst = value.Arredondar(2); }
+            get => _vBcfcpst.Arredondar(2);
+            set => _vBcfcpst = value.Arredondar(2);
         }
 
-        public bool vBCFCPSTSpecified
-        {
-            get { return vBCFCPST.HasValue; }
-        }
+        public bool vBCFCPSTSpecified => vBCFCPST.HasValue;
 
         /// <summary>
         /// N23b - Percentual do FCP retido por Substituição Tributária
@@ -241,14 +229,11 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 18)]
         public decimal? pFCPST
         {
-            get { return _pFcpst.Arredondar(4); }
-            set { _pFcpst = value.Arredondar(4); }
+            get => _pFcpst.Arredondar(4);
+            set => _pFcpst = value.Arredondar(4);
         }
 
-        public bool pFCPSTSpecified
-        {
-            get { return pFCPST.HasValue; }
-        }
+        public bool pFCPSTSpecified => pFCPST.HasValue;
 
         /// <summary>
         /// N23d - Valor do FCP retido por Substituição Tributária
@@ -257,14 +242,11 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 19)]
         public decimal? vFCPST
         {
-            get { return _vFcpst; }
-            set { _vFcpst = value; }
+            get => _vFcpst;
+            set => _vFcpst = value;
         }
 
-        public bool vFCPSTSpecified
-        {
-            get { return vFCPST.HasValue; }
-        }
+        public bool vFCPSTSpecified => vFCPST.HasValue;
 
         /// <summary>
         ///     N27a - Valor do ICMS desonerado
@@ -272,8 +254,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 20)]
         public decimal? vICMSDeson
         {
-            get { return _vIcmsDeson.Arredondar(2); }
-            set { _vIcmsDeson = value.Arredondar(2); }
+            get => _vIcmsDeson.Arredondar(2);
+            set => _vIcmsDeson = value.Arredondar(2);
         }
 
         /// <summary>

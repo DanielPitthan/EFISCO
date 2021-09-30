@@ -8,4 +8,8 @@
     <None Remove="TOTVS\Cadastros\Produtos\ProdutoTotvs.cs~RF100826f6.TMP" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
+  </ItemGroup>
+
 </Project>

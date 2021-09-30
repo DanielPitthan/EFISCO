@@ -22,7 +22,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using XmlNFe.Nfes;
@@ -61,25 +60,25 @@ namespace BLL.NFE.Services
                              IEmitenteIntegradoService _emitenteService,
                              IProdutoIntegradoService _produtoIntegradoService)
         {
-            this.nFeDAO = _nFeDAO;
-            this.nFeFilesDAO = _nFeFilesDAO;
-            this.fileStorangeDAO = _fileStorangeDAO;
-            this.empresaService = _empresaService;
-            this.fornecedorService = _fornecedorTotvsService;
-            this.produtoTotvsService = _produtoTotvsService;
-            this.nFeFilesMensagensService = _nFeFilesMensagensService;
-            this.produtoVersusFornecedorTotvsService = _produtoVersusFornecedorTotvsService;
-            this.pedidoTotvsService = _pedidoTotvsService;
-            this.notaFiscalEntradaTotvsService = _notaFiscalEntradaTotvsService;
-            this.emitenteService = _emitenteService;
-            this.produtoIntegradoService = _produtoIntegradoService;
+            nFeDAO = _nFeDAO;
+            nFeFilesDAO = _nFeFilesDAO;
+            fileStorangeDAO = _fileStorangeDAO;
+            empresaService = _empresaService;
+            fornecedorService = _fornecedorTotvsService;
+            produtoTotvsService = _produtoTotvsService;
+            nFeFilesMensagensService = _nFeFilesMensagensService;
+            produtoVersusFornecedorTotvsService = _produtoVersusFornecedorTotvsService;
+            pedidoTotvsService = _pedidoTotvsService;
+            notaFiscalEntradaTotvsService = _notaFiscalEntradaTotvsService;
+            emitenteService = _emitenteService;
+            produtoIntegradoService = _produtoIntegradoService;
         }
 
 
 
         public async Task<IList<NFeFiles>> ListarXMLSNaoProcessados(bool apenasValidos = false, bool apenasAuditado = false)
         {
-            IQueryable<NFeFiles> query = this.nFeFilesDAO.GetAll();
+            IQueryable<NFeFiles> query = nFeFilesDAO.GetAll();
 
             query = query.Where(nf => nf.Processada == false);
 
@@ -107,13 +106,17 @@ namespace BLL.NFE.Services
         }
         public async Task<IList<NFeFiles>> ListarXMLSProcessados(bool apenasValidos = false, bool apenasNaoValidados = false)
         {
-            IQueryable<NFeFiles> query = this.nFeFilesDAO.GetAll();
+            IQueryable<NFeFiles> query = nFeFilesDAO.GetAll();
 
             if (apenasValidos)
+            {
                 query = query.Where(x => x.Validado == apenasValidos);
+            }
 
             if (apenasNaoValidados)
+            {
                 query = query.Where(x => x.Validado == !apenasNaoValidados);
+            }
 
             query = query.Where(x => x.Processada == true);
 
@@ -127,7 +130,7 @@ namespace BLL.NFE.Services
 
         public async Task<IList<NFeFiles>> ListarTodosXML()
         {
-            IQueryable<NFeFiles> query = this.nFeFilesDAO.GetAll();
+            IQueryable<NFeFiles> query = nFeFilesDAO.GetAll();
 
 
 
@@ -143,7 +146,7 @@ namespace BLL.NFE.Services
         {
 
 
-            var arquivosAProcessar = await fileStorangeDAO.GetAll()
+            List<FileStorange> arquivosAProcessar = await fileStorangeDAO.GetAll()
                                      .Where(f => f.Processado == false && f.FileType == ".xml")
                                      .ToListAsync();
 
@@ -152,7 +155,7 @@ namespace BLL.NFE.Services
             StatusOfCurrentProcess = 0;
             double contagem = 0;
 
-            foreach (var arquivo in arquivosAProcessar)
+            foreach (FileStorange arquivo in arquivosAProcessar)
             {
 
                 #region Faz todos os loads
@@ -160,19 +163,28 @@ namespace BLL.NFE.Services
                 XmlDocument documento = new XmlDocument();
                 documento.LoadXml(arquivo.XmlString);
 
+                bool typeIsNfe = documento.GetElementsByTagName("NFe").Count > 0;
+                bool typeIsCte = documento.GetElementsByTagName("CTe").Count > 0;
+                NFe notaFiscalLidaXML = new NFe();
 
+                if (typeIsNfe)
+                {
+                    notaFiscalLidaXML = await nFeDAO.CarregarXML(documento.GetElementsByTagName("NFe")[0].OuterXml);
+                }
 
+                if (typeIsCte)
+                {
+                    throw new Exception("Sistema não preparado para Importar CTe");
+                }
 
-                NFe notaFiscalLidaXML = await this.nFeDAO.CarregarXML(documento.GetElementsByTagName("NFe")[0].OuterXml);
-
-                NFe notaImportada = await this.nFeDAO.GetAll()
+                NFe notaImportada = await nFeDAO.GetAll()
                                                 .Where(x => x.infNFe.Id == notaFiscalLidaXML.infNFe.Id)//Chave da NF
                                                 .FirstOrDefaultAsync();
 
 
 
 
-                NFeFiles arquivoJaExiste = await this.nFeFilesDAO
+                NFeFiles arquivoJaExiste = await nFeFilesDAO
                                                  .GetAll()
                                                  .Where(x => x.ChaveAcesso == notaFiscalLidaXML.infNFe.Id)
                                                  .FirstOrDefaultAsync();
@@ -182,22 +194,23 @@ namespace BLL.NFE.Services
 
 
                 string[] pathSplited = arquivo.Path.Split('\\');
-                NFeFiles nfeFiles = new NFeFiles();
-
-                nfeFiles.Id = arquivoJaExiste == null ? 0 : arquivoJaExiste.Id;
-                nfeFiles.Arquivo = pathSplited[pathSplited.Length - 1];
-                nfeFiles.Path = arquivo.Path;
-                nfeFiles.ChaveAcesso = notaFiscalLidaXML.infNFe.Id;
-                nfeFiles.CnpjFornecedor = notaFiscalLidaXML.infNFe.emit.CNPJ;
-                nfeFiles.DataEmnissaoNfe = notaFiscalLidaXML.infNFe.ide.dhEmi.Value.DateTime;
-                nfeFiles.Fornecedor = notaFiscalLidaXML.infNFe.emit.xNome;
-                nfeFiles.NumeroNota = notaFiscalLidaXML.infNFe.ide.nNF.ToString().PadLeft(9, '0');
-                nfeFiles.Serie = notaFiscalLidaXML.infNFe.ide.serie;
-                nfeFiles.ValorTotal = notaFiscalLidaXML.infNFe.total.ICMSTot.vNF;
-                nfeFiles.DataInclusao = DateTime.Now;
-                nfeFiles.Empresa = await empresaService.GetByCnpjsync(notaFiscalLidaXML.infNFe.dest.CNPJ);
-                nfeFiles.AutoValidado = false;
-                nfeFiles.Validado = false;
+                NFeFiles nfeFiles = new NFeFiles
+                {
+                    Id = arquivoJaExiste == null ? 0 : arquivoJaExiste.Id,
+                    Arquivo = pathSplited[pathSplited.Length - 1],
+                    Path = arquivo.Path,
+                    ChaveAcesso = notaFiscalLidaXML.infNFe.Id,
+                    CnpjFornecedor = notaFiscalLidaXML.infNFe.emit.CNPJ,
+                    DataEmnissaoNfe = notaFiscalLidaXML.infNFe.ide.dhEmi.Value.DateTime,
+                    Fornecedor = notaFiscalLidaXML.infNFe.emit.xNome,
+                    NumeroNota = notaFiscalLidaXML.infNFe.ide.nNF.ToString().PadLeft(9, '0'),
+                    Serie = notaFiscalLidaXML.infNFe.ide.serie,
+                    ValorTotal = notaFiscalLidaXML.infNFe.total.ICMSTot.vNF,
+                    DataInclusao = DateTime.Now,
+                    Empresa = await empresaService.GetByCnpjsync(notaFiscalLidaXML.infNFe.dest.CNPJ),
+                    AutoValidado = false,
+                    Validado = false
+                };
 
 
 
@@ -206,14 +219,14 @@ namespace BLL.NFE.Services
                 if (notaImportada != null)
                 {
                     notaFiscalLidaXML.Id = notaImportada.Id;
-                    await this.nFeDAO.UpdateAsync(notaFiscalLidaXML);
+                    await nFeDAO.UpdateAsync(notaFiscalLidaXML);
                 }
                 else
                 {
-                    await this.nFeDAO.AddAsync(notaFiscalLidaXML);
-                    
+                    await nFeDAO.AddAsync(notaFiscalLidaXML);
+
                     //Após a inclusão preciso recuperar a nota para a validações
-                    notaImportada = await this.nFeDAO.GetAll()
+                    notaImportada = await nFeDAO.GetAll()
                                                 .Where(x => x.infNFe.Id == notaFiscalLidaXML.infNFe.Id)//Chave da NF
                                                 .SingleOrDefaultAsync();
                 }
@@ -232,19 +245,19 @@ namespace BLL.NFE.Services
                 //Atualiza ou insere NFeFile
                 if (arquivoJaExiste != null)
                 {
-                    this.nFeFilesDAO.Update(nfeFiles);
+                    nFeFilesDAO.Update(nfeFiles);
                 }
                 else
                 {
-                    await this.nFeFilesDAO.AddSysnc(nfeFiles);
+                    await nFeFilesDAO.AddSysnc(nfeFiles);
                 }
 
                 //Atualiza o arquivo processado 
                 arquivo.Processado = true;
-                await this.fileStorangeDAO.UpdateAsync(arquivo);
+                await fileStorangeDAO.UpdateAsync(arquivo);
 
                 //Grava as mensagens de erro 
-                foreach (var mensagem in mensagensDeErro)
+                foreach (NFeFilesMensagens mensagem in mensagensDeErro)
                 {
                     await nFeFilesMensagensService.Adcionar(mensagem).ConfigureAwait(false);
                 }
@@ -284,7 +297,9 @@ namespace BLL.NFE.Services
             try
             {
                 if (mensagensIntegracao.Count == 0)
+                {
                     mensagensIntegracao.AddRange(await ValidaProduto(notaXml, nfeFiles));
+                }
             }
             catch (Exception ex)
             {
@@ -322,7 +337,7 @@ namespace BLL.NFE.Services
         {
             List<NFeFilesMensagens> mensagensDeErro = new List<NFeFilesMensagens>();
 
-            NotaFiscalEntradaCabecalhoTotvs notaFicalEntrada = await this.notaFiscalEntradaTotvsService.GetByChave(notaFiscalLidaXML.infNFe.Id);
+            NotaFiscalEntradaCabecalhoTotvs notaFicalEntrada = await notaFiscalEntradaTotvsService.GetByChave(notaFiscalLidaXML.infNFe.Id);
             //Se ja existe no TOTVS grava erro
             if (notaFicalEntrada != null)
             {
@@ -349,7 +364,7 @@ namespace BLL.NFE.Services
         private async Task<IList<NFeFilesMensagens>> ValidaPedido(NFe notaXml, NFeFiles nfeFiles)
         {
             IList<NFeFilesMensagens> mensagens = new List<NFeFilesMensagens>();
-            foreach (var detalhe in notaXml.infNFe.det)
+            foreach (det detalhe in notaXml.infNFe.det)
             {
                 if (string.IsNullOrEmpty(detalhe.prod.xPed))
                 {
@@ -364,7 +379,7 @@ namespace BLL.NFE.Services
                     continue;
                 }
 
-                IList<PedidoDeCompraTotvs> pedidos = await this.pedidoTotvsService.GetByPedido(detalhe.prod.xPed);
+                IList<PedidoDeCompraTotvs> pedidos = await pedidoTotvsService.GetByPedido(detalhe.prod.xPed);
                 if (pedidos == null)
                 {
                     mensagens.Add(new NFeFilesMensagens()
@@ -437,19 +452,19 @@ namespace BLL.NFE.Services
 
             IList<prod> prods;
 
-            foreach (var produto in notaXml.infNFe.det)
+            foreach (det produto in notaXml.infNFe.det)
             {
-                IList<ProdutoTotvs> produtos = await this.produtoTotvsService
+                IList<ProdutoTotvs> produtos = await produtoTotvsService
                                                          .GetAllByNCM(nfeFiles.Empresa.CodigoTotvsEmpresaFilial, produto.prod.NCM);
 
-                FornecedorTotvs fornecedor = await this.fornecedorService.LocateByCnpjAsync(nfeFiles
+                FornecedorTotvs fornecedor = await fornecedorService.LocateByCnpjAsync(nfeFiles
                                                                                         .Empresa.CodigoTotvsEmpresaFilial.Substring(0, 2),
                                                                                         nfeFiles.CnpjFornecedor);
 
                 ProdutoVersusFornecedorTotvs produtoVsFornecedor = await produtoVersusFornecedorTotvsService.Get(nfeFiles.Empresa.CodigoTotvsEmpresaFilial,
                                                                                                                  fornecedor.A2_COD,
                                                                                                                  produto.prod.cProd).ConfigureAwait(false);
-                if (produtos.Count <= 0 && produtoVsFornecedor==null)
+                if (produtos.Count <= 0 && produtoVsFornecedor == null)
                 {
 
                     mensagensIntegracao.Add(new NFeFilesMensagens()
@@ -472,15 +487,15 @@ namespace BLL.NFE.Services
                         Texto = $"Fornecedor X Produto não cadastrado no Protheus. CNPJ: {nfeFiles.CnpjFornecedor}  Produto do fornecedor: {produto.prod.cProd} NCM: {produto.prod.NCM}  "
                     });
 
-                    ProdutoIntegrado jaEstaCadastrado = await this.produtoIntegradoService.ExistsProd(produto.prod.cProd, nfeFiles.CnpjFornecedor);
+                    ProdutoIntegrado jaEstaCadastrado = await produtoIntegradoService.ExistsProd(produto.prod.cProd, nfeFiles.CnpjFornecedor);
 
 
                     if (jaEstaCadastrado == null)
                     {
 
-                        prods = await this.nFeDAO.GetProduto(notaXml);
+                        prods = await nFeDAO.GetProduto(notaXml);
 
-                        foreach (var prod in prods)
+                        foreach (prod prod in prods)
                         {
                             ProdutoIntegrado produtoIntegrado = new ProdutoIntegrado()
                             {
@@ -490,7 +505,7 @@ namespace BLL.NFE.Services
                                 Produto = prod,
                                 CnpjFornecedor = nfeFiles.CnpjFornecedor
                             };
-                            await this.produtoIntegradoService.AdicionarAsync(produtoIntegrado);
+                            await produtoIntegradoService.AdicionarAsync(produtoIntegrado);
                         }
 
                     }
@@ -510,7 +525,7 @@ namespace BLL.NFE.Services
         {
             List<NFeFilesMensagens> mensagensIntegracao = new List<NFeFilesMensagens>();
 
-            var fornecedorExiste = await this.fornecedorService.LocateByCnpjAsync(nfeFiles.Empresa.CodigoTotvsEmpresaFilial, nfeFiles.CnpjFornecedor);
+            FornecedorTotvs fornecedorExiste = await fornecedorService.LocateByCnpjAsync(nfeFiles.Empresa.CodigoTotvsEmpresaFilial, nfeFiles.CnpjFornecedor);
             if (fornecedorExiste == null)
             {
 
@@ -524,24 +539,26 @@ namespace BLL.NFE.Services
                     Texto = $"Fornecedor {nfeFiles.CnpjFornecedor}-{nfeFiles.Fornecedor} não cadastrado no TOTVS - Protheus"
                 });
 
-                var emitentePendente = await this.emitenteService.Get(notaXml.infNFe.emit.Id);
+                EmitenteIntegrado emitentePendente = await emitenteService.Get(notaXml.infNFe.emit.Id);
 
                 if (emitentePendente == null)
                 {
-                    EmitenteIntegrado emitenteIntegrado = new EmitenteIntegrado();
-                    emitenteIntegrado.DataInclusao = DateTime.Now;
-                    emitenteIntegrado.Emitente = notaXml.infNFe.emit;
-                    emitenteIntegrado.IntegradaoTOTVS = false;
-                    emitenteIntegrado.CodigoTotvsEmpresaFilial = nfeFiles.Empresa.CodigoTotvsEmpresaFilial;
-                    await this.emitenteService.AdicionarAsync(emitenteIntegrado);
+                    EmitenteIntegrado emitenteIntegrado = new EmitenteIntegrado
+                    {
+                        DataInclusao = DateTime.Now,
+                        Emitente = notaXml.infNFe.emit,
+                        IntegradaoTOTVS = false,
+                        CodigoTotvsEmpresaFilial = nfeFiles.Empresa.CodigoTotvsEmpresaFilial
+                    };
+                    await emitenteService.AdicionarAsync(emitenteIntegrado);
                 }
                 else
                 {
                     emitentePendente.IntegradaoTOTVS = false;
-                    await this.emitenteService.AtualizarAsync(emitentePendente);
+                    await emitenteService.AtualizarAsync(emitentePendente);
                 }
 
-                
+
             }
             return mensagensIntegracao;
         }
@@ -551,9 +568,9 @@ namespace BLL.NFE.Services
             try
             {
                 List<NFe> notas = new List<NFe>();
-                IQueryable<NFe> nfeQuery = this.nFeDAO.GetAll();
-                IList<NFeFiles> nfeFiles = await this.ListarXMLSNaoProcessados(false, false);
-                foreach (var nfeFile in nfeFiles)
+                IQueryable<NFe> nfeQuery = nFeDAO.GetAll();
+                IList<NFeFiles> nfeFiles = await ListarXMLSNaoProcessados(false, false);
+                foreach (NFeFiles nfeFile in nfeFiles)
                 {
                     notas.Add(
                     nfeQuery
@@ -576,10 +593,12 @@ namespace BLL.NFE.Services
         {
             IList<NfeExcelValidarModel> chavesNfe = new List<NfeExcelValidarModel>();
 
-            foreach (var file in fileStoranges)
+            foreach (FileStorange file in fileStoranges)
             {
                 if (file.FileType != ".xlsx")
+                {
                     break;
+                }
 
                 FileInfo newFile = new FileInfo(file.Path);
                 FileInfo templateFile = new FileInfo(file.Path);
@@ -593,8 +612,8 @@ namespace BLL.NFE.Services
                     {
                         ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
 
-                        var cell1 = worksheet.Cells["A1"].Value;
-                        var cell2 = worksheet.Cells["B1"].Value;
+                        object cell1 = worksheet.Cells["A1"].Value;
+                        object cell2 = worksheet.Cells["B1"].Value;
 
                         if (!cell1.Equals("ChaveNFE") || cell1.Equals("Validado"))
                         {
@@ -605,9 +624,9 @@ namespace BLL.NFE.Services
                             };
                         }
 
-                        var linha = 2;
+                        int linha = 2;
 
-                        var x = worksheet.Cells[1, 1].Value;
+                        object x = worksheet.Cells[1, 1].Value;
                         for (int i = 0; i < package.Workbook.Worksheets[0].Cells.Count(); i++)
                         {
 
@@ -637,7 +656,7 @@ namespace BLL.NFE.Services
                 }
 
                 file.Processado = true;
-                await this.fileStorangeDAO.UpdateAsync(file);
+                await fileStorangeDAO.UpdateAsync(file);
             }
 
             Parallel.ForEach(chavesNfe, (chave) =>
@@ -654,13 +673,13 @@ namespace BLL.NFE.Services
                     }
                 });
 
-            foreach (var chave in chavesNfe)
+            foreach (NfeExcelValidarModel chave in chavesNfe)
             {
-                NFeFiles nfeFiles = await this.ObterNFEFilesPelaChave(chave.ChaveNFE);
+                NFeFiles nfeFiles = await ObterNFEFilesPelaChave(chave.ChaveNFE);
                 if (nfeFiles != null)
                 {
                     nfeFiles.Validado = chave.Valido;
-                    this.nFeFilesDAO.Update(nfeFiles);
+                    nFeFilesDAO.Update(nfeFiles);
                 }
 
             }
@@ -674,7 +693,7 @@ namespace BLL.NFE.Services
 
         public async Task<NFeFiles> ObterNFEFilesPelaChave(string chaveNfe)
         {
-            NFeFiles nfe = await this.nFeFilesDAO.GetAll().Where(x => x.ChaveAcesso == chaveNfe).SingleOrDefaultAsync();
+            NFeFiles nfe = await nFeFilesDAO.GetAll().Where(x => x.ChaveAcesso == chaveNfe).SingleOrDefaultAsync();
             return nfe;
         }
 
@@ -689,10 +708,10 @@ namespace BLL.NFE.Services
             //Inativsa as mensagens de erro 
             List<NFeFilesMensagens> mensagensIntegracao = new List<NFeFilesMensagens>();
 
-            var mensagensDeErro = await nFeFilesMensagensService
+            IList<NFeFilesMensagens> mensagensDeErro = await nFeFilesMensagensService
                                             .ListarErroDoArquivoAsync(nfeFiles);
 
-            foreach (var erro in mensagensDeErro)
+            foreach (NFeFilesMensagens erro in mensagensDeErro)
             {
                 erro.Ativo = false;
                 await nFeFilesMensagensService.Alterar(erro)
@@ -704,10 +723,10 @@ namespace BLL.NFE.Services
                  .SingleOrDefaultAsync();
 
             file.Processado = false;
-            await this.fileStorangeDAO.UpdateAsync(file);
+            await fileStorangeDAO.UpdateAsync(file);
             try
             {
-                await this.ProcessarArquivos();
+                await ProcessarArquivos();
             }
             catch (Exception ex)
             {
@@ -719,7 +738,7 @@ namespace BLL.NFE.Services
 
         public async Task Revalidar(string chaveNFE)
         {
-            NFeFiles nfeFiles = await this.nFeFilesDAO.GetAll()
+            NFeFiles nfeFiles = await nFeFilesDAO.GetAll()
                                         .Where(n => n.ChaveAcesso == chaveNFE)
                                         .AsNoTracking()
                                         .FirstOrDefaultAsync();
@@ -728,23 +747,23 @@ namespace BLL.NFE.Services
 
         public NFe GetNfeByChave(string chave)
         {
-            var nfe = this.nFeDAO.GetAll().Where(x => x.infNFe.Id == chave)
+            NFe nfe = nFeDAO.GetAll().Where(x => x.infNFe.Id == chave)
                   .SingleOrDefault();
             return nfe;
         }
 
         public async Task<bool> Atualiza(NFe nfe)
         {
-            return await this.nFeDAO.UpdateAsync(nfe);
+            return await nFeDAO.UpdateAsync(nfe);
         }
 
-        
+
         IQueryable<NFeFiles> INFeXmlService.ListarTodosXMLQuery()
         {
-            return this.nFeFilesDAO.GetAll();
+            return nFeFilesDAO.GetAll();
         }
 
-       
+
     }
 }
 

@@ -30,8 +30,8 @@
 /* http://www.zeusautomacao.com.br/                                             */
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
-using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
 using System.Xml.Serialization;
+using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
 
 namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
 {

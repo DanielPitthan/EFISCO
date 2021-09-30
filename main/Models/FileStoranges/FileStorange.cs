@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Models.FileStoranges
 {
@@ -17,5 +15,6 @@ namespace Models.FileStoranges
         public bool Processado { get; set; }
         public string XmlString { get; set; }
         public string FileType { get; set; }
+        public byte[] DataByte { get; set; }
     }
 }

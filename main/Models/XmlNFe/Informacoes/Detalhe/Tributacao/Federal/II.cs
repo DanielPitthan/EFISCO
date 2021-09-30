@@ -48,8 +48,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Federal
         /// </summary>
         public decimal vBC
         {
-            get { return _vBc; }
-            set { _vBc = value.Arredondar(2); }
+            get => _vBc;
+            set => _vBc = value.Arredondar(2);
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Federal
         /// </summary>
         public decimal vDespAdu
         {
-            get { return _vDespAdu; }
-            set { _vDespAdu = value.Arredondar(2); }
+            get => _vDespAdu;
+            set => _vDespAdu = value.Arredondar(2);
         }
 
         /// <summary>
@@ -66,8 +66,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Federal
         /// </summary>
         public decimal vII
         {
-            get { return _vIi; }
-            set { _vIi = value.Arredondar(2); }
+            get => _vIi;
+            set => _vIi = value.Arredondar(2);
         }
 
         /// <summary>
@@ -75,8 +75,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Federal
         /// </summary>
         public decimal vIOF
         {
-            get { return _vIof; }
-            set { _vIof = value.Arredondar(2); }
+            get => _vIof;
+            set => _vIof = value.Arredondar(2);
         }
     }
 }

@@ -31,7 +31,6 @@
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
 
-using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace XmlNFe.Nfes.Informacoes.Pagamento
@@ -56,14 +55,11 @@ namespace XmlNFe.Nfes.Informacoes.Pagamento
         /// </summary>
         public decimal? vTroco
         {
-            get { return _vTroco.Arredondar(2); }
-            set { _vTroco = value.Arredondar(2); }
+            get => _vTroco.Arredondar(2);
+            set => _vTroco = value.Arredondar(2);
         }
 
-        public bool vTrocoSpecified
-        {
-            get { return _vTroco.HasValue; }
-        }
+        public bool vTrocoSpecified => _vTroco.HasValue;
 
         /// <summary>
         ///     YA02 - Forma de pagamento
@@ -71,10 +67,7 @@ namespace XmlNFe.Nfes.Informacoes.Pagamento
         /// </summary>
         public FormaPagamento? tPag { get; set; }
 
-        public bool tPagSpecified
-        {
-            get { return tPag.HasValue; }
-        }
+        public bool tPagSpecified => tPag.HasValue;
 
         /// <summary>
         ///     YA03 - Valor do Pagamento
@@ -82,14 +75,11 @@ namespace XmlNFe.Nfes.Informacoes.Pagamento
         /// </summary>
         public decimal? vPag
         {
-            get { return _vPag.Arredondar(2); }
-            set { _vPag = value.Arredondar(2); }
+            get => _vPag.Arredondar(2);
+            set => _vPag = value.Arredondar(2);
         }
 
-        public bool vPagSpecified
-        {
-            get { return vPag.HasValue; }
-        }
+        public bool vPagSpecified => vPag.HasValue;
 
         /// <summary>
         ///     YA04 - Grupo de Cartões

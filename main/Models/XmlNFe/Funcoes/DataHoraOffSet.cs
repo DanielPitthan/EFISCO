@@ -53,7 +53,10 @@ namespace DFe.Utils
         /// <returns></returns>
         public static string ParaDataString(this DateTimeOffset? data)
         {
-            if (data == null) return null;
+            if (data == null)
+            {
+                return null;
+            }
 
             return data == DateTimeOffset.MinValue ? null : data.Value.ToString("yyyy-MM-dd");
         }

@@ -1,8 +1,6 @@
 ﻿using Models.Empresas;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 using System.Xml.Serialization;
 
 namespace Models.NFe
@@ -18,7 +16,7 @@ namespace Models.NFe
         /// <summary>
         /// Integrado ao ERP
         /// </summary>
-        public bool Processada { get; set; } 
+        public bool Processada { get; set; }
         public DateTime DataInclusao { get; set; }
         public DateTime DataEmnissaoNfe { get; set; }
         public DateTime? DataProcessamento { get; set; }

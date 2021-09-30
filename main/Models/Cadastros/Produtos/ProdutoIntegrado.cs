@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using XmlNFe.Nfes.Informacoes.Detalhe;
 
 namespace Models.Cadastros.Produtos

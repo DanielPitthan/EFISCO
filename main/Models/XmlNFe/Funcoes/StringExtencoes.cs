@@ -7,7 +7,9 @@ namespace Shared.DFe.Utils
         public static string RemoverAcentos(this string valor)
         {
             if (string.IsNullOrEmpty(valor))
+            {
                 return valor;
+            }
 
             valor = Regex.Replace(valor, "[áàâãª]", "a");
             valor = Regex.Replace(valor, "[ÁÀÂÃÄ]", "A");

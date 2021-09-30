@@ -5,9 +5,6 @@ using Models.TOTVS.Cadastros.ClienteFornecedor;
 using Models.TOTVS.Cadastros.Produtos;
 using Models.TOTVS.Movimentos;
 using Models.TOTVS.Movimentos.Compras;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ContextBinds.EntityCore
 {

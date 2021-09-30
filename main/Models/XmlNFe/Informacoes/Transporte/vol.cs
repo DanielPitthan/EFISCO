@@ -67,8 +67,8 @@ namespace XmlNFe.Nfes.Informacoes.Transporte
         /// </summary>
         public decimal? pesoL
         {
-            get { return _pesoL.Arredondar(3); }
-            set { _pesoL = value.Arredondar(3); }
+            get => _pesoL.Arredondar(3);
+            set => _pesoL = value.Arredondar(3);
         }
 
         /// <summary>
@@ -76,8 +76,8 @@ namespace XmlNFe.Nfes.Informacoes.Transporte
         /// </summary>
         public decimal? pesoB
         {
-            get { return _pesoB.Arredondar(3); }
-            set { _pesoB = value.Arredondar(3); }
+            get => _pesoB.Arredondar(3);
+            set => _pesoB = value.Arredondar(3);
         }
 
         /// <summary>

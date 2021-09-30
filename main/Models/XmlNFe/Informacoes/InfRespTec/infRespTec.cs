@@ -23,7 +23,10 @@ namespace Shared.XmlNFe.Nfes.Informacoes.InfRespTec
         {
             get
             {
-                if (idCSRT == null) return null;
+                if (idCSRT == null)
+                {
+                    return null;
+                }
 
                 return idCSRT.Value.ToString("D2");
             }

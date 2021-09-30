@@ -30,10 +30,10 @@
 /* http://www.zeusautomacao.com.br/                                             */
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
-using System;
-using System.Xml.Serialization;
 using DFe.Classes.Assinatura;
 using DFe.Classes.Flags;
+using System;
+using System.Xml.Serialization;
 
 namespace XmlNFe.Nfes.Protocolo
 {
@@ -90,7 +90,11 @@ namespace XmlNFe.Nfes.Protocolo
         {
             get
             {
-                if (cMsg == null) return null;
+                if (cMsg == null)
+                {
+                    return null;
+                }
+
                 return cMsg.Value.ToString();
             }
             set

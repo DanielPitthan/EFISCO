@@ -71,16 +71,16 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Federal
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string ProxycEnq
         {
-            get { return cEnq.ToString("D3"); }
-            set { cEnq = int.Parse(value); }
+            get => cEnq.ToString("D3");
+            set => cEnq = int.Parse(value);
         }
 
         /// <summary>
         ///     O07 (IPITrib) - Grupo do CST 00, 49, 50 e 99
         ///     O08 (IPINT) - Grupo CST 01, 02, 03, 04, 51, 52, 53, 54 e 55
         /// </summary>
-        [XmlElement("IPITrib", typeof (IPITrib))]
-        [XmlElement("IPINT", typeof (IPINT))]
+        [XmlElement("IPITrib", typeof(IPITrib))]
+        [XmlElement("IPINT", typeof(IPINT))]
         public IPIBasico TipoIPI { get; set; }
 
         public bool ShouldSerializeqSelo()

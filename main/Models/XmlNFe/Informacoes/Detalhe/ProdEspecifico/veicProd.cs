@@ -40,12 +40,12 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.ProdEspecifico
         public int Id { get; set; }
         private decimal _pesoL;
         private decimal _pesoB;
-        private decimal _cmt;
+        private readonly decimal _cmt;
 
         /// <summary>
         ///     J02 - Tipo da operação
         /// </summary>
-        
+
         public TipoOperacao tpOp { get; set; }
 
         /// <summary>
@@ -78,8 +78,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.ProdEspecifico
         /// </summary>
         public decimal pesoL
         {
-            get { return _pesoL; }
-            set { _pesoL = value.Arredondar(3); }
+            get => _pesoL;
+            set => _pesoL = value.Arredondar(3);
         }
 
         /// <summary>
@@ -87,8 +87,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.ProdEspecifico
         /// </summary>
         public decimal pesoB
         {
-            get { return _pesoB; }
-            set { _pesoB = value.Arredondar(3); }
+            get => _pesoB;
+            set => _pesoB = value.Arredondar(3);
         }
 
         /// <summary>

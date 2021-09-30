@@ -2,18 +2,12 @@
 using DAL.DAOBaseNfeXml;
 using DAL.XmlDAL.Helpers;
 using DAL.XmlDAL.Interfaces;
-using Dapper;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using XmlNFe.Nfes;
-using XmlNFe.Nfes.Informacoes;
 using XmlNFe.Nfes.Informacoes.Detalhe;
-using XmlNFe.Nfes.Informacoes.Identificacao;
 
 namespace DAL.XmlDAL.DAO
 {
@@ -23,15 +17,15 @@ namespace DAL.XmlDAL.DAO
 
         public async Task<NFe> CarregarXML(string xml)
         {
-            var nfe = FuncoesXml.XmlStringParaClasse<NFe>(xml);
+            NFe nfe = FuncoesXml.XmlStringParaClasse<NFe>(xml);
             nfe.infNFe.Id = nfe.infNFe.Id.Substring(3, 44);
             return nfe;
         }
 
-      
+
         public IQueryable<NFe> GetAll()
         {
-            var notas = this.Contexto.NFe
+            IQueryable<NFe> notas = Contexto.NFe
                 .Include(infNFeSupl => infNFeSupl.infNFeSupl)
                 .Include(signature => signature.Signature)
                 .Include(infNFe => infNFe.infNFe)
@@ -105,26 +99,26 @@ namespace DAL.XmlDAL.DAO
 
         public async Task<bool> AddAsync(NFe nfe)
         {
-            await this.Contexto.NFe.AddAsync(nfe);
-            var rowsAffecteds = await this.Contexto.SaveChangesAsync().ConfigureAwait(false);
+            await Contexto.NFe.AddAsync(nfe);
+            int rowsAffecteds = await Contexto.SaveChangesAsync().ConfigureAwait(false);
             return rowsAffecteds > 0;
         }
 
         public async Task<bool> UpdateAsync(NFe nfe)
         {
-            var localContext = this.Contexto.Set<NFe>().Local.FirstOrDefault(entry => entry.Id.Equals(nfe.Id));
+            NFe localContext = Contexto.Set<NFe>().Local.FirstOrDefault(entry => entry.Id.Equals(nfe.Id));
             if (localContext != null)
             {
-                this.Contexto.Entry(localContext).State = EntityState.Detached;
+                Contexto.Entry(localContext).State = EntityState.Detached;
             }
-            this.Contexto.Entry(nfe).State = EntityState.Modified;
-            var rowsAffecteds = await this.Contexto.SaveChangesAsync().ConfigureAwait(false);
+            Contexto.Entry(nfe).State = EntityState.Modified;
+            int rowsAffecteds = await Contexto.SaveChangesAsync().ConfigureAwait(false);
             return rowsAffecteds > 0;
         }
 
         public async Task<IList<prod>> GetProduto(NFe nfe)
         {
-            var produtos = await this.Contexto.prod.FromSqlInterpolated<prod>($@"select prod.* 
+            List<prod> produtos = await Contexto.prod.FromSqlInterpolated<prod>($@"select prod.* 
                                                                         from prod as prod with(nolock)
                                                                         join det as det with(nolock) on prod.Id = det.prodId
                                                                         join infNFe as inf with(nolock) on det.infNFeId = inf.infNFeId

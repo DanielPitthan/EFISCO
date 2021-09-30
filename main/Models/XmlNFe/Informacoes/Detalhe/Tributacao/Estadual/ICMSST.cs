@@ -30,8 +30,8 @@
 /* http://www.zeusautomacao.com.br/                                             */
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
-using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
 using System.Xml.Serialization;
+using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
 
 namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
 {
@@ -71,15 +71,15 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 3)]
         public decimal vBCSTRet
         {
-            get { return _vBcstRet; }
-            set { _vBcstRet = value.Arredondar(2); }
+            get => _vBcstRet;
+            set => _vBcstRet = value.Arredondar(2);
         }
 
         [XmlElement(Order = 4)]
         public decimal? pST
         {
-            get { return _pST.Arredondar(4); }
-            set { _pST = value.Arredondar(4); }
+            get => _pST.Arredondar(4);
+            set => _pST = value.Arredondar(4);
         }
 
         public bool ShouldSerializepST()
@@ -90,8 +90,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 5)]
         public decimal? vICMSSubstituto
         {
-            get { return _vIcmsSubstituto.Arredondar(2); }
-            set { _vIcmsSubstituto = value.Arredondar(2); }
+            get => _vIcmsSubstituto.Arredondar(2);
+            set => _vIcmsSubstituto = value.Arredondar(2);
         }
 
         public bool ShouldSerializevICMSSubstituto()
@@ -105,15 +105,15 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 6)]
         public decimal vICMSSTRet
         {
-            get { return _vIcmsstRet; }
-            set { _vIcmsstRet = value.Arredondar(2); }
+            get => _vIcmsstRet;
+            set => _vIcmsstRet = value.Arredondar(2);
         }
 
         [XmlElement(Order = 7)]
         public decimal? vBCFCPSTRet
         {
-            get { return _vBcfcpstRet.Arredondar(2); }
-            set { _vBcfcpstRet = value.Arredondar(2); }
+            get => _vBcfcpstRet.Arredondar(2);
+            set => _vBcfcpstRet = value.Arredondar(2);
         }
 
         public bool vBCFCPSTRetSpecified
@@ -128,14 +128,11 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 8)]
         public decimal? pFCPSTRet
         {
-            get { return _pFcpstRet.Arredondar(4); }
-            set { _pFcpstRet = value.Arredondar(4); }
+            get => _pFcpstRet.Arredondar(4);
+            set => _pFcpstRet = value.Arredondar(4);
         }
 
-        public bool pFCPSTRetSpecified
-        {
-            get { return pFCPSTRet.HasValue; }
-        }
+        public bool pFCPSTRetSpecified => pFCPSTRet.HasValue;
 
 
         /// <summary>
@@ -145,14 +142,11 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 9)]
         public decimal? vFCPSTRet
         {
-            get { return _vFcpstRet.Arredondar(2); }
-            set { _vFcpstRet = value.Arredondar(2); }
+            get => _vFcpstRet.Arredondar(2);
+            set => _vFcpstRet = value.Arredondar(2);
         }
 
-        public bool vFCPSTRetSpecified
-        {
-            get { return vFCPSTRet.HasValue; }
-        }
+        public bool vFCPSTRetSpecified => vFCPSTRet.HasValue;
 
         /// <summary>
         ///     N31 - Valor da BC do ICMS ST da UF destino
@@ -160,8 +154,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 10)]
         public decimal vBCSTDest
         {
-            get { return _vBcstDest; }
-            set { _vBcstDest = value.Arredondar(2); }
+            get => _vBcstDest;
+            set => _vBcstDest = value.Arredondar(2);
         }
 
         /// <summary>
@@ -170,15 +164,15 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 11)]
         public decimal vICMSSTDest
         {
-            get { return _vIcmsstDest; }
-            set { _vIcmsstDest = value.Arredondar(2); }
+            get => _vIcmsstDest;
+            set => _vIcmsstDest = value.Arredondar(2);
         }
 
         [XmlElement(Order = 12)]
         public decimal? pRedBCEfet
         {
-            get { return _pRedBCEfet.Arredondar(4); }
-            set { _pRedBCEfet = value.Arredondar(4); }
+            get => _pRedBCEfet.Arredondar(4);
+            set => _pRedBCEfet = value.Arredondar(4);
         }
 
         public bool ShouldSerializepRedBCEfet()
@@ -192,8 +186,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 13)]
         public decimal? vBCEfet
         {
-            get { return _vBCEfet.Arredondar(2); }
-            set { _vBCEfet = value.Arredondar(2); }
+            get => _vBCEfet.Arredondar(2);
+            set => _vBCEfet = value.Arredondar(2);
         }
 
         public bool ShouldSerializevBCEfet()
@@ -207,8 +201,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 14)]
         public decimal? pICMSEfet
         {
-            get { return _pICMSEfet.Arredondar(4); }
-            set { _pICMSEfet = value.Arredondar(4); }
+            get => _pICMSEfet.Arredondar(4);
+            set => _pICMSEfet = value.Arredondar(4);
         }
 
         public bool ShouldSerializepICMSEfet()
@@ -222,8 +216,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 15)]
         public decimal? vICMSEfet
         {
-            get { return _vICMSEfet.Arredondar(2); }
-            set { _vICMSEfet = value.Arredondar(2); }
+            get => _vICMSEfet.Arredondar(2);
+            set => _vICMSEfet = value.Arredondar(2);
         }
 
         public bool ShouldSerializevICMSEfet()

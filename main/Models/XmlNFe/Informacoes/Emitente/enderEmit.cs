@@ -31,10 +31,10 @@
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
 
+using DFe.Classes.Entidades;
 using System;
 using System.Linq;
 using System.Xml.Serialization;
-using DFe.Classes.Entidades;
 
 namespace XmlNFe.Nfes.Informacoes.Emitente
 {
@@ -85,8 +85,8 @@ namespace XmlNFe.Nfes.Informacoes.Emitente
         [XmlElement(ElementName = "UF")]
         public string ProxyUF
         {
-            get { return Enum.GetName(typeof(Estado), UF); }
-            set { UF = (Estado)Enum.Parse(typeof(Estado), value); }
+            get => Enum.GetName(typeof(Estado), UF);
+            set => UF = (Estado)Enum.Parse(typeof(Estado), value);
         }
 
         /// <summary>
@@ -95,16 +95,21 @@ namespace XmlNFe.Nfes.Informacoes.Emitente
         /// </summary>
         public string CEP
         {
-            get { return _cep; }
+            get => _cep;
             set
             {
                 if (!string.IsNullOrEmpty(value))
                 {
                     value = value.Replace("-", "");
                     if (!value.All(char.IsDigit))
+                    {
                         throw new Exception(@"enderEmit\CEP deve receber somente números!");
+                    }
+
                     if (value.Length != 8)
+                    {
                         throw new Exception(string.Format(@"enderEmit\CEP deve ter 8 números. Tamanho informado: {0}!", value.Length));
+                    }
                 }
                 _cep = value;
             }

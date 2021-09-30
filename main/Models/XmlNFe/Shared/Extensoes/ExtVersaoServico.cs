@@ -1,5 +1,5 @@
-﻿using System;
-using DFe.Classes.Flags;
+﻿using DFe.Classes.Flags;
+using System;
 
 namespace DFe.Classes.Extensoes
 {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Models.TOTVS.Cadastros.ClienteFornecedor
+﻿namespace Models.TOTVS.Cadastros.ClienteFornecedor
 {
-   
+
     public class ClienteTotvs
     {
         public string A1_FILIAL { get; set; }

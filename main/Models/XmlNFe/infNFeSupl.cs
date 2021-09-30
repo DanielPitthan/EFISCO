@@ -86,7 +86,10 @@ namespace XmlNFe.Nfes
             writer.WriteCData(qrCode);
             writer.WriteEndElement();
 
-            if (urlChave == null) return;
+            if (urlChave == null)
+            {
+                return;
+            }
 
             writer.WriteStartElement("urlChave");
             writer.WriteString(urlChave);

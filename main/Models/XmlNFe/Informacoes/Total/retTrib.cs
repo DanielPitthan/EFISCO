@@ -51,8 +51,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal? vRetPIS
         {
-            get { return _vRetPis.Arredondar(2); }
-            set { _vRetPis = value.Arredondar(2); }
+            get => _vRetPis.Arredondar(2);
+            set => _vRetPis = value.Arredondar(2);
         }
 
         /// <summary>
@@ -60,8 +60,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal? vRetCOFINS
         {
-            get { return _vRetCofins.Arredondar(2); }
-            set { _vRetCofins = value.Arredondar(2); }
+            get => _vRetCofins.Arredondar(2);
+            set => _vRetCofins = value.Arredondar(2);
         }
 
         /// <summary>
@@ -69,8 +69,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal? vRetCSLL
         {
-            get { return _vRetCsll.Arredondar(2); }
-            set { _vRetCsll = value.Arredondar(2); }
+            get => _vRetCsll.Arredondar(2);
+            set => _vRetCsll = value.Arredondar(2);
         }
 
         /// <summary>
@@ -78,8 +78,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal? vBCIRRF
         {
-            get { return _vBcirrf.Arredondar(2); }
-            set { _vBcirrf = value.Arredondar(2); }
+            get => _vBcirrf.Arredondar(2);
+            set => _vBcirrf = value.Arredondar(2);
         }
 
         /// <summary>
@@ -87,8 +87,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal? vIRRF
         {
-            get { return _vIrrf.Arredondar(2); }
-            set { _vIrrf = value.Arredondar(2); }
+            get => _vIrrf.Arredondar(2);
+            set => _vIrrf = value.Arredondar(2);
         }
 
         /// <summary>
@@ -96,8 +96,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal? vBCRetPrev
         {
-            get { return _vBcRetPrev.Arredondar(2); }
-            set { _vBcRetPrev = value.Arredondar(2); }
+            get => _vBcRetPrev.Arredondar(2);
+            set => _vBcRetPrev = value.Arredondar(2);
         }
 
         /// <summary>
@@ -105,8 +105,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal? vRetPrev
         {
-            get { return _vRetPrev.Arredondar(2); }
-            set { _vRetPrev = value.Arredondar(2); }
+            get => _vRetPrev.Arredondar(2);
+            set => _vRetPrev = value.Arredondar(2);
         }
 
         public bool ShouldSerializevRetPIS()

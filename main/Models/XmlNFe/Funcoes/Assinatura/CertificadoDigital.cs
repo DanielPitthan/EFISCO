@@ -54,7 +54,7 @@ namespace DFe.Utils.Assinatura
         /// <returns></returns>
         public static X509Store ObterX509Store(OpenFlags openFlags)
         {
-            var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
+            X509Store store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
             store.Open(openFlags);
             return store;
         }
@@ -74,7 +74,7 @@ namespace DFe.Utils.Assinatura
                 throw new Exception(string.Format("Certificado digital {0} não encontrado!", arquivo));
             }
 
-            var certificado = new X509Certificate2(arquivo, senha, X509KeyStorageFlags.MachineKeySet);
+            X509Certificate2 certificado = new X509Certificate2(arquivo, senha, X509KeyStorageFlags.MachineKeySet);
             return certificado;
         }
 
@@ -89,7 +89,7 @@ namespace DFe.Utils.Assinatura
         {
             try
             {
-                var certificado = new X509Certificate2(arrayBytes, senha, X509KeyStorageFlags.MachineKeySet);
+                X509Certificate2 certificado = new X509Certificate2(arrayBytes, senha, X509KeyStorageFlags.MachineKeySet);
                 return certificado;
             }
             catch (Exception ex)
@@ -105,19 +105,26 @@ namespace DFe.Utils.Assinatura
         private static X509Certificate2 ObterDoRepositorio(string serial, OpenFlags opcoesDeAbertura)
         {
             if (string.IsNullOrEmpty(serial))
+            {
                 throw new ArgumentException("O número de série do certificado digital não foi informado!");
+            }
+
             X509Certificate2 certificado = null;
-            var store = ObterX509Store(opcoesDeAbertura);
+            X509Store store = ObterX509Store(opcoesDeAbertura);
             try
             {
-                foreach (var item in store.Certificates)
+                foreach (X509Certificate2 item in store.Certificates)
                 {
                     if (item.SerialNumber != null && item.SerialNumber.ToUpper().Equals(serial.ToUpper(), StringComparison.InvariantCultureIgnoreCase))
+                    {
                         certificado = item;
+                    }
                 }
 
                 if (certificado == null)
+                {
                     throw new Exception(string.Format("Certificado digital nº {0} não encontrado!", serial.ToUpper()));
+                }
             }
             finally
             {
@@ -135,8 +142,12 @@ namespace DFe.Utils.Assinatura
         /// <returns></returns>
         private static X509Certificate2 ObterDoRepositorioPassandoPin(string serial, string senha = null)
         {
-            var certificado = ObterDoRepositorio(serial, OpenFlags.ReadOnly);
-            if (string.IsNullOrEmpty(senha)) return certificado;
+            X509Certificate2 certificado = ObterDoRepositorio(serial, OpenFlags.ReadOnly);
+            if (string.IsNullOrEmpty(senha))
+            {
+                return certificado;
+            }
+
             certificado.DefinirPinParaChavePrivada(senha);
             return certificado;
         }
@@ -148,11 +159,15 @@ namespace DFe.Utils.Assinatura
         /// </summary>
         private static void DefinirPinParaChavePrivada(this X509Certificate2 certificado, string pin)
         {
-            if (certificado == null) throw new ArgumentNullException("certificado");
-            var key = (RSACryptoServiceProvider)certificado.PrivateKey;
+            if (certificado == null)
+            {
+                throw new ArgumentNullException("certificado");
+            }
 
-            var providerHandle = IntPtr.Zero;
-            var pinBuffer = Encoding.ASCII.GetBytes(pin);
+            RSACryptoServiceProvider key = (RSACryptoServiceProvider)certificado.PrivateKey;
+
+            IntPtr providerHandle = IntPtr.Zero;
+            byte[] pinBuffer = Encoding.ASCII.GetBytes(pin);
 
             MetodosNativos.Executar(() => MetodosNativos.CryptAcquireContext(ref providerHandle,
                 key.CspKeyContainerInfo.KeyContainerName,
@@ -201,14 +216,18 @@ namespace DFe.Utils.Assinatura
         public static X509Certificate2 ObterCertificado(ConfiguracaoCertificado configuracaoCertificado)
         {
             if (!configuracaoCertificado.ManterDadosEmCache)
+            {
                 return ObterDadosCertificado(configuracaoCertificado);
+            }
 
             if (!string.IsNullOrEmpty(configuracaoCertificado.CacheId) && CacheCertificado.ContainsKey(configuracaoCertificado.CacheId))
+            {
                 return CacheCertificado[configuracaoCertificado.CacheId];
+            }
 
-            var certificado = ObterDadosCertificado(configuracaoCertificado);
+            X509Certificate2 certificado = ObterDadosCertificado(configuracaoCertificado);
 
-            var keyCertificado = string.IsNullOrEmpty(configuracaoCertificado.CacheId)
+            string keyCertificado = string.IsNullOrEmpty(configuracaoCertificado.CacheId)
                 ? certificado.SerialNumber
                 : configuracaoCertificado.CacheId;
 
@@ -294,7 +313,7 @@ namespace DFe.Utils.Assinatura
                 throw new ArgumentException("Certificado digital vencido na data => " + dataExpiracao);
             }
         }
-        
+
         /// <summary>
         /// Extensão para retornar o número de dias válidos do certificado
         /// </summary>
@@ -317,7 +336,9 @@ namespace DFe.Utils.Assinatura
         public static bool IsA3(this X509Certificate2 x509Certificate2)
         {
             if (x509Certificate2 == null)
+            {
                 return false;
+            }
 
             bool result = false;
 
@@ -329,7 +350,9 @@ namespace DFe.Utils.Assinatura
                 {
                     if (service.CspKeyContainerInfo.Removable &&
                         service.CspKeyContainerInfo.HardwareDevice)
+                    {
                         result = true;
+                    }
                 }
             }
             catch

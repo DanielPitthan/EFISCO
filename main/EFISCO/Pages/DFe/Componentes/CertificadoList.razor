@@ -1,0 +1,64 @@
+﻿@page "/CertificadoLista"
+
+@inject BLL.Certificados.Interfaces.ICertificadoService certificadoService;
+
+
+<EFISCO.Pages.Components.Titulos.NavbarTitulo Titulo="Certificados Digitais" />
+<div class="container">
+    @if (!string.IsNullOrEmpty(Error))
+    {
+        <div class="alert alert-danger">
+            <b>Erro:</b>@Error
+        </div>
+    }
+    <RadzenDataGrid AllowColumnResize="true"
+                    AllowSorting="true"
+                    Data="Certificados"
+                    TItem="Certificado">
+        <Columns>
+            <RadzenDataGridColumn TItem="Certificado" Property="@nameof(Certificado.Id)" Title="Id" />
+            <RadzenDataGridColumn TItem="Certificado" Property="@nameof(Certificado.Ativo)" Title="Ativo">
+                <Template Context="cert">
+                    <RadzenSwitch @bind-Value=@cert.Ativo Change="@(async ()=> await Ativa(cert))" />
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Certificado" Property="@nameof(Certificado.Cnpj)" Title="Cnpj" />
+            <RadzenDataGridColumn TItem="Certificado" Property="@nameof(Certificado.Empresa.DescricaoResumida)" Title="Nome" >
+                <Template Context="cert">
+                    @cert.Empresa.DescricaoResumida
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Certificado" Property="@nameof(Certificado.DataExpiracao)" Title="Data Expiração" />
+            <RadzenDataGridColumn TItem="Certificado" Property="@nameof(Certificado.DataInclusao)" Title="Data Inclusão" />
+
+        </Columns>
+
+    </RadzenDataGrid>
+</div>
+
+
+@code {
+
+    private string Error = "";
+
+    private IList<Certificado> Certificados = new List<Certificado>();
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        Certificados = await certificadoService.List();
+    }
+
+    private async Task Ativa(Certificado certificado)
+    {
+        try
+        {
+            await certificadoService.Alterar(certificado);
+        }
+        catch (Exception ex)
+        {
+            Error = $"{ex.Message} {ex.InnerException}";
+            return;
+        }
+    }
+}

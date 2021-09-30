@@ -1,15 +1,11 @@
 ﻿using BLL.NFE.Interfaces;
-using DAL.XmlDAL.Interfaces;
 using DFe.Classes.Flags;
-using Models.NFe;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using XmlNFe.Nfes;
 using XmlNFe.Nfes.Informacoes.Destinatario;
@@ -21,23 +17,23 @@ namespace BLL.NFE.Services
 {
     public class NfeDownloadService : INfeDownloadListService
     {
-        private INFeXmlService nFeXmlService;
+        private readonly INFeXmlService nFeXmlService;
 
 
         public NfeDownloadService(INFeXmlService _nFeXmlService
                                  )
         {
-            this.nFeXmlService = _nFeXmlService;
+            nFeXmlService = _nFeXmlService;
 
         }
 
         public async Task<byte[]> DownloadList()
         {
             IList<NFe> Nfes;
-            
+
             try
             {
-                Nfes = await this.nFeXmlService.ObterNotasByFiles();
+                Nfes = await nFeXmlService.ObterNotasByFiles();
 
 
             }
@@ -50,13 +46,13 @@ namespace BLL.NFE.Services
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-            var file = new FileInfo("NotasFiscais.xlsx");
-            using (var excel = new ExcelPackage(file))
+            FileInfo file = new FileInfo("NotasFiscais.xlsx");
+            using (ExcelPackage excel = new ExcelPackage(file))
             {
 
                 //Abas
-                var planNotas = excel.Workbook.Worksheets.Add("Notas");
-                var planProduto = excel.Workbook.Worksheets.Add("Produtos");
+                ExcelWorksheet planNotas = excel.Workbook.Worksheets.Add("Notas");
+                ExcelWorksheet planProduto = excel.Workbook.Worksheets.Add("Produtos");
 
                 //Cabecalho 
                 planNotas.Cells[1, 1].Value = "Chave Nfe";

@@ -45,8 +45,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         /// </summary>
         public decimal pDevol
         {
-            get { return _pDevol; }
-            set { _pDevol = value.Arredondar(2); }
+            get => _pDevol;
+            set => _pDevol = value.Arredondar(2);
         }
 
         /// <summary>

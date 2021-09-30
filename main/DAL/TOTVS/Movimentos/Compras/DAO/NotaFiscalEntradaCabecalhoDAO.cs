@@ -1,11 +1,9 @@
-﻿using DAL.TOTVS.Movimentos.Compras.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Models.TOTVS.Movimentos.Compras;
-using ContextBinds.EntityCore;
+﻿using ContextBinds.EntityCore;
 using DAL.DAOBase;
+using DAL.TOTVS.Movimentos.Compras.Interfaces;
+using Models.TOTVS.Movimentos.Compras;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DAL.TOTVS.Movimentos.Compras.DAO
@@ -23,7 +21,7 @@ namespace DAL.TOTVS.Movimentos.Compras.DAO
 
         public IQueryable<NotaFiscalEntradaCabecalhoTotvs> All()
         {
-            return this.Contexto.SF1010;
+            return Contexto.SF1010;
         }
     }
 }

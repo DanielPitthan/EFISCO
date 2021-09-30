@@ -53,8 +53,8 @@ namespace XmlNFe.Nfes.Informacoes.Cana
         /// </summary>
         public decimal vDed
         {
-            get { return _vDed; }
-            set { _vDed = value.Arredondar(2); }
+            get => _vDed;
+            set => _vDed = value.Arredondar(2);
         }
 
         /// <summary>
@@ -62,8 +62,8 @@ namespace XmlNFe.Nfes.Informacoes.Cana
         /// </summary>
         public decimal vFor
         {
-            get { return _vFor; }
-            set { _vFor = value.Arredondar(2); }
+            get => _vFor;
+            set => _vFor = value.Arredondar(2);
         }
 
         /// <summary>
@@ -71,8 +71,8 @@ namespace XmlNFe.Nfes.Informacoes.Cana
         /// </summary>
         public decimal vTotDed
         {
-            get { return _vTotDed; }
-            set { _vTotDed = value.Arredondar(2); }
+            get => _vTotDed;
+            set => _vTotDed = value.Arredondar(2);
         }
 
         /// <summary>
@@ -80,8 +80,8 @@ namespace XmlNFe.Nfes.Informacoes.Cana
         /// </summary>
         public decimal vLiqFor
         {
-            get { return _vLiqFor; }
-            set { _vLiqFor = value.Arredondar(2); }
+            get => _vLiqFor;
+            set => _vLiqFor = value.Arredondar(2);
         }
     }
 }

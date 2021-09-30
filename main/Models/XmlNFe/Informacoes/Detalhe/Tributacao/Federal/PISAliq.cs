@@ -53,8 +53,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Federal
         /// </summary>
         public decimal vBC
         {
-            get { return _vBc; }
-            set { _vBc = value.Arredondar(2); }
+            get => _vBc;
+            set => _vBc = value.Arredondar(2);
         }
 
         /// <summary>
@@ -62,8 +62,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Federal
         /// </summary>
         public decimal pPIS
         {
-            get { return _pPis; }
-            set { _pPis = value.Arredondar(4); }
+            get => _pPis;
+            set => _pPis = value.Arredondar(4);
         }
 
         /// <summary>
@@ -71,8 +71,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Federal
         /// </summary>
         public decimal vPIS
         {
-            get { return _vPis; }
-            set { _vPis = value.Arredondar(2); }
+            get => _vPis;
+            set => _vPis = value.Arredondar(2);
         }
     }
 }

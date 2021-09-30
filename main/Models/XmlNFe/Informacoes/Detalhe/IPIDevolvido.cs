@@ -45,8 +45,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe
         /// </summary>
         public decimal vIPIDevol
         {
-            get { return _vIpiDevol; }
-            set { _vIpiDevol = value.Arredondar(2); }
+            get => _vIpiDevol;
+            set => _vIpiDevol = value.Arredondar(2);
         }
     }
 }

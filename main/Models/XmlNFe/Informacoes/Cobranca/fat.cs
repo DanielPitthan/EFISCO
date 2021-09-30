@@ -52,8 +52,8 @@ namespace XmlNFe.Nfes.Informacoes.Cobranca
         /// </summary>
         public decimal? vOrig
         {
-            get { return _vOrig.Arredondar(2); }
-            set { _vOrig = value.Arredondar(2); }
+            get => _vOrig.Arredondar(2);
+            set => _vOrig = value.Arredondar(2);
         }
 
         /// <summary>
@@ -61,8 +61,8 @@ namespace XmlNFe.Nfes.Informacoes.Cobranca
         /// </summary>
         public decimal? vDesc
         {
-            get { return _vDesc.Arredondar(2); }
-            set { _vDesc = value.Arredondar(2); }
+            get => _vDesc.Arredondar(2);
+            set => _vDesc = value.Arredondar(2);
         }
 
         /// <summary>
@@ -70,8 +70,8 @@ namespace XmlNFe.Nfes.Informacoes.Cobranca
         /// </summary>
         public decimal? vLiq
         {
-            get { return _vLiq.Arredondar(2); }
-            set { _vLiq = value.Arredondar(2); }
+            get => _vLiq.Arredondar(2);
+            set => _vLiq = value.Arredondar(2);
         }
 
         public bool ShouldSerializevOrig()

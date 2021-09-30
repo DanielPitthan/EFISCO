@@ -49,8 +49,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 1)]
         public decimal vBCUFDest
         {
-            get { return _vBcufDest; }
-            set { _vBcufDest = value.Arredondar(2); }
+            get => _vBcufDest;
+            set => _vBcufDest = value.Arredondar(2);
         }
 
         /// <summary>
@@ -60,14 +60,11 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 2)]
         public decimal? vBCFCPUFDest
         {
-            get { return _vBcfcpufDest.Arredondar(2); }
-            set { _vBcfcpufDest = value.Arredondar(2); }
+            get => _vBcfcpufDest.Arredondar(2);
+            set => _vBcfcpufDest = value.Arredondar(2);
         }
 
-        public bool vBCFCPUFDestSpecified
-        {
-            get { return vBCFCPUFDest.HasValue; }
-        }
+        public bool vBCFCPUFDestSpecified => vBCFCPUFDest.HasValue;
 
         /// <summary>
         /// NA05 - Percentual do ICMS relativo ao Fundo de Combate à Pobreza (FCP) na UF de destino
@@ -75,16 +72,11 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 3)]
         public decimal? pFCPUFDest
         {
-            get { return _pFcpufDest; }
-            set
-            {
-                _pFcpufDest = value.Arredondar(4); }
+            get => _pFcpufDest;
+            set => _pFcpufDest = value.Arredondar(4);
         }
 
-        public bool pFCPUFDestSpecified
-        {
-            get { return pFCPUFDest.HasValue; }
-        }
+        public bool pFCPUFDestSpecified => pFCPUFDest.HasValue;
 
         /// <summary>
         /// NA07 - Alíquota interna da UF de destino
@@ -92,8 +84,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 4)]
         public decimal pICMSUFDest
         {
-            get { return _pIcmsufDest; }
-            set { _pIcmsufDest = value.Arredondar(4); }
+            get => _pIcmsufDest;
+            set => _pIcmsufDest = value.Arredondar(4);
         }
 
         /// <summary>
@@ -102,8 +94,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 5)]
         public decimal pICMSInter
         {
-            get { return _pIcmsInter; }
-            set { _pIcmsInter = value.Arredondar(2); }
+            get => _pIcmsInter;
+            set => _pIcmsInter = value.Arredondar(2);
         }
 
         /// <summary>
@@ -112,8 +104,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 6)]
         public decimal pICMSInterPart
         {
-            get { return _pIcmsInterPart; }
-            set { _pIcmsInterPart = value.Arredondar(4); }
+            get => _pIcmsInterPart;
+            set => _pIcmsInterPart = value.Arredondar(4);
         }
 
         /// <summary>
@@ -122,14 +114,11 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 7)]
         public decimal? vFCPUFDest
         {
-            get { return _vFcpufDest; }
-            set { _vFcpufDest = value.Arredondar(2); }
+            get => _vFcpufDest;
+            set => _vFcpufDest = value.Arredondar(2);
         }
 
-        public bool vFCPUFDestSpecified
-        {
-            get { return vFCPUFDest.HasValue; }
-        }
+        public bool vFCPUFDestSpecified => vFCPUFDest.HasValue;
 
         /// <summary>
         /// NA15 - Valor do ICMS Interestadual para a UF de destino
@@ -137,8 +126,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 8)]
         public decimal vICMSUFDest
         {
-            get { return _vIcmsufDest; }
-            set { _vIcmsufDest = value.Arredondar(2); }
+            get => _vIcmsufDest;
+            set => _vIcmsufDest = value.Arredondar(2);
         }
 
         /// <summary>
@@ -147,8 +136,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 9)]
         public decimal vICMSUFRemet
         {
-            get { return _vIcmsufRemet; }
-            set { _vIcmsufRemet = value.Arredondar(2); }
+            get => _vIcmsufRemet;
+            set => _vIcmsufRemet = value.Arredondar(2);
         }
     }
 }

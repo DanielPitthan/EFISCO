@@ -1,7 +1,4 @@
 ﻿using Models.Cadastros.Produtos;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DAL.TOTVS.Cadastros.DAO
 {

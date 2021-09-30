@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace Models.TOTVS.Cadastros.Produtos
 {
     public class ProdutoTotvs
     {
-     [DisplayName("Filial")]
+        [DisplayName("Filial")]
         public string B1_FILIAL { get; set; }
 
         public string B1_COD { get; set; }

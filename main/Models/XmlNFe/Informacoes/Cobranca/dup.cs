@@ -31,9 +31,9 @@
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
 
+using DFe.Utils;
 using System;
 using System.Xml.Serialization;
-using DFe.Utils;
 
 namespace XmlNFe.Nfes.Informacoes.Cobranca
 {
@@ -60,11 +60,14 @@ namespace XmlNFe.Nfes.Informacoes.Cobranca
         {
             get
             {
-                if (dVenc == null) return null;
+                if (dVenc == null)
+                {
+                    return null;
+                }
 
                 return dVenc.Value.ParaDataString();
             }
-            set { dVenc = Convert.ToDateTime(value); }
+            set => dVenc = Convert.ToDateTime(value);
         }
 
         /// <summary>
@@ -72,8 +75,8 @@ namespace XmlNFe.Nfes.Informacoes.Cobranca
         /// </summary>
         public decimal vDup
         {
-            get { return _vDup; }
-            set { _vDup = value.Arredondar(2); }
+            get => _vDup;
+            set => _vDup = value.Arredondar(2);
         }
     }
 }

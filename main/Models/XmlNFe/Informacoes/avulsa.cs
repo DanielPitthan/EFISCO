@@ -85,8 +85,8 @@ namespace XmlNFe.Nfes.Informacoes
         /// </summary>
         public decimal vDAR
         {
-            get { return _vDar; }
-            set { _vDar = value.Arredondar(2); }
+            get => _vDar;
+            set => _vDar = value.Arredondar(2);
         }
 
         /// <summary>

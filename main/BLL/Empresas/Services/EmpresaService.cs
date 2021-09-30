@@ -2,10 +2,8 @@
 using DAL.Empresas.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Models.Empresas;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BLL.Empresas.Services
@@ -16,26 +14,26 @@ namespace BLL.Empresas.Services
 
         public EmpresaService(IEmpresaDAO _empresaDAO)
         {
-            this.empresaDAO = _empresaDAO;
+            empresaDAO = _empresaDAO;
         }
 
         public async Task<Empresa> GetByCnpjsync(string cnpj)
         {
-            Empresa empresa = await this.empresaDAO.All().Where(x => x.Cnpj == cnpj)
+            Empresa empresa = await empresaDAO.All().Where(x => x.Cnpj == cnpj)
                                .SingleOrDefaultAsync();
             return empresa;
         }
 
         public async Task<Empresa> GetByIdAsync(int id)
         {
-            Empresa empresa = await this.empresaDAO.All().Where(x => x.Id == id)
+            Empresa empresa = await empresaDAO.All().Where(x => x.Id == id)
                                 .SingleOrDefaultAsync();
             return empresa;
         }
 
         public async Task<IList<Empresa>> ListAllAsync()
         {
-            return await this.empresaDAO.All().ToListAsync();
+            return await empresaDAO.All().ToListAsync();
         }
     }
 }

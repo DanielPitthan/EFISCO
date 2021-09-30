@@ -50,13 +50,18 @@ namespace XmlNFe.Nfes.Informacoes.Emitente
         /// </summary>
         public string CNPJ
         {
-            get { return _cnpj; }
+            get => _cnpj;
             set
             {
-                if (string.IsNullOrEmpty(value)) return;
-                if (string.IsNullOrEmpty(_cpf))
-                    _cnpj = Regex.Match(value, @"\d+").Value;
+                if (string.IsNullOrEmpty(value))
+                {
+                    return;
+                }
 
+                if (string.IsNullOrEmpty(_cpf))
+                {
+                    _cnpj = Regex.Match(value, @"\d+").Value;
+                }
                 else
                 {
                     throw new ArgumentException(ErroCpfCnpjPreenchidos);
@@ -69,12 +74,18 @@ namespace XmlNFe.Nfes.Informacoes.Emitente
         /// </summary>
         public string CPF
         {
-            get { return _cpf; }
+            get => _cpf;
             set
             {
-                if (string.IsNullOrEmpty(value)) return;
+                if (string.IsNullOrEmpty(value))
+                {
+                    return;
+                }
+
                 if (string.IsNullOrEmpty(_cnpj))
+                {
                     _cpf = Regex.Match(value, @"\d+").Value;
+                }
                 else
                 {
                     throw new ArgumentException(ErroCpfCnpjPreenchidos);

@@ -1,15 +1,12 @@
 ﻿using Models.TOTVS.Cadastros.ClienteFornecedor;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DAL.TOTVS.Cadastros.DAO
 {
-	public class FornecedorQuery
-	{
-		public static string Insert(FornecedorTotvs fornecedor)
-		{
-			string query = @$"exec InsertSA2
+    public class FornecedorQuery
+    {
+        public static string Insert(FornecedorTotvs fornecedor)
+        {
+            string query = @$"exec InsertSA2
 		'{fornecedor.A2_NOME}',	
 		'{fornecedor.A2_NREDUZ}',	
 		'{fornecedor.A2_EST}',		
@@ -32,12 +29,12 @@ namespace DAL.TOTVS.Cadastros.DAO
 		'{fornecedor.A2_TIPO}',
 		'{fornecedor.A2_FILIAL}'";
 
-			return query;
-		}
+            return query;
+        }
 
-		public static string MaxCode(string filial)
-		{
-			return $@"SELECT * FROM SA2010
+        public static string MaxCode(string filial)
+        {
+            return $@"SELECT * FROM SA2010
 					WHERE 
 					A2_FILIAL='{filial}' 
 					AND A2_COD = (SELECT MAX(A2_COD) FROM SA2010
@@ -46,6 +43,6 @@ namespace DAL.TOTVS.Cadastros.DAO
 					'UNIAO', 'ESTADO', 'INPS', 'MUNIC', 'UNIAO'))
 														";
 
-		}
-	}
+        }
+    }
 }

@@ -31,9 +31,9 @@
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
 
+using DFe.Classes.Entidades;
 using System;
 using System.Linq;
-using DFe.Classes.Entidades;
 
 namespace DFe.Classes.Extensoes
 {
@@ -41,14 +41,14 @@ namespace DFe.Classes.Extensoes
     {
         public static Estado SiglaParaEstado(this Estado estado, string siglaUf)
         {
-            var enumValues = Enum.GetValues(typeof(Estado)).Cast<Estado>().FirstOrDefault(e => e.GetSiglaUfString() == siglaUf);
+            Estado enumValues = Enum.GetValues(typeof(Estado)).Cast<Estado>().FirstOrDefault(e => e.GetSiglaUfString() == siglaUf);
 
             return enumValues;
         }
 
         public static Estado CodigoIbgeParaEstado(this Estado estado, string codigoIbge)
         {
-            var enumValues = Enum.GetValues(typeof(Estado)).Cast<Estado>().FirstOrDefault(est => est.GetCodigoIbgeEmString() == codigoIbge);
+            Estado enumValues = Enum.GetValues(typeof(Estado)).Cast<Estado>().FirstOrDefault(est => est.GetCodigoIbgeEmString() == codigoIbge);
 
             return enumValues;
         }
@@ -60,13 +60,13 @@ namespace DFe.Classes.Extensoes
 
         public static string GetCodigoIbgeEmString(this Estado estado)
         {
-            var codigo = (byte) estado;
+            byte codigo = (byte)estado;
             return codigo.ToString();
         }
 
         public static byte GetCodigoIbgeEmByte(this Estado estado)
         {
-            var codigo = (byte) estado;
+            byte codigo = (byte)estado;
 
             return codigo;
         }

@@ -8,7 +8,7 @@ namespace DFe.Utils
     {
         private static void CopiarPara(Stream src, Stream dest)
         {
-            var bytes = new byte[4096];
+            byte[] bytes = new byte[4096];
 
             int cnt;
 
@@ -25,12 +25,12 @@ namespace DFe.Utils
         /// <returns></returns>
         public static byte[] Zip(string str)
         {
-            var bytes = Encoding.UTF8.GetBytes(str);
+            byte[] bytes = Encoding.UTF8.GetBytes(str);
 
-            using (var msi = new MemoryStream(bytes))
-            using (var mso = new MemoryStream())
+            using (MemoryStream msi = new MemoryStream(bytes))
+            using (MemoryStream mso = new MemoryStream())
             {
-                using (var gs = new GZipStream(mso, CompressionMode.Compress))
+                using (GZipStream gs = new GZipStream(mso, CompressionMode.Compress))
                 {
                     CopiarPara(msi, gs);
                 }
@@ -46,10 +46,10 @@ namespace DFe.Utils
         /// <returns></returns>
         public static string Unzip(byte[] bytes)
         {
-            using (var msi = new MemoryStream(bytes))
-            using (var mso = new MemoryStream())
+            using (MemoryStream msi = new MemoryStream(bytes))
+            using (MemoryStream mso = new MemoryStream())
             {
-                using (var gs = new GZipStream(msi, CompressionMode.Decompress))
+                using (GZipStream gs = new GZipStream(msi, CompressionMode.Decompress))
                 {
                     CopiarPara(gs, mso);
                 }

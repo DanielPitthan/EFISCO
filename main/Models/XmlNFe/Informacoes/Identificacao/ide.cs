@@ -31,12 +31,12 @@
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
 
-using System;
-using System.Collections.Generic;
-using System.Xml.Serialization;
 using DFe.Classes.Entidades;
 using DFe.Classes.Flags;
 using DFe.Utils;
+using System;
+using System.Collections.Generic;
+using System.Xml.Serialization;
 using XmlNFe.Nfes.Informacoes.Identificacao.Tipos;
 
 namespace XmlNFe.Nfes.Informacoes.Identificacao
@@ -67,10 +67,7 @@ namespace XmlNFe.Nfes.Informacoes.Identificacao
         /// </summary>
         public IndicadorPagamento? indPag { get; set; }
 
-        public bool indPagSpecified
-        {
-            get { return indPag.HasValue; }
-        }
+        public bool indPagSpecified => indPag.HasValue;
 
         /// <summary>
         ///     B06 - Modelo do Documento Fiscal
@@ -103,8 +100,8 @@ namespace XmlNFe.Nfes.Informacoes.Identificacao
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string ProxydEmi
         {
-            get { return dEmi.ParaDataString(); }
-            set { dEmi = DateTime.Parse(value); }
+            get => dEmi.ParaDataString();
+            set => dEmi = DateTime.Parse(value);
         }
 
         /// <summary>
@@ -120,8 +117,8 @@ namespace XmlNFe.Nfes.Informacoes.Identificacao
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string ProxydSaiEnt
         {
-            get { return dSaiEnt.ParaDataString(); }
-            set { dSaiEnt = DateTime.Parse(value); }
+            get => dSaiEnt.ParaDataString();
+            set => dSaiEnt = DateTime.Parse(value);
         }
 
         /// <summary>
@@ -137,8 +134,8 @@ namespace XmlNFe.Nfes.Informacoes.Identificacao
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string ProxyDhEmi
         {
-            get { return dhEmi.ParaDataHoraStringUtc(); }
-            set { dhEmi = DateTimeOffset.Parse(value); }
+            get => dhEmi.ParaDataHoraStringUtc();
+            set => dhEmi = DateTimeOffset.Parse(value);
         }
 
         /// <summary>
@@ -154,8 +151,8 @@ namespace XmlNFe.Nfes.Informacoes.Identificacao
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string ProxydhSaiEnt
         {
-            get { return dhSaiEnt.ParaDataHoraStringUtc(); }
-            set { dhSaiEnt = DateTimeOffset.Parse(value); }
+            get => dhSaiEnt.ParaDataHoraStringUtc();
+            set => dhSaiEnt = DateTimeOffset.Parse(value);
         }
 
         /// <summary>
@@ -234,8 +231,8 @@ namespace XmlNFe.Nfes.Informacoes.Identificacao
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string ProxydhCont
         {
-            get { return dhCont.ParaDataHoraStringUtc(); }
-            set { dhCont = DateTimeOffset.Parse(value); }
+            get => dhCont.ParaDataHoraStringUtc();
+            set => dhCont = DateTimeOffset.Parse(value);
         }
 
         /// <summary>

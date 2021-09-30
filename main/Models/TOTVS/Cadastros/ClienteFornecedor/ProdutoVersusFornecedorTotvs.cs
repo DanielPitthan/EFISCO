@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Models.TOTVS.Cadastros
+﻿namespace Models.TOTVS.Cadastros
 {
-   public  class ProdutoVersusFornecedorTotvs
+    public class ProdutoVersusFornecedorTotvs
     {
         public string A5_FILIAL { get; set; }
 

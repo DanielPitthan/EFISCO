@@ -30,9 +30,9 @@
 /* http://www.zeusautomacao.com.br/                                             */
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
+using DFe.Classes.Flags;
 using System;
 using System.Xml.Serialization;
-using DFe.Classes.Flags;
 
 namespace XmlNFe.Nfes.Informacoes.Destinatario
 {
@@ -64,12 +64,18 @@ namespace XmlNFe.Nfes.Informacoes.Destinatario
         /// </summary>
         public string CNPJ
         {
-            get { return cnpj; }
+            get => cnpj;
             set
             {
-                if (string.IsNullOrEmpty(value)) return;
+                if (string.IsNullOrEmpty(value))
+                {
+                    return;
+                }
+
                 if (string.IsNullOrEmpty(cpf))
+                {
                     cnpj = value;
+                }
                 else
                 {
                     throw new ArgumentException(ErroCpfCnpjPreenchidos);
@@ -82,12 +88,18 @@ namespace XmlNFe.Nfes.Informacoes.Destinatario
         /// </summary>
         public string CPF
         {
-            get { return cpf; }
+            get => cpf;
             set
             {
-                if (string.IsNullOrEmpty(value)) return;
+                if (string.IsNullOrEmpty(value))
+                {
+                    return;
+                }
+
                 if (string.IsNullOrEmpty(cnpj))
+                {
                     cpf = value;
+                }
                 else
                 {
                     throw new ArgumentException(ErroCpfCnpjPreenchidos);
@@ -158,7 +170,7 @@ namespace XmlNFe.Nfes.Informacoes.Destinatario
 
         public bool ShouldSerializeIE()
         {
-            var teste = _versao == VersaoServico.Versao200 | !string.IsNullOrEmpty(IE);
+            bool teste = _versao == VersaoServico.Versao200 | !string.IsNullOrEmpty(IE);
             return teste;
         }
     }

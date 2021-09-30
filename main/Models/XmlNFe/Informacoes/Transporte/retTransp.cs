@@ -48,8 +48,8 @@ namespace XmlNFe.Nfes.Informacoes.Transporte
         /// </summary>
         public decimal vServ
         {
-            get { return _vServ; }
-            set { _vServ = value.Arredondar(2); }
+            get => _vServ;
+            set => _vServ = value.Arredondar(2);
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace XmlNFe.Nfes.Informacoes.Transporte
         /// </summary>
         public decimal vBCRet
         {
-            get { return _vBcRet; }
-            set { _vBcRet = value.Arredondar(2); }
+            get => _vBcRet;
+            set => _vBcRet = value.Arredondar(2);
         }
 
         /// <summary>
@@ -66,8 +66,8 @@ namespace XmlNFe.Nfes.Informacoes.Transporte
         /// </summary>
         public decimal pICMSRet
         {
-            get { return _pIcmsRet; }
-            set { _pIcmsRet = value.Arredondar(4); }
+            get => _pIcmsRet;
+            set => _pIcmsRet = value.Arredondar(4);
         }
 
         /// <summary>
@@ -75,8 +75,8 @@ namespace XmlNFe.Nfes.Informacoes.Transporte
         /// </summary>
         public decimal vICMSRet
         {
-            get { return _vIcmsRet; }
-            set { _vIcmsRet = value.Arredondar(2); }
+            get => _vIcmsRet;
+            set => _vIcmsRet = value.Arredondar(2);
         }
 
         /// <summary>

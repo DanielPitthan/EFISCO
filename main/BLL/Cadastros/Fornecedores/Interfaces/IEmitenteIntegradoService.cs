@@ -1,7 +1,5 @@
 ﻿using Models.Cadastros.Fornecedores;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BLL.Cadastros.Fornecedores.Interfaces
@@ -13,6 +11,6 @@ namespace BLL.Cadastros.Fornecedores.Interfaces
         public Task<bool> ExcluirAsync(EmitenteIntegrado emitente);
         public Task<IList<EmitenteIntegrado>> ListarNaoIntegradosAsync();
         public Task<EmitenteIntegrado> Get(int emitId);
-       
+
     }
 }

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
@@ -25,10 +24,10 @@ namespace DAL.XmlDAL.Helpers
         public static string ClasseParaXmlString<T>(T objeto)
         {
             XElement xml;
-            var keyNomeClasseEmUso = typeof(T).FullName;
-            var ser = BuscarNoCache(keyNomeClasseEmUso, typeof(T));
+            string keyNomeClasseEmUso = typeof(T).FullName;
+            XmlSerializer ser = BuscarNoCache(keyNomeClasseEmUso, typeof(T));
 
-            using (var memory = new MemoryStream())
+            using (MemoryStream memory = new MemoryStream())
             {
                 using (TextReader tr = new StreamReader(memory, Encoding.UTF8))
                 {
@@ -49,11 +48,13 @@ namespace DAL.XmlDAL.Helpers
         /// <returns></returns>
         public static T XmlStringParaClasse<T>(string input) where T : class
         {
-            var keyNomeClasseEmUso = typeof(T).FullName;
-            var ser = BuscarNoCache(keyNomeClasseEmUso, typeof(T));
+            string keyNomeClasseEmUso = typeof(T).FullName;
+            XmlSerializer ser = BuscarNoCache(keyNomeClasseEmUso, typeof(T));
 
-            using (var sr = new StringReader(input))
+            using (StringReader sr = new StringReader(input))
+            {
                 return (T)ser.Deserialize(sr);
+            }
         }
 
         /// <summary>
@@ -70,9 +71,9 @@ namespace DAL.XmlDAL.Helpers
                 throw new FileNotFoundException("Arquivo " + arquivo + " não encontrado!");
             }
 
-            var keyNomeClasseEmUso = typeof(T).FullName;
-            var serializador = BuscarNoCache(keyNomeClasseEmUso, typeof(T));
-            var stream = new FileStream(arquivo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            string keyNomeClasseEmUso = typeof(T).FullName;
+            XmlSerializer serializador = BuscarNoCache(keyNomeClasseEmUso, typeof(T));
+            FileStream stream = new FileStream(arquivo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             try
             {
                 return (T)serializador.Deserialize(stream);
@@ -92,16 +93,16 @@ namespace DAL.XmlDAL.Helpers
         /// <param name="arquivo">Arquivo XML</param>
         public static void ClasseParaArquivoXml<T>(T objeto, string arquivo)
         {
-            var dir = Path.GetDirectoryName(arquivo);
+            string dir = Path.GetDirectoryName(arquivo);
             if (dir != null && !Directory.Exists(dir))
             {
                 throw new DirectoryNotFoundException("Diretório " + dir + " não encontrado!");
             }
 
-            var xml = ClasseParaXmlString(objeto);
+            string xml = ClasseParaXmlString(objeto);
             try
             {
-                var stw = new StreamWriter(arquivo);
+                StreamWriter stw = new StreamWriter(arquivo);
                 stw.WriteLine(xml);
                 stw.Close();
             }
@@ -113,7 +114,7 @@ namespace DAL.XmlDAL.Helpers
 
         public static void SalvarStringXmlParaArquivoXml(string xml, string arquivo)
         {
-            var dir = Path.GetDirectoryName(arquivo);
+            string dir = Path.GetDirectoryName(arquivo);
             if (dir != null && !Directory.Exists(dir))
             {
                 throw new DirectoryNotFoundException("Diretório " + dir + " não encontrado!");
@@ -121,7 +122,7 @@ namespace DAL.XmlDAL.Helpers
 
             try
             {
-                var stw = new StreamWriter(arquivo);
+                StreamWriter stw = new StreamWriter(arquivo);
                 stw.WriteLine(xml);
                 stw.Close();
             }
@@ -140,14 +141,17 @@ namespace DAL.XmlDAL.Helpers
         /// <returns>Retorna a string contendo o node XML cujo strem foi passado no parâmetro nomeDoNode</returns>
         public static string ObterNodeDeStream(string nomeDoNode, StreamReader stream)
         {
-            var xmlDoc = XDocument.Load(stream);
+            XDocument xmlDoc = XDocument.Load(stream);
 
-            var xmlString = (from d in xmlDoc.Descendants()
-                             where d.Name.LocalName == nomeDoNode
-                             select d).FirstOrDefault();
+            XElement xmlString = (from d in xmlDoc.Descendants()
+                                  where d.Name.LocalName == nomeDoNode
+                                  select d).FirstOrDefault();
 
             if (xmlString == null)
-                throw new Exception(String.Format("Nenhum objeto {0} encontrado no stream!", nomeDoNode));
+            {
+                throw new Exception(string.Format("Nenhum objeto {0} encontrado no stream!", nomeDoNode));
+            }
+
             return xmlString.ToString();
         }
 
@@ -160,13 +164,16 @@ namespace DAL.XmlDAL.Helpers
         /// <returns>Retorna a string contendo o node XML cujo nome foi passado no parâmetro nomeDoNode</returns>
         public static string ObterNodeDeArquivoXml(string nomeDoNode, string arquivoXml)
         {
-            var xmlDoc = XDocument.Load(arquivoXml);
-            var xmlString = (from d in xmlDoc.Descendants()
-                             where d.Name.LocalName == nomeDoNode
-                             select d).FirstOrDefault();
+            XDocument xmlDoc = XDocument.Load(arquivoXml);
+            XElement xmlString = (from d in xmlDoc.Descendants()
+                                  where d.Name.LocalName == nomeDoNode
+                                  select d).FirstOrDefault();
 
             if (xmlString == null)
-                throw new Exception(String.Format("Nenhum objeto {0} encontrado no arquivo {1}!", nomeDoNode, arquivoXml));
+            {
+                throw new Exception(string.Format("Nenhum objeto {0} encontrado no arquivo {1}!", nomeDoNode, arquivoXml));
+            }
+
             return xmlString.ToString();
         }
 
@@ -179,14 +186,17 @@ namespace DAL.XmlDAL.Helpers
         /// <returns>Retorna a string contendo o node XML cujo nome foi passado no parâmetro nomeDoNode</returns>
         public static string ObterNodeDeStringXml(string nomeDoNode, string stringXml)
         {
-            var s = stringXml;
-            var xmlDoc = XDocument.Parse(s);
-            var xmlString = (from d in xmlDoc.Descendants()
-                             where d.Name.LocalName == nomeDoNode
-                             select d).FirstOrDefault();
+            string s = stringXml;
+            XDocument xmlDoc = XDocument.Parse(s);
+            XElement xmlString = (from d in xmlDoc.Descendants()
+                                  where d.Name.LocalName == nomeDoNode
+                                  select d).FirstOrDefault();
 
             if (xmlString == null)
-                throw new Exception(String.Format("Nenhum objeto {0} encontrado no xml!", nomeDoNode));
+            {
+                throw new Exception(string.Format("Nenhum objeto {0} encontrado no xml!", nomeDoNode));
+            }
+
             return xmlString.ToString();
         }
 
@@ -201,7 +211,7 @@ namespace DAL.XmlDAL.Helpers
                 }
 
 
-                var ser = XmlSerializer.FromTypes(new[] { type })[0];
+                XmlSerializer ser = XmlSerializer.FromTypes(new[] { type })[0];
                 CacheSerializers.Add(chave, ser);
                 return ser;
             }

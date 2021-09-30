@@ -30,8 +30,8 @@
 /* http://www.zeusautomacao.com.br/                                             */
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
-using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
 using System.Xml.Serialization;
+using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
 
 namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
 {
@@ -69,8 +69,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 4)]
         public decimal vBC
         {
-            get { return _vBc.Arredondar(2); }
-            set { _vBc = value.Arredondar(2); }
+            get => _vBc.Arredondar(2);
+            set => _vBc = value.Arredondar(2);
         }
 
         /// <summary>
@@ -79,8 +79,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 5)]
         public decimal pICMS
         {
-            get { return _pIcms.Arredondar(4); }
-            set { _pIcms = value.Arredondar(4); }
+            get => _pIcms.Arredondar(4);
+            set => _pIcms = value.Arredondar(4);
         }
 
         /// <summary>
@@ -89,8 +89,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 6)]
         public decimal vICMS
         {
-            get { return _vIcms.Arredondar(2); }
-            set { _vIcms = value.Arredondar(2); }
+            get => _vIcms.Arredondar(2);
+            set => _vIcms = value.Arredondar(2);
         }
 
         /// <summary>
@@ -100,14 +100,11 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 7)]
         public decimal? pFCP
         {
-            get { return _pFcp.Arredondar(4); }
-            set { _pFcp = value.Arredondar(4); }
+            get => _pFcp.Arredondar(4);
+            set => _pFcp = value.Arredondar(4);
         }
 
-        public bool pFCPSpecified
-        {
-            get { return pFCP.HasValue; }
-        }
+        public bool pFCPSpecified => pFCP.HasValue;
 
         /// <summary>
         /// N17c - Valor do Fundo de Combate à Pobreza (FCP)
@@ -116,13 +113,10 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 8)]
         public decimal? vFCP
         {
-            get { return _vFcp.Arredondar(2); }
-            set { _vFcp = value.Arredondar(2); }
+            get => _vFcp.Arredondar(2);
+            set => _vFcp = value.Arredondar(2);
         }
 
-        public bool vFCPSpecified
-        {
-            get { return vFCP.HasValue; }
-        }
+        public bool vFCPSpecified => vFCP.HasValue;
     }
 }

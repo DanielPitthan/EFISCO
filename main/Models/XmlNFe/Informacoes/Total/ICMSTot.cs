@@ -67,8 +67,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal vBC
         {
-            get { return _vBc.Arredondar(2); }
-            set { _vBc = value.Arredondar(2); }
+            get => _vBc.Arredondar(2);
+            set => _vBc = value.Arredondar(2);
         }
 
         /// <summary>
@@ -76,8 +76,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal vICMS
         {
-            get { return _vIcms.Arredondar(2); }
-            set { _vIcms = value.Arredondar(2); }
+            get => _vIcms.Arredondar(2);
+            set => _vIcms = value.Arredondar(2);
         }
 
         /// <summary>
@@ -85,8 +85,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal? vICMSDeson
         {
-            get { return _vIcmsDeson.Arredondar(2); }
-            set { _vIcmsDeson = value.Arredondar(2); }
+            get => _vIcmsDeson.Arredondar(2);
+            set => _vIcmsDeson = value.Arredondar(2);
         } //Nulable por conta da v2.00
 
         public bool ShouldSerializevICMSDeson()
@@ -99,8 +99,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal? vFCPUFDest
         {
-            get { return _vFcpufDest.Arredondar(2); }
-            set { _vFcpufDest = value.Arredondar(2); }
+            get => _vFcpufDest.Arredondar(2);
+            set => _vFcpufDest = value.Arredondar(2);
         }
 
         public bool ShouldSerializevFCPUFDest()
@@ -113,8 +113,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal? vICMSUFDest
         {
-            get { return _vIcmsufDest.Arredondar(2); }
-            set { _vIcmsufDest = value.Arredondar(2); }
+            get => _vIcmsufDest.Arredondar(2);
+            set => _vIcmsufDest = value.Arredondar(2);
         }
 
         public bool ShouldSerializevICMSUFDest()
@@ -127,8 +127,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal? vICMSUFRemet
         {
-            get { return _vIcmsufRemet.Arredondar(2); }
-            set { _vIcmsufRemet = value.Arredondar(2); }
+            get => _vIcmsufRemet.Arredondar(2);
+            set => _vIcmsufRemet = value.Arredondar(2);
         }
 
         public bool ShouldSerializevICMSUFRemet()
@@ -142,22 +142,19 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal? vFCP
         {
-            get { return _vFcp.Arredondar(2); }
-            set { _vFcp = value.Arredondar(2); }
+            get => _vFcp.Arredondar(2);
+            set => _vFcp = value.Arredondar(2);
         }
 
-        public bool vFCPSpecified
-        {
-            get { return vFCP.HasValue; }
-        }
+        public bool vFCPSpecified => vFCP.HasValue;
 
         /// <summary>
         ///     W05 - Base de Cálculo do ICMS ST
         /// </summary>
         public decimal vBCST
         {
-            get { return _vBcst.Arredondar(2); }
-            set { _vBcst = value.Arredondar(2); }
+            get => _vBcst.Arredondar(2);
+            set => _vBcst = value.Arredondar(2);
         }
 
         /// <summary>
@@ -165,8 +162,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal vST
         {
-            get { return _vSt.Arredondar(2); }
-            set { _vSt = value.Arredondar(2); }
+            get => _vSt.Arredondar(2);
+            set => _vSt = value.Arredondar(2);
         }
 
         /// <summary>
@@ -175,14 +172,11 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal? vFCPST
         {
-            get { return _vFcpst.Arredondar(2); }
-            set { _vFcpst = value.Arredondar(2); }
+            get => _vFcpst.Arredondar(2);
+            set => _vFcpst = value.Arredondar(2);
         }
 
-        public bool vFCPSTSpecified
-        {
-            get { return vFCPST.HasValue; }
-        }
+        public bool vFCPSTSpecified => vFCPST.HasValue;
 
         /// <summary>
         /// W06b - Valor Total do FCP retido anteriormente por Substituição Tributária
@@ -190,22 +184,19 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal? vFCPSTRet
         {
-            get { return _vFcpstRet.Arredondar(2); }
-            set { _vFcpstRet = value.Arredondar(2); }
+            get => _vFcpstRet.Arredondar(2);
+            set => _vFcpstRet = value.Arredondar(2);
         }
 
-        public bool vFCPSTRetSpecified
-        {
-            get { return vFCPSTRet.HasValue; }
-        }
+        public bool vFCPSTRetSpecified => vFCPSTRet.HasValue;
 
         /// <summary>
         ///     W07 - Valor Total dos produtos e serviços
         /// </summary>
         public decimal vProd
         {
-            get { return _vProd.Arredondar(2); }
-            set { _vProd = value.Arredondar(2); }
+            get => _vProd.Arredondar(2);
+            set => _vProd = value.Arredondar(2);
         }
 
         /// <summary>
@@ -213,8 +204,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal vFrete
         {
-            get { return _vFrete.Arredondar(2); }
-            set { _vFrete = value.Arredondar(2); }
+            get => _vFrete.Arredondar(2);
+            set => _vFrete = value.Arredondar(2);
         }
 
         /// <summary>
@@ -222,8 +213,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal vSeg
         {
-            get { return _vSeg.Arredondar(2); }
-            set { _vSeg = value.Arredondar(2); }
+            get => _vSeg.Arredondar(2);
+            set => _vSeg = value.Arredondar(2);
         }
 
         /// <summary>
@@ -231,8 +222,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal vDesc
         {
-            get { return _vDesc.Arredondar(2); }
-            set { _vDesc = value.Arredondar(2); }
+            get => _vDesc.Arredondar(2);
+            set => _vDesc = value.Arredondar(2);
         }
 
         /// <summary>
@@ -240,8 +231,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal vII
         {
-            get { return _vIi.Arredondar(2); }
-            set { _vIi = value.Arredondar(2); }
+            get => _vIi.Arredondar(2);
+            set => _vIi = value.Arredondar(2);
         }
 
         /// <summary>
@@ -249,8 +240,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal vIPI
         {
-            get { return _vIpi.Arredondar(2); }
-            set { _vIpi = value.Arredondar(2); }
+            get => _vIpi.Arredondar(2);
+            set => _vIpi = value.Arredondar(2);
         }
 
         /// <summary>
@@ -259,22 +250,19 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal? vIPIDevol
         {
-            get { return _vIpiDevol.Arredondar(2); }
-            set { _vIpiDevol = value.Arredondar(2); }
+            get => _vIpiDevol.Arredondar(2);
+            set => _vIpiDevol = value.Arredondar(2);
         }
 
-        public bool vIPIDevolSpecified
-        {
-            get { return vIPIDevol.HasValue; }
-        }
+        public bool vIPIDevolSpecified => vIPIDevol.HasValue;
 
         /// <summary>
         ///     W13 - Valor do PIS
         /// </summary>
         public decimal vPIS
         {
-            get { return _vPis.Arredondar(2); }
-            set { _vPis = value.Arredondar(2); }
+            get => _vPis.Arredondar(2);
+            set => _vPis = value.Arredondar(2);
         }
 
         /// <summary>
@@ -282,8 +270,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal vCOFINS
         {
-            get { return _vCofins.Arredondar(2); }
-            set { _vCofins = value.Arredondar(2); }
+            get => _vCofins.Arredondar(2);
+            set => _vCofins = value.Arredondar(2);
         }
 
         /// <summary>
@@ -291,8 +279,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal vOutro
         {
-            get { return _vOutro.Arredondar(2); }
-            set { _vOutro = value.Arredondar(2); }
+            get => _vOutro.Arredondar(2);
+            set => _vOutro = value.Arredondar(2);
         }
 
         /// <summary>
@@ -300,8 +288,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal vNF
         {
-            get { return _vNf.Arredondar(2); }
-            set { _vNf = value.Arredondar(2); }
+            get => _vNf.Arredondar(2);
+            set => _vNf = value.Arredondar(2);
         }
 
         /// <summary>
@@ -309,8 +297,8 @@ namespace XmlNFe.Nfes.Informacoes.Total
         /// </summary>
         public decimal vTotTrib
         {
-            get { return _vTotTrib.Arredondar(2); }
-            set { _vTotTrib = value.Arredondar(2); }
+            get => _vTotTrib.Arredondar(2);
+            set => _vTotTrib = value.Arredondar(2);
         }
 
     }

@@ -31,10 +31,10 @@
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
 
-using System;
-using System.Text;
 using DFe.Classes.Entidades;
 using DFe.Classes.Flags;
+using System;
+using System.Text;
 
 namespace DFe.Utils
 {
@@ -57,7 +57,7 @@ namespace DFe.Utils
         /// <returns>Retorna um objeto <see cref="DadosChaveFiscal"/> com os dados da chave de acesso</returns>
         public static DadosChaveFiscal ObterChave(Estado ufEmitente, DateTimeOffset dataEmissao, string cnpjEmitente, ModeloDocumento modelo, int serie, long numero, int tipoEmissao, int cNf)
         {
-            var chave = new StringBuilder();
+            StringBuilder chave = new StringBuilder();
 
             chave.Append(((int)ufEmitente).ToString("D2"))
                 .Append(dataEmissao.ToString("yyMM"))
@@ -68,7 +68,7 @@ namespace DFe.Utils
                 .Append(tipoEmissao.ToString())
                 .Append(cNf.ToString("D8"));
 
-            var digitoVerificador = ObterDigitoVerificador(chave.ToString());
+            string digitoVerificador = ObterDigitoVerificador(chave.ToString());
 
             chave.Append(digitoVerificador);
 
@@ -82,30 +82,38 @@ namespace DFe.Utils
         /// <returns></returns>
         private static string ObterDigitoVerificador(string chave)
         {
-            var soma = 0; // Vai guardar a Soma
-            var mod = -1; // Vai guardar o Resto da divisão
-            var dv = -1; // Vai guardar o DigitoVerificador
-            var peso = 2; // vai guardar o peso de multiplicação
+            int soma = 0; // Vai guardar a Soma
+            int mod = -1; // Vai guardar o Resto da divisão
+            int dv = -1; // Vai guardar o DigitoVerificador
+            int peso = 2; // vai guardar o peso de multiplicação
 
             //percorrendo cada caractere da chave da direita para esquerda para fazer os cálculos com o peso
-            for (var i = chave.Length - 1; i != -1; i--)
+            for (int i = chave.Length - 1; i != -1; i--)
             {
-                var ch = Convert.ToInt32(chave[i].ToString());
-                soma += ch*peso;
+                int ch = Convert.ToInt32(chave[i].ToString());
+                soma += ch * peso;
                 //sempre que for 9 voltamos o peso a 2
                 if (peso < 9)
+                {
                     peso += 1;
+                }
                 else
+                {
                     peso = 2;
+                }
             }
 
             //Agora que tenho a soma vamos pegar o resto da divisão por 11
-            mod = soma%11;
+            mod = soma % 11;
             //Aqui temos uma regrinha, se o resto da divisão for 0 ou 1 então o dv vai ser 0
             if (mod == 0 || mod == 1)
+            {
                 dv = 0;
+            }
             else
+            {
                 dv = 11 - mod;
+            }
 
             return dv.ToString();
         }
@@ -117,25 +125,23 @@ namespace DFe.Utils
         /// <returns></returns>
         public static bool ChaveValida(string chaveNfe)
         {
-            Estado codigo;
-            Enum.TryParse(chaveNfe.Substring(0, 2), out codigo);
+            Enum.TryParse(chaveNfe.Substring(0, 2), out Estado codigo);
 
-            var anoMes = chaveNfe.Substring(2, 4);
+            string anoMes = chaveNfe.Substring(2, 4);
 
-            var ano = int.Parse(anoMes.Substring(0, 2));
-            var mes = int.Parse(anoMes.Substring(2, 2));
-            var anoEMesData = new DateTime(ano, mes, 1);
+            int ano = int.Parse(anoMes.Substring(0, 2));
+            int mes = int.Parse(anoMes.Substring(2, 2));
+            DateTime anoEMesData = new DateTime(ano, mes, 1);
 
-            var cnpj = chaveNfe.Substring(6, 14);
-            ModeloDocumento modelo;
-            Enum.TryParse(chaveNfe.Substring(20, 2), out modelo);
-            var serie = int.Parse(chaveNfe.Substring(22, 3));
-            var numeroNfe = long.Parse(chaveNfe.Substring(25, 9));
-            var formaEmissao = int.Parse(chaveNfe.Substring(34, 1));
-            var codigoNumerico = int.Parse(chaveNfe.Substring(35, 8));
-            var digitoVerificador = chaveNfe.Substring(43, 1);
+            string cnpj = chaveNfe.Substring(6, 14);
+            Enum.TryParse(chaveNfe.Substring(20, 2), out ModeloDocumento modelo);
+            int serie = int.Parse(chaveNfe.Substring(22, 3));
+            long numeroNfe = long.Parse(chaveNfe.Substring(25, 9));
+            int formaEmissao = int.Parse(chaveNfe.Substring(34, 1));
+            int codigoNumerico = int.Parse(chaveNfe.Substring(35, 8));
+            string digitoVerificador = chaveNfe.Substring(43, 1);
 
-            var gerarChave = ObterChave(codigo, anoEMesData, cnpj, modelo, serie, numeroNfe, formaEmissao, codigoNumerico);
+            DadosChaveFiscal gerarChave = ObterChave(codigo, anoEMesData, cnpj, modelo, serie, numeroNfe, formaEmissao, codigoNumerico);
 
             return digitoVerificador.Equals(gerarChave.DigitoVerificador.ToString());
         }

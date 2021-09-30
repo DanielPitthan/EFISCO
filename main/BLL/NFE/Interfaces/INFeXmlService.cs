@@ -1,10 +1,8 @@
 ﻿using Models.FileStoranges;
 using Models.Infra;
 using Models.NFe;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using XmlNFe.Nfes;
 
@@ -21,7 +19,7 @@ namespace BLL.NFE.Interfaces
         public Task<IList<NFeFiles>> ListarTodosXML();
         public IQueryable<NFeFiles> ListarTodosXMLQuery();
         public Task ProcessarArquivos();
-        public Task<ExcelResult> ValidarArquivos(IList<FileStorange> fileStoranges);     
+        public Task<ExcelResult> ValidarArquivos(IList<FileStorange> fileStoranges);
         public Task<IList<NFe>> ObterNotasByFiles();
         public Task Revalidar(NFeFiles nfeFiles);
         public Task Revalidar(string chaveNFE);

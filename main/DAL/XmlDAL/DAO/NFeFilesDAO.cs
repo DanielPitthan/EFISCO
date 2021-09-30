@@ -8,28 +8,28 @@ using System.Threading.Tasks;
 
 namespace DAL.XmlDAL.DAO
 {
-    public class NFeFilesDAO : DataAccessBase,INFeFilesDAO
+    public class NFeFilesDAO : DataAccessBase, INFeFilesDAO
     {
-        public NFeFilesDAO(ContextEF _context) : base(_context)
+        public NFeFilesDAO(ContextEFNFeXml _context) : base(_context)
         {
         }
 
         public IQueryable<NFeFiles> GetAll()
         {
-            return this.Contexto.NFeFiles;
+            return Contexto.NFeFiles;
         }
 
         public override async Task<bool> UpdateAsync<TSource>(TSource item)
         {
             NFeFiles nfeFile = item as NFeFiles;
 
-            var localContext = this.Contexto.Set<NFeFiles>().Local.FirstOrDefault(entry => entry.Id.Equals(nfeFile.Id));
+            NFeFiles localContext = Contexto.Set<NFeFiles>().Local.FirstOrDefault(entry => entry.Id.Equals(nfeFile.Id));
             if (localContext != null)
             {
-                this.Contexto.Entry(localContext).State = EntityState.Detached;
+                Contexto.Entry(localContext).State = EntityState.Detached;
             }
-            this.Contexto.Entry(nfeFile).State = EntityState.Modified;
-            var rowsAffecteds =   await this.Contexto.SaveChangesAsync().ConfigureAwait(false);
+            Contexto.Entry(nfeFile).State = EntityState.Modified;
+            int rowsAffecteds = await Contexto.SaveChangesAsync().ConfigureAwait(false);
             return rowsAffecteds > 0;
         }
 
@@ -38,13 +38,13 @@ namespace DAL.XmlDAL.DAO
         {
             NFeFiles nfeFile = item as NFeFiles;
 
-            var localContext = this.Contexto.Set<NFeFiles>().Local.FirstOrDefault(entry => entry.Id.Equals(nfeFile.Id));
+            NFeFiles localContext = Contexto.Set<NFeFiles>().Local.FirstOrDefault(entry => entry.Id.Equals(nfeFile.Id));
             if (localContext != null)
             {
-                this.Contexto.Entry(localContext).State = EntityState.Detached;
+                Contexto.Entry(localContext).State = EntityState.Detached;
             }
-            this.Contexto.Entry(nfeFile).State = EntityState.Modified;
-            var rowsAffecteds = this.Contexto.SaveChanges();
+            Contexto.Entry(nfeFile).State = EntityState.Modified;
+            int rowsAffecteds = Contexto.SaveChanges();
             return rowsAffecteds > 0;
         }
     }

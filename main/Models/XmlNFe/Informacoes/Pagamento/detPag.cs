@@ -12,7 +12,7 @@ namespace XmlNFe.Nfes.Informacoes.Pagamento
 
         public IndicadorPagamentoDetalhePagamento? indPag { get; set; }
 
-        public bool indPagSpecified { get { return indPag.HasValue; } }
+        public bool indPagSpecified => indPag.HasValue;
 
         /// <summary>
         /// YA02 - Forma de pagamento
@@ -21,8 +21,8 @@ namespace XmlNFe.Nfes.Informacoes.Pagamento
 
         public decimal vPag
         {
-            get { return _vPag.Arredondar(2); }
-            set { _vPag = value.Arredondar(2); }
+            get => _vPag.Arredondar(2);
+            set => _vPag = value.Arredondar(2);
         }
 
         public card card { get; set; }

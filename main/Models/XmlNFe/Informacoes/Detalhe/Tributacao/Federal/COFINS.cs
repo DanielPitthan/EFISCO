@@ -45,10 +45,10 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Federal
         ///     <para>S04 (COFINSNT) - Grupo COFINS não tributado</para>
         ///     <para>S05 (COFINSOutr) - Grupo COFINS Outras Operações</para>
         /// </summary>
-        [XmlElement("COFINSAliq", typeof (COFINSAliq))]
-        [XmlElement("COFINSQtde", typeof (COFINSQtde))]
-        [XmlElement("COFINSNT", typeof   (COFINSNT  ))]
-        [XmlElement("COFINSOutr", typeof (COFINSOutr))]
+        [XmlElement("COFINSAliq", typeof(COFINSAliq))]
+        [XmlElement("COFINSQtde", typeof(COFINSQtde))]
+        [XmlElement("COFINSNT", typeof(COFINSNT))]
+        [XmlElement("COFINSOutr", typeof(COFINSOutr))]
         public COFINSBasico TipoCOFINS { get; set; }
     }
 }

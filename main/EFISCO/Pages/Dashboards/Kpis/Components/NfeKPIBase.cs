@@ -1,26 +1,23 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace EFISCO.Pages.Dashboards.Kpis.Components
 {
-    public class NfeKPIBase:ComponentBase
+    public class NfeKPIBase : ComponentBase
     {
         [Inject] public BLL.NFE.Interfaces.INFeXmlService NfeXlsService { get; set; }
 
-        public  int TotalJaProcessadas { get; set; }
-        public  int TotalValidadas { get; set; }
-        public  int TotalAuditadas { get; set; }
-        public  decimal TotalJaProcessadasValor { get; set; }
-        public  decimal TotalValidadasValor { get; set; }
-        public  decimal TotalAuditadasValor { get; set; }
+        public int TotalJaProcessadas { get; set; }
+        public int TotalValidadas { get; set; }
+        public int TotalAuditadas { get; set; }
+        public decimal TotalJaProcessadasValor { get; set; }
+        public decimal TotalValidadasValor { get; set; }
+        public decimal TotalAuditadasValor { get; set; }
 
 
         protected override void OnInitialized()
         {
-            var notasFiscais = NfeXlsService.ListarTodosXMLQuery();
+            IQueryable<Models.NFe.NFeFiles> notasFiscais = NfeXlsService.ListarTodosXMLQuery();
 
             TotalJaProcessadas = notasFiscais.Count();
 

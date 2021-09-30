@@ -48,12 +48,18 @@ namespace XmlNFe.Nfes.Informacoes
         /// </summary>
         public string CNPJ
         {
-            get { return cnpj; }
+            get => cnpj;
             set
             {
-                if (string.IsNullOrEmpty(value)) return;
+                if (string.IsNullOrEmpty(value))
+                {
+                    return;
+                }
+
                 if (string.IsNullOrEmpty(cpf))
+                {
                     cnpj = value;
+                }
                 else
                 {
                     throw new ArgumentException(ErroCpfCnpjPreenchidos);
@@ -66,12 +72,18 @@ namespace XmlNFe.Nfes.Informacoes
         /// </summary>
         public string CPF
         {
-            get { return cpf; }
+            get => cpf;
             set
             {
-                if (string.IsNullOrEmpty(value)) return;
+                if (string.IsNullOrEmpty(value))
+                {
+                    return;
+                }
+
                 if (string.IsNullOrEmpty(cnpj))
+                {
                     cpf = value;
+                }
                 else
                 {
                     throw new ArgumentException(ErroCpfCnpjPreenchidos);
@@ -124,16 +136,13 @@ namespace XmlNFe.Nfes.Informacoes
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string ProxyCEP
         {
-            get
-            {
-                return CEP.ToString("D8");
-            }
-            set { CEP = long.Parse(value); }
+            get => CEP.ToString("D8");
+            set => CEP = long.Parse(value);
         }
 
         public int? cPais { get; set; }
 
-        public bool cPaisSpecified { get { return cPais.HasValue; } }
+        public bool cPaisSpecified => cPais.HasValue;
 
         public string xPais { get; set; }
 

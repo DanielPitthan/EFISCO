@@ -54,7 +54,10 @@ namespace DFe.Utils
         /// <returns></returns>
         public static string ParaDataString(this DateTime? data)
         {
-            if (data == null) return null;
+            if (data == null)
+            {
+                return null;
+            }
 
             return data == DateTime.MinValue ? null : data.Value.ToString("yyyy-MM-dd");
         }

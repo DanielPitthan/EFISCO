@@ -47,8 +47,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.ProdEspecifico
         /// </summary>
         public decimal qBCProd
         {
-            get { return _qBcProd; }
-            set { _qBcProd = value.Arredondar(4); }
+            get => _qBcProd;
+            set => _qBcProd = value.Arredondar(4);
         }
 
         /// <summary>
@@ -56,8 +56,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.ProdEspecifico
         /// </summary>
         public decimal vAliqProd
         {
-            get { return _vAliqProd; }
-            set { _vAliqProd = value.Arredondar(4); }
+            get => _vAliqProd;
+            set => _vAliqProd = value.Arredondar(4);
         }
 
         /// <summary>
@@ -65,8 +65,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.ProdEspecifico
         /// </summary>
         public decimal vCIDE
         {
-            get { return _vCide; }
-            set { _vCide = value.Arredondar(2); }
+            get => _vCide;
+            set => _vCide = value.Arredondar(2);
         }
     }
 }

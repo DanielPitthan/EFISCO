@@ -48,12 +48,18 @@ namespace XmlNFe.Nfes.Informacoes.Transporte
         /// </summary>
         public string CNPJ
         {
-            get { return cnpj; }
+            get => cnpj;
             set
             {
-                if (string.IsNullOrEmpty(value)) return;
+                if (string.IsNullOrEmpty(value))
+                {
+                    return;
+                }
+
                 if (string.IsNullOrEmpty(cpf))
+                {
                     cnpj = value;
+                }
                 else
                 {
                     throw new ArgumentException(ErroCpfCnpjPreenchidos);
@@ -66,12 +72,18 @@ namespace XmlNFe.Nfes.Informacoes.Transporte
         /// </summary>
         public string CPF
         {
-            get { return cpf; }
+            get => cpf;
             set
             {
-                if (string.IsNullOrEmpty(value)) return;
+                if (string.IsNullOrEmpty(value))
+                {
+                    return;
+                }
+
                 if (string.IsNullOrEmpty(cnpj))
+                {
                     cpf = value;
+                }
                 else
                 {
                     throw new ArgumentException(ErroCpfCnpjPreenchidos);

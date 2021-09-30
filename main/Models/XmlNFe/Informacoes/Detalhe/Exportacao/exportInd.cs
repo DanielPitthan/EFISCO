@@ -55,8 +55,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Exportacao
         /// </summary>
         public decimal qExport
         {
-            get { return _qExport; }
-            set { _qExport = value.Arredondar(4); }
+            get => _qExport;
+            set => _qExport = value.Arredondar(4);
         }
     }
 }

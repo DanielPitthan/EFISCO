@@ -31,8 +31,8 @@
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
-using XmlNFe.Nfes.Informacoes.Cana;
 using XmlNFe.Nfes.Informacoes.Cobranca;
 using XmlNFe.Nfes.Informacoes.Destinatario;
 using XmlNFe.Nfes.Informacoes.Detalhe;
@@ -42,8 +42,6 @@ using XmlNFe.Nfes.Informacoes.Observacoes;
 using XmlNFe.Nfes.Informacoes.Pagamento;
 using XmlNFe.Nfes.Informacoes.Total;
 using XmlNFe.Nfes.Informacoes.Transporte;
-using Shared.XmlNFe.Nfes.Informacoes.InfRespTec;
-using System.ComponentModel.DataAnnotations;
 
 namespace XmlNFe.Nfes.Informacoes
 {

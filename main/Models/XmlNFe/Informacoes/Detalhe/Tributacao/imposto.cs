@@ -48,8 +48,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao
         /// </summary>
         public decimal? vTotTrib
         {
-            get { return _vTotTrib.Arredondar(2); }
-            set { _vTotTrib = value.Arredondar(2); }
+            get => _vTotTrib.Arredondar(2);
+            set => _vTotTrib = value.Arredondar(2);
         }
 
         /// <summary>

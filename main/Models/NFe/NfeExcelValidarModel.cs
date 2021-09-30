@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Models.NFe
+﻿namespace Models.NFe
 {
     public class NfeExcelValidarModel
     {

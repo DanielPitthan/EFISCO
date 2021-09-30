@@ -1,0 +1,230 @@
+﻿@page "/CertificadoUpload"
+
+
+
+@inject DAL.FileStoranges.Interfaces.IFileStorangeDAO fileStorangeService;
+@inject BLL.Certificados.Interfaces.ICertificadoService certificadoService;
+@inject BLL.Empresas.Interfaces.IEmpresaService empresaService;
+
+
+<EFISCO.Pages.Components.Titulos.NavbarTitulo Titulo="Upload de Certificado"></EFISCO.Pages.Components.Titulos.NavbarTitulo>
+
+<div class="container">
+    @if (!string.IsNullOrEmpty(Error))
+    {
+        <div class="alert alert-danger alert-dismissible">
+            <b>Erro:</b>@Error
+        </div>
+    }
+    @if (!string.IsNullOrEmpty(Sucesso))
+    {
+        <div class="alert alert-success alert-dismissible">
+            @Sucesso
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Cnpj</label>
+        </div>
+        <div class="col-sm-10 col-md-10 col-lg-10">
+            <RadzenDropDown Data="Empresas" AllowClear="true"
+                            TValue="Empresa"
+                            Change="@(async (emp)=> DefineEmpresa((Empresa)emp))">
+                <Template>
+                    @((context as Empresa).DescricaoResumida)
+                </Template>
+            </RadzenDropDown>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Senha</label>
+        </div>
+        <div class="col-sm-10 col-md-10 col-lg-10">
+            <RadzenPassword @bind-Value="Senha"
+                            Placeholder="Senha do Certificado" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+            <RadzenUpload Url="upload/single"
+                          ChooseText="Carregar Arquivo"
+                          Progress="@(async(args)=> OnProgress(args))"
+                          Auto="true"
+                          Complete="@(async (args)=> OnComplete(args))"
+                          Visible="true"
+                          Change="@(async (args)=>  OnChange(args))">
+
+            </RadzenUpload>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+            <RadzenProgressBar @bind-Value="progressValue" Max="progressMax"></RadzenProgressBar>
+        </div>
+    </div>
+    <br />
+    <hr />
+    <div class="row">
+        <div class="col-12 col-lg-12 col-sm-12">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Arquivo</th>
+                        <th>Assinatura</th>
+                        <th>Remover</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (certicadosCarregados != null)
+                    {
+                        <tr>
+                            <td>@certicadosCarregados.Id</td>
+                            <td>@certicadosCarregados.OriginalFileName</td>
+                            <td>@certicadosCarregados.MD5</td>
+                            <td>
+                                <RadzenButton ButtonStyle="ButtonStyle.Primary"
+                                              Size="ButtonSize.Medium"
+                                              Click="@(async()=> await Remover())"
+                                              Icon="backspace">
+
+                                </RadzenButton>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-4">
+            <RadzenButton ButtonStyle="ButtonStyle.Primary"
+                          Size="ButtonSize.Medium"
+                          Click="@(async()=>await Gravar())">
+                Gravar
+            </RadzenButton>
+        </div>
+
+    </div>
+</div>
+
+
+@code {
+    private double progressValue = 0;
+    private double progressMax = 100;
+    private bool ShowSuccess;
+    private string CNPJ;
+    private string Senha;
+    private int EmpresaId;
+    private FileStorange certicadosCarregados;
+    private string Error = "";
+    private string Sucesso = "";
+    private IList<Empresa> Empresas = new List<Empresa>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            Empresas = await empresaService.ListAllAsync();
+        }
+        catch (Exception ex)
+        {
+            Error = $"{ex.Message} {ex.InnerException}";
+        }
+
+    }
+
+    private async Task OnProgress(UploadProgressArgs progressArgs)
+    {
+
+        progressValue = (double)progressArgs.Progress;
+    }
+
+
+    private async Task OnComplete(UploadCompleteEventArgs completeArgs)
+    {
+        var resultOfUploadFile = Newtonsoft.Json.JsonConvert
+                                    .DeserializeObject<ResultOfUploadFile>(completeArgs.RawResponse);
+
+
+        certicadosCarregados = resultOfUploadFile.fileStorange;
+    }
+
+    private async Task OnChange(UploadChangeEventArgs changeEventArgs)
+    {
+
+    }
+
+    private async Task Gravar()
+    {
+        if (string.IsNullOrEmpty(Senha))
+        {
+            Error = "Senha não preenchida";
+            return;
+        }
+        if (string.IsNullOrEmpty(CNPJ))
+        {
+            Error = "CNPJ não preenchido";
+            return;
+        }
+
+        try
+        {
+            var result = await certificadoService.AdcionarByFileStorange(certicadosCarregados, Senha, CNPJ,EmpresaId);
+            Sucesso = "Certificado gravado com sucesso!";
+
+
+            if (result)
+            {
+                Error = CNPJ = Senha = "";
+                EmpresaId = 0;
+            }
+        }
+        catch (Exception ex)
+        {
+            Error = $"{ex.Message} {ex.InnerException}";
+        }
+    }
+
+    public struct ResultOfUploadFile
+    {
+
+        public FileStorange fileStorange { get; set; }
+
+    }
+    private async Task Remover()
+    {
+        try
+        {
+            await fileStorangeService.DeleteAsync(certicadosCarregados);
+            certicadosCarregados = null;
+            Error = CNPJ = Senha = "";
+            EmpresaId = 0;
+
+        }
+        catch (Exception ex)
+        {
+            Error = $"{ex.Message} {ex.InnerException}";
+        }
+
+    }
+
+    private async Task DefineEmpresa(Empresa emp)
+    {
+        if (emp != null)
+        {
+            CNPJ = emp.Cnpj;
+            EmpresaId = emp.Id;
+        }
+
+    }
+}

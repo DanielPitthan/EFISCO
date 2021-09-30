@@ -10,6 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Pages\_Host.cshtml~RF248d381e.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BlazorDownloadFile" Version="2.1.6" />
     <PackageReference Include="Blazorise" Version="0.9.4" />
     <PackageReference Include="Blazorise.Bootstrap" Version="0.9.4" />
@@ -33,7 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\DFe\Componentes\" />
     <Folder Include="Pages\Relatorios\" />
     <Folder Include="wwwroot\Upload\XML\" />
   </ItemGroup>

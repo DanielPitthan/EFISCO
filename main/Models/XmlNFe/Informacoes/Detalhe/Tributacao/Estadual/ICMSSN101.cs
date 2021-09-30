@@ -30,8 +30,8 @@
 /* http://www.zeusautomacao.com.br/                                             */
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
-using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
 using System.Xml.Serialization;
+using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
 
 namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
 {
@@ -60,8 +60,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 3)]
         public decimal pCredSN
         {
-            get { return _pCredSn; }
-            set { _pCredSn = value.Arredondar(4); }
+            get => _pCredSn;
+            set => _pCredSn = value.Arredondar(4);
         }
 
         /// <summary>
@@ -70,8 +70,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 4)]
         public decimal vCredICMSSN
         {
-            get { return _vCredIcmssn; }
-            set { _vCredIcmssn = value.Arredondar(2); }
+            get => _vCredIcmssn;
+            set => _vCredIcmssn = value.Arredondar(2);
         }
     }
 }

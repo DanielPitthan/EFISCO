@@ -31,9 +31,9 @@
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
 
+using DFe.Utils;
 using System;
 using System.Xml.Serialization;
-using DFe.Utils;
 
 namespace XmlNFe.Nfes.Informacoes.Detalhe.ProdEspecifico
 {
@@ -64,14 +64,11 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.ProdEspecifico
         /// </summary>
         public decimal? qLote
         {
-            get { return _qLote; }
-            set { _qLote = value.Arredondar(3); }
+            get => _qLote;
+            set => _qLote = value.Arredondar(3);
         }
 
-        public bool qLoteSpecified
-        {
-            get { return qLote.HasValue; }
-        }
+        public bool qLoteSpecified => qLote.HasValue;
 
         /// <summary>
         ///     K04 - Data de fabricação.
@@ -87,15 +84,12 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.ProdEspecifico
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string ProxydFab
         {
-            get { return dFab.ParaDataString(); }
-            set { dFab = DateTime.Parse(value); }
+            get => dFab.ParaDataString();
+            set => dFab = DateTime.Parse(value);
         }
 
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public bool ProxydFabSpecified
-        {
-            get { return dFab.HasValue; }
-        }
+        public bool ProxydFabSpecified => dFab.HasValue;
 
         /// <summary>
         ///     K05 - Data de validade.
@@ -112,14 +106,11 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.ProdEspecifico
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public string ProxydVal
         {
-            get { return dVal.ParaDataString(); }
-            set { dVal = DateTime.Parse(value); }
+            get => dVal.ParaDataString();
+            set => dVal = DateTime.Parse(value);
         }
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public bool ProxydValSpecified
-        {
-            get { return dVal.HasValue; }
-        }
+        public bool ProxydValSpecified => dVal.HasValue;
 
         /// <summary>
         ///     K06 - Preço máximo consumidor
@@ -128,8 +119,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.ProdEspecifico
         /// </summary>
         public decimal vPMC
         {
-            get { return _vPmc; }
-            set { _vPmc = value.Arredondar(2); }
+            get => _vPmc;
+            set => _vPmc = value.Arredondar(2);
         }
     }
 }

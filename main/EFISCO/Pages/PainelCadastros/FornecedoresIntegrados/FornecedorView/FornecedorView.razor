@@ -1,6 +1,14 @@
 ﻿@using Models.TOTVS.Cadastros.ClienteFornecedor
 @inject BLL.TOTVS.Cadastros.Interfaces.IFornecedorTotvsService forncedorTotvsService;
 
+
+@if (!string.IsNullOrEmpty(Error))
+{
+    <Alert TextAlignment="TextAlignment.Center" Visible="true" Background="Background.Danger" TextColor="TextColor.White">
+     <b>Erro:</b>@Error
+    </Alert>
+}
+
 <Modal @ref="modalRef" ScrollToTop="false">
     <ModalContent Size="ModalSize.ExtraLarge">
         <ModalHeader Class="grey lighten-3">
@@ -95,7 +103,7 @@
 
 
     private Modal modalRef;
-
+    private string Error = "";
 
 
     protected override void OnInitialized()
@@ -134,7 +142,16 @@
             A2_CONTA = conta,
 
         };
-        await forncedorTotvsService.Cadastrar(fornecedor, Emitente.Id);
+        try
+        {
+            await forncedorTotvsService.Cadastrar(fornecedor, Emitente.Id);
+        }
+        catch (Exception ex)
+        {
+            Error = $"{ex.Message} {ex.InnerException}";
+        }
+
+
         await FecharModal();
     }
 

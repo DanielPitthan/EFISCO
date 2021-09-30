@@ -18,7 +18,7 @@
                   Url="upload/multiple"
                   ChooseText="@textButtonUpload" Style="width:100%;" Auto="true"
                   Complete="UploadFinish"
-                  @ref="radzenUpload">
+                  >
     </RadzenUpload>
     <RadzenProgressBar @bind-Value="@xmlNfeService.StatusOfCurrentProcess" Style="margin-bottom: 20px" />
 
@@ -38,7 +38,7 @@
     [Parameter]
     public EventCallback<bool> UploadFinishCallBack { get; set; }
 
-    private RadzenUpload radzenUpload;
+
 
     private int progress;
     private string info;
@@ -59,6 +59,7 @@
 
     private async Task OnProgress(dynamic args, string t)
     {
+
         if ((int)args.Progress >= 100)
         {
             textButtonUpload = "Arquivos carregados com sucesso. Processando...";
@@ -79,6 +80,7 @@
         {
             Error = ex.Message;
             this.StateHasChanged();
+            return;
         }
 
 

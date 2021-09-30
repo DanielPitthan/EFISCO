@@ -30,8 +30,8 @@
 /* http://www.zeusautomacao.com.br/                                             */
 /* Rua Comendador Francisco josé da Cunha, 111 - Itabaiana - SE - 49500-000     */
 /********************************************************************************/
-using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
 using System.Xml.Serialization;
+using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
 
 namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
 {
@@ -74,8 +74,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 4)]
         public decimal vBC
         {
-            get { return _vBc; }
-            set { _vBc = value.Arredondar(2); }
+            get => _vBc;
+            set => _vBc = value.Arredondar(2);
         }
 
         /// <summary>
@@ -84,8 +84,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 5)]
         public decimal? pRedBC
         {
-            get { return _pRedBc.Arredondar(4); }
-            set { _pRedBc = value.Arredondar(4); }
+            get => _pRedBc.Arredondar(4);
+            set => _pRedBc = value.Arredondar(4);
         }
 
         /// <summary>
@@ -94,8 +94,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 6)]
         public decimal pICMS
         {
-            get { return _pIcms; }
-            set { _pIcms = value.Arredondar(4); }
+            get => _pIcms;
+            set => _pIcms = value.Arredondar(4);
         }
 
         /// <summary>
@@ -104,8 +104,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 7)]
         public decimal vICMS
         {
-            get { return _vIcms; }
-            set { _vIcms = value.Arredondar(2); }
+            get => _vIcms;
+            set => _vIcms = value.Arredondar(2);
         }
 
         /// <summary>
@@ -120,8 +120,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 9)]
         public decimal? pMVAST
         {
-            get { return _pMvast.Arredondar(4); }
-            set { _pMvast = value.Arredondar(4); }
+            get => _pMvast.Arredondar(4);
+            set => _pMvast = value.Arredondar(4);
         }
 
         /// <summary>
@@ -130,8 +130,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 10)]
         public decimal? pRedBCST
         {
-            get { return _pRedBcst.Arredondar(4); }
-            set { _pRedBcst = value.Arredondar(4); }
+            get => _pRedBcst.Arredondar(4);
+            set => _pRedBcst = value.Arredondar(4);
         }
 
         /// <summary>
@@ -140,8 +140,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 11)]
         public decimal vBCST
         {
-            get { return _vBcst; }
-            set { _vBcst = value.Arredondar(2); }
+            get => _vBcst;
+            set => _vBcst = value.Arredondar(2);
         }
 
         /// <summary>
@@ -150,8 +150,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 12)]
         public decimal pICMSST
         {
-            get { return _pIcmsst; }
-            set { _pIcmsst = value.Arredondar(4); }
+            get => _pIcmsst;
+            set => _pIcmsst = value.Arredondar(4);
         }
 
         /// <summary>
@@ -160,8 +160,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 13)]
         public decimal vICMSST
         {
-            get { return _vIcmsst; }
-            set { _vIcmsst = value.Arredondar(2); }
+            get => _vIcmsst;
+            set => _vIcmsst = value.Arredondar(2);
         }
 
         /// <summary>
@@ -170,8 +170,8 @@ namespace XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual
         [XmlElement(Order = 14)]
         public decimal pBCOp
         {
-            get { return _pBcOp; }
-            set { _pBcOp = value.Arredondar(4); }
+            get => _pBcOp;
+            set => _pBcOp = value.Arredondar(4);
         }
 
         /// <summary>

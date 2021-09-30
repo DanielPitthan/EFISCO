@@ -1,5 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using DFe.Classes.Assinatura;
+﻿using DFe.Classes.Assinatura;
+using Microsoft.EntityFrameworkCore;
+using Models.Cadastros.Fornecedores;
+using Models.Cadastros.Produtos;
+using Models.Certificados;
+using Models.Empresas;
+using Models.FileStoranges;
 using Models.Infra;
 using Models.NFe;
 using XmlNFe.Nfes;
@@ -9,24 +14,26 @@ using XmlNFe.Nfes.Informacoes.Destinatario;
 using XmlNFe.Nfes.Informacoes.Detalhe;
 using XmlNFe.Nfes.Informacoes.Detalhe.ProdEspecifico;
 using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao;
+using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual;
+using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Federal;
 using XmlNFe.Nfes.Informacoes.Emitente;
 using XmlNFe.Nfes.Informacoes.Identificacao;
 using XmlNFe.Nfes.Informacoes.Observacoes;
 using XmlNFe.Nfes.Informacoes.Pagamento;
 using XmlNFe.Nfes.Informacoes.Total;
 using XmlNFe.Nfes.Informacoes.Transporte;
-using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Estadual;
-using XmlNFe.Nfes.Informacoes.Detalhe.Tributacao.Federal;
-using Models.FileStoranges;
-using Models.Cadastros.Fornecedores;
-using Models.Cadastros.Produtos;
 
 namespace ContextBinds.EntityCore
 {
     public class ContextEFNFeXml : DbContext
     {
         #region DBSETs
-        
+
+        public DbSet<Certificado> Certificado { get; set; }
+        public DbSet<Empresa> Empresa { get; set; }
+        public DbSet<Parametro> Parametro { get; set; }
+        public DbSet<NFeFiles> NFeFiles { get; set; }
+        public DbSet<NFeFilesMensagens> NFeFilesMensagens { get; set; }
         public DbSet<prod> prod { get; set; }
         public DbSet<ProdutoIntegrado> ProdutoIntegrado { get; set; }
         public DbSet<EmitenteIntegrado> EmitenteIntegrado { get; set; }
