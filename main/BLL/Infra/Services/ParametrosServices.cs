@@ -3,6 +3,7 @@ using DAL.Infra.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Models.Infra;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -42,6 +43,21 @@ namespace BLL.Infra.Services
                                 .Where(x => x.Codigo == codigo)
                                 .SingleOrDefaultAsync();
             return parametro;
+        }
+
+        public async Task<IList<Parametro>> List()
+        {
+            var list =  await this.parametroDAO
+                                    .GetAll()
+                                    .AsNoTracking()
+                                    .ToListAsync();
+            return list;
+        }
+
+        public async Task<bool> ExcluirAsync(Parametro parametro)
+        {
+            var result = await parametroDAO.DeleteAsync(parametro);
+            return result;
         }
     }
 }

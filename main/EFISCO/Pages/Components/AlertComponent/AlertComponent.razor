@@ -1,0 +1,34 @@
+﻿
+@inherits AlertComponentBase
+
+
+
+
+@if (!string.IsNullOrEmpty(Error))
+{
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <b>Erro : </b> @Error
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" @onclick="HideAlert"></button>
+</div>
+}
+
+@if (!string.IsNullOrEmpty(Sucesso))
+{
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <b>Sucesso : </b> @Sucesso
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" @onclick="HideAlert"></button>
+
+</div>
+}
+
+@if (!string.IsNullOrEmpty(Aviso))
+{
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <b>Aviso : </b> @Aviso
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" @onclick="HideAlert"></button>
+</div>
+}
+
+@code {
+
+}

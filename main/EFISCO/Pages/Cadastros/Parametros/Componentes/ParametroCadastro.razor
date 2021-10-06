@@ -1,34 +1,40 @@
-﻿@page "/ParametroCadastro"
+﻿@page "/ParametroCadastro/{Opcao}/{ParametroCodigo}"
+@page "/ParametroCadastro"
+
 @inject BLL.Infra.Interface.IParametroService parametroService;
+@inject Radzen.DialogService dialogService;
+@inject EFISCO.Pages.Components.AlertComponent.AlertService alertService
 
-<EFISCO.Pages.Components.Titulos.NavbarTitulo Titulo="Cadastro de Parâmetros"></EFISCO.Pages.Components.Titulos.NavbarTitulo>
-
-@if (!string.IsNullOrEmpty(Error))
-{
-    <div class="alert alert-danger alert-dismissible">
-        <b>Erro : </b> @Error
-    </div>
-}
-
-@if (!string.IsNullOrEmpty(Sucesso))
-{
-    <div class="alert alert-success alert-dismissible">
-        @Sucesso
-    </div>
-}
+<AlertComponent />
 
 <div class="container">
     <div class="row">
-        <label>Codigo</label>
-        <RadzenTextBox @bind-Value="parametro.Codigo" Placeholder="Código"></RadzenTextBox>
-        <label>Descrição</label>
-        <RadzenTextBox @bind-Value="parametro.Descricao" Placeholder="Descrição do Parâmetro"></RadzenTextBox>
-        <label>Valor</label>
-        <RadzenTextBox @bind-Value="parametro.Valor" Placeholder="Valor"></RadzenTextBox>
+        <div class="col-12 col-md-4 col-lg-4">
+            <label>Codigo</label>
+            <RadzenTextBox @bind-Value="parametro.Codigo" Placeholder="Código" Style="width:100%;" Disabled="disable"></RadzenTextBox>
+        </div>
+        <div class="col-12  col-md-4 col-lg-4">
+            <label>Descrição</label>
+            <RadzenTextBox @bind-Value="parametro.Descricao" Placeholder="Descrição do Parâmetro" Style="width:100%;" Disabled="disable"></RadzenTextBox>
+        </div>
+        <div class="col-12">
+            <label>Valor</label>
+            <RadzenTextBox @bind-Value="parametro.Valor" Placeholder="Valor" Style="width:100%;" Disabled="disable"></RadzenTextBox>
+        </div>
     </div>
+    <br />
+
     <div class="row">
         <div class="col-12 col-md-4 col-lg-4">
-            <RadzenButton Click="@(async ()=> await Gravar())">Gravar</RadzenButton>
+            @if (opcao == Opcoes.Incluir || opcao == Opcoes.Alterar)
+            {
+                <RadzenButton Click="@(async ()=> await Gravar())">Gravar</RadzenButton>
+            }
+            @if (opcao == Opcoes.Excluir)
+            {
+                <RadzenButton Click="@(async ()=> await Excluir())">Excluir</RadzenButton>
+            }
+
         </div>
     </div>
 </div>
@@ -37,25 +43,80 @@
 @code {
 
     [Parameter]
-    public Parametro Parametro { get; set; }
+    public string ParametroCodigo { get; set; }
+
+    [Parameter]
+    public int Opcao { get; set; }
+    private Opcoes opcao;
 
     private Parametro parametro = new Parametro();
 
     private string Error = "";
     private string Sucesso = "";
+    private string Aviso = "";
+    private bool disable;
 
 
-    protected override void OnParametersSet()
+
+
+    protected override async Task OnParametersSetAsync()
     {
-        this.parametro = Parametro;
+        if (!string.IsNullOrEmpty(ParametroCodigo))
+        {
+            this.parametro = await parametroService.ObterParametro(ParametroCodigo);
+        }
+
+        opcao = (Opcoes)Opcao;
+        disable = !(opcao == Opcoes.Alterar || opcao == Opcoes.Incluir);
+
+
     }
 
     private async Task Gravar()
     {
-        var result = await parametroService.MergeAsync(parametro);
+        if (Obrigatorio())
+        {
+            var result = await parametroService.MergeAsync(parametro);
+            if (result)
+            {
+                Sucesso = "Parâmetro gravado como Sucesso!";
+                parametro = new Parametro();
+            }
+        }
+    }
+
+
+    private bool Obrigatorio()
+    {
+        if (string.IsNullOrEmpty(parametro.Codigo))
+        {
+            alertService.Show("O Código é obrigatório", TiposAviso.Aviso);
+            return false;
+
+        }
+
+        if (string.IsNullOrEmpty(parametro.Descricao))
+        {
+            alertService.Show("A Descrição é obrigatória", TiposAviso.Aviso);
+            return false;
+
+        }
+        if (string.IsNullOrEmpty(parametro.Valor))
+        {
+            alertService.Show("O Valor é obrigatório", TiposAviso.Aviso);
+            return false;
+        }
+        return true;
+    }
+
+    private async Task Excluir()
+    {
+        var result = await parametroService.ExcluirAsync(parametro);
         if (result)
         {
-            Sucesso = "Parâmetro garvado como Sucesso!";
+            Aviso = "Parâmetro excluído como Sucesso!";
+            parametro = new Parametro();
         }
+
     }
 }

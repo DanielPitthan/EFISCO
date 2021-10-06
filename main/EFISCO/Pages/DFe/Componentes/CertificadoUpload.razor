@@ -49,7 +49,7 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+        <div class="col-sm-10 col-md-10 col-lg-10">
             <RadzenUpload Url="upload/single"
                           ChooseText="Carregar Arquivo"
                           Progress="@(async(args)=> OnProgress(args))"
@@ -61,12 +61,6 @@
             </RadzenUpload>
         </div>
 
-    </div>
-
-    <div class="row">
-        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
-            <RadzenProgressBar @bind-Value="progressValue" Max="progressMax"></RadzenProgressBar>
-        </div>
     </div>
     <br />
     <hr />

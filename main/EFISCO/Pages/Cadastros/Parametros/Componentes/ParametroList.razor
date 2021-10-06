@@ -1,0 +1,62 @@
+﻿
+
+@inject BLL.Infra.Interface.IParametroService parametroService
+
+
+<div class="container">
+    <RadzenDataGrid AllowColumnResize="true"
+                    TItem="Parametro"
+                    Data="Parametros"
+                    SelectionMode="DataGridSelectionMode.Single"
+                    RowSelect="@(async (args)=>await HandleWithSelection(args))">
+        <Columns>
+            <RadzenDataGridColumn TItem="Parametro" Property="@nameof(Parametro.Id)" Title="Id"></RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Parametro" Property="@nameof(Parametro.Codigo)" Title="Codigo"></RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Parametro" Property="@nameof(Parametro.Valor)" Title="Valor"></RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Parametro" Property="@nameof(Parametro.Descricao)" Title="Descrição"></RadzenDataGridColumn>
+
+        </Columns>
+    </RadzenDataGrid>
+</div>
+
+
+
+@code {
+
+    [Parameter]
+    public EventCallback<Parametro> ParametroSelecionadoCallBack { get; set; }
+    [Parameter]
+    public bool Realod { get; set; }
+
+
+    [Parameter]
+    public EventCallback<bool> StopRelodCallBack { get; set; }
+
+    private IList<Parametro> Parametros;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CarregarLista();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Realod)
+        {
+            await CarregarLista();
+            await StopRelodCallBack.InvokeAsync(true);
+            this.StateHasChanged();
+        }
+    }
+
+    private async Task CarregarLista()
+    {
+        Parametros = await parametroService.List();
+
+    }
+
+    private async Task HandleWithSelection(Parametro parametro)
+    {
+        await ParametroSelecionadoCallBack.InvokeAsync(parametro);
+    }
+}

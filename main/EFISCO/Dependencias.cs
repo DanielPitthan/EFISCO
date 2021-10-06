@@ -39,7 +39,9 @@ using DAL.TOTVS.Relatorios.Interfaces;
 using DAL.XmlDAL.DAO;
 using DAL.XmlDAL.Interfaces;
 using EFISCO.Areas.UploadFiles;
+using EFISCO.Pages.Components.AlertComponent;
 using Microsoft.Extensions.DependencyInjection;
+using Radzen;
 using System.Net.Http;
 namespace EFISCO
 {
@@ -50,11 +52,12 @@ namespace EFISCO
         {
             services = serviceCollection;
 
+            services.AddScoped<AlertService>();
             services.AddTransient<ICertificadoService, CertificadoService>();
             services.AddTransient<ICertificadoDAO, CertificadoDAO>();
             services.AddTransient<IAtivoVsNotaFiscalService, AtivoVsNotaFiscalService>();
             services.AddTransient<IAtivoVsNotaFiscalDAO, AtivoVsNotaFiscalDAO>();
-            services.AddTransient<Radzen.DialogService>();
+            services.AddScoped<DialogService>();
             services.AddTransient<INfeDownloadListService, NfeDownloadService>();
             services.AddTransient<IProdutoIntegradoDAO, ProdutoIntegradoDAO>();
             services.AddTransient<IProdutoIntegradoService, ProdutoIntegradoService>();

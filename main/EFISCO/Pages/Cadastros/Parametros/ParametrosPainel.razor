@@ -1,0 +1,117 @@
+﻿@page "/ParametroPainel"
+@inject DialogService DialogService
+@implements IDisposable
+
+<EFISCO.Pages.Components.Titulos.NavbarTitulo Titulo="Parâmetros do Sistema"></EFISCO.Pages.Components.Titulos.NavbarTitulo>
+
+<div class="container-fluid">
+    <MatButton Label="Opções" OnClick="@OnClick" RefBack="@buttonForwardRef" Icon="library_add"></MatButton>
+    <MatMenu @ref="Menu" TargetForwardRef="@buttonForwardRef">
+        <MatList>
+            <MatListItem OnClick="Editar"><MatIcon Icon="edit"></MatIcon>Editar</MatListItem>
+            <MatListItem OnClick="Novo"><MatIcon Icon="add_circle"></MatIcon>Novo</MatListItem>
+            <MatListItem OnClick="Excluir"><MatIcon Icon="delete"></MatIcon>Excluir</MatListItem>
+        </MatList>
+    </MatMenu>
+</div>
+
+
+<ParametroList ParametroSelecionadoCallBack="ParametroSelecionado" Realod="reload" StopRelodCallBack="StopRealod"></ParametroList>
+
+
+<MatSnackbar @bind-IsOpen="IsOpenSnack">
+    <MatSnackbarContent>
+        @avisoSnack
+    </MatSnackbarContent>
+    <MatSnackbarActions>
+        <MatButton Raised="true" @onclick="@(()=> { IsOpenSnack = false; this.StateHasChanged(); })">OK</MatButton>
+    </MatSnackbarActions>
+</MatSnackbar>
+
+@code {
+
+
+    private Parametro paramentro;
+    private bool IsOpenSnack;
+    private string avisoSnack = "";
+    private bool reload;
+
+
+    protected override void OnInitialized()
+    {
+        paramentro = new Parametro();
+        DialogService.OnClose += EventCloseFormHandler;
+    }
+    public void Dispose()
+    {
+        // The DialogService is a singleton so it is advisable to unsubscribe.
+        DialogService.OnClose -= EventCloseFormHandler;
+    }
+
+    private async Task StopRealod()
+    {
+        reload = false;
+    }
+
+    private void EventCloseFormHandler(dynamic _sucess)
+    {
+        reload = true;
+        this.StateHasChanged();
+    }
+
+    private void Editar()
+    {
+        if (paramentro.Codigo == null)
+        {
+            avisoSnack = "Selecione um parâmetro para editar";
+            IsOpenSnack = true;
+            return;
+        }
+
+        DialogService.Open<ParametroCadastro>("Cadastro de Parâmetros - Editar",
+            new Dictionary<string, object> { { "Opcao", Opcoes.Alterar },
+                { "ParametroCodigo", paramentro.Codigo } },
+            new Radzen.DialogOptions { Width = "60%" });
+
+    }
+
+
+    private void Novo()
+    {
+
+        DialogService.Open<ParametroCadastro>("Cadastro de Parâmetros - Novo",
+            new Dictionary<string, object> { { "Opcao", Opcoes.Incluir },
+                { "ParametroCodigo", paramentro.Codigo } },
+            new Radzen.DialogOptions { Width = "60%" });
+
+    }
+
+
+
+    private void Excluir()
+    {
+
+        DialogService.Open<ParametroCadastro>("Cadastro de Parâmetros - Excluir",
+            new Dictionary<string, object> { { "Opcao", Opcoes.Excluir },
+                { "ParametroCodigo", paramentro.Codigo } },
+            new Radzen.DialogOptions { Width = "60%" });
+
+    }
+
+
+
+
+    ForwardRef buttonForwardRef = new ForwardRef();
+    BaseMatMenu Menu;
+
+    public void OnClick(MouseEventArgs e)
+    {
+        this.Menu.OpenAsync();
+    }
+
+    private async Task ParametroSelecionado(Parametro _parametro)
+    {
+        paramentro = _parametro;
+    }
+
+}
