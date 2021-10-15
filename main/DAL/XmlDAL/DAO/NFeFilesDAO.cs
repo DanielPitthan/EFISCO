@@ -1,5 +1,6 @@
 ﻿using ContextBinds.EntityCore;
 using DAL.DAOBase;
+using DAL.DAOBaseNfeXml;
 using DAL.XmlDAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Models.NFe;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL.XmlDAL.DAO
 {
-    public class NFeFilesDAO : DataAccessBase, INFeFilesDAO
+    public class NFeFilesDAO : DataAccessBaseNfeXml, INFeFilesDAO
     {
         public NFeFilesDAO(ContextEFNFeXml _context) : base(_context)
         {

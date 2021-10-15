@@ -11,9 +11,9 @@ namespace BLL.Infra.Services
 {
     public class ParametrosServices : IParametroService
     {
-        private readonly IParametros parametroDAO;
+        private readonly IParametrosDAO parametroDAO;
 
-        public ParametrosServices(IParametros _parametroDAO)
+        public ParametrosServices(IParametrosDAO _parametroDAO)
         {
             parametroDAO = _parametroDAO;
         }

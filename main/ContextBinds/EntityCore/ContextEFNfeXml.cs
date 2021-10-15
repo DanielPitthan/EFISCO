@@ -29,6 +29,7 @@ namespace ContextBinds.EntityCore
     {
         #region DBSETs
 
+     
         public DbSet<Certificado> Certificado { get; set; }
         public DbSet<Empresa> Empresa { get; set; }
         public DbSet<Parametro> Parametro { get; set; }

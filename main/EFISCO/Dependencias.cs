@@ -16,6 +16,8 @@ using BLL.TOTVS.Movimentos.Compras.Interfaces;
 using BLL.TOTVS.Movimentos.Compras.Services;
 using BLL.TOTVS.Relatorios.Interfaces;
 using BLL.TOTVS.Relatorios.Services;
+using CrossCuting.Factorys;
+using CrossCuting.Tools;
 using DAL.Cadastros.Fornecedores.DAO;
 using DAL.Cadastros.Fornecedores.Interfaces;
 using DAL.Cadastros.Produtos.DAO;
@@ -52,6 +54,10 @@ namespace EFISCO
         {
             services = serviceCollection;
 
+
+            services.AddTransient<IFileStorangeService, FileStorangeService>();
+            serviceCollection.AddTransient<EmailControl>();
+            services.AddTransient<UploadFactory>();
             services.AddScoped<AlertService>();
             services.AddTransient<ICertificadoService, CertificadoService>();
             services.AddTransient<ICertificadoDAO, CertificadoDAO>();
@@ -81,7 +87,7 @@ namespace EFISCO
             services.AddTransient<HttpClient>();
             services.AddTransient<INFeDAO, NFeDAO>();
             services.AddTransient<INFeXmlService, NFeXmlService>();
-            services.AddTransient<IParametros, ParametroDAO>();
+            services.AddTransient<IParametrosDAO, ParametroDAO>();
             services.AddTransient<IParametroService, ParametrosServices>();
             services.AddTransient<INFeFilesDAO, NFeFilesDAO>();
             services.AddTransient<Upload>();

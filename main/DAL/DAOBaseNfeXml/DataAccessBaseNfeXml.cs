@@ -1,6 +1,9 @@
 ﻿using ContextBinds.EntityCore;
 using Microsoft.EntityFrameworkCore;
+using Models;
+using Models.Interfaces;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DAL.DAOBaseNfeXml
@@ -49,6 +52,24 @@ namespace DAL.DAOBaseNfeXml
 
         }
 
+        public virtual bool Update<TSource>(TSource item)
+        {
+            Contexto.Entry(item).State = EntityState.Modified;
+
+            try
+            {
+
+                int rows = Contexto.SaveChanges();
+                return rows > 0;
+            }
+            catch (DbUpdateException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+
         public virtual async Task<bool> DeleteAsync<TSource>(TSource item)
         {
             Contexto.Entry(item).State = EntityState.Deleted;
@@ -63,6 +84,13 @@ namespace DAL.DAOBaseNfeXml
                 Console.WriteLine(ex.Message);
                 return false;
             }
+        }
+
+
+        public virtual TEntity GetById<TEntity>( int id) where TEntity : class, IIdentifier
+        {
+            var entity = Contexto.Set<TEntity>().Find(id);
+            return entity;
         }
     }
 }

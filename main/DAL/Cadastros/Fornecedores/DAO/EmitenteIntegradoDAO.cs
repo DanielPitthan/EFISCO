@@ -16,5 +16,10 @@ namespace DAL.Cadastros.Fornecedores.DAO
         {
             return Contexto.EmitenteIntegrado;
         }
+
+        public override bool Update<TSource>(TSource item)
+        {
+           return base.Update(item);
+        }
     }
 }

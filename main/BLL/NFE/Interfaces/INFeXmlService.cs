@@ -9,16 +9,16 @@ using XmlNFe.Nfes;
 namespace BLL.NFE.Interfaces
 {
     public interface INFeXmlService
-    {
-        public double StatusOfCurrentProcess { get; set; }
-        public int EndOfProcess { get; set; }
-
+  
+  {
+      
+      
         public Task<NFeFiles> ObterNFEFilesPelaChave(string chaveNfe);
         public Task<IList<NFeFiles>> ListarXMLSNaoProcessados(bool apenasValidos = false, bool apenasAuditado = false);
         public Task<IList<NFeFiles>> ListarXMLSProcessados(bool apenasValidos = false, bool apenasNaoValidados = false);
         public Task<IList<NFeFiles>> ListarTodosXML();
         public IQueryable<NFeFiles> ListarTodosXMLQuery();
-        public Task ProcessarArquivos();
+        public Task<bool> ProcessarArquivos(int? id=null);
         public Task<ExcelResult> ValidarArquivos(IList<FileStorange> fileStoranges);
         public Task<IList<NFe>> ObterNotasByFiles();
         public Task Revalidar(NFeFiles nfeFiles);

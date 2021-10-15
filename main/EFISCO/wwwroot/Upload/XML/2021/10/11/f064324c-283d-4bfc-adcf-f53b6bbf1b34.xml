@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><cteProc versao="1.04" xmlns="http://www.portalfiscal.inf.br/cte"><CTe xmlns="http://www.portalfiscal.inf.br/cte"><infCte Id="CTe35140211896764000123570010000003681290709060" versao="1.04"><ide><cUF>35</cUF><cCT>29070906</cCT><CFOP>6352</CFOP><natOp>PRESTAÇÃO DE SERVIÇO</natOp><forPag>1</forPag><mod>57</mod><serie>1</serie><nCT>368</nCT><dhEmi>2014-02-07T14:56:00</dhEmi><tpImp>1</tpImp><tpEmis>1</tpEmis><cDV>0</cDV><tpAmb>1</tpAmb><tpCTe>0</tpCTe><procEmi>3</procEmi><verProc>1.2.14</verProc><cMunEnv>3543907</cMunEnv><xMunEnv>Rio Claro</xMunEnv><UFEnv>SP</UFEnv><modal>01</modal><tpServ>0</tpServ><cMunIni>2516755</cMunIni><xMunIni>Tenorio</xMunIni><UFIni>PB</UFIni><cMunFim>3523404</cMunFim><xMunFim>Itatiba</xMunFim><UFFim>SP</UFFim><retira>1</retira><toma03><toma>3</toma></toma03></ide><compl><fluxo/><xObs>MOTORISTA: DJALMA TEIXEIRA       PLACA: IUV 7629           PRAZO PGTO: 35 DD FORA O MES                      PREVISÃO ENTREGA: 12/02/2014</xObs></compl><emit><CNPJ>11896764000123</CNPJ><IE>587151126114</IE><xNome>BRIGIDO &amp; CIA LTDA</xNome><xFant>MB TRANSPORTES E COM. DE MAT. CERAMICOS</xFant><enderEmit><xLgr>RUA 21</xLgr><nro>683</nro><xBairro>JD. CLARET</xBairro><cMun>3543907</cMun><xMun>Rio Claro</xMun><CEP>13503751</CEP><UF>SP</UF><fone>1935973227</fone></enderEmit></emit><rem><CNPJ>03981277000130</CNPJ><IE>161295916</IE><xNome>CAUVIL MINERIOS INDUSTRIAIS LTDA</xNome><enderReme><xLgr>SITIO TENORIO DE BAIXO</xLgr><nro>S/N</nro><xBairro>ZONA RURAL</xBairro><cMun>2516755</cMun><xMun>Tenorio</xMun><CEP>58665000</CEP><UF>PB</UF><cPais>1058</cPais><xPais>BRASIL</xPais></enderReme><infNFe><chave>25140203981277000130550020000010221015170507</chave></infNFe></rem><dest><CNPJ>47939855000146</CNPJ><IE>382009542116</IE><xNome>COLOROBBIA BRASIL LTDA</xNome><enderDest><xLgr>VIA DAS ESTÂNCIAS KM 090</xLgr><nro>S/N</nro><xBairro>BAIRRO DA PONTE</xBairro><cMun>3523404</cMun><xMun>Itatiba</xMun><CEP>13251800</CEP><UF>SP</UF><cPais>1058</cPais><xPais>BRASIL</xPais></enderDest></dest><vPrest><vTPrest>6660.00</vTPrest><vRec>6660.00</vRec></vPrest><imp><ICMS><ICMS00><CST>00</CST><vBC>6660.00</vBC><pICMS>12.00</pICMS><vICMS>799.20</vICMS></ICMS00></ICMS><vTotTrib>2137.19</vTotTrib></imp><infCTeNorm><infCarga><vCarga>8892.00</vCarga><proPred>CAULIM</proPred><infQ><cUnid>01</cUnid><tpMed>BG</tpMed><qCarga>36000.0000</qCarga></infQ></infCarga><seg><respSeg>4</respSeg></seg><infModal versaoModal="1.04"><rodo><RNTRC>46968326</RNTRC><dPrev>2014-02-12</dPrev><lota>0</lota></rodo></infModal></infCTeNorm></infCte><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#CTe35140211896764000123570010000003681290709060"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>NBjaTEx7i+lGDwWZmA2KvV5w4iU=</DigestValue></Reference></SignedInfo><SignatureValue>Dg3c1u+XOESdkIc91grAsITIRoUCJESpJqMBewJhU8fvbtx+v4zOpz0zEvqMvrz0yBXiDHRGFW63
+SzQAq3fCAF9LMsDXurfoWC8AlqsEhexAxPXxRaPUVgyOebRJcCLHFHWv6mvBVxH2InT8wdkCDGnt
+z/CO7VaTcnSBnfH84bM=</SignatureValue><KeyInfo><X509Data><X509Certificate>MIIGtTCCBZ2gAwIBAgIQBp77JBNwozA8Ds8S088OsTANBgkqhkiG9w0BAQUFADB0MQswCQYDVQQG
+EwJCUjETMBEGA1UEChMKSUNQLUJyYXNpbDEtMCsGA1UECxMkQ2VydGlzaWduIENlcnRpZmljYWRv
+cmEgRGlnaXRhbCBTLkEuMSEwHwYDVQQDExhBQyBDZXJ0aXNpZ24gTXVsdGlwbGEgRzMwHhcNMTEw
+NzIyMDAwMDAwWhcNMTQwNzIwMjM1OTU5WjCB9zELMAkGA1UEBhMCQlIxEzARBgNVBAoUCklDUC1C
+cmFzaWwxFTATBgNVBAsUDElEIC0gMTc5NjE5MzEiMCAGA1UECxQZQXV0ZW50aWNhZG8gcG9yIEFS
+IEZBQ0VTUDEbMBkGA1UECxQSQXNzaW5hdHVyYSBUaXBvIEEzMRQwEgYDVQQLFAsoZW0gYnJhbmNv
+KTEUMBIGA1UECxQLKGVtIGJyYW5jbykxHjAcBgNVBAMTFUJSSUdJRE8gRSBDSUEgTFREQSBNRTEv
+MC0GCSqGSIb3DQEJARYgYXVkaWNvbkBlc2NyaXRvcmlvYXVkaWNvbi5jb20uYnIwgZ8wDQYJKoZI
+hvcNAQEBBQADgY0AMIGJAoGBAKWIr+/w5VpC06rASJGCQQhPvSqZ+svmkM0aqsm9rnGajSgbph/t
+c21umWnxLa24uUjmZNW9zepPhVDhFQ9erEdk+FrdPvN3pzlK95jsXij7MzfZqQhEZkJpBlWPn2KW
+kDsbfRmZKEGzKUAgiycSgO5SYfSKsp9LLlXOfbIk/PutAgMBAAGjggNBMIIDPTCBvAYDVR0RBIG0
+MIGxoD0GBWBMAQMEoDQEMjA2MDExOTgyMDM0NTA3MjE5NzYwMDAwMDAwMDAwMDAwMDAwMDAwMzI2
+Njk0NFNTUFNDoBoGBWBMAQMCoBEED01BUkNFTE8gQlJJR0lET6AZBgVgTAEDA6AQBA4xMTg5Njc2
+NDAwMDEyM6AXBgVgTAEDB6AOBAwwMDAwMDAwMDAwMDCBIGF1ZGljb25AZXNjcml0b3Jpb2F1ZGlj
+b24uY29tLmJyMAkGA1UdEwQCMAAwHwYDVR0jBBgwFoAUhLBCMzSjQiWlKJc+g+t38OhPwlQwDgYD
+VR0PAQH/BAQDAgXgMIIBJQYDVR0fBIIBHDCCARgwXKBaoFiGVmh0dHA6Ly9pY3AtYnJhc2lsLmNl
+cnRpc2lnbi5jb20uYnIvcmVwb3NpdG9yaW8vbGNyL0FDQ2VydGlzaWduTXVsdGlwbGFHMy9MYXRl
+c3RDUkwuY3JsMFugWaBXhlVodHRwOi8vaWNwLWJyYXNpbC5vdXRyYWxjci5jb20uYnIvcmVwb3Np
+dG9yaW8vbGNyL0FDQ2VydGlzaWduTXVsdGlwbGFHMy9MYXRlc3RDUkwuY3JsMFugWaBXhlVodHRw
+Oi8vcmVwb3NpdG9yaW8uaWNwYnJhc2lsLmdvdi5ici9sY3IvQ2VydGlzaWduL0FDQ2VydGlzaWdu
+TXVsdGlwbGFHMy9MYXRlc3RDUkwuY3JsMFUGA1UdIAROMEwwSgYGYEwBAgMFMEAwPgYIKwYBBQUH
+AgEWMmh0dHA6Ly9pY3AtYnJhc2lsLmNlcnRpc2lnbi5jb20uYnIvcmVwb3NpdG9yaW8vZHBjMB0G
+A1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDCBoAYIKwYBBQUHAQEEgZMwgZAwKAYIKwYBBQUH
+MAGGHGh0dHA6Ly9vY3NwLmNlcnRpc2lnbi5jb20uYnIwZAYIKwYBBQUHMAKGWGh0dHA6Ly9pY3At
+YnJhc2lsLmNlcnRpc2lnbi5jb20uYnIvcmVwb3NpdG9yaW8vY2VydGlmaWNhZG9zL0FDX0NlcnRp
+c2lnbl9NdWx0aXBsYV9HMy5wN2MwDQYJKoZIhvcNAQEFBQADggEBAADS0WIWEbY9kVd+xt6LljNB
+yaglI65kx1+Mp0+ukiP0jTIMgOvVCgXboGo1n6+3/aTb9D1z4pVNTSYqWh/2XH1wzN4OS9he0r9C
+RR3pk6Skg+EPtRm5DVbvNYWCiOehFZIiU9oDB8+y87AZP88OoJXKt0VEQx54z3ITxtCFv7vDqOWS
+adn+m+Y778OJJkEFYyTTblwJtgNkyFBH6j/jhXSk8b3xNQ7ksM2HJWv1UBLEIpQbGE2vqDbHrqUW
+ciEQg4uEu714YjQoAheMXNbAByfuNeGbUHHqHGQk1/QjvzTMaOdvZY2zcBHBOinP4TgOyi+Y2186
+VxFKfNAt4BfoQtE=</X509Certificate></X509Data></KeyInfo></Signature></CTe><protCTe versao="1.04"><infProt><tpAmb>1</tpAmb><verAplic>SP-CTe-10-12-2013</verAplic><chCTe>35140211896764000123570010000003681290709060</chCTe><dhRecbto>2014-02-07T15:01:35</dhRecbto><nProt>135140252687239</nProt><digVal>NBjaTEx7i+lGDwWZmA2KvV5w4iU=</digVal><cStat>100</cStat><xMotivo>Autorizado o uso do CT-e</xMotivo></infProt></protCTe></cteProc>

@@ -70,6 +70,9 @@
         disable = !(opcao == Opcoes.Alterar || opcao == Opcoes.Incluir);
 
 
+        if (opcao == Opcoes.Incluir)
+            parametro = new Parametro();
+
     }
 
     private async Task Gravar()

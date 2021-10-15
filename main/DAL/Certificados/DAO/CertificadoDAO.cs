@@ -26,5 +26,10 @@ namespace DAL.Certificados.DAO
                                 .Certificado
                                 .Where(x => x.Id == id).FirstOrDefaultAsync();
         }
+
+        public override bool Update<TSource>(TSource item)
+        {
+            return base.Update(item);
+        }
     }
 }

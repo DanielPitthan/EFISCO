@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><nfeProc versao="2.00" xmlns="http://www.portalfiscal.inf.br/nfe"><NFe xmlns="http://www.portalfiscal.inf.br/nfe"><infNFe Id="NFe35140208733752000173550010000012831520060700" versao="2.00"><ide><cUF>35</cUF><cNF>52006070</cNF><natOp>Venda</natOp><indPag>1</indPag><mod>55</mod><serie>1</serie><nNF>1283</nNF><dEmi>2014-02-17</dEmi><dSaiEnt>2014-02-18</dSaiEnt><hSaiEnt>15:20:00</hSaiEnt><tpNF>1</tpNF><cMunFG>3550308</cMunFG><tpImp>1</tpImp><tpEmis>1</tpEmis><cDV>0</cDV><tpAmb>1</tpAmb><finNFe>1</finNFe><procEmi>3</procEmi><verProc>2.2.21</verProc></ide><emit><CNPJ>08733752000173</CNPJ><xNome>Spumapaper Ltda</xNome><xFant>Spumapaper Ltda</xFant><enderEmit><xLgr>Rua Frei Ruperto de Jesus</xLgr><nro>255</nro><xCpl>Altos</xCpl><xBairro>Jd. Planalto</xBairro><cMun>3550308</cMun><xMun>Sao Paulo</xMun><UF>SP</UF><CEP>03985050</CEP><cPais>1058</cPais><xPais>BRASIL</xPais><fone>1127028537</fone></enderEmit><IE>149632048118</IE><IM>38509580</IM><CNAE>4761003</CNAE><CRT>1</CRT></emit><dest><CNPJ>47939855000146</CNPJ><xNome>COLOROBBIA BRASIL PRODUTOS PARA CERÂMICA LTDA</xNome><enderDest><xLgr>Via das Estâncias</xLgr><nro>km 90</nro><xBairro>Bairro da Ponte</xBairro><cMun>3523404</cMun><xMun>Itatiba</xMun><UF>SP</UF><CEP>13251800</CEP><cPais>1058</cPais><xPais>BRASIL</xPais></enderDest><IE>382009542116</IE><email>eduardo@colorobbia.com.br</email></dest><det nItem="1"><prod><cProd>5BBBAI</cProd><cEAN/><xProd>Spumapaper (Foam Board), tamanho 122cm x 244cm x 5mm, com um lado branco, miolo branco e o outro lado branco;</xProd><NCM>39211900</NCM><CFOP>5102</CFOP><uCom>un</uCom><qCom>10.0000</qCom><vUnCom>45.0000000000</vUnCom><vProd>450.00</vProd><cEANTrib/><uTrib>un</uTrib><qTrib>10.0000</qTrib><vUnTrib>45.0000000000</vUnTrib><indTot>1</indTot></prod><imposto><ICMS><ICMSSN102><orig>0</orig><CSOSN>102</CSOSN></ICMSSN102></ICMS><PIS><PISOutr><CST>99</CST><qBCProd>0.0000</qBCProd><vAliqProd>0.0000</vAliqProd><vPIS>0.00</vPIS></PISOutr></PIS><COFINS><COFINSOutr><CST>99</CST><qBCProd>0.0000</qBCProd><vAliqProd>0.0000</vAliqProd><vCOFINS>0.00</vCOFINS></COFINSOutr></COFINS></imposto></det><total><ICMSTot><vBC>0.00</vBC><vICMS>0.00</vICMS><vBCST>0.00</vBCST><vST>0.00</vST><vProd>450.00</vProd><vFrete>0.00</vFrete><vSeg>0.00</vSeg><vDesc>0.00</vDesc><vII>0.00</vII><vIPI>0.00</vIPI><vPIS>0.00</vPIS><vCOFINS>0.00</vCOFINS><vOutro>0.00</vOutro><vNF>450.00</vNF></ICMSTot></total><transp><modFrete>1</modFrete><transporta><xNome>Cliente Retira</xNome></transporta><vol><qVol>01</qVol><esp>Caixa</esp><pesoL>19.500</pesoL><pesoB>20.000</pesoB></vol></transp><cobr><dup><nDup>Boleto Bancario</nDup><dVenc>2014-02-28</dVenc><vDup>450.00</vDup></dup></cobr><infAdic><infAdFisco>Documento emitido por ME ou EPP Pelo simples nacional / Não gera a direito a crédito fiscal IPI</infAdFisco><infCpl>Pedido colocado  por email por Eduardo Morin, email: eduardo@colorobbia.com.br /* Frete por conta do Destinatario</infCpl></infAdic></infNFe><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#NFe35140208733752000173550010000012831520060700"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>sDTw6Pdwf3FsGTLSTTZdetI4DVE=</DigestValue></Reference></SignedInfo><SignatureValue>Pm4M0zCFcy8W2gw2AnI4IBiNkybG0eRGkrtswXps2hF52BcgCvDC4WdPUwgDuv+CceFBqney4x+/
+KI9NqohJlzq8Jj/QoJmEpNWOp+zCdQqb9deLrYwngL/nrxeINRe3OjdFvSwNqXMd5oeVaXuOXNeL
+nPn/9mrpv2j3woL5X5A=</SignatureValue><KeyInfo><X509Data><X509Certificate>MIIGgDCCBWigAwIBAgIQZ4n4lLJbfyi0/LgBW45IATANBgkqhkiG9w0BAQUFADB4MQswCQYDVQQG
+EwJCUjETMBEGA1UEChMKSUNQLUJyYXNpbDE2MDQGA1UECxMtU2VjcmV0YXJpYSBkYSBSZWNlaXRh
+IEZlZGVyYWwgZG8gQnJhc2lsIC0gUkZCMRwwGgYDVQQDExNBQyBDZXJ0aXNpZ24gUkZCIEczMB4X
+DTExMDQyMDAwMDAwMFoXDTE0MDQxODIzNTk1OVowgd4xCzAJBgNVBAYTAkJSMQswCQYDVQQIEwJT
+UDESMBAGA1UEBxQJU0FPIFBBVUxPMRMwEQYDVQQKFApJQ1AtQnJhc2lsMTYwNAYDVQQLFC1TZWNy
+ZXRhcmlhIGRhIFJlY2VpdGEgRmVkZXJhbCBkbyBCcmFzaWwgLSBSRkIxFjAUBgNVBAsUDVJGQiBl
+LUNOUEogQTMxIDAeBgNVBAsUF0F1dGVudGljYWRvIHBvciBBUiBBQ1NQMScwJQYDVQQDEx5TUFVN
+QVBBUEVSIExUREE6MDg3MzM3NTIwMDAxNzMwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAIV9
+K5LPyXNv7Us6KMZmZ4AdNzJge5TqOmWOsQ2E1jerwdyzIbrrmuhcPczLb265ygM97y1HMtRiDplk
+lLZyJFAnBiRDcy/uiuX8Ri39elds37fk54484ZdoqFlhf6WSJOVJ4+qwMnsr0YA6cz+L9LJG8pJ2
+Mur/w95amHMydvzpAgMBAAGjggMhMIIDHTCBtgYDVR0RBIGuMIGroDgGBWBMAQMEoC8ELTI1MDIx
+OTg0MzI0MTc5MTI4OTkwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMKAgBgVgTAEDAqAXBBVDTEVD
+SU8gQkFSUk9TIERFIExJTUGgGQYFYEwBAwOgEAQOMDg3MzM3NTIwMDAxNzOgFwYFYEwBAwegDgQM
+MDAwMDAwMDAwMDAwgRljb250YXRvQHNwdW1hcGFwZXIuY29tLmJyMAkGA1UdEwQCMAAwHwYDVR0j
+BBgwFoAU/IBr1U3R/HjYbGQvYUs4p4Lw3J0wDgYDVR0PAQH/BAQDAgXgMIIBEAYDVR0fBIIBBzCC
+AQMwV6BVoFOGUWh0dHA6Ly9pY3AtYnJhc2lsLmNlcnRpc2lnbi5jb20uYnIvcmVwb3NpdG9yaW8v
+bGNyL0FDQ2VydGlzaWduUkZCRzMvTGF0ZXN0Q1JMLmNybDBWoFSgUoZQaHR0cDovL2ljcC1icmFz
+aWwub3V0cmFsY3IuY29tLmJyL3JlcG9zaXRvcmlvL2xjci9BQ0NlcnRpc2lnblJGQkczL0xhdGVz
+dENSTC5jcmwwUKBOoEyGSmh0dHA6Ly9yZXBvc2l0b3Jpby5pY3BicmFzaWwuZ292LmJyL2xjci9S
+RkIvQUNDZXJ0aXNpZ25SRkJHMy9MYXRlc3RDUkwuY3JsMFUGA1UdIAROMEwwSgYGYEwBAgMGMEAw
+PgYIKwYBBQUHAgEWMmh0dHA6Ly9pY3AtYnJhc2lsLmNlcnRpc2lnbi5jb20uYnIvcmVwb3NpdG9y
+aW8vZHBjMB0GA1UdJQQWMBQGCCsGAQUFBwMEBggrBgEFBQcDAjCBmwYIKwYBBQUHAQEEgY4wgYsw
+XwYIKwYBBQUHMAKGU2h0dHA6Ly9pY3AtYnJhc2lsLmNlcnRpc2lnbi5jb20uYnIvcmVwb3NpdG9y
+aW8vY2VydGlmaWNhZG9zL0FDX0NlcnRpc2lnbl9SRkJfRzMucDdjMCgGCCsGAQUFBzABhhxodHRw
+Oi8vb2NzcC5jZXJ0aXNpZ24uY29tLmJyMA0GCSqGSIb3DQEBBQUAA4IBAQA8TnVaSiYEmQJrU0DH
+Ek5id/28Uxyjxdt8dFZF0gmnf3sPvpFMQF3QQJAC14X4Cl6g39h3VKv+ahTFsQ3ywVFA0RA0lxfe
+/rC4nwdlWlJMMRWjZvDG2eVyznKzKbjWL0r+weZqOjO2aT8Z3XBvbuQjbXB7rcFJq/GEp1PkXlYq
++LDYpqbCNcofeRL33QpUERsnf0RkorSL84a2NSh1MELjVc6WWU7ehYO/COds9rkwbjXy8QzJtv5+
+QHraHIczl6cExrlXGrYr483Cbd22noOjYfUrJaUG0DJR5ms+YYGvg8r5Dd+GozK85ypVDg2goYpD
+T7HIpKQJbGovSaLwDI32</X509Certificate></X509Data></KeyInfo></Signature></NFe><protNFe versao="2.00"><infProt><tpAmb>1</tpAmb><verAplic>SP_NFE_PL_006q</verAplic><chNFe>35140208733752000173550010000012831520060700</chNFe><dhRecbto>2014-02-17T16:10:30</dhRecbto><nProt>135140102941589</nProt><digVal>sDTw6Pdwf3FsGTLSTTZdetI4DVE=</digVal><cStat>100</cStat><xMotivo>Autorizado o uso da NF-e</xMotivo></infProt></protNFe></nfeProc>

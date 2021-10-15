@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NFES versao="001" data_gerado="21/02/2014"><NOTA_FISCAL><numero_nf>1322</numero_nf><serie>NFE</serie><rps>0</rps><data_emissao>21/02/2014</data_emissao><nf_avulsa>N</nf_avulsa><sistema_gerador>SIGISS-WEB</sistema_gerador><data_cadastro>21/02/2014</data_cadastro><codigo>045332508000171188000010110019933302773226</codigo><PRESTADOR><cnpj_cpf>02.772.508/0001-33</cnpj_cpf><pessoa>J</pessoa><ie>270067203113</ie><im>1313</im><razao_social>BEGLLIM COMERCIAL LTDA</razao_social><endereco><logradouro>RODOVIA SP 191, Nº 799</logradouro><numero></numero><complemento /><bairro>SÃO  JOÃO DA FIGUEIRA</bairro><cep>13835000</cep><cidade>Conchal</cidade><uf>SP        </uf></endereco></PRESTADOR><DESTINATARIO><cnpj_cpf>47.939.855/0001-46</cnpj_cpf><pessoa>J</pessoa><ie>382009542116</ie><im /><razao_social>COLOROBBIA BRASIL PRODUTOS PARA CERAMICA LTDA.</razao_social><endereco><logradouro>ROD. DAS ESTANCIAS, KM 90</logradouro><numero>0</numero><complemento></complemento><bairro>.</bairro><cep>13252900</cep><cidade>Itatiba</cidade><uf>SP</uf><pais>Brasil</pais></endereco><email></email></DESTINATARIO><valor_nf>R$ 7.896,00</valor_nf><deducao>R$ 0,00</deducao><valor_servico>R$ 7.896,00</valor_servico><forma_de_pagamento>28/02/2014</forma_de_pagamento><descricao>,
+Serviços de lavagem e manutenção em big bags
+1920 big bags x R$ 4,00 =  R$ 7680,00
+
+Serviços em big bags descartados
+180 big bags x R$ 1,20 = R$ 216,00
+
+TOTAL = R$ 7.896,00
+</descricao><id_codigo_servico>14.05</id_codigo_servico><regime>V</regime><cancelada>N</cancelada><impostos><iss_retido>N</iss_retido><aliq_iss>2</aliq_iss><valor_iss>R$ 157,92</valor_iss><bc_pis></bc_pis><aliq_pis></aliq_pis><valor_pis></valor_pis><bc_cofins></bc_cofins><aliq_cofins></aliq_cofins><valor_cofins></valor_cofins><bc_csll></bc_csll><aliq_csll></aliq_csll><valor_csll></valor_csll><bc_irrf></bc_irrf><aliq_irrf></aliq_irrf><valor_irrf></valor_irrf><bc_inss></bc_inss><aliq_inss></aliq_inss><valor_inss></valor_inss></impostos></NOTA_FISCAL></NFES>

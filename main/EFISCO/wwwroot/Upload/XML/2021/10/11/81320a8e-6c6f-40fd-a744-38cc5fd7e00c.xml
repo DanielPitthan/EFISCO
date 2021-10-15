@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><nfeProc versao="2.00" xmlns="http://www.portalfiscal.inf.br/nfe"><NFe xmlns="http://www.portalfiscal.inf.br/nfe"><infNFe Id="NFe35140603563979000102550010000001551301430045" versao="2.00"><ide><cUF>35</cUF><cNF>30143004</cNF><natOp>Venda</natOp><indPag>1</indPag><mod>55</mod><serie>1</serie><nNF>155</nNF><dEmi>2014-06-03</dEmi><tpNF>1</tpNF><cMunFG>3556206</cMunFG><tpImp>1</tpImp><tpEmis>1</tpEmis><cDV>5</cDV><tpAmb>1</tpAmb><finNFe>1</finNFe><procEmi>3</procEmi><verProc>2.2.24</verProc></ide><emit><CNPJ>03563979000102</CNPJ><xNome>MKM SERVICE COMERCIO E LOCACAO DE EQUIPAMENTOS LTDA EPP</xNome><enderEmit><xLgr>RUA  BENJAMIN DE PAULA FRANCA</xLgr><nro>414</nro><xCpl>1 ANDAR</xCpl><xBairro>VALE VERDE</xBairro><cMun>3556206</cMun><xMun>Valinhos</xMun><UF>SP</UF><CEP>13279173</CEP><cPais>1058</cPais><xPais>BRASIL</xPais><fone>1938817600</fone></enderEmit><IE>708191265113</IE><IM>1197600</IM><CNAE>4751201</CNAE><CRT>1</CRT></emit><dest><CNPJ>47939855000146</CNPJ><xNome>COLOROBBIA BRASIL PROD.P/CERÂMICA LTDA.</xNome><enderDest><xLgr>Rod. das Estâncias</xLgr><nro>KM 90</nro><xCpl>CP 112</xCpl><xBairro>Da Ponte</xBairro><cMun>3523404</cMun><xMun>Itatiba</xMun><UF>SP</UF><CEP>13251800</CEP><cPais>1058</cPais><xPais>BRASIL</xPais></enderDest><IE>382009542116</IE></dest><det nItem="1"><prod><cProd>MLT-D203U</cProd><cEAN/><xProd>Cartucho de Toner Original MLT-D203U-15k</xProd><NCM>84439933</NCM><CFOP>5102</CFOP><uCom>Un</uCom><qCom>1.0000</qCom><vUnCom>388.2600000000</vUnCom><vProd>388.26</vProd><cEANTrib/><uTrib>Un</uTrib><qTrib>1.0000</qTrib><vUnTrib>388.2600000000</vUnTrib><indTot>1</indTot></prod><imposto><vTotTrib>114.57</vTotTrib><ICMS><ICMSSN102><orig>0</orig><CSOSN>400</CSOSN></ICMSSN102></ICMS><IPI><cEnq>999</cEnq><IPINT><CST>53</CST></IPINT></IPI><PIS><PISNT><CST>07</CST></PISNT></PIS><COFINS><COFINSNT><CST>07</CST></COFINSNT></COFINS></imposto></det><total><ICMSTot><vBC>0.00</vBC><vICMS>0.00</vICMS><vBCST>0.00</vBCST><vST>0.00</vST><vProd>388.26</vProd><vFrete>0.00</vFrete><vSeg>0.00</vSeg><vDesc>0.00</vDesc><vII>0.00</vII><vIPI>0.00</vIPI><vPIS>0.00</vPIS><vCOFINS>0.00</vCOFINS><vOutro>0.00</vOutro><vNF>388.26</vNF><vTotTrib>114.57</vTotTrib></ICMSTot></total><transp><modFrete>0</modFrete></transp><cobr><fat><nFat>R$ 388,26 - vencimento: 15/06/14</nFat></fat></cobr><infAdic><infCpl>EMPRESA OPTANTE PELO SIMPLES NACIONAL / NAO GERA DIREITO A CREDITO FISCAL DE ISS E IPI / Ref:44059 - UKN14383 - Eduardo Morin / Permite o aproveitamento de crédito no valor R$ 11,03,correspondente a alíquota de 2,84%,nos termos do Artigo 23 da LC123/063</infCpl></infAdic></infNFe><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#NFe35140603563979000102550010000001551301430045"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>/MQSVvMAFptm1eEFZVDWdASvWgY=</DigestValue></Reference></SignedInfo><SignatureValue>JHL4vLG91zogGpeLKPbzwqxLqxs7MD6ZFifSFk1dILBI8RdH1U2YGtHSXdMaYq469qXQ4XWh5re3
+oKJdXQnCsKE1bbu30+UI1mad0jm9ZNvGgC5ux6CwavEgTcd3Xn5Nt+Be/NuewEf5m7xeS+NMWdsd
+l028toQgQ34hvCpDIIY=</SignatureValue><KeyInfo><X509Data><X509Certificate>MIIGmjCCBYKgAwIBAgIQchGp4AlT06+eVWN1ZQsqqjANBgkqhkiG9w0BAQUFADB1MQswCQYDVQQG
+EwJCUjETMBEGA1UEChMKSUNQLUJyYXNpbDE2MDQGA1UECxMtU2VjcmV0YXJpYSBkYSBSZWNlaXRh
+IEZlZGVyYWwgZG8gQnJhc2lsIC0gUkZCMRkwFwYDVQQDExBBQyBTSU5DT1IgUkZCIEcyMB4XDTEx
+MTAyNTAwMDAwMFoXDTE0MTAyMzIzNTk1OVowggEEMQswCQYDVQQGEwJCUjETMBEGA1UEChQKSUNQ
+LUJyYXNpbDELMAkGA1UECBMCU1AxETAPBgNVBAcUCFZBTElOSE9TMTYwNAYDVQQLFC1TZWNyZXRh
+cmlhIGRhIFJlY2VpdGEgRmVkZXJhbCBkbyBCcmFzaWwgLSBSRkIxFjAUBgNVBAsUDVJGQiBlLUNO
+UEogQTMxJTAjBgNVBAsUHEF1dGVudGljYWRvIHBvciBBUiBJbnN1cmFuY2UxSTBHBgNVBAMTQE1L
+TSBTRVJWSUNFIENPTUVSQ0lPIEUgTE9DQUNBTyBERSBFUVVJUEFNRU5UT1MgTFQ6MDM1NjM5Nzkw
+MDAxMDIwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAM6l3I+hrMmEH8C6aMPV+0sOya9IfIBH
+s6jtSGIHowB9Af7yLsrbLVYKjonmjl/EfJp8UY+yDWBdQ6v2zWkRawA3ScZxq9y9OPKePMGW/5Ue
+FGw+yrmy4ExH21/0nlHzX0YBwkrVg6ztH8wZBcz7jOnlCpuvVGOK1dI1g5bzV6fVAgMBAAGjggMX
+MIIDEzCBvAYDVR0RBIG0MIGxoD0GBWBMAQMEoDQEMjE0MDMxOTYxMDI4MzA5MDQ4MDAwMDAwMDAw
+MDAwMDAwMDAwMTE2ODAwNzctWFNTUFNQoB8GBWBMAQMCoBYEFFNBTkRSQSBNQVJJQSBHT1VMQVJU
+oBkGBWBMAQMDoBAEDjAzNTYzOTc5MDAwMTAyoBcGBWBMAQMHoA4EDDAwMDAwMDAwMDAwMIEbY2Ft
+aWxhbkB2ZWlnYWVwb3N0YWwuY29tLmJyMAkGA1UdEwQCMAAwHwYDVR0jBBgwFoAUb9s6hCXsZYHW
+kR0g4029G4HKGCkwDgYDVR0PAQH/BAQDAgXgMIIBBQYDVR0fBIH9MIH6MFSgUqBQhk5odHRwOi8v
+aWNwLWJyYXNpbC5jZXJ0aXNpZ24uY29tLmJyL3JlcG9zaXRvcmlvL2xjci9BQ1NJTkNPUlJGQkcy
+L0xhdGVzdENSTC5jcmwwU6BRoE+GTWh0dHA6Ly9pY3AtYnJhc2lsLm91dHJhbGNyLmNvbS5ici9y
+ZXBvc2l0b3Jpby9sY3IvQUNTSU5DT1JSRkJHMi9MYXRlc3RDUkwuY3JsME2gS6BJhkdodHRwOi8v
+cmVwb3NpdG9yaW8uaWNwYnJhc2lsLmdvdi5ici9sY3IvUkZCL0FDU0lOQ09SUkZCRzIvTGF0ZXN0
+Q1JMLmNybDBUBgNVHSAETTBLMEkGBmBMAQIDGTA/MD0GCCsGAQUFBwIBFjFodHRwOi8vaWNwLWJy
+YXNpbC5hY3NpbmNvci5jb20uYnIvcmVwb3NpdG9yaW8vZHBjMB0GA1UdJQQWMBQGCCsGAQUFBwMC
+BggrBgEFBQcDBDCBlwYIKwYBBQUHAQEEgYowgYcwKAYIKwYBBQUHMAGGHGh0dHA6Ly9vY3NwLmNl
+cnRpc2lnbi5jb20uYnIwWwYIKwYBBQUHMAKGT2h0dHA6Ly9pY3AtYnJhc2lsLmFjc2luY29yLmNv
+bS5ici9yZXBvc2l0b3Jpby9jZXJ0aWZpY2Fkb3MvQUNfU0lOQ09SX1JGQl9HMi5wN2MwDQYJKoZI
+hvcNAQEFBQADggEBABHpSQiyzDGXnPTUEWKXfmqhvE0TDzSC9ujFIpKQbWq15U4N9WslBMQNB8xq
+IPKDV/vw3CrQSknlfbfVI22DkJ0qqlAc9yetz5B0V3th2kEOLqRZX+dtglhz34AkaoEvNjnsKqXL
+Inf+M2Uq4eOHRet5civdNVkcyMErKr9fNDG6hAp0/M721wd7P2zNZhWdzahmS/xV63aNgoYOLzuX
+bVI8uxze9L9IIY8keovOnFyxYhp9eLWp3QMFE7Ol3TlhtD196/i5wlnnXWS3G4V5bSD2/y9pQhZj
+J6WexX9Cb9r8U/Qvz7/Rcwoab87xolRzOXlizy0y4KZj3Cpdu/NGHqM=</X509Certificate></X509Data></KeyInfo></Signature></NFe><protNFe versao="2.00"><infProt><tpAmb>1</tpAmb><verAplic>SP_NFE_PL_006q</verAplic><chNFe>35140603563979000102550010000001551301430045</chNFe><dhRecbto>2014-06-03T11:23:41</dhRecbto><nProt>135140341182259</nProt><digVal>/MQSVvMAFptm1eEFZVDWdASvWgY=</digVal><cStat>100</cStat><xMotivo>Autorizado o uso da NF-e</xMotivo></infProt></protNFe></nfeProc>

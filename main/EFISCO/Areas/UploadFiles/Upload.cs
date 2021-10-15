@@ -1,4 +1,5 @@
 ﻿using BLL.NFE.Interfaces;
+using CrossCuting.Factorys;
 using DAL.FileStoranges.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,17 +23,19 @@ namespace EFISCO.Areas.UploadFiles
         private static string pathToSaveofTheDay;
         private readonly IFileStorangeDAO fileStorangeDAO;
         private readonly INFeXmlService nfeXmlService;
+        private readonly UploadFactory uploadFactory;
 
         //TIPO_ARQUIVO_NFE
         public Upload(IHostEnvironment _enviroment,
                      IFileStorangeDAO _fileStorange,
-                     INFeXmlService _xmlService)
+                     INFeXmlService _xmlService,
+                     UploadFactory _uploadFactory)
         {
             enviroment = _enviroment;
             fileStorangeDAO = _fileStorange;
             nfeXmlService = _xmlService;
-
-            pathToSaveofTheDay = PrepareEnviroment();
+            uploadFactory = _uploadFactory;
+            pathToSaveofTheDay = _uploadFactory.PrepareEnviroment();
         }
 
         [HttpPost("upload/single")]
@@ -40,67 +43,15 @@ namespace EFISCO.Areas.UploadFiles
         {
             try
             {
+                IFormFile[] files = new FormFile[1] { (FormFile)file};
 
-                #region Monta o FileStorange
-                byte[] fileByte = new byte[file.Length];
+               
 
-
-                FileStorange fileStorange = new FileStorange();
-                string[] fileStruct = file.FileName.Split('.');
-
-                fileStorange.FileType = fileStruct[fileStruct.Length - 1];
-                fileStorange.DataInclusao = DateTime.Now;
-                fileStorange.FileName = $"{Guid.NewGuid()}.{fileStruct[fileStruct.Length - 1]}";
-                fileStorange.FileStornageUnique = Guid.NewGuid();
-                fileStorange.Processado = false;
-                fileStorange.OriginalFileName = file.FileName;
-
-                using (MemoryStream mStream = new MemoryStream())
-                {
-                    file.CopyTo(mStream);
-                    fileByte = mStream.ToArray();
-                }
-
-                fileStorange.MD5 = GetMd5FromFile(Encoding.UTF8.GetString(fileByte))
-                                    .ToString();
+                var filesStoranges = await uploadFactory.ProcessarArquivos(files, OrigemArquivo.Upload);
+                FileStorange fileStorange = filesStoranges.First();
 
 
-                fileStorange.DataByte = fileByte;
-                #endregion
-
-                try
-                {
-                    FileStorange existeArquivo = await fileStorangeDAO.GetAll()
-                                                    .AsNoTracking()
-                                                    .Where(x => x.MD5 == fileStorange.MD5)
-                                                    .SingleOrDefaultAsync();
-
-
-                    if (existeArquivo != null)
-                    {
-                        existeArquivo.Processado = false;
-                        existeArquivo.XmlString = fileStorange.XmlString;
-                        existeArquivo.DataByte = fileStorange.DataByte;
-                        existeArquivo.DataInclusao = DateTime.Now;
-                        await fileStorangeDAO.UpdateAsync(existeArquivo);
-                    }
-                    else
-                    {
-                        await fileStorangeDAO.AddSysnc(fileStorange);
-
-                    }
-
-                    FileStorange arquivoGravado = await fileStorangeDAO.GetAll()
-                                               .AsNoTracking()
-                                               .Where(x => x.MD5 == fileStorange.MD5)
-                                               .SingleOrDefaultAsync();
-                    fileStorange.Id = arquivoGravado.Id;
-
-                }
-                catch (Exception ex)
-                {
-                    return new JsonResult(new { StatusCode = StatusCode(500, ex.Message) });// StatusCode(500, ex.Message);
-                }
+          
 
                 return new JsonResult(new { StatusCode = StatusCode(200), fileStorange }); //StatusCode(200);
             }
@@ -111,28 +62,30 @@ namespace EFISCO.Areas.UploadFiles
         }
 
         [HttpPost("upload/multiple")]
-        public async Task<IActionResult> Multiple(IFormFile[] files)
+        public async Task<JsonResult> Multiple(IFormFile[] files)
         {
             if (files == null)
             {
-                return StatusCode(204, "Não há conteúdo para ser processado");
+                return new JsonResult(new { StatusCode = StatusCode(204, "Não há conteúdo para ser processado") });
             }
 
             try
             {
-                if (await ProcessarArquivos(files))
+
+                var filesStoranges = await uploadFactory.ProcessarArquivos(files,OrigemArquivo.Upload);
+                if (filesStoranges.Count > 0)
                 {
-                    return StatusCode(200);
+                    return new JsonResult(new { StatusCode = StatusCode(200), filesStoranges });
                 }
                 else
                 {
-                    return StatusCode(500, "Ocorreu um erro no processamento dos arquivos");
+                    return new JsonResult(new { StatusCode = StatusCode(500, "Ocorreu um erro no processamento dos arquivos") });
                 }
 
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                return new JsonResult(new { StatusCode = StatusCode(500, ex.Message) });
             }
 
         }
@@ -154,7 +107,7 @@ namespace EFISCO.Areas.UploadFiles
                 file.Processado = false;
 
                 file.XmlString = System.IO.File.ReadAllText(file.Path);
-                file.MD5 = GetMd5FromFile(file.XmlString).ToString();
+                file.MD5 = uploadFactory.GetMd5FromFile(file.XmlString).ToString();
                 try
                 {
                     FileStorange existeArquivo = await fileStorangeDAO.GetAll()
@@ -195,79 +148,7 @@ namespace EFISCO.Areas.UploadFiles
 
         }
 
-        public async Task<bool> ProcessarArquivos(IFormFile[] files)
-        {
-
-            foreach (IFormFile file in files)
-            {
-                ContentDispositionHeaderValue fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
-                string fileName = file.FileName;
-                string extension = Path.GetExtension(fileName);
-                string newFileName = $"{Guid.NewGuid()}{extension}";
-                string filePath = Path.Combine(pathToSaveofTheDay, newFileName);
-
-                FileStorange fileToStore = new FileStorange
-                {
-                    DataInclusao = DateTime.Now,
-                    FileName = newFileName,
-                    OriginalFileName = fileName,
-                    Path = filePath,
-                    UsuarioId = 0,
-                    FileStornageUnique = Guid.NewGuid(),
-                    FileType = extension,
-                    Processado = false
-                };
-
-                try
-                {
-                    using (FileStream fileStrean = new FileStream(filePath, FileMode.Create, FileAccess.Write))
-                    {
-
-                        await file.CopyToAsync(fileStrean);
-                    }
-                    fileToStore.XmlString = System.IO.File.ReadAllText(filePath);
-                    fileToStore.MD5 = GetMd5FromFile(fileToStore.XmlString).ToString();
-
-
-                    FileStorange existeArquivo = await fileStorangeDAO.GetAll()
-                                                    .Where(x => x.MD5 == fileToStore.MD5)
-                                                    .SingleOrDefaultAsync();
-
-                    if (existeArquivo != null)
-                    {
-                        await fileStorangeDAO.UpdateAsync(existeArquivo);
-                    }
-                    else
-                    {
-                        await fileStorangeDAO.AddSysnc(fileToStore);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message, ex.InnerException);
-                }
-            }
-
-            return true;
-        }
-
-        private static StringBuilder GetMd5FromFile(string file)
-        {
-
-            MD5 md5 = MD5.Create();
-            byte[] hashMd5 = md5.ComputeHash(Encoding.UTF8.GetBytes(file));
-
-            StringBuilder sBuilder = new StringBuilder();
-
-            // Loop through each byte of the hashed data
-            // and format each one as a hexadecimal string.
-            for (int i = 0; i < hashMd5.Length; i++)
-            {
-                sBuilder.Append(hashMd5[i].ToString("x2"));
-            }
-
-            return sBuilder;
-        }
+      
 
         [HttpPost("upload/{id}")]
         public IActionResult Post(IFormFile[] files, int id)
@@ -283,18 +164,7 @@ namespace EFISCO.Areas.UploadFiles
             }
         }
 
-        private string PrepareEnviroment()
-        {
-            string pathToSaveofTheDay = Path.Combine(enviroment.ContentRootPath, "wwwroot", $@"Upload\XML\{DateTime.Now.Year}\{DateTime.Now.Month}\{DateTime.Now.Day}");
-
-            if (!Directory.Exists(pathToSaveofTheDay))
-            {
-                Directory.CreateDirectory(pathToSaveofTheDay);
-            }
-
-            return pathToSaveofTheDay;
-
-        }
+       
 
     }
 }

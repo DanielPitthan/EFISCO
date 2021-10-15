@@ -1,0 +1,254 @@
+<nfeProc versao="2.00" xmlns="http://www.portalfiscal.inf.br/nfe">
+  <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+    <infNFe Id="NFe35140612541569000143550010000002861000002863" versao="2.00">
+      <ide>
+        <cUF>35</cUF>
+        <cNF>00000286</cNF>
+        <natOp>5102 - Venda de mercadoria</natOp>
+        <indPag>1</indPag>
+        <mod>55</mod>
+        <serie>1</serie>
+        <nNF>286</nNF>
+        <dEmi>2014-06-30</dEmi>
+        <tpNF>1</tpNF>
+        <cMunFG>3523404</cMunFG>
+        <tpImp>1</tpImp>
+        <tpEmis>1</tpEmis>
+        <cDV>3</cDV>
+        <tpAmb>1</tpAmb>
+        <finNFe>1</finNFe>
+        <procEmi>0</procEmi>
+        <verProc>SuasVendas.com V1.00</verProc>
+      </ide>
+      <emit>
+        <CNPJ>12541569000143</CNPJ>
+        <xNome>TORINO UNIFORMES PROFISSIONAIS LTDA</xNome>
+        <xFant>TORINO UNIFORMES PROFISSIONAIS LTDA</xFant>
+        <enderEmit>
+          <xLgr>Rua Brasil</xLgr>
+          <nro>68</nro>
+          <xBairro>Vila Brasileira</xBairro>
+          <cMun>3523404</cMun>
+          <xMun>Itatiba</xMun>
+          <UF>SP</UF>
+          <CEP>13256420</CEP>
+          <cPais>1058</cPais>
+          <xPais>Brasil</xPais>
+          <fone>1145943814</fone>
+        </enderEmit>
+        <IE>382073932116</IE>
+        <CRT>1</CRT>
+      </emit>
+      <dest>
+        <CNPJ>47939855000146</CNPJ>
+        <xNome>COLOROBBIA BRASIL PRODUTOS PARA CERAMICA LTDA</xNome>
+        <enderDest>
+          <xLgr>VIA DAS ESTANCIAS</xLgr>
+          <nro>S/N</nro>
+          <xCpl>KM 90</xCpl>
+          <xBairro>BAIRRO DA PONTE</xBairro>
+          <cMun>3523404</cMun>
+          <xMun>Itatiba</xMun>
+          <UF>SP</UF>
+          <CEP>13251800</CEP>
+          <cPais>1058</cPais>
+          <xPais>BRASIL</xPais>
+          <fone>1134089200</fone>
+        </enderDest>
+        <IE>382009542116</IE>
+        <email>infocolbra@colorobbia.com.br</email>
+      </dest>
+      <det nItem="1">
+        <prod>
+          <cProd>300001G</cProd>
+          <cEAN />
+          <xProd>Jaleco / Avental em Unistill, comprimento 3/4. P(15) M(15) G(15) GG(5)</xProd>
+          <NCM>62011900</NCM>
+          <CFOP>5102</CFOP>
+          <uCom>PC</uCom>
+          <qCom>50.0000</qCom>
+          <vUnCom>35.90</vUnCom>
+          <vProd>1795.00</vProd>
+          <cEANTrib />
+          <uTrib>PC</uTrib>
+          <qTrib>50.0000</qTrib>
+          <vUnTrib>35.90</vUnTrib>
+          <indTot>1</indTot>
+        </prod>
+        <imposto>
+          <vTotTrib>122.78</vTotTrib>
+          <ICMS>
+            <ICMSSN102>
+              <orig>0</orig>
+              <CSOSN>102</CSOSN>
+            </ICMSSN102>
+          </ICMS>
+          <IPI>
+            <cEnq>999</cEnq>
+            <IPINT>
+              <CST>53</CST>
+            </IPINT>
+          </IPI>
+          <PIS>
+            <PISNT>
+              <CST>07</CST>
+            </PISNT>
+          </PIS>
+          <COFINS>
+            <COFINSNT>
+              <CST>07</CST>
+            </COFINSNT>
+          </COFINS>
+        </imposto>
+      </det>
+      <det nItem="2">
+        <prod>
+          <cProd>200000A</cProd>
+          <cEAN />
+          <xProd>Calca Brim Pesado, 1/2 cos elastico, fechamento ziper e botao. P(10) M(15) G(15)</xProd>
+          <NCM>62034200</NCM>
+          <CFOP>5102</CFOP>
+          <uCom>PC</uCom>
+          <qCom>40.0000</qCom>
+          <vUnCom>28.95</vUnCom>
+          <vProd>1158.00</vProd>
+          <cEANTrib />
+          <uTrib>PC</uTrib>
+          <qTrib>40.0000</qTrib>
+          <vUnTrib>28.95</vUnTrib>
+          <indTot>1</indTot>
+        </prod>
+        <imposto>
+          <vTotTrib>79.21</vTotTrib>
+          <ICMS>
+            <ICMSSN102>
+              <orig>0</orig>
+              <CSOSN>102</CSOSN>
+            </ICMSSN102>
+          </ICMS>
+          <IPI>
+            <cEnq>999</cEnq>
+            <IPINT>
+              <CST>53</CST>
+            </IPINT>
+          </IPI>
+          <PIS>
+            <PISNT>
+              <CST>07</CST>
+            </PISNT>
+          </PIS>
+          <COFINS>
+            <COFINSNT>
+              <CST>07</CST>
+            </COFINSNT>
+          </COFINS>
+        </imposto>
+      </det>
+      <det nItem="3">
+        <prod>
+          <cProd>100005B</cProd>
+          <cEAN />
+          <xProd>Camiseta Malha PV, manga curta logotipo bordado. P(10) M(15) G(15) GG(5)</xProd>
+          <NCM>61099000</NCM>
+          <CFOP>5102</CFOP>
+          <uCom>PC</uCom>
+          <qCom>45.0000</qCom>
+          <vUnCom>16.50</vUnCom>
+          <vProd>742.50</vProd>
+          <cEANTrib />
+          <uTrib>PC</uTrib>
+          <qTrib>45.0000</qTrib>
+          <vUnTrib>16.50</vUnTrib>
+          <indTot>1</indTot>
+        </prod>
+        <imposto>
+          <vTotTrib>50.79</vTotTrib>
+          <ICMS>
+            <ICMSSN102>
+              <orig>0</orig>
+              <CSOSN>102</CSOSN>
+            </ICMSSN102>
+          </ICMS>
+          <IPI>
+            <cEnq>999</cEnq>
+            <IPINT>
+              <CST>53</CST>
+            </IPINT>
+          </IPI>
+          <PIS>
+            <PISNT>
+              <CST>07</CST>
+            </PISNT>
+          </PIS>
+          <COFINS>
+            <COFINSNT>
+              <CST>07</CST>
+            </COFINSNT>
+          </COFINS>
+        </imposto>
+      </det>
+      <total>
+        <ICMSTot>
+          <vBC>0.00</vBC>
+          <vICMS>0.00</vICMS>
+          <vBCST>0.00</vBCST>
+          <vST>0.00</vST>
+          <vProd>3695.50</vProd>
+          <vFrete>0.00</vFrete>
+          <vSeg>0.00</vSeg>
+          <vDesc>0.00</vDesc>
+          <vII>0.00</vII>
+          <vIPI>0.00</vIPI>
+          <vPIS>0.00</vPIS>
+          <vCOFINS>0.00</vCOFINS>
+          <vOutro>0.00</vOutro>
+          <vNF>3695.50</vNF>
+          <vTotTrib>252.78</vTotTrib>
+        </ICMSTot>
+        <ISSQNtot />
+        <retTrib />
+      </total>
+      <transp>
+        <modFrete>9</modFrete>
+      </transp>
+      <cobr>
+        <fat />
+      </cobr>
+      <infAdic>
+        <infCpl>DOCUMENTO EMITIDO POR ME OU EPP OPTANTE PELO SIMPLES NACIONAL. NAO GERA DIREITO A CREDITO FISCAL DE IPI. *** SEM NUMERO DE PEDIDO ***</infCpl>
+      </infAdic>
+    </infNFe>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+        <Reference URI="#NFe35140612541569000143550010000002861000002863">
+          <Transforms>
+            <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+            <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+          </Transforms>
+          <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+          <DigestValue>T2I+gzVPEoEvgRxaWOrpZCYDUtY=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>heWicFe0dU70jzMlW5YWgFC8tPJkt0XvUjq8fcSwmhWJb2UnJ/kgI0Lzp+9R3B79iBuPhjHmXJJsZubJnnjtRA/rrG4EK6GNSUhflqpt23txVSsAWflpXqe4Rgw6ngYBlMqhKD/FBpO+e2/GrqDyXElnlVYcilO/Ky6O4jkVa2MwRC3IlCR98qDQNLGSxMP6FQKAVLg/D6Gz+pMsKM1qG+EerGtGX1W9BGPjQWsrQU0/TxrjQ67PxR/59KzJ6NNgYQXLzPV5oKydKSPftXUB1suXE0vtkF89U6gj/tn+frEcXzEfpLvENHKEc+GzI8ySRpTcjJOMcURSCTKIBbJzCQ==</SignatureValue>
+      <KeyInfo>
+        <X509Data>
+          <X509Certificate>MIIIUTCCBjmgAwIBAgIQQmrFXJQlJ8CasmwxW3Q7djANBgkqhkiG9w0BAQsFADB4MQswCQYDVQQGEwJCUjETMBEGA1UEChMKSUNQLUJyYXNpbDE2MDQGA1UECxMtU2VjcmV0YXJpYSBkYSBSZWNlaXRhIEZlZGVyYWwgZG8gQnJhc2lsIC0gUkZCMRwwGgYDVQQDExNBQyBDZXJ0aXNpZ24gUkZCIEc0MB4XDTEyMDEwMjAwMDAwMFoXDTE0MTIzMTIzNTk1OVowgf4xCzAJBgNVBAYTAkJSMRMwEQYDVQQKFApJQ1AtQnJhc2lsMQswCQYDVQQIEwJTUDEcMBoGA1UEBxQTU0FOVEFOQSBERSBQQVJOQUlCQTE2MDQGA1UECxQtU2VjcmV0YXJpYSBkYSBSZWNlaXRhIEZlZGVyYWwgZG8gQnJhc2lsIC0gUkZCMRYwFAYDVQQLFA1SRkIgZS1DTlBKIEEzMSIwIAYDVQQLFBlBdXRlbnRpY2FkbyBwb3IgQVIgRkFDRVNQMTswOQYDVQQDEzJUT1JJTk8gVU5JRk9STUVTIFBST0ZJU1NJT05BSVMgTFREQToxMjU0MTU2OTAwMDE0MzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMSdK869n9E1Mc8fNkPaJjW+gd1cWGyaTBnoqMdELtJVWyknH7ONjr96M72XEH12d8pySUEWBuvKPMlMfZcAHZgAkufDLt5RQOo3Qcu9rGNLtv3plZqIcq+pUWF0ocOpjSQFJuQSilJd7y/iAowN0tXrdCLn4G7q1J2FKomeuObDkkzgmQwFJqM8FFVtIx2sc16YvZiBiWO5VtfpdT6n/Q+HKkEeXMphUVNJGlKoAVe8HsXYgZA62ix4Lt1J0+yFyeWOq+L15+1XKEd+6GNP2UdLrF7bF6PibjAaFDVVi2vwIBol0Ku7TIKcGFFDT0/O3fYcjIIyUWLISA5S2XfJrmsCAwEAAaOCA04wggNKMIGzBgNVHREEgaswgaigOAYFYEwBAwSgLwQtMjAwNzE5NzMxODA2MDI1Nzg3MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwoBkGBWBMAQMCoBAEDkxBRVJDSU8gQ0hBVkVToBkGBWBMAQMDoBAEDjEyNTQxNTY5MDAwMTQzoBcGBWBMAQMHoA4EDDAwMDAwMDAwMDAwMIEddmVuZGFzX3VuaWZvcm1lc0B0ZXJyYS5jb20uYnIwCQYDVR0TBAIwADAfBgNVHSMEGDAWgBQukerWbeWyWYLcOIUpdjQWVjzQPjAOBgNVHQ8BAf8EBAMCBeAwfwYDVR0gBHgwdjB0BgZgTAECAwYwajBoBggrBgEFBQcCARZcaHR0cDovL2ljcC1icmFzaWwuY2VydGlzaWduLmNvbS5ici9yZXBvc2l0b3Jpby9kcGMvQUNfQ2VydGlzaWduX1JGQi9EUENfQUNfQ2VydGlzaWduX1JGQi5wZGYwggEWBgNVHR8EggENMIIBCTBXoFWgU4ZRaHR0cDovL2ljcC1icmFzaWwuY2VydGlzaWduLmNvbS5ici9yZXBvc2l0b3Jpby9sY3IvQUNDZXJ0aXNpZ25SRkJHNC9MYXRlc3RDUkwuY3JsMFagVKBShlBodHRwOi8vaWNwLWJyYXNpbC5vdXRyYWxjci5jb20uYnIvcmVwb3NpdG9yaW8vbGNyL0FDQ2VydGlzaWduUkZCRzQvTGF0ZXN0Q1JMLmNybDBWoFSgUoZQaHR0cDovL3JlcG9zaXRvcmlvLmljcGJyYXNpbC5nb3YuYnIvbGNyL0NlcnRpc2lnbi9BQ0NlcnRpc2lnblJGQkc0L0xhdGVzdENSTC5jcmwwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMEMIGbBggrBgEFBQcBAQSBjjCBizBfBggrBgEFBQcwAoZTaHR0cDovL2ljcC1icmFzaWwuY2VydGlzaWduLmNvbS5ici9yZXBvc2l0b3Jpby9jZXJ0aWZpY2Fkb3MvQUNfQ2VydGlzaWduX1JGQl9HNC5wN2MwKAYIKwYBBQUHMAGGHGh0dHA6Ly9vY3NwLmNlcnRpc2lnbi5jb20uYnIwDQYJKoZIhvcNAQELBQADggIBAMh826GLVy6BBGO4R0xwcVLUgL2Lb1qN6cwkAevZHdckqNbNqyW7TGO6efGIzTgQqvmwlom4THsgy+ZvGEKQAayb3q6DrpR7YG203/9zZVQScf+cVEqMRqTYchEa8JfWgcFmNRwmWTvghqLa9nDWvGTb2DH9T5iekIOUt/O2odBZGnx9/TqbyuOi7HuLJy/JqEPtJV1A57Dy9hcdzapttL4a5KNGuvNUHt86WQWlZ6RkO4KQ2X6Cz5RqP06+CTaWa0frZRs+k4VyOFZP/KuAd1RzTobCVO/7xV2DczVStaFaqZslROkJBhnlWrN4/i4iu44L/hIQp251m09k9Afq87TwrjbHlhi03atk2tozC4CjcH6KIdliDwP2Cw7WOMBwPmcfC8P3C0r5vCjloDey71w3wrmfvcZEiCQTkBxPOIWI2rgDh1MiSepNXC/hMlG1NIlGo3+CZXcQYyp/E9jrXsiUHecqoiFyTzL0xpPfWzMee/lEgfg+fGJgKUfNpdQlG6AUBlneRhHGswspu/QusTATJe/icNw+cnwIVQzHsb0oestZXxYzuNQyUg2xIJmXe0zu9FpiHgw5AJLawm/6lNzcd7CdMGD3Usv2RIcncMB3uHaAlWNenK23WzbztTK98N9PvMIeKpX4NyqtFJstHM55AJ7CUOyyTQecd/VHD5WO</X509Certificate>
+        </X509Data>
+      </KeyInfo>
+    </Signature>
+  </NFe>
+  <protNFe versao="2.00">
+    <infProt>
+      <tpAmb>1</tpAmb>
+      <verAplic>SP_NFE_PL_006q</verAplic>
+      <chNFe>35140612541569000143550010000002861000002863</chNFe>
+      <dhRecbto>2014-07-01T15:53:57</dhRecbto>
+      <nProt>135140402358349</nProt>
+      <digVal>T2I+gzVPEoEvgRxaWOrpZCYDUtY=</digVal>
+      <cStat>100</cStat>
+      <xMotivo>Autorizado o uso da NF-e</xMotivo>
+    </infProt>
+  </protNFe>
+</nfeProc>

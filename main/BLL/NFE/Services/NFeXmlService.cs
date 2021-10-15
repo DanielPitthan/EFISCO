@@ -44,8 +44,7 @@ namespace BLL.NFE.Services
         private readonly IEmitenteIntegradoService emitenteService;
         private readonly IProdutoIntegradoService produtoIntegradoService;
 
-        public double StatusOfCurrentProcess { get; set; }
-        public int EndOfProcess { get; set; }
+     
 
         public NFeXmlService(INFeDAO _nFeDAO,
                              INFeFilesDAO _nFeFilesDAO,
@@ -142,18 +141,22 @@ namespace BLL.NFE.Services
             return arquivos;
         }
 
-        public async Task ProcessarArquivos()
+        public async Task<bool> ProcessarArquivos(int? id=null)
         {
 
 
-            List<FileStorange> arquivosAProcessar = await fileStorangeDAO.GetAll()
-                                     .Where(f => f.Processado == false && f.FileType == ".xml")
-                                     .ToListAsync();
+            var query = fileStorangeDAO.GetAll()
+                         .Where(f => f.Processado == false && f.FileType == ".xml");
 
+            if (id.HasValue)
+                query = query.Where(x => x.Id == id.Value);
 
-            EndOfProcess = arquivosAProcessar.Count;
-            StatusOfCurrentProcess = 0;
-            double contagem = 0;
+                                    
+            List<FileStorange> arquivosAProcessar =await  query.ToListAsync();
+
+ 
+
+            bool existeCTENoProcessamento = false;
 
             foreach (FileStorange arquivo in arquivosAProcessar)
             {
@@ -161,10 +164,15 @@ namespace BLL.NFE.Services
                 #region Faz todos os loads
                 List<NFeFilesMensagens> mensagensDeErro = new List<NFeFilesMensagens>();
                 XmlDocument documento = new XmlDocument();
+                
+                if (arquivo.XmlString == null)
+                    continue;
+
                 documento.LoadXml(arquivo.XmlString);
 
                 bool typeIsNfe = documento.GetElementsByTagName("NFe").Count > 0;
                 bool typeIsCte = documento.GetElementsByTagName("CTe").Count > 0;
+              
                 NFe notaFiscalLidaXML = new NFe();
 
                 if (typeIsNfe)
@@ -174,7 +182,15 @@ namespace BLL.NFE.Services
 
                 if (typeIsCte)
                 {
-                    throw new Exception("Sistema não preparado para Importar CTe");
+                    existeCTENoProcessamento = typeIsCte;
+                    continue;                   
+                }
+
+                if(typeIsCte==false && typeIsNfe == false)
+                {
+                    
+                    existeCTENoProcessamento = true;
+                    continue;
                 }
 
                 NFe notaImportada = await nFeDAO.GetAll()
@@ -201,7 +217,7 @@ namespace BLL.NFE.Services
                     Path = arquivo.Path,
                     ChaveAcesso = notaFiscalLidaXML.infNFe.Id,
                     CnpjFornecedor = notaFiscalLidaXML.infNFe.emit.CNPJ,
-                    DataEmnissaoNfe = notaFiscalLidaXML.infNFe.ide.dhEmi.Value.DateTime,
+                    DataEmnissaoNfe = notaFiscalLidaXML.infNFe.ide.dhEmi ==null ? notaFiscalLidaXML.infNFe.ide.dEmi.Value.Date : notaFiscalLidaXML.infNFe.ide.dhEmi.Value.DateTime,
                     Fornecedor = notaFiscalLidaXML.infNFe.emit.xNome,
                     NumeroNota = notaFiscalLidaXML.infNFe.ide.nNF.ToString().PadLeft(9, '0'),
                     Serie = notaFiscalLidaXML.infNFe.ide.serie,
@@ -261,12 +277,14 @@ namespace BLL.NFE.Services
                 {
                     await nFeFilesMensagensService.Adcionar(mensagem).ConfigureAwait(false);
                 }
-                contagem++;
-                StatusOfCurrentProcess = (contagem * 100) / arquivosAProcessar.Count;
-
             }
-
-            StatusOfCurrentProcess = 100;
+            
+            if (existeCTENoProcessamento)
+            {
+                throw new Exception($"O Sistema não está preparado para importar o tipo selecionado ");
+              
+            }
+            return true;
         }
 
 

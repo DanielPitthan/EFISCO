@@ -1,0 +1,201 @@
+﻿@page "/ObterAnexosDosEmails"
+
+@inject CrossCuting.Tools.EmailControl emailControl;
+@inject BLL.NFE.Interfaces.INFeXmlService nfeXMLService;
+@inject BLL.Infra.Interface.IFileStorangeService fileStorange;
+
+<NavbarTitulo Titulo="Importação de XMLs do E-mail"></NavbarTitulo>
+
+@if (initLoading)
+{
+
+
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border text-primary" role="status">
+        </div>
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="row" style="margin-bottom:1rem;">
+            <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                <div class="card">
+                    <div class="card-header">
+                        E-Mails Pendentes
+                    </div>
+                    <div class="card-body">
+                        @emailPendentes
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                <div class="card">
+                    <div class="card-header">
+                        Pendentes de Processar
+                    </div>
+                    <div class="card-body">
+                        @pendentesDeProcessamento
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                <div class="card">
+                    <div class="card-header">
+                        NFE
+                    </div>
+                    <div class="card-body">
+                        @pendentesDeProcessamentoNFE
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                <div class="card">
+                    <div class="card-header">
+                        CTE
+                    </div>
+                    <div class="card-body">
+                        @pendentesDeProcessamentoCTE
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:1rem;">
+            <div class="col-12 col-md-2 col-lg-2">
+                <RadzenButton ButtonStyle="@Radzen.ButtonStyle.Primary"
+                              Icon="move_to_inbox"
+                              Click="@(async ()=> await ObterAnexos())"
+                              Size="@Radzen.ButtonSize.Medium">
+
+                </RadzenButton>
+            </div>
+
+        </div>
+        <div class="row">
+            @if (!string.IsNullOrEmpty(aviso))
+            {
+                <div class="alert alert-danger">
+                    @aviso
+                </div>
+            }
+            @if (loading)
+            {
+                <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" Style="margin-bottom: 20px" />
+            }
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row" style="margin-bottom:1rem;">
+            <RadzenGrid AllowFiltering="true" AllowPaging="true" PageSize="50"
+                        AllowSorting="true" Data="@arquivos" TItem="FileStorange"
+                        AllowColumnResize="true">
+                <Columns>
+                    <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange.Id)" Title="Id" Width="100px" />
+                    <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange.MD5)" Title="Md5" />
+                    <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange.DataInclusao)" Title="Data Leitura" />
+                    <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange.DataRecebimetoEmail)" Title="Data E-Mail" />
+                    <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange.OriginalFileName)" Title="Arquivo" Width="500px" />
+                    <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange.TipoXml)" Title="Tipo" />
+                    <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange.RemetenteEmail)" Title="Remetente" Width="300px" />
+                    <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange.CorpoDoEmail)" Title="Trecho do E-mail" Width="600px" />
+                    <RadzenGridColumn TItem="FileStorange" Property="Importar">
+                        <Template Context="fileStorange">
+                            <RadzenButton Icon="publish" Click="@(async ()=> await Processar(fileStorange))"></RadzenButton>
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange._processando)">
+                        <Template>
+                            @if (context._processando)
+                            {
+                                <div class="spinner-border-sm text-primary" role="status">
+                                </div>
+                            }
+
+                        </Template>
+                    </RadzenGridColumn>
+                </Columns>
+            </RadzenGrid>
+        </div>
+    </div>
+}
+
+
+
+@code {
+
+    string aviso = "";
+    IList<FileStorange> arquivos = new List<FileStorange>();
+    private int emailPendentes = 0;
+    private int pendentesDeProcessamento = 0;
+    private int pendentesDeProcessamentoNFE = 0;
+    private int pendentesDeProcessamentoCTE = 0;
+    private bool loading = false;
+    private bool initLoading = true;
+    private bool processing = false;
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+
+
+            var query = fileStorange.GetByOrigem(OrigemArquivo.Email);
+            arquivos = query.OrderByDescending(x => x.DataRecebimetoEmail)
+                            .ToList();
+
+            pendentesDeProcessamento = query.Count();
+
+            pendentesDeProcessamentoNFE = query.Where(x => x.TipoXml == "NFE")
+                                               .Count();
+
+            pendentesDeProcessamentoNFE = query.Where(x => x.TipoXml == "CTE")
+                                               .Count();
+
+            emailPendentes = emailControl.EmailsPendentes();
+
+            initLoading = false;
+            this.StateHasChanged();
+        }
+
+    }
+
+    private async Task ObterAnexos()
+    {
+        try
+        {
+            loading = true;
+            var resultOfProcess = await emailControl.Ler();
+
+            if (resultOfProcess)
+            {
+                arquivos = fileStorange.GetByOrigem(OrigemArquivo.Email)
+                           .ToList();
+                loading = false;
+            }
+
+        }
+        catch (Exception ex)
+        {
+            aviso = $"{ex.Message} {ex.InnerException}";
+        }
+
+
+    }
+
+    private async Task Processar(FileStorange file)
+    {
+        try
+        {
+            file._processando = true;
+            file._processando = !await nfeXMLService.ProcessarArquivos(file.Id);
+
+
+        }
+        catch (Exception ex)
+        {
+            file._processando = false;
+            aviso = $"{ex.Message} {ex.InnerException}";
+        }
+    }
+}

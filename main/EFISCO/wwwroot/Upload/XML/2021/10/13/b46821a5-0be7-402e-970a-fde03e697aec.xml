@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><nfeProc xmlns="http://www.portalfiscal.inf.br/nfe" versao="2.00"><NFe xmlns="http://www.portalfiscal.inf.br/nfe"><infNFe Id="NFe35140668075613000393550020001819201002313903" versao="2.00"><ide><cUF>35</cUF><cNF>00231390</cNF><natOp>VENDA MERC ADQ OU REC DE TERCEIROS</natOp><indPag>1</indPag><mod>55</mod><serie>2</serie><nNF>181920</nNF><dEmi>2014-06-18</dEmi><tpNF>1</tpNF><cMunFG>3525904</cMunFG><tpImp>1</tpImp><tpEmis>1</tpEmis><cDV>3</cDV><tpAmb>1</tpAmb><finNFe>1</finNFe><procEmi>0</procEmi><verProc>V2.250</verProc></ide><emit><CNPJ>68075613000393</CNPJ><xNome>METAIS COMERCIAL LTDA</xNome><enderEmit><xLgr>RUA UNIAO, 681</xLgr><nro>01</nro><xCpl>681</xCpl><xBairro>VILA JUNDIAINOPOLIS</xBairro><cMun>3525904</cMun><xMun>JUNDIAI</xMun><UF>SP</UF><CEP>13206650</CEP><cPais>1058</cPais><xPais>Brasil</xPais><fone>01145273070</fone></enderEmit><IE>407464770111</IE><CRT>3</CRT></emit><dest><CNPJ>47939855000146</CNPJ><xNome>COLOROBBIA BRASIL PRODUTOS PARA CERAMICA LTDA-037351</xNome><enderDest><xLgr>VIA DAS ESTANCIAS SN KM 090</xLgr><nro>01</nro><xCpl>1</xCpl><xBairro>BAIRRO DA PONTE</xBairro><cMun>3523404</cMun><xMun>ITATIBA</xMun><UF>SP</UF><CEP>13251800</CEP><cPais>1058</cPais><xPais>BRASIL</xPais><fone>1134089219</fone></enderDest><IE>382009542116</IE></dest><retirada><CNPJ>68075613000393</CNPJ><xLgr>RUA UNIAO, 681</xLgr><nro>01</nro><xCpl>681</xCpl><xBairro>VILA JUNDIAINOPOLIS</xBairro><cMun>3525904</cMun><xMun>JUNDIAI</xMun><UF>SP</UF></retirada><entrega><CNPJ>47939855000146</CNPJ><xLgr>RODOVIA DAS ESTANCIAS, KM 90</xLgr><nro>01</nro><xCpl>1</xCpl><xBairro>BAIRRO DA PONTE</xBairro><cMun>3523404</cMun><xMun>ITATIBA</xMun><UF>SP</UF></entrega><det nItem="1"><prod><cProd>709</cProd><cEAN/><xProd>CHATO 3/16 X 1.1/4 MECANICO</xProd><NCM>72111400</NCM><CFOP>5102</CFOP><uCom>BR</uCom><qCom>3.0000</qCom><vUnCom>22.8000000000</vUnCom><vProd>68.40</vProd><cEANTrib/><uTrib>BR</uTrib><qTrib>3.0000</qTrib><vUnTrib>22.8000000000</vUnTrib><vFrete>15.00</vFrete><indTot>1</indTot></prod><imposto><ICMS><ICMS00><orig>0</orig><CST>00</CST><modBC>3</modBC><vBC>83.40</vBC><pICMS>18.00</pICMS><vICMS>15.01</vICMS></ICMS00></ICMS><IPI><cEnq>999</cEnq><IPINT><CST>52</CST></IPINT></IPI><II><vBC>0.00</vBC><vDespAdu>0.00</vDespAdu><vII>0.00</vII><vIOF>0.00</vIOF></II><PIS><PISAliq><CST>01</CST><vBC>83.40</vBC><pPIS>1.65</pPIS><vPIS>1.38</vPIS></PISAliq></PIS><COFINS><COFINSAliq><CST>01</CST><vBC>83.40</vBC><pCOFINS>7.60</pCOFINS><vCOFINS>6.34</vCOFINS></COFINSAliq></COFINS></imposto></det><total><ICMSTot><vBC>83.40</vBC><vICMS>15.01</vICMS><vBCST>0.00</vBCST><vST>0.00</vST><vProd>68.40</vProd><vFrete>15.00</vFrete><vSeg>0.00</vSeg><vDesc>0.00</vDesc><vII>0.00</vII><vIPI>0.00</vIPI><vPIS>1.38</vPIS><vCOFINS>6.34</vCOFINS><vOutro>0.00</vOutro><vNF>83.40</vNF></ICMSTot></total><transp><modFrete>1</modFrete><transporta><CNPJ>68075613000121</CNPJ><xNome>NOSSO CARRO</xNome><xMun>JUNDIAI</xMun><UF>SP</UF></transporta><vol><qVol>0</qVol><pesoL>21.240</pesoL><pesoB>21.240</pesoB></vol></transp><cobr><fat><nFat>1)15-07-2014</nFat></fat><dup><nDup>181920/N-1</nDup><dVenc>2014-07-15</dVenc><vDup>83.40</vDup></dup></cobr><infAdic><infCpl>PEDIDO DO CLIENTE  MOTORISTA: JOSE ROBERTO DOS SANTOS  NUM.PEDIDO: 148563  Vendedor: SERGIO RICARDO MENDES (FUNCIO)  Endereco Entrega: RODOVIA DAS ESTANCIAS, KM 90  BAIRRO DA PONTE ITATIBA SP  000-TRIBUTADO INTEGRALMENTE</infCpl></infAdic></infNFe><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#NFe35140668075613000393550020001819201002313903"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>68zi0VoRMKjyVYaBfVUtHmvhBZw=</DigestValue></Reference></SignedInfo><SignatureValue>ZrLeAc6/hYULlZwhwN/6hoPLfnahzsee5cQiD/l9EVXeW0WzwvCdfkSMvgID7iY2VoRRKuA627jx
+r5JXJiTj/g33L661+HZ6FFYV8baEf7e+BUlSwxtSRPe1oO36tLusxRpSt05LXYfVGDa6ye2anXz1
+vnecAdRQAYyBbomGEOy4BaneIctsI+/Vl2EdIfqCmOgzlKJ3Y4HaGTkWJrvy4mPUKV1DM/3jb9HF
+cRivY5+45aLCo1NRsW/guef45fGrbeth/3X0GyZ14mWmPRtbPkgaus5RhXlpPOlRtMz2ify/Z3EK
+I5eGSU4Y9gBBrXr/DKA5H8Kb/5Nd/Sp9/VwbWw==</SignatureValue><KeyInfo><X509Data><X509Certificate>MIIIMTCCBhmgAwIBAgIQPj3toD0OjKPHXKX410s4/zANBgkqhkiG9w0BAQsFADB0MQswCQYDVQQG
+EwJCUjETMBEGA1UEChMKSUNQLUJyYXNpbDEtMCsGA1UECxMkQ2VydGlzaWduIENlcnRpZmljYWRv
+cmEgRGlnaXRhbCBTLkEuMSEwHwYDVQQDExhBQyBDZXJ0aXNpZ24gTXVsdGlwbGEgRzUwHhcNMTQw
+NjEzMDAwMDAwWhcNMTUwNjEyMjM1OTU5WjCBwTELMAkGA1UEBhMCQlIxEzARBgNVBAoUCklDUC1C
+cmFzaWwxITAfBgNVBAsUGEF1dGVudGljYWRvIHBvciBBUiBGYWNzaTEbMBkGA1UECxQSQXNzaW5h
+dHVyYSBUaXBvIEExMRUwEwYDVQQLFAxJRCAtIDY0ODE3NTcxHjAcBgNVBAMTFU1FVEFJUyBDT01F
+UkNJQUwgTFREQTEmMCQGCSqGSIb3DQEJARYXbml2YWxkb0BzYW1ldGFpcy5jb20uYnIwggEiMA0G
+CSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCYJuJxa1hvInvm065oJHBeVCravB2yVOFSiF41Y5oD
+mS7nyxJityfTJMNwHqfM7guLAFvsvdHy9AqoZJsqXMjIzNe9Fqb98nZs+P3H97FxKAbPqT0BEgHK
+tRslh+EdZL83Ej3SDyczOTkcNB6vwGDf1yB+KKSCmsp2zOxLg1HpogeZxIYD2xxgpricJ+8NpbMh
+pMnMTRwYy/sHmPHZWnaNqXWai7W6WF3QhTyqi7e8JvvHLhSZp5jF0mmbnkLM47se48zkHudvWoWa
+2mUvZKTD9QRP52X+KAOfmXpHWNWHvKauRc4sm0EtvpY9VFkfAJmT+AOYv7Vh1opDcLXr+KXZAgMB
+AAGjggNvMIIDazCBtQYDVR0RBIGtMIGqoDgGBWBMAQMEoC8ELTE2MDYxOTUzNzIxODE3NjE4Njgw
+MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMKAhBgVgTAEDAqAYBBZOSVZBTERPIEdPTUVTIERBIFNJ
+TFZBoBkGBWBMAQMDoBAEDjY4MDc1NjEzMDAwMTIxoBcGBWBMAQMHoA4EDDAwMDAwMDAwMDAwMIEX
+bml2YWxkb0BzYW1ldGFpcy5jb20uYnIwCQYDVR0TBAIwADAfBgNVHSMEGDAWgBSdUM+9/yTKr7Ez
+6xfiQnqOaSqOUzAOBgNVHQ8BAf8EBAMCBeAwgYkGA1UdIASBgTB/MH0GBmBMAQIBCzBzMHEGCCsG
+AQUFBwIBFmVodHRwOi8vaWNwLWJyYXNpbC5jZXJ0aXNpZ24uY29tLmJyL3JlcG9zaXRvcmlvL2Rw
+Yy9BQ19DZXJ0aXNpZ25fTXVsdGlwbGEvRFBDX0FDX0NlcnRpU2lnbk11bHRpcGxhLnBkZjCCASUG
+A1UdHwSCARwwggEYMFygWqBYhlZodHRwOi8vaWNwLWJyYXNpbC5jZXJ0aXNpZ24uY29tLmJyL3Jl
+cG9zaXRvcmlvL2xjci9BQ0NlcnRpc2lnbk11bHRpcGxhRzUvTGF0ZXN0Q1JMLmNybDBboFmgV4ZV
+aHR0cDovL2ljcC1icmFzaWwub3V0cmFsY3IuY29tLmJyL3JlcG9zaXRvcmlvL2xjci9BQ0NlcnRp
+c2lnbk11bHRpcGxhRzUvTGF0ZXN0Q1JMLmNybDBboFmgV4ZVaHR0cDovL3JlcG9zaXRvcmlvLmlj
+cGJyYXNpbC5nb3YuYnIvbGNyL0NlcnRpc2lnbi9BQ0NlcnRpc2lnbk11bHRpcGxhRzUvTGF0ZXN0
+Q1JMLmNybDAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwgaAGCCsGAQUFBwEBBIGTMIGQ
+MGQGCCsGAQUFBzAChlhodHRwOi8vaWNwLWJyYXNpbC5jZXJ0aXNpZ24uY29tLmJyL3JlcG9zaXRv
+cmlvL2NlcnRpZmljYWRvcy9BQ19DZXJ0aXNpZ25fTXVsdGlwbGFfRzUucDdjMCgGCCsGAQUFBzAB
+hhxodHRwOi8vb2NzcC5jZXJ0aXNpZ24uY29tLmJyMA0GCSqGSIb3DQEBCwUAA4ICAQBDqM6Kl9C6
+LfpPWXxRf1kO9G6rA601yIly/JWr+jVveQQ2G+etIn5zus02ix7Pd3V0cQoFApoU3zYRvJa5LEnj
+aYTqRDOvpIQGF5AhXODo8XJqCckcZrfO+EUXJOgyLESIM4McVKBGfx7kHT3DRKvpovIvoIuAkMz2
+IRRqCw9x5qeUa/BDTu3nEeqPn8zDh9Z86zHmtYY084qEfgZTCaEDURZgW90qwVof5Vh6Mdoy/Mi6
+9Wqeyy8lfMgUqj8AOOH92KbedLpzft3519VRNoCnIO5yA9Eye4RIzmQ2p99SJLof2Ss1zsyBj/Mr
+3B/sfh5UUX/+K7gPzN1iOo1LEkhZu0WYHZuZy+AcKqAQc5g5g6WFMIfOiFXNuFD8KC6vp4/msBYG
+KDnnqwepCM7SnUbDHX1Cvi7p3z3ifD1LynJcoJ3DT+L9DdJt3j3csPTofQ05zZLezTxL5730bFLT
+Wf+nozo4SnPN/r1WFiL8cUl0cnMmw3elgq7YV7UJ3LdUIW/B4nu4sdoWfgIKbj9AO81QJmTYk0Cv
+f0Apm3zpKEQ/fnIlLqiaOPK8y9XeNoT5kgqMfM2ibXsss5Spp1nXmlKwZ5CtQ9gbptfItI4hhQo7
+dyP5e5i1MXrJLX/ZcPj7cbcFXo831jmw+4DeNi25HiFG9+4nQicwMY4pXEADOTeP2Q==</X509Certificate></X509Data></KeyInfo></Signature></NFe><protNFe versao="2.00">
+        <infProt>
+            <tpAmb>1</tpAmb>
+            <verAplic>SP_NFE_PL_006q</verAplic>
+            <chNFe>35140668075613000393550020001819201002313903</chNFe>
+            <dhRecbto>2014-06-18T03:22:41</dhRecbto>
+            <nProt>135140373510335</nProt>
+            <digVal>68zi0VoRMKjyVYaBfVUtHmvhBZw=</digVal>
+            <cStat>100</cStat>
+            <xMotivo>Autorizado o uso da NF-e</xMotivo>
+        </infProt>
+    </protNFe></nfeProc>

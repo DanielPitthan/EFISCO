@@ -14,9 +14,9 @@ namespace DAL.FileStoranges.DAO
         {
         }
 
-        public DbSet<FileStorange> GetAll()
+        public IQueryable<FileStorange> GetAll()
         {
-            return Contexto.FileStorange;
+            return Contexto.FileStorange.AsNoTracking();
         }
 
         public async Task<FileStorange> GetByFileNameAndType(string fileName, string type)
@@ -27,5 +27,30 @@ namespace DAL.FileStoranges.DAO
                    .FirstOrDefaultAsync();
             return arquivos;
         }
+
+        public override bool Update<TSource>(TSource _item)
+        {
+            FileStorange item = _item as FileStorange;
+
+            var local = base.Contexto.Set<FileStorange>()
+                                  .Local
+                                  .FirstOrDefault(entry => entry.Id.Equals(item.Id));
+            if (local != null)
+            {
+                Contexto.Entry(local).State = EntityState.Detached;
+            }
+
+
+            Contexto.Entry(item).State = EntityState.Modified;
+
+
+
+
+            int rows = Contexto.SaveChanges();
+            return rows > 0;
+
+        }
+
+
     }
 }

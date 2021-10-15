@@ -16,5 +16,10 @@ namespace DAL.Cadastros.Produtos.DAO
         {
             return Contexto.ProdutoIntegrado;
         }
+
+        public override bool Update<TSource>(TSource item)
+        {
+            return base.Update(item);
+        }
     }
 }

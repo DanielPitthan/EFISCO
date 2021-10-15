@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nfeProc xmlns="http://www.portalfiscal.inf.br/nfe" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" versao="2.00" xsi:schemaLocation="http://www.portalfiscal.inf.br/nfe  procNFe_v2.00.xsd"><NFe xmlns="http://www.portalfiscal.inf.br/nfe"><infNFe Id="NFe35140658507468000904551010000897301000897304" versao="2.00"><ide><cUF>35</cUF><cNF>00089730</cNF><natOp>VENDA DE MERCADORIAS</natOp><indPag>2</indPag><mod>55</mod><serie>101</serie><nNF>89730</nNF><dEmi>2014-06-26</dEmi><dSaiEnt>2014-06-26</dSaiEnt><tpNF>1</tpNF><cMunFG>3518800</cMunFG><tpImp>1</tpImp><tpEmis>1</tpEmis><cDV>4</cDV><tpAmb>1</tpAmb><finNFe>1</finNFe><procEmi>0</procEmi><verProc>1.00</verProc></ide><emit><CNPJ>58507468000904</CNPJ><xNome>MULTIEIXO IMPLEMENTOS RODOVIARIOS LTDA</xNome><enderEmit><xLgr>RUA LUIZ RODRIGUES DE FREITAS 132</xLgr><nro>132</nro><xBairro>VL ROSA MINELIA</xBairro><cMun>3518800</cMun><xMun>GUARULHOS</xMun><UF>SP</UF><CEP>07034050</CEP><cPais>1058</cPais><xPais>BRASIL</xPais><fone>1121329898</fone></enderEmit><IE>336856803118</IE><CRT>3</CRT></emit><dest><CNPJ>47939855000146</CNPJ><xNome>COLOROBBIA BRASIL PRODS P/ CERAMICA LTDA</xNome><enderDest><xLgr>VIA DAS ESTANCIAS KM 90</xLgr><nro>S/N</nro><xBairro>DA PONTE</xBairro><cMun>3523404</cMun><xMun>ITATIBA</xMun><UF>SP</UF><CEP>13252900</CEP><cPais>1058</cPais><xPais>BRASIL</xPais></enderDest><IE>382009542116</IE><email>fernandovieira@colorobbia.com.br</email></dest><det nItem="1"><prod><cProd>7380300144</cProd><cEAN /><xProd>ENGATE 3'' SILO P/MANG. DESCARGA</xProd><NCM>87169090</NCM><CFOP>5405</CFOP><uCom>UN</uCom><qCom>1.0000</qCom><vUnCom>190.0000000000</vUnCom><vProd>190.00</vProd><cEANTrib /><uTrib>UN</uTrib><qTrib>1.0000</qTrib><vUnTrib>190.0000000000</vUnTrib><indTot>1</indTot></prod><imposto><vTotTrib>65.13</vTotTrib><ICMS><ICMS60><orig>0</orig><CST>60</CST><vBCSTRet>0.00</vBCSTRet><vICMSSTRet>0.00</vICMSSTRet></ICMS60></ICMS><PIS><PISAliq><CST>01</CST><vBC>190.00</vBC><pPIS>1.65</pPIS><vPIS>3.14</vPIS></PISAliq></PIS><COFINS><COFINSAliq><CST>01</CST><vBC>190.00</vBC><pCOFINS>7.60</pCOFINS><vCOFINS>14.44</vCOFINS></COFINSAliq></COFINS></imposto><infAdProd>CST 060 - ICMS RECOLHIDO ANTECIPADAMENTE POR SUBSTITUICAO TRIBUTARIA NOS TERMOS DO ARTIGO 310/313 DO RICMS-SP/2000.</infAdProd></det><total><ICMSTot><vBC>0.00</vBC><vICMS>0.00</vICMS><vBCST>0.00</vBCST><vST>0.00</vST><vProd>190.00</vProd><vFrete>0.00</vFrete><vSeg>0.00</vSeg><vDesc>0.00</vDesc><vII>0.00</vII><vIPI>0.00</vIPI><vPIS>3.14</vPIS><vCOFINS>14.44</vCOFINS><vOutro>0.00</vOutro><vNF>190.00</vNF><vTotTrib>65.13</vTotTrib></ICMSTot></total><transp><modFrete>1</modFrete><vol><qVol>1</qVol></vol></transp><infAdic><infCpl>POSTO FISCAL .. 10 - GUARULHOS - DEVOLUCOES APENAS COM CONSULTA PREVIA PEDIDO VERBAL SR FERNANDO VIEIRA. ENTREGAR NA MULTIEIXO SUMARE. Valor Aprox.Tributos.: R$       65,13 (34,28%) Fonte: IBPT</infCpl></infAdic></infNFe><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI="#NFe35140658507468000904551010000897301000897304"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>FLF0oozhhUpl90i4SkeYx+IFWv8=</DigestValue></Reference></SignedInfo><SignatureValue>oSe8rNyflVsEVy/YXQlov4VCwEH7prBUF6R92vZhF3kZe30RgWe7e+B24cyMN/VEhYdpOwBY5AhC
+L1U5V7aR+TMPsa/7+7Qc+DU8xPWWBZlvQJb0LeI6U9mgTT0kdUAQbKBI03muUDtAf0gv93DYz7aC
+L3JY9xLXT5KbOqSdrgsj60wJAwSFI/Ggq3p4ZSJ87iLu+fkodgPDzucms0EXEJ6oE3pUQ3yT48rl
+j/wdDTKSA1zj1IfaZ3EfDFJlrNJxeHSK2vlD/VrtzAuIjlM6fwwTKp7qDmHjJdW9kORolOTiwzzC
+QqKMMjxYkDsUDi1TfQcrR1rActit3eoPbPHakg==</SignatureValue><KeyInfo><X509Data><X509Certificate>MIIH3jCCBcagAwIBAgIIZzlQF3pCJGkwDQYJKoZIhvcNAQELBQAwTDELMAkGA1UEBhMCQlIxEzAR
+BgNVBAoTCklDUC1CcmFzaWwxKDAmBgNVBAMTH1NFUkFTQSBDZXJ0aWZpY2Fkb3JhIERpZ2l0YWwg
+djIwHhcNMTQwNDI2MTMxOTAwWhcNMTUwNDI2MTMxOTAwWjCB8TELMAkGA1UEBhMCQlIxEzARBgNV
+BAoTCklDUC1CcmFzaWwxFDASBgNVBAsTCyhFTSBCUkFOQ08pMRgwFgYDVQQLEw8wMDAwMDEwMDUx
+MzczMjUxFDASBgNVBAsTCyhFTSBCUkFOQ08pMRQwEgYDVQQLEwsoRU0gQlJBTkNPKTEUMBIGA1UE
+CxMLKEVNIEJSQU5DTykxFDASBgNVBAsTCyhFTSBCUkFOQ08pMRQwEgYDVQQLEwsoRU0gQlJBTkNP
+KTEvMC0GA1UEAxMmTVVMVElFSVhPIElNUExFTUVOVE9TIFJPRE9WSUFSSU9TIExUREEwggEiMA0G
+CSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC0U+Jj1o2uoFsxJDJeTncAPXrHXCGnp/KCGS3E/p6h
+PSAfTJfGWDPLDO5wXMX4aparb3A2sku6HKjhKPWPAd8y6L3mn0q8sVNYoVvpV5vv8XY3bC8libkr
+QlbzosJC2iNEhoin8pyTXXM9Qofz6XejwawDn5YbQabbvYGdfv3pkaMzMpcQppi8jlvT0jGU8jWb
+H/rUSRIgQUj0eyW7AkuDmjqstRhJdof9c4FLq7E5lZy/YEUBowiPrfxnDGJ7o8GdoxbhWW4OmZwu
+gFbNvWj0hE+7Ppgv4HPurfuDXqfsLIfrsjHS8sRv817J/D4nYePBLl7xhZPOTqdX9W5CoSqpAgMB
+AAGjggMcMIIDGDCBlwYIKwYBBQUHAQEEgYowgYcwRwYIKwYBBQUHMAKGO2h0dHA6Ly93d3cuY2Vy
+dGlmaWNhZG9kaWdpdGFsLmNvbS5ici9jYWRlaWFzL3NlcmFzYWNkdjIucDdiMDwGCCsGAQUFBzAB
+hjBodHRwOi8vb2NzcC5jZXJ0aWZpY2Fkb2RpZ2l0YWwuY29tLmJyL3NlcmFzYWNkdjIwHwYDVR0j
+BBgwFoAUmuCDENcmm+m62oKygc45GtOHcIYwcQYDVR0gBGowaDBmBgZgTAECAQYwXDBaBggrBgEF
+BQcCARZOaHR0cDovL3B1YmxpY2FjYW8uY2VydGlmaWNhZG9kaWdpdGFsLmNvbS5ici9yZXBvc2l0
+b3Jpby9kcGMvZGVjbGFyYWNhby1zY2QucGRmMIHwBgNVHR8EgegwgeUwSaBHoEWGQ2h0dHA6Ly93
+d3cuY2VydGlmaWNhZG9kaWdpdGFsLmNvbS5ici9yZXBvc2l0b3Jpby9sY3Ivc2VyYXNhY2R2Mi5j
+cmwwQ6BBoD+GPWh0dHA6Ly9sY3IuY2VydGlmaWNhZG9zLmNvbS5ici9yZXBvc2l0b3Jpby9sY3Iv
+c2VyYXNhY2R2Mi5jcmwwU6BRoE+GTWh0dHA6Ly9yZXBvc2l0b3Jpby5pY3BicmFzaWwuZ292LmJy
+L2xjci9TZXJhc2EvcmVwb3NpdG9yaW8vbGNyL3NlcmFzYWNkdjIuY3JsMA4GA1UdDwEB/wQEAwIF
+4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwgcUGA1UdEQSBvTCBuoEXTVVMVElFSVhP
+QE1VTFRJRUlYTy5DT02gPgYFYEwBAwSgNRMzMTkxMTE5NTQxOTg2MTc0NTA2ODAwMDAwMDAwMDAw
+MDAwMDAwMDAwMDAwMDAwMDAwMDAwoCsGBWBMAQMCoCITIEpPU0UgVkFMREVOT1IgREUgUVVBRFJP
+UyBGQUNISU5JoBkGBWBMAQMDoBATDjU4NTA3NDY4MDAwMTU3oBcGBWBMAQMHoA4TDDAwMDAwMDAw
+MDAwMDANBgkqhkiG9w0BAQsFAAOCAgEAlN/lZfNU0FufZrRKhL+mXZU1tGBv/5EZHmiezC8MRvIA
+TzoPsMYsuCO5lOzGDkzY+0yfUz7SvtBKtizK7Pnku6YyZ9AhUAURnzygo1MccfklQ4oXaoQkrEeA
+Zg18FUh7wcuW/AhEtl1Q6dc+OLOpkhmne/mduS/ofW2xBfPkAr0VhKMukVZs37+ZhT8PH0aWcRE1
+KhWMmoYrHauwCnvFoEwQeEKn4j3vQdYL8jZZzITbWo55mdwLX95Uj6Px/xwQs//6P11tWO2NCdRb
+fqPeL3TDeJq10ePMxB6HhwTOgNQ6Gov2JNC35msqRyTu+zTzDPkup0pCi5z7kdTfElTfTeFrnFY8
+xPi8Hc6C55W4skjCV05h/XxDYLcnUkgfW2aIfkYCor8xt3plnhC8FwJgay4YRIIVcyHCvmPzYF2y
+EjGe93zkbj3/teJrLDHIKoE9etmcW9q8uUZi7chnB1IqHhRE68OfcgNr/LcIJvcOebEuzVUVzqZy
+N/EgYjenxxHLXlzzdn6xK4O2POtzpJxgpsKwToevUGCevR32sTrUJxvXgSa3WgqS/rLotQ41PQXL
+JXLGLv5UZdxlMIdcHl+mE+65EuBmi7v863ziXPLbFeGcV6xvrKnVQayJutSKbgVqtXRuSxYI3PWC
+f3r0HFz4BAVv60zUc38jtR0UqBQdQbI=</X509Certificate></X509Data></KeyInfo></Signature></NFe><protNFe versao="2.00"><infProt><tpAmb>1</tpAmb><verAplic>SP_NFE_PL_006q</verAplic><chNFe>35140658507468000904551010000897301000897304</chNFe><dhRecbto>2014-06-26T15:45:17</dhRecbto><nProt>135140391616834</nProt><digVal>FLF0oozhhUpl90i4SkeYx+IFWv8=</digVal><cStat>100</cStat><xMotivo>Autorizado o uso da NF-e</xMotivo></infProt></protNFe></nfeProc>

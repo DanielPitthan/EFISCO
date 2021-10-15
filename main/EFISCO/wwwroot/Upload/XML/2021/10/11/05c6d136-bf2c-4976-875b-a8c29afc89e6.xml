@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nfeProc versao="2.00" xmlns="http://www.portalfiscal.inf.br/nfe">
+	<NFe xmlns="http://www.portalfiscal.inf.br/nfe"><infNFe Id="NFe35140262969951000120550010007292171827931646" versao="2.00"><ide><cUF>35</cUF><cNF>82793164</cNF><natOp>Venda</natOp><indPag>1</indPag><mod>55</mod><serie>1</serie><nNF>729217</nNF><dEmi>2014-02-17</dEmi><tpNF>1</tpNF><cMunFG>3550308</cMunFG><tpImp>1</tpImp><tpEmis>1</tpEmis><cDV>6</cDV><tpAmb>1</tpAmb><finNFe>1</finNFe><procEmi>0</procEmi><verProc>1.8.5.0</verProc></ide><emit><CNPJ>62969951000120</CNPJ><xNome>RPL Rolamentos Paulista Ltda.</xNome><xFant>RPL</xFant><enderEmit><xLgr>Avenida Queiroz Filho</xLgr><nro>812</nro><xBairro>Vila Hamburguesa</xBairro><cMun>3550308</cMun><xMun>Sao Paulo</xMun><UF>SP</UF><CEP>05319000</CEP><cPais>1058</cPais><xPais>BRASIL</xPais><fone>1130244000</fone></enderEmit><IE>108428818116</IE><CRT>3</CRT></emit><dest><CNPJ>47939855000146</CNPJ><xNome>Colorobbia Produtos para Ceramica Ltda.</xNome><enderDest><xLgr>Via Das Estancias, Km90</xLgr><nro>0</nro><xBairro>Bairro da Ponte</xBairro><cMun>3523404</cMun><xMun>Itatiba</xMun><UF>SP</UF><CEP>13252900</CEP><cPais>1058</cPais><xPais>BRASIL</xPais><fone>1145249219</fone></enderDest><IE>382009542116</IE><email>nfe@colorobbia.com.br</email></dest><det nItem="1"><prod><cProd>15979</cProd><cEAN/><xProd>Rolamento-NJ2309W-NSK</xProd><NCM>84825010</NCM><CFOP>5102</CFOP><uCom>PC</uCom><qCom>2.0000</qCom><vUnCom>370.0000</vUnCom><vProd>740.00</vProd><cEANTrib/><uTrib>PC</uTrib><qTrib>2.0000</qTrib><vUnTrib>370.0000</vUnTrib><indTot>1</indTot></prod><imposto><ICMS><ICMS00><orig>2</orig><CST>00</CST><modBC>3</modBC><vBC>740.00</vBC><pICMS>18.00</pICMS><vICMS>133.20</vICMS></ICMS00></ICMS><IPI><cEnq>999</cEnq><IPINT><CST>53</CST></IPINT></IPI><PIS><PISAliq><CST>01</CST><vBC>740.00</vBC><pPIS>1.65</pPIS><vPIS>12.21</vPIS></PISAliq></PIS><COFINS><COFINSAliq><CST>01</CST><vBC>740.00</vBC><pCOFINS>7.60</pCOFINS><vCOFINS>56.24</vCOFINS></COFINSAliq></COFINS></imposto></det><det nItem="2"><prod><cProd>8590</cProd><cEAN/><xProd>Rolamento-6309ZZ-NSK</xProd><NCM>84821010</NCM><CFOP>5102</CFOP><uCom>PC</uCom><qCom>1.0000</qCom><vUnCom>39.3700</vUnCom><vProd>39.37</vProd><cEANTrib/><uTrib>PC</uTrib><qTrib>1.0000</qTrib><vUnTrib>39.3700</vUnTrib><indTot>1</indTot></prod><imposto><ICMS><ICMS00><orig>0</orig><CST>00</CST><modBC>3</modBC><vBC>39.37</vBC><pICMS>18.00</pICMS><vICMS>7.09</vICMS></ICMS00></ICMS><IPI><cEnq>999</cEnq><IPINT><CST>53</CST></IPINT></IPI><PIS><PISAliq><CST>01</CST><vBC>39.37</vBC><pPIS>1.65</pPIS><vPIS>0.65</vPIS></PISAliq></PIS><COFINS><COFINSAliq><CST>01</CST><vBC>39.37</vBC><pCOFINS>7.60</pCOFINS><vCOFINS>2.99</vCOFINS></COFINSAliq></COFINS></imposto></det><det nItem="3"><prod><cProd>126021</cProd><cEAN/><xProd>Rolamento-6310ZZ-NSK</xProd><NCM>84821010</NCM><CFOP>5102</CFOP><uCom>PC</uCom><qCom>1.0000</qCom><vUnCom>62.0000</vUnCom><vProd>62.00</vProd><cEANTrib/><uTrib>PC</uTrib><qTrib>1.0000</qTrib><vUnTrib>62.0000</vUnTrib><indTot>1</indTot><nFCI>29D58B88-FAC3-4E03-AE43-F365C22576F1</nFCI></prod><imposto><ICMS><ICMS00><orig>5</orig><CST>00</CST><modBC>3</modBC><vBC>62.00</vBC><pICMS>18.00</pICMS><vICMS>11.16</vICMS></ICMS00></ICMS><IPI><cEnq>999</cEnq><IPINT><CST>53</CST></IPINT></IPI><PIS><PISAliq><CST>01</CST><vBC>62.00</vBC><pPIS>1.65</pPIS><vPIS>1.02</vPIS></PISAliq></PIS><COFINS><COFINSAliq><CST>01</CST><vBC>62.00</vBC><pCOFINS>7.60</pCOFINS><vCOFINS>4.71</vCOFINS></COFINSAliq></COFINS></imposto><infAdProd>Instr.Sen.Fed.13/12 FCI: 29D58B88-FAC3-4E03-AE43-F365C22576F1</infAdProd></det><total><ICMSTot><vBC>841.37</vBC><vICMS>151.45</vICMS><vBCST>0.00</vBCST><vST>0.00</vST><vProd>841.37</vProd><vFrete>0.00</vFrete><vSeg>0.00</vSeg><vDesc>0.00</vDesc><vII>0.00</vII><vIPI>0.00</vIPI><vPIS>13.88</vPIS><vCOFINS>63.94</vCOFINS><vOutro>0.00</vOutro><vNF>841.37</vNF></ICMSTot></total><transp><modFrete>0</modFrete><transporta><CNPJ>44914992001371</CNPJ><xNome>Rodonaves Transportes e Encomendas Ltda.</xNome><xEnder>Av. Alexandre Collares,340</xEnder><xMun>Sao Paulo</xMun><UF>SP</UF></transporta><vol><qVol>1</qVol><esp>Caixas</esp><marca>RPL</marca><pesoL>4.655</pesoL><pesoB>4.680</pesoB></vol></transp><cobr><dup><nDup>729217</nDup><dVenc>2014-03-30</dVenc><vDup>841.37</vDup></dup></cobr><infAdic><infCpl>Produto Para uso e Aplicacao Exclusivamente Industrial - Nao Sujeito a Substituicao Tributaria</infCpl></infAdic></infNFe><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#NFe35140262969951000120550010007292171827931646"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>8nn192PJK70fhPS3ZZOYqqe/4lA=</DigestValue></Reference></SignedInfo><SignatureValue>IVYQwURrFiRfeFsvbfotyfOJZ0czp8UbTuU2RAoUhDtDaff4a14VjgymYkru1CR6dlCkNxLI0WBs
+LmOGZU+hllMdWATMC/1sqaV7aJnwnNPswfTKVVgy6/fFc5LH/VfYimqL9YSba+jnBS3GxwKJWx1x
+4J/WQAERa+ng3V5Wh9CnBf3FBf3cTWEkfwjx+g4QnuLPyISEpmooGB3I3XoLQzqRI/oqqDVH6HNl
+tJKq3m4cgaRpQJ1xjvXbC0GxhQrQmTKGFVgnKco3WKnJ6VZUNZn7iJsEykjKMb0M4NoY9C/OFuB7
+DM6gjRspo2pIeD5QpcvenHuI0pl/7S1Xv0TRcA==</SignatureValue><KeyInfo><X509Data><X509Certificate>MIIHyDCCBbCgAwIBAgIIMaAFwJ3L6BMwDQYJKoZIhvcNAQELBQAwTDELMAkGA1UEBhMCQlIxEzAR
+BgNVBAoTCklDUC1CcmFzaWwxKDAmBgNVBAMTH1NFUkFTQSBDZXJ0aWZpY2Fkb3JhIERpZ2l0YWwg
+djIwHhcNMTQwMTI4MTM0OTAwWhcNMTUwMTI4MTM0OTAwWjCB5zELMAkGA1UEBhMCQlIxEzARBgNV
+BAoTCklDUC1CcmFzaWwxFDASBgNVBAsTCyhFTSBCUkFOQ08pMRgwFgYDVQQLEw8wMDAwMDEwMDQ5
+MDk3MjExFDASBgNVBAsTCyhFTSBCUkFOQ08pMRQwEgYDVQQLEwsoRU0gQlJBTkNPKTEUMBIGA1UE
+CxMLKEVNIEJSQU5DTykxFDASBgNVBAsTCyhFTSBCUkFOQ08pMRQwEgYDVQQLEwsoRU0gQlJBTkNP
+KTElMCMGA1UEAxMcUlBMIFJPTEFNRU5UT1MgUEFVTElTVEEgTFREQTCCASIwDQYJKoZIhvcNAQEB
+BQADggEPADCCAQoCggEBALjPTFSsLe1U0KHGBBTFxGtkuEogC6koUu1OWQJPBDCmc7qgwhWGx8/3
+xin7x9xqNdUB1pxAoc1PpW2Bq90VeCPkMTAz34Q1gzCuunsU9Wo9S9NThUrqyymO9BSfGrzUZoW4
+quaWipw8aeIjU7HenzjfSad5fOUulPVYJFhmBpuGGlmyia2e+M7jqqk6aRHpSCfMIItM3bjs6L3Q
+814F8J+8ouDxc/wlIPEC5drPmunMH+ZiPFm8q/48DHENJ5zh1FxRdckUcqJ5k676iAQi7PK8wXYO
+I2QOxOakMrU1DP/FEjONoJz2o0hWuWtTXWbcwSw4hOHvaK/62zIewpnYY8sCAwEAAaOCAxAwggMM
+MIGXBggrBgEFBQcBAQSBijCBhzBHBggrBgEFBQcwAoY7aHR0cDovL3d3dy5jZXJ0aWZpY2Fkb2Rp
+Z2l0YWwuY29tLmJyL2NhZGVpYXMvc2VyYXNhY2R2Mi5wN2IwPAYIKwYBBQUHMAGGMGh0dHA6Ly9v
+Y3NwLmNlcnRpZmljYWRvZGlnaXRhbC5jb20uYnIvc2VyYXNhY2R2MjAfBgNVHSMEGDAWgBSa4IMQ
+1yab6bragrKBzjka04dwhjBxBgNVHSAEajBoMGYGBmBMAQIBBjBcMFoGCCsGAQUFBwIBFk5odHRw
+Oi8vcHVibGljYWNhby5jZXJ0aWZpY2Fkb2RpZ2l0YWwuY29tLmJyL3JlcG9zaXRvcmlvL2RwYy9k
+ZWNsYXJhY2FvLXNjZC5wZGYwgfAGA1UdHwSB6DCB5TBJoEegRYZDaHR0cDovL3d3dy5jZXJ0aWZp
+Y2Fkb2RpZ2l0YWwuY29tLmJyL3JlcG9zaXRvcmlvL2xjci9zZXJhc2FjZHYyLmNybDBDoEGgP4Y9
+aHR0cDovL2xjci5jZXJ0aWZpY2Fkb3MuY29tLmJyL3JlcG9zaXRvcmlvL2xjci9zZXJhc2FjZHYy
+LmNybDBToFGgT4ZNaHR0cDovL3JlcG9zaXRvcmlvLmljcGJyYXNpbC5nb3YuYnIvbGNyL1NlcmFz
+YS9yZXBvc2l0b3Jpby9sY3Ivc2VyYXNhY2R2Mi5jcmwwDgYDVR0PAQH/BAQDAgXgMB0GA1UdJQQW
+MBQGCCsGAQUFBwMCBggrBgEFBQcDBDCBuQYDVR0RBIGxMIGugRJWQUxERUNZQFJQTC5DT00uQlKg
+PgYFYEwBAwSgNRMzMjkwMTE5MzUyNTM0NjI4ODg3MjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAw
+MDAwMDAwoCQGBWBMAQMCoBsTGUpPU0UgRElBUyBNQVJUSU5TIFBFUkVJUkGgGQYFYEwBAwOgEBMO
+NjI5Njk5NTEwMDAxMjCgFwYFYEwBAwegDhMMMDAwMDAwMDAwMDAwMA0GCSqGSIb3DQEBCwUAA4IC
+AQAP9vGzQj2m7NEQMi27NRMfw+GcL/f3oL4dbnavfpvAe6IJ0fZQcdaLNop0q//SOQUFbQQyrpmh
+1CsKPNZJYXOO+K6LWeIheTiKHp/W+lHuib0ysNZTYdKqZ/PL+SFG3tdlmQtjATUIUKh15Bk/sTi4
+qUFvBmNaD1iI8QBNBJgyIwKW5lRp5I4kRfsYLtLkm8+PLV7+FYIqW+oA3jgEIcww++UoNo+Tx+dX
+OnmCwvOZlxmo8b5gf3qeXFJ+i7Cr+AMOPkkUK5dZDyOMxL8U7am5C9wQKDMFQoybbGEwdF9K8ArP
+bpcnNj2bLGENYb9fI7bJnEEEgxwxlxuW+xKX0NnhUMAnkZJ763Ea3N2nb7XcIJ6VT5kmXIJ1P7Le
+y+H7G+oi/T462hgReTUQNcf5wjyRrNqgANVh1PZiMfQkkMRHAd+v2aQOaoA8hzsyrR7p3O0q+F1W
+7jQnN8+dcdSbdMTnuHbo16Fr+EhJi559FrJQChp45e9Ck40Kp4iMSRFqrD5ZFpF0P/GXppZ4QYLu
+9Nbk3boJW+PN2Nw2B4aRd0Dfbkgr1og7xXHGk7T4G/+HDJr2oROf3jVVpGtLNHh+eeu8b5Bj59ud
+HjUgXk6DbvnnN2lHPKHoVI8eF3H2bMv4dk/J0qcPRwN/KX6g49BA+SC/LLxNB/xm+s0dCeZRBkqM
+mg==</X509Certificate></X509Data></KeyInfo></Signature></NFe><protNFe versao="2.00">
+	<infProt><tpAmb>1</tpAmb><verAplic>SP_NFE_PL_006q</verAplic><chNFe>35140262969951000120550010007292171827931646</chNFe><dhRecbto>2014-02-17T17:30:31</dhRecbto><nProt>135140103297182</nProt><digVal>8nn192PJK70fhPS3ZZOYqqe/4lA=</digVal><cStat>100</cStat><xMotivo>Autorizado o uso da NF-e</xMotivo></infProt></protNFe>
+</nfeProc>

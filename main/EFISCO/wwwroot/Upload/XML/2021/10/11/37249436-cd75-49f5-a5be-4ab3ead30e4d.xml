@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><nfeProc xmlns="http://www.portalfiscal.inf.br/nfe" versao="2.00"><NFe xmlns="http://www.portalfiscal.inf.br/nfe"><infNFe Id="NFe35140668075613000121550020000900631002309565" versao="2.00"><ide><cUF>35</cUF><cNF>00230956</cNF><natOp>VENDA MERC ADQ OU REC DE TERCEIROS</natOp><indPag>1</indPag><mod>55</mod><serie>2</serie><nNF>90063</nNF><dEmi>2014-06-16</dEmi><tpNF>1</tpNF><cMunFG>3525904</cMunFG><tpImp>1</tpImp><tpEmis>1</tpEmis><cDV>5</cDV><tpAmb>1</tpAmb><finNFe>1</finNFe><procEmi>0</procEmi><verProc>V2.250</verProc></ide><emit><CNPJ>68075613000121</CNPJ><xNome>METAIS COMERCIAL LTDA</xNome><enderEmit><xLgr>RUA XV NOVEMBRO, 889</xLgr><nro>01</nro><xCpl>925</xCpl><xBairro>CENTRO</xBairro><cMun>3525904</cMun><xMun>JUNDIAI</xMun><UF>SP</UF><CEP>13201005</CEP><cPais>1058</cPais><xPais>Brasil</xPais><fone>01145887400</fone></enderEmit><IE>407183099119</IE><CRT>3</CRT></emit><dest><CNPJ>47939855000146</CNPJ><xNome>COLOROBBIA BRASIL PRODUTOS PARA CERAMICA LTDA-037351</xNome><enderDest><xLgr>VIA DAS ESTANCIAS SN KM 090</xLgr><nro>01</nro><xCpl>1</xCpl><xBairro>BAIRRO DA PONTE</xBairro><cMun>3523404</cMun><xMun>ITATIBA</xMun><UF>SP</UF><CEP>13251800</CEP><cPais>1058</cPais><xPais>BRASIL</xPais><fone>1134089219</fone></enderDest><IE>382009542116</IE></dest><retirada><CNPJ>68075613000121</CNPJ><xLgr>RUA XV NOVEMBRO, 889</xLgr><nro>01</nro><xCpl>925</xCpl><xBairro>CENTRO</xBairro><cMun>3525904</cMun><xMun>JUNDIAI</xMun><UF>SP</UF></retirada><entrega><CNPJ>47939855000146</CNPJ><xLgr>RODOVIA DAS ESTANCIAS, KM 90</xLgr><nro>01</nro><xCpl>1</xCpl><xBairro>BAIRRO DA PONTE</xBairro><cMun>3523404</cMun><xMun>ITATIBA</xMun><UF>SP</UF></entrega><det nItem="1"><prod><cProd>602</cProd><cEAN/><xProd>CANTONEIRA 3/16 X 1.1/4 MECANICO - 6M</xProd><NCM>72162100</NCM><CFOP>5102</CFOP><uCom>BR</uCom><qCom>2.0000</qCom><vUnCom>39.0000000000</vUnCom><vProd>78.00</vProd><cEANTrib/><uTrib>BR</uTrib><qTrib>2.0000</qTrib><vUnTrib>39.0000000000</vUnTrib><vFrete>8.18</vFrete><indTot>1</indTot></prod><imposto><ICMS><ICMS00><orig>0</orig><CST>00</CST><modBC>3</modBC><vBC>86.18</vBC><pICMS>12.00</pICMS><vICMS>10.34</vICMS></ICMS00></ICMS><IPI><cEnq>999</cEnq><IPINT><CST>52</CST></IPINT></IPI><II><vBC>0.00</vBC><vDespAdu>0.00</vDespAdu><vII>0.00</vII><vIOF>0.00</vIOF></II><PIS><PISAliq><CST>01</CST><vBC>86.18</vBC><pPIS>1.65</pPIS><vPIS>1.42</vPIS></PISAliq></PIS><COFINS><COFINSAliq><CST>01</CST><vBC>86.18</vBC><pCOFINS>7.60</pCOFINS><vCOFINS>6.55</vCOFINS></COFINSAliq></COFINS></imposto></det><det nItem="2"><prod><cProd>605</cProd><cEAN/><xProd>CANTONEIRA 3/16 X 2 MECANICO - 6M</xProd><NCM>72162100</NCM><CFOP>5102</CFOP><uCom>BR</uCom><qCom>1.0000</qCom><vUnCom>65.0000000000</vUnCom><vProd>65.00</vProd><cEANTrib/><uTrib>BR</uTrib><qTrib>1.0000</qTrib><vUnTrib>65.0000000000</vUnTrib><vFrete>6.82</vFrete><indTot>1</indTot></prod><imposto><ICMS><ICMS00><orig>0</orig><CST>00</CST><modBC>3</modBC><vBC>71.82</vBC><pICMS>12.00</pICMS><vICMS>8.62</vICMS></ICMS00></ICMS><IPI><cEnq>999</cEnq><IPINT><CST>52</CST></IPINT></IPI><II><vBC>0.00</vBC><vDespAdu>0.00</vDespAdu><vII>0.00</vII><vIOF>0.00</vIOF></II><PIS><PISAliq><CST>01</CST><vBC>71.82</vBC><pPIS>1.65</pPIS><vPIS>1.19</vPIS></PISAliq></PIS><COFINS><COFINSAliq><CST>01</CST><vBC>71.82</vBC><pCOFINS>7.60</pCOFINS><vCOFINS>5.46</vCOFINS></COFINSAliq></COFINS></imposto></det><total><ICMSTot><vBC>158.00</vBC><vICMS>18.96</vICMS><vBCST>0.00</vBCST><vST>0.00</vST><vProd>143.00</vProd><vFrete>15.00</vFrete><vSeg>0.00</vSeg><vDesc>0.00</vDesc><vII>0.00</vII><vIPI>0.00</vIPI><vPIS>2.61</vPIS><vCOFINS>12.01</vCOFINS><vOutro>0.00</vOutro><vNF>158.00</vNF></ICMSTot></total><transp><modFrete>1</modFrete><transporta><CNPJ>68075613000121</CNPJ><xNome>NOSSO CARRO</xNome><xMun>JUNDIAI</xMun><UF>SP</UF></transporta><vol><qVol>0</qVol><pesoL>48.060</pesoL><pesoB>48.060</pesoB></vol></transp><cobr><fat><nFat>1)15-07-2014</nFat></fat><dup><nDup>090063/N-1</nDup><dVenc>2014-07-15</dVenc><vDup>158.00</vDup></dup></cobr><infAdic><infCpl>ALIQUOTA 12% CFE.ART 54, INCISO VII, PARAG.1o - DECRETO 45490/00.  PEDIDO DO CLIENTE  NUM.PEDIDO: 164710  Vendedor: SERGIO RICARDO MENDES (FUNCIO)  Endereco Entrega: RODOVIA DAS ESTANCIAS, KM 90  BAIRRO DA PONTE ITATIBA SP  000-TRIBUTADO INTEGRALMENTE  VAL APROX TRIBUTOS: R$ 39,25</infCpl></infAdic></infNFe><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#NFe35140668075613000121550020000900631002309565"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>wJtrUvdqvqqPEWxnDzsDP60DEkw=</DigestValue></Reference></SignedInfo><SignatureValue>BdnJ+vJOpgU6yWUiIlMq+Tz8syWx1NHW8NxR7Vb1aIOv20zX2d55oC6Gj04y3Sp3tBH0HNiSV6Y0
+dpe6prQdA2wyxoeEs+BTRryNlvxYUTcNO3248TBjSJALjaf38uVi69tQ3eiN+zFE9ZHtepNoZNvX
+yEcPDH5fgMwNEqDy240mI8vL6YaTa6k4mQFsMcTcXHzpV+9WInwATq/OBmZyBSzsG1KeoaPSsDS+
+SrZxKzdCwbv/F8PDE2fcNBXcEkxlC7nhO+AQqk6xIeDwnw64BEqCCekB54usrdmIJ76uu3fah/Hp
+43j1K7i5x9RdHiXZ9jsA8B+WguadxeETn0ctLw==</SignatureValue><KeyInfo><X509Data><X509Certificate>MIIIMTCCBhmgAwIBAgIQPj3toD0OjKPHXKX410s4/zANBgkqhkiG9w0BAQsFADB0MQswCQYDVQQG
+EwJCUjETMBEGA1UEChMKSUNQLUJyYXNpbDEtMCsGA1UECxMkQ2VydGlzaWduIENlcnRpZmljYWRv
+cmEgRGlnaXRhbCBTLkEuMSEwHwYDVQQDExhBQyBDZXJ0aXNpZ24gTXVsdGlwbGEgRzUwHhcNMTQw
+NjEzMDAwMDAwWhcNMTUwNjEyMjM1OTU5WjCBwTELMAkGA1UEBhMCQlIxEzARBgNVBAoUCklDUC1C
+cmFzaWwxITAfBgNVBAsUGEF1dGVudGljYWRvIHBvciBBUiBGYWNzaTEbMBkGA1UECxQSQXNzaW5h
+dHVyYSBUaXBvIEExMRUwEwYDVQQLFAxJRCAtIDY0ODE3NTcxHjAcBgNVBAMTFU1FVEFJUyBDT01F
+UkNJQUwgTFREQTEmMCQGCSqGSIb3DQEJARYXbml2YWxkb0BzYW1ldGFpcy5jb20uYnIwggEiMA0G
+CSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCYJuJxa1hvInvm065oJHBeVCravB2yVOFSiF41Y5oD
+mS7nyxJityfTJMNwHqfM7guLAFvsvdHy9AqoZJsqXMjIzNe9Fqb98nZs+P3H97FxKAbPqT0BEgHK
+tRslh+EdZL83Ej3SDyczOTkcNB6vwGDf1yB+KKSCmsp2zOxLg1HpogeZxIYD2xxgpricJ+8NpbMh
+pMnMTRwYy/sHmPHZWnaNqXWai7W6WF3QhTyqi7e8JvvHLhSZp5jF0mmbnkLM47se48zkHudvWoWa
+2mUvZKTD9QRP52X+KAOfmXpHWNWHvKauRc4sm0EtvpY9VFkfAJmT+AOYv7Vh1opDcLXr+KXZAgMB
+AAGjggNvMIIDazCBtQYDVR0RBIGtMIGqoDgGBWBMAQMEoC8ELTE2MDYxOTUzNzIxODE3NjE4Njgw
+MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMKAhBgVgTAEDAqAYBBZOSVZBTERPIEdPTUVTIERBIFNJ
+TFZBoBkGBWBMAQMDoBAEDjY4MDc1NjEzMDAwMTIxoBcGBWBMAQMHoA4EDDAwMDAwMDAwMDAwMIEX
+bml2YWxkb0BzYW1ldGFpcy5jb20uYnIwCQYDVR0TBAIwADAfBgNVHSMEGDAWgBSdUM+9/yTKr7Ez
+6xfiQnqOaSqOUzAOBgNVHQ8BAf8EBAMCBeAwgYkGA1UdIASBgTB/MH0GBmBMAQIBCzBzMHEGCCsG
+AQUFBwIBFmVodHRwOi8vaWNwLWJyYXNpbC5jZXJ0aXNpZ24uY29tLmJyL3JlcG9zaXRvcmlvL2Rw
+Yy9BQ19DZXJ0aXNpZ25fTXVsdGlwbGEvRFBDX0FDX0NlcnRpU2lnbk11bHRpcGxhLnBkZjCCASUG
+A1UdHwSCARwwggEYMFygWqBYhlZodHRwOi8vaWNwLWJyYXNpbC5jZXJ0aXNpZ24uY29tLmJyL3Jl
+cG9zaXRvcmlvL2xjci9BQ0NlcnRpc2lnbk11bHRpcGxhRzUvTGF0ZXN0Q1JMLmNybDBboFmgV4ZV
+aHR0cDovL2ljcC1icmFzaWwub3V0cmFsY3IuY29tLmJyL3JlcG9zaXRvcmlvL2xjci9BQ0NlcnRp
+c2lnbk11bHRpcGxhRzUvTGF0ZXN0Q1JMLmNybDBboFmgV4ZVaHR0cDovL3JlcG9zaXRvcmlvLmlj
+cGJyYXNpbC5nb3YuYnIvbGNyL0NlcnRpc2lnbi9BQ0NlcnRpc2lnbk11bHRpcGxhRzUvTGF0ZXN0
+Q1JMLmNybDAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwgaAGCCsGAQUFBwEBBIGTMIGQ
+MGQGCCsGAQUFBzAChlhodHRwOi8vaWNwLWJyYXNpbC5jZXJ0aXNpZ24uY29tLmJyL3JlcG9zaXRv
+cmlvL2NlcnRpZmljYWRvcy9BQ19DZXJ0aXNpZ25fTXVsdGlwbGFfRzUucDdjMCgGCCsGAQUFBzAB
+hhxodHRwOi8vb2NzcC5jZXJ0aXNpZ24uY29tLmJyMA0GCSqGSIb3DQEBCwUAA4ICAQBDqM6Kl9C6
+LfpPWXxRf1kO9G6rA601yIly/JWr+jVveQQ2G+etIn5zus02ix7Pd3V0cQoFApoU3zYRvJa5LEnj
+aYTqRDOvpIQGF5AhXODo8XJqCckcZrfO+EUXJOgyLESIM4McVKBGfx7kHT3DRKvpovIvoIuAkMz2
+IRRqCw9x5qeUa/BDTu3nEeqPn8zDh9Z86zHmtYY084qEfgZTCaEDURZgW90qwVof5Vh6Mdoy/Mi6
+9Wqeyy8lfMgUqj8AOOH92KbedLpzft3519VRNoCnIO5yA9Eye4RIzmQ2p99SJLof2Ss1zsyBj/Mr
+3B/sfh5UUX/+K7gPzN1iOo1LEkhZu0WYHZuZy+AcKqAQc5g5g6WFMIfOiFXNuFD8KC6vp4/msBYG
+KDnnqwepCM7SnUbDHX1Cvi7p3z3ifD1LynJcoJ3DT+L9DdJt3j3csPTofQ05zZLezTxL5730bFLT
+Wf+nozo4SnPN/r1WFiL8cUl0cnMmw3elgq7YV7UJ3LdUIW/B4nu4sdoWfgIKbj9AO81QJmTYk0Cv
+f0Apm3zpKEQ/fnIlLqiaOPK8y9XeNoT5kgqMfM2ibXsss5Spp1nXmlKwZ5CtQ9gbptfItI4hhQo7
+dyP5e5i1MXrJLX/ZcPj7cbcFXo831jmw+4DeNi25HiFG9+4nQicwMY4pXEADOTeP2Q==</X509Certificate></X509Data></KeyInfo></Signature></NFe><protNFe versao="2.00">
+        <infProt>
+            <tpAmb>1</tpAmb>
+            <verAplic>SP_NFE_PL_006q</verAplic>
+            <chNFe>35140668075613000121550020000900631002309565</chNFe>
+            <dhRecbto>2014-06-16T16:18:32</dhRecbto>
+            <nProt>135140370081672</nProt>
+            <digVal>wJtrUvdqvqqPEWxnDzsDP60DEkw=</digVal>
+            <cStat>100</cStat>
+            <xMotivo>Autorizado o uso da NF-e</xMotivo>
+        </infProt>
+    </protNFe></nfeProc>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><nfeProc versao="2.00" xmlns="http://www.portalfiscal.inf.br/nfe"><NFe xmlns="http://www.portalfiscal.inf.br/nfe"><infNFe Id="NFe35140603929489000179550010000017101089200104" versao="2.00"><ide><cUF>35</cUF><cNF>08920010</cNF><natOp>VENDA</natOp><indPag>1</indPag><mod>55</mod><serie>1</serie><nNF>1710</nNF><dEmi>2014-06-05</dEmi><dSaiEnt>2014-06-05</dSaiEnt><tpNF>1</tpNF><cMunFG>3518800</cMunFG><tpImp>1</tpImp><tpEmis>1</tpEmis><cDV>4</cDV><tpAmb>1</tpAmb><finNFe>1</finNFe><procEmi>3</procEmi><verProc>2.2.24</verProc></ide><emit><CNPJ>03929489000179</CNPJ><xNome>AZEVEDO MÓVEIS PARA ESCRITÓRIO LTDA-EPP</xNome><xFant>AZEVEDO</xFant><enderEmit><xLgr>AV DR TIMOTEO PENTEADO</xLgr><nro>1.903</nro><xBairro>PICANÇO</xBairro><cMun>3518800</cMun><xMun>Guarulhos</xMun><UF>SP</UF><CEP>07094000</CEP><cPais>1058</cPais><xPais>BRASIL</xPais><fone>1124591057</fone></enderEmit><IE>336647994110</IE><CRT>1</CRT></emit><dest><CNPJ>47939855000146</CNPJ><xNome>COLOROBBIA BRASIL PRODUTOS PARA CERÂMICA LTDA</xNome><enderDest><xLgr>VIA DAS ESTANCIAS</xLgr><nro>KM 90</nro><xBairro>BAIIRO DA PONTE</xBairro><cMun>3523404</cMun><xMun>Itatiba</xMun><UF>SP</UF><CEP>13251800</CEP><cPais>1058</cPais><xPais>BRASIL</xPais><fone>1134089219</fone></enderDest><IE>382009542116</IE><email>FernandoVieira@colorobbia.com.br;nfe@colorobbia.com.br</email></dest><det nItem="1"><prod><cProd>187</cProd><cEAN/><xProd>ROUPEIRO 16 PORTAS PEQUENAS 197x123x040</xProd><NCM>94031000</NCM><CFOP>5102</CFOP><uCom>PÇ</uCom><qCom>1.0000</qCom><vUnCom>620.0000000000</vUnCom><vProd>620.00</vProd><cEANTrib/><uTrib>PÇ</uTrib><qTrib>1.0000</qTrib><vUnTrib>620.0000000000</vUnTrib><indTot>1</indTot></prod><imposto><ICMS><ICMSSN102><orig>0</orig><CSOSN>400</CSOSN></ICMSSN102></ICMS><PIS><PISNT><CST>07</CST></PISNT></PIS><COFINS><COFINSNT><CST>07</CST></COFINSNT></COFINS></imposto></det><total><ICMSTot><vBC>0.00</vBC><vICMS>0.00</vICMS><vBCST>0.00</vBCST><vST>0.00</vST><vProd>620.00</vProd><vFrete>0.00</vFrete><vSeg>0.00</vSeg><vDesc>0.00</vDesc><vII>0.00</vII><vIPI>0.00</vIPI><vPIS>0.00</vPIS><vCOFINS>0.00</vCOFINS><vOutro>0.00</vOutro><vNF>620.00</vNF></ICMSTot></total><transp><modFrete>1</modFrete><transporta><xNome>RETIROU TRANSPORTADORA</xNome></transporta><vol><qVol>1</qVol><esp>VOLUME</esp><marca>AZEVEDO MÓVEIS</marca></vol></transp><cobr><dup><nDup>1710</nDup><dVenc>2014-07-03</dVenc><vDup>620.00</vDup></dup></cobr><infAdic><infCpl>COMPRADO POR FERNANDO VALOR APROX.DE TRIBUTOS 182,40 (29,42) FONTE DE IBPT</infCpl></infAdic></infNFe><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#NFe35140603929489000179550010000017101089200104"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>8/yeOuG8UrSPsR6QG69OExuUBMo=</DigestValue></Reference></SignedInfo><SignatureValue>OpDGrParWAjiu7wE7QCd+GpgJ27BdCzCZ7znt13kttDI1IGgi6EWCDZl5X5wB9gzQeM2HLlb/DsF
+RJmjvEWGxiMQzCAhgL6InnulCN3EhoZWa8K1+59RcbLmIXhLpzbfS+qe4bdqdcJ6lM1reXEGgIxL
+0u7E0ShEmlxa7pTyN8U=</SignatureValue><KeyInfo><X509Data><X509Certificate>MIIGbDCCBVSgAwIBAgIIP5SpGVn+GxYwDQYJKoZIhvcNAQEFBQAwdTELMAkGA1UEBhMCQlIxEzAR
+BgNVBAoTCklDUC1CcmFzaWwxNjA0BgNVBAsTLVNlY3JldGFyaWEgZGEgUmVjZWl0YSBGZWRlcmFs
+IGRvIEJyYXNpbCAtIFJGQjEZMBcGA1UEAxMQQUMgU0VSQVNBIFJGQiB2MTAeFw0xMTA3MTIyMTAw
+MDBaFw0xNDA3MTEyMTAwMDBaMIHoMQswCQYDVQQGEwJCUjELMAkGA1UECBMCU1AxEjAQBgNVBAcT
+CUdVQVJVTEhPUzETMBEGA1UEChMKSUNQLUJyYXNpbDE2MDQGA1UECxMtU2VjcmV0YXJpYSBkYSBS
+ZWNlaXRhIEZlZGVyYWwgZG8gQnJhc2lsIC0gUkZCMRYwFAYDVQQLEw1SRkIgZS1DTlBKIEEzMRIw
+EAYDVQQLEwlBUiBTRVJBU0ExPzA9BgNVBAMTNkFaRVZFRE8gTU9WRUlTIFBBUkEgRVNDUklUT1JJ
+TyBMVERBIEVQUDowMzkyOTQ4OTAwMDE3OTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAvanv
+VcpjF3uF8s8Wq4tbxllCBcovuWeoYmuaS1B8a33pADN7RBtOduiY0C/rrI/WluZyb50uM6uljmrD
+LkG4ErbM5CWxIU+vArk8GAxNlJ+8ae5ylDuhiqo8GR1Kf6RtzvorY79+CNpI333ST/8RFb3wctnH
+K70qd+9wqsmOnFMCAwEAAaOCAw4wggMKMAkGA1UdEwQCMAAwDgYDVR0PAQH/BAQDAgXgMB0GA1Ud
+JQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDAfBgNVHSMEGDAWgBSa3SK29nfpQm9IwlFAoFbi83Q/
+uzCBwQYDVR0RBIG5MIG2gRtBWkVWRURPQEFaRVZFRE9NT1ZFSVNDT00uQlKgIwYFYEwBAwKgGhMY
+SkVTU1VBTiBDT1NUQSBERSBBWkVWRURPoBkGBWBMAQMDoBATDjAzOTI5NDg5MDAwMTc5oD4GBWBM
+AQMEoDUTMzA1MDgxOTY4NTU1MzQzNTA0ODIxMjMzMjY4NTI4ODAwMDAwMDUyNDYxMzAzNVNTUCBT
+UKAXBgVgTAEDB6AOEwwwMDAwMDAwMDAwMDAwVwYDVR0gBFAwTjBMBgZgTAECAwowQjBABggrBgEF
+BQcCARY0aHR0cDovL3d3dy5jZXJ0aWZpY2Fkb2RpZ2l0YWwuY29tLmJyL3JlcG9zaXRvcmlvL2Rw
+YzCB8wYDVR0fBIHrMIHoMEqgSKBGhkRodHRwOi8vd3d3LmNlcnRpZmljYWRvZGlnaXRhbC5jb20u
+YnIvcmVwb3NpdG9yaW8vbGNyL3NlcmFzYXJmYnYxLmNybDBEoEKgQIY+aHR0cDovL2xjci5jZXJ0
+aWZpY2Fkb3MuY29tLmJyL3JlcG9zaXRvcmlvL2xjci9zZXJhc2FyZmJ2MS5jcmwwVKBSoFCGTmh0
+dHA6Ly9yZXBvc2l0b3Jpby5pY3BicmFzaWwuZ292LmJyL2xjci9TZXJhc2EvcmVwb3NpdG9yaW8v
+bGNyL3NlcmFzYXJmYnYxLmNybDCBmQYIKwYBBQUHAQEEgYwwgYkwSAYIKwYBBQUHMAKGPGh0dHA6
+Ly93d3cuY2VydGlmaWNhZG9kaWdpdGFsLmNvbS5ici9jYWRlaWFzL3NlcmFzYXJmYnYxLnA3YjA9
+BggrBgEFBQcwAYYxaHR0cDovL29jc3AuY2VydGlmaWNhZG9kaWdpdGFsLmNvbS5ici9zZXJhc2Fy
+ZmJ2MTANBgkqhkiG9w0BAQUFAAOCAQEAW2FyA5895/b5OMu+AEP4IvcDbER/fbF/zjI2/6GI8F2F
+XQWAsnfrcecOGVa/OToa14xrRCahfgAkG2evDWE46zw4/4hoq07J2ieckpiQyfoRPURc1Wecxz2B
+hLNx1ziScUxNnugdCQ/zeQsEia5dlySZaQjBrQ6FjexHJnIWpLvXjgFmITVYQ8cjyraH4zlMSoZ8
+2SnTvCqpXsEco3YAsidwU8YUh+XK+5jHcfmSbYG2HGDOl1EoxVbwxpkDmVhqSgUKFRm4sq1h+xyA
+mFRCtLyDjAqQjhvLnjqIiQRmVjBLIiURUXboYRUAx1iaWLXAL/mVLsXyf3roMfpfEc1yhA==</X509Certificate></X509Data></KeyInfo></Signature></NFe><protNFe versao="2.00"><infProt><tpAmb>1</tpAmb><verAplic>SP_NFE_PL_006q</verAplic><chNFe>35140603929489000179550010000017101089200104</chNFe><dhRecbto>2014-06-05T17:00:43</dhRecbto><nProt>135140348400834</nProt><digVal>8/yeOuG8UrSPsR6QG69OExuUBMo=</digVal><cStat>100</cStat><xMotivo>Autorizado o uso da NF-e</xMotivo></infProt></protNFe></nfeProc>

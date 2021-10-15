@@ -129,5 +129,10 @@ namespace DAL.XmlDAL.DAO
             return produtos;
 
         }
+
+        public override bool Update<TSource>(TSource item)
+        {
+            return base.Update(item);
+        }
     }
 }
