@@ -7,6 +7,7 @@ using Models.Empresas;
 using Models.FileStoranges;
 using Models.Infra;
 using Models.NFe;
+using Models.POCOs.FileStoranges;
 using XmlNFe.Nfes;
 using XmlNFe.Nfes.Informacoes;
 using XmlNFe.Nfes.Informacoes.Cobranca;
@@ -29,7 +30,8 @@ namespace ContextBinds.EntityCore
     {
         #region DBSETs
 
-     
+        public DbSet<EmailRecebido> EmailRecebido { get; set; }
+        public DbSet<AnexosDoEmail> AnexosDoEmail { get; set; }
         public DbSet<Certificado> Certificado { get; set; }
         public DbSet<Empresa> Empresa { get; set; }
         public DbSet<Parametro> Parametro { get; set; }

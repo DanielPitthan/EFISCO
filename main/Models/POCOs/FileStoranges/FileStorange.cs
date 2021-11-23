@@ -1,4 +1,5 @@
 ﻿using Models.Interfaces;
+using Models.POCOs.FileStoranges;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -21,12 +22,13 @@ namespace Models.FileStoranges
         public byte[]? DataByte { get; set; }
 #nullable disable
         public OrigemArquivo? OrigemId { get; set; }
-        public string RemetenteEmail { get; set; }
+        //public string RemetenteEmail { get; set; }
         public string TipoXml { get; set; }
-        public DateTime DataRecebimetoEmail { get; set; }
-        public string CorpoDoEmail { get; set; }
+        //public DateTime DataRecebimetoEmail { get; set; }
+        //public string CorpoDoEmail { get; set; }
 
         [NotMapped]
         public bool _processando = false;
+        public  EmailRecebido EmailRecebido { get; set; }    
     }
 }

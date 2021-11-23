@@ -35,6 +35,8 @@ namespace Models.NFe
         /// Validado automáticamente pelo sistema
         /// </summary>
         public bool? AutoValidado { get; set; }
+        public bool? TemXPed { get; set; }
+        public bool? FornecedorCadastrado { get; set; }
 
     }
 }

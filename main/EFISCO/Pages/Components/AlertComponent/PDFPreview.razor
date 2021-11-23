@@ -1,0 +1,30 @@
+﻿@page "/PDFPreview/{Pdf}"
+
+@inject IMatDialogService MatDialogService
+
+<EFISCO.Pages.Components.Titulos.NavbarTitulo Titulo="PDF Recebido"></EFISCO.Pages.Components.Titulos.NavbarTitulo>
+<div class="" style="width:1920px">
+    @*<embed type="application/pdf" src="data:application/pdf;base64,@Pdf" />*@
+    <object type="application/pdf" data="data:application/pdf;base64,@Pdf" style="min-width: 70%; max-width: 100%; height:790px;"></object>
+</div>
+<div class="row">
+    <MatButton OnClick="Fechar">Fechar</MatButton>
+</div>
+
+
+@code {
+    [Parameter]
+    public string Pdf { get; set; }
+
+
+    [CascadingParameter]
+    public MatDialogReference DialogReference { get; set; }
+
+
+
+    private void Fechar()
+    {
+        DialogReference.Close(new object());
+    }
+}
+

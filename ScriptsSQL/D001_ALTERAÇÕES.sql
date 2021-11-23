@@ -194,3 +194,54 @@ REFERENCES [dbo].[NFeFiles] ([Id])
 GO
 ALTER TABLE [dbo].[NFeFilesMensagens] CHECK CONSTRAINT [FK_NFeFilesMensagens_NFeFiles]
 GO
+
+
+create table II
+(
+Id int identity not null primary key ,
+vBC decimal(18,4),
+vDespAdu decimal(18,4),
+vII decimal(18,4),
+vIOF decimal(18,4)
+)
+
+go 
+alter table dest alter column idEstrangeiro varchar(50)
+alter table dest alter column CNPJ varchar(14)
+alter table dest alter column CPF varchar(11)
+alter table dest alter column IE varchar(30)
+go
+alter table FileStorange alter column CorpoDoEmail varchar(max)
+go
+
+create  table EmailRecebido(
+	Id int identity not null primary key,
+	Assunto varchar(712),
+	De varchar(1024),
+	Para varchar(1024),
+	CC varchar(1024),
+	Corpo Varchar(Max),
+	DataRecebido DateTime 
+)
+go
+Create table AnexosDoEmail(
+	Id int identity not null primary key,
+	Anexo varbinary(max),
+	EmailRecebidoId int 
+)
+go
+
+alter table AnexosDoEmail add constraint fk_AnexosDoEmail_EmailRecebido foreign key (EmailRecebidoId) references EmailRecebido(Id)
+go
+alter table AnexosDoEmail add ExtensaoArquivo varchar(10)
+go
+alter table FileStorange add EmailRecebidoId int
+go
+alter table FileStorange add constraint fk_FileStorange_EmailRecebido foreign key (EmailRecebidoId) references EmailRecebido(Id)
+go
+alter table FileStorange drop column RemetenteEmail
+alter table FileStorange drop column CorpoDoEmail
+alter table FileStorange drop column DataRecebimetoEmail
+go
+alter table NFeFiles add TemXPed bit
+alter table NFeFiles add FornecedorCadastrado bit

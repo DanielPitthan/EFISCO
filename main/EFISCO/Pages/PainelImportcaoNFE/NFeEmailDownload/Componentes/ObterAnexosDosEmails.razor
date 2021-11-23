@@ -1,8 +1,13 @@
 ﻿@page "/ObterAnexosDosEmails"
 
+
 @inject CrossCuting.Tools.EmailControl emailControl;
 @inject BLL.NFE.Interfaces.INFeXmlService nfeXMLService;
 @inject BLL.Infra.Interface.IFileStorangeService fileStorange;
+@inject BLL.Infra.Interface.IEmailService emailService;
+@inject NavigationManager navigate;
+@inject IMatDialogService MatDialogService
+
 
 <NavbarTitulo Titulo="Importação de XMLs do E-mail"></NavbarTitulo>
 
@@ -59,23 +64,13 @@ else
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row" style="margin-bottom:1rem;">
-            <div class="col-12 col-md-2 col-lg-2">
-                <RadzenButton ButtonStyle="@Radzen.ButtonStyle.Primary"
-                              Icon="move_to_inbox"
-                              Click="@(async ()=> await ObterAnexos())"
-                              Size="@Radzen.ButtonSize.Medium">
-
-                </RadzenButton>
-            </div>
-
-        </div>
+        </div>       
         <div class="row">
             @if (!string.IsNullOrEmpty(aviso))
             {
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     @aviso
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" @onclick="@(x=> aviso="")"></button>
                 </div>
             }
             @if (loading)
@@ -85,21 +80,48 @@ else
         </div>
     </div>
     <div class="container-fluid">
+         <Divider></Divider>
+        <div class="row" style="margin-bottom:1rem;">
+              <div class="col-auto col-md-auto col-lg-auto">
+                Baixar E-mails
+            </div>
+            <div class="col-12 col-md-2 col-lg-2">
+                <RadzenButton ButtonStyle="@Radzen.ButtonStyle.Primary"
+                          Icon="move_to_inbox"
+                          Click="@(async ()=> await ObterAnexos())"
+                          Size="@Radzen.ButtonSize.Medium">
+
+                </RadzenButton>
+            </div>
+
+        </div>
         <div class="row" style="margin-bottom:1rem;">
             <RadzenGrid AllowFiltering="true" AllowPaging="true" PageSize="50"
-                        AllowSorting="true" Data="@arquivos" TItem="FileStorange"
-                        AllowColumnResize="true">
+                    AllowSorting="true" Data="@arquivos" TItem="FileStorange"
+                    AllowColumnResize="true">
                 <Columns>
-                    <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange.Id)" Title="Id" Width="100px" />
+                    <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange.Id)" Title="Id" Width="80px" />
                     <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange.MD5)" Title="Md5" />
                     <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange.DataInclusao)" Title="Data Leitura" />
-                    <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange.DataRecebimetoEmail)" Title="Data E-Mail" />
+                    <RadzenGridColumn TItem="FileStorange" Title="Data E-Mail">
+                        <Template>
+                            @FormatDate(context.EmailRecebido.DataRecebido)
+                        </Template>
+                    </RadzenGridColumn>
                     <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange.OriginalFileName)" Title="Arquivo" Width="500px" />
                     <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange.TipoXml)" Title="Tipo" />
-                    <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange.RemetenteEmail)" Title="Remetente" Width="300px" />
-                    <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange.CorpoDoEmail)" Title="Trecho do E-mail" Width="600px" />
-                    <RadzenGridColumn TItem="FileStorange" Property="Importar">
-                        <Template Context="fileStorange">
+                    <RadzenGridColumn TItem="FileStorange" Title="Remetente" Width="300px">
+                        <Template>
+                            @context.EmailRecebido.De
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="FileStorange" Title="Abrir E-mail">
+                        <Template>
+                            <RadzenButton Icon="email" ButtonStyle="ButtonStyle.Info" Click="@(e=> OpenMail(context) )"></RadzenButton>
+                        </Template>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="FileStorange" Title="Importar">
+                        <Template Context="fileStorange" >
                             <RadzenButton Icon="publish" Click="@(async ()=> await Processar(fileStorange))"></RadzenButton>
                         </Template>
                     </RadzenGridColumn>
@@ -107,7 +129,7 @@ else
                         <Template>
                             @if (context._processando)
                             {
-                                <div class="spinner-border-sm text-primary" role="status">
+                                <div class="spinner-border spinner-border-sm text-primary" role="status">
                                 </div>
                             }
 
@@ -119,6 +141,30 @@ else
     </div>
 }
 
+<MatDialog @bind-IsOpen="@isOpenEmail">
+    <MatDialogTitle> E-Mail Recebido @email.Assunto</MatDialogTitle>
+    <MatDialogContent>
+        @((MarkupString)email.Corpo)
+    </MatDialogContent>
+    <MatDialogActions>
+
+        @if (email.AnexosDoEmail != null)
+        {
+            @foreach (var anexo in email.AnexosDoEmail)
+            {
+                if (anexo.ExtensaoArquivo.ToUpper().Trim() == "XML")
+                {
+                    <MatButton Icon="code" OnClick="@(async ()=> await AbrirXml() )">XML</MatButton>
+                }
+                if (anexo.ExtensaoArquivo.ToUpper().Trim() == "PDF")
+                {
+                    <MatButton Icon="picture_as_pdf" OnClick="@(async ()=> await AbrirPdf())">PDF</MatButton>
+                }
+            }
+        }
+        <MatButton OnClick="@(e=> {isOpenEmail=false;})">Fechar</MatButton>
+    </MatDialogActions>
+</MatDialog>
 
 
 @code {
@@ -132,33 +178,41 @@ else
     private bool loading = false;
     private bool initLoading = true;
     private bool processing = false;
-
+    private bool isOpenEmail = false;
+    private bool isOpenXml = false;
+    private EmailRecebido email = new EmailRecebido();
+    private string xml = "";
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
 
-
-            var query = fileStorange.GetByOrigem(OrigemArquivo.Email);
-            arquivos = query.OrderByDescending(x => x.DataRecebimetoEmail)
-                            .ToList();
-
-            pendentesDeProcessamento = query.Count();
-
-            pendentesDeProcessamentoNFE = query.Where(x => x.TipoXml == "NFE")
-                                               .Count();
-
-            pendentesDeProcessamentoNFE = query.Where(x => x.TipoXml == "CTE")
-                                               .Count();
-
-            emailPendentes = emailControl.EmailsPendentes();
-
+            await CarregaDados();
             initLoading = false;
             this.StateHasChanged();
         }
 
     }
+
+    private async Task CarregaDados()
+    {
+
+        var query = fileStorange.GetByOrigem(OrigemArquivo.Email);
+        arquivos = query.ToList();
+
+        pendentesDeProcessamento = query.Count();
+
+        pendentesDeProcessamentoNFE = query.Where(x => x.TipoXml == "NFE")
+                                           .Count();
+
+        pendentesDeProcessamentoNFE = query.Where(x => x.TipoXml == "CTE")
+                                           .Count();
+
+        emailPendentes = emailControl.EmailsPendentes();
+
+    }
+
 
     private async Task ObterAnexos()
     {
@@ -189,7 +243,7 @@ else
         {
             file._processando = true;
             file._processando = !await nfeXMLService.ProcessarArquivos(file.Id);
-
+            await CarregaDados();
 
         }
         catch (Exception ex)
@@ -197,5 +251,64 @@ else
             file._processando = false;
             aviso = $"{ex.Message} {ex.InnerException}";
         }
+    }
+
+
+    private void OpenMail(FileStorange fileStorange)
+    {
+        email = emailService.GetById(fileStorange.EmailRecebido.Id);
+        isOpenEmail = true;
+        this.StateHasChanged();
+    }
+
+    private string FormatDate(DateTime date)
+    {
+        return date.ToLocalTime().ToString();
+    }
+
+    private async Task AbrirPdf()
+    {
+        AnexosDoEmail anexo = email.AnexosDoEmail.Where(x => x.ExtensaoArquivo.Trim().Contains("PDF"))
+                                       .FirstOrDefault();
+
+        if (anexo == null)
+            return;
+
+        var pdfB64 = Convert.ToBase64String(anexo.Anexo);
+        isOpenEmail = false;
+
+        await MatDialogService.OpenAsync(typeof(PDFPreview), new MatDialogOptions()
+            {
+                Attributes = new Dictionary<string, object>()
+                {
+                    {"Pdf",pdfB64}
+                },
+                SurfaceStyle="min-width: 800px; max-width: 1080px; height:800px;"
+            });
+    }
+
+
+    private async Task AbrirXml()
+    {
+        AnexosDoEmail anexo = email.AnexosDoEmail.Where(x => x.ExtensaoArquivo.Trim().Contains("XML"))
+                                       .FirstOrDefault();
+
+        if (anexo == null)
+            return;
+
+        System.IO.MemoryStream memoryStream = new System.IO.MemoryStream(anexo.Anexo);
+        System.IO.StreamReader reader = new System.IO.StreamReader(memoryStream);
+
+        xml = System.Web.HttpUtility.UrlEncode(reader.ReadToEnd());
+
+        isOpenEmail = false;
+
+        await MatDialogService.OpenAsync(typeof(XMLPreview), new MatDialogOptions()
+            {
+                Attributes = new Dictionary<string, object>()
+                {
+                    {"Xml",xml}
+                }
+            });
     }
 }

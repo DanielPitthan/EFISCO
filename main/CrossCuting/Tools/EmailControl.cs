@@ -1,4 +1,5 @@
 ﻿using CrossCuting.Factorys;
+using DAL.FileStoranges.Interfaces;
 using DAL.Infra.Interfaces;
 using Limilabs.Client.IMAP;
 using Limilabs.Mail;
@@ -6,6 +7,7 @@ using Limilabs.Mail.MIME;
 using Microsoft.AspNetCore.Http;
 
 using Models.Infra;
+using Models.POCOs.FileStoranges;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,6 +21,7 @@ namespace CrossCuting.Tools
     {
         private readonly IParametrosDAO parametroDAO;
         private readonly UploadFactory uploadFactory;
+        private readonly IEmailDAO emailDAO;
         private Parametro HostEmailNfe;
         private Parametro UsuarioDoEmailNfe;
         private Parametro SenhaEmailDoNFe;
@@ -26,11 +29,12 @@ namespace CrossCuting.Tools
         private Parametro PastaEmailNfe_Lido;
 
         public EmailControl(IParametrosDAO _paramDAO,
-                            UploadFactory _uploadFactory)
+                            UploadFactory _uploadFactory,
+                            IEmailDAO _emailDAO)
         {
             this.parametroDAO = _paramDAO;
             this.uploadFactory = _uploadFactory;
-
+            this.emailDAO = _emailDAO;
 
             HostEmailNfe = SetParametro("HostEmailNfe");
             UsuarioDoEmailNfe = SetParametro("UsuarioDoEmailNfe");
@@ -103,13 +107,17 @@ namespace CrossCuting.Tools
                     List<long> uids = imap.Search(Flag.Unseen);
 
 
-                    IFormFile[] arquivosAProcessar = new FormFile[1]; //Processar um arquivo por vez
+
+
 
                     foreach (long uid in uids)
                     {
+
+
                         IMail email = new MailBuilder()
                             .CreateFromEml(imap.GetMessageByUID(uid));
 
+                        IFormFile[] arquivosAProcessar = new FormFile[email.Attachments.Count]; //Processar um arquivo por vez
 
                         string from = "";
                         for (int i = 0; i < email.From.Count; i++)
@@ -117,20 +125,36 @@ namespace CrossCuting.Tools
                             from += email.From[i].Address;
                         }
 
+                        string To = "";
+                        for (int i = 0; i < email.To.Count; i++)
+                        {
+                            To += email.To[i].Name;
+                        }
+
+                        string CC = "";
+                        for (int i = 0; i < email.Cc.Count; i++)
+                        {
+                            CC += email.Cc[i].Name;
+                        }
                         //if (email.Date.HasValue && email.Date <= DateTime.Now.AddYears(-1))
                         //{
                         //    continue;
                         //}
                         string bodyEmail = email.GetBodyAsText();
 
-                        if (!string.IsNullOrWhiteSpace(bodyEmail))
-                            if (bodyEmail.Length < 80)
-                                bodyEmail = bodyEmail.Substring(0, bodyEmail.Length);
-                            else
-                                bodyEmail = bodyEmail.Substring(0, 80);
 
+                        EmailRecebido emailRecebido = new EmailRecebido();
+                        emailRecebido.Corpo = bodyEmail;
+                        emailRecebido.De = from;
+                        emailRecebido.Para = To;
+                        emailRecebido.CC = CC;
 
+                        if (email.Date.HasValue)
+                            emailRecebido.DataRecebido = email.Date.Value;
 
+                        emailRecebido.AnexosDoEmail = new List<AnexosDoEmail>();
+
+                        var _i = 0;
                         //Gera lista de anexos a Processar 
                         foreach (MimeData mime in email.Attachments)
                         {
@@ -140,18 +164,27 @@ namespace CrossCuting.Tools
                             }
                             var extension = Path.GetExtension(mime.FileName).ToUpper();
 
+                            emailRecebido.AnexosDoEmail.Add(new AnexosDoEmail()
+                            {
+                                Anexo = mime.Data,
+                                ExtensaoArquivo = extension.Replace('.', ' ')
+                            });
+
+
+
                             if (extension.Equals(".XML"))
                             {
-                                using (MemoryStream mbStrem = new MemoryStream())
-                                {
+                                MemoryStream mbStrem = new MemoryStream();
+                                mime.Save(mbStrem);
+                                arquivosAProcessar[_i] = new FormFile(mbStrem, 0, mbStrem.Length, mime.FileName, mime.FileName);
 
-                                    mime.Save(mbStrem);
-                                    arquivosAProcessar[0] = new FormFile(mbStrem, 0, mbStrem.Length, mime.FileName, mime.FileName);
-
-                                    var arquivosProcessados = await uploadFactory.ProcessarArquivos(arquivosAProcessar, Models.FileStoranges.OrigemArquivo.Email, from, email.Date, bodyEmail);
-                                }
                             }
+                            _i++;
                         }
+
+                        await emailDAO.AddAsync(emailRecebido);
+                        var arquivosProcessados = await uploadFactory.ProcessarArquivos(arquivosAProcessar, Models.FileStoranges.OrigemArquivo.Email, emailRecebido);
+
 
                         //try
                         //{

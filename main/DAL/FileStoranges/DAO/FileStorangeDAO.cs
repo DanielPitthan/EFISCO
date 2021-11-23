@@ -43,9 +43,6 @@ namespace DAL.FileStoranges.DAO
 
             Contexto.Entry(item).State = EntityState.Modified;
 
-
-
-
             int rows = Contexto.SaveChanges();
             return rows > 0;
 

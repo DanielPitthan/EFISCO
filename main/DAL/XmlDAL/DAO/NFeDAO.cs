@@ -56,6 +56,11 @@ namespace DAL.XmlDAL.DAO
                        .ThenInclude(imp => imp.IPI)
 
                 .Include(inf => inf.infNFe.det)
+                    .ThenInclude(det => det.imposto)
+                        .ThenInclude(imp => imp.II)
+
+
+                .Include(inf => inf.infNFe.det)
                     .ThenInclude(det => det.prod)
                 // .ThenInclude(prod => prod.comb)
 
@@ -91,6 +96,8 @@ namespace DAL.XmlDAL.DAO
 
                 .Include(inf => inf.infNFe.pag)
                 .Include(inf => inf.infNFe.infAdic)
+
+
                 .AsNoTracking();
 
 

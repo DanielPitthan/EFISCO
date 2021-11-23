@@ -1,0 +1,35 @@
+﻿@page "/XmlPreview/{Xml}"
+
+@inject IMatDialogService MatDialogService
+
+<EFISCO.Pages.Components.Titulos.NavbarTitulo Titulo="XML Recebido"></EFISCO.Pages.Components.Titulos.NavbarTitulo>
+<div class="container">
+    <div class="prettyprint">
+        <code class="language-html" style="height:500px;">
+            @decodedXml
+        </code>
+    </div>
+</div>
+<div class="row">
+    <MatButton OnClick="Fechar">Fechar</MatButton>
+</div>
+
+
+@code {
+    [Parameter]
+    public string Xml { get; set; }
+    private string decodedXml = "";
+
+    [CascadingParameter]
+    public MatDialogReference DialogReference { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        decodedXml = System.Web.HttpUtility.UrlDecode(Xml);
+    }
+
+    private void Fechar()
+    {
+        DialogReference.Close(new object());
+    }
+}

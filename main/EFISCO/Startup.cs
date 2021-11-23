@@ -2,6 +2,7 @@ using BlazorDownloadFile;
 using Blazorise;
 using Blazorise.Bootstrap;
 using ContextBinds.EntityCore;
+using MatBlazor;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -55,6 +56,8 @@ namespace EFISCO
 
 
             services.AddBlazorDownloadFile(ServiceLifetime.Scoped);
+
+            services.AddMatBlazor();
 
             #region Injeção de Dependencias    
             Dependencias dependencias = new Dependencias(services);

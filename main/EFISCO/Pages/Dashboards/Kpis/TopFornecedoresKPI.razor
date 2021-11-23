@@ -4,7 +4,7 @@
 
 
 <div style="text-align:center;">
-    <h4>Top @top Fornecedores </h4>
+    <h4>Top @top Fornecedores  </h4>
 </div>
 <br />
 
@@ -21,6 +21,7 @@
     </RadzenCategoryAxis>
 </RadzenChart>
 <br />
+
 <RadzenSlider @bind-Value=@top TValue="int" Min="10" Max="50" Change=@(args => OnChange(args)) Step="10"  Style="width:100%;"/>
 
 @code {

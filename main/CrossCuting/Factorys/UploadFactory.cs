@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Models.FileStoranges;
+using Models.POCOs.FileStoranges;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,13 +31,16 @@ namespace CrossCuting.Factorys
             pathToSaveofTheDay = PrepareEnviroment();
         }
 
-        public async Task<IList<FileStorange>> ProcessarArquivos(IFormFile[] files, OrigemArquivo origem, string remetenteEmail = "", DateTime? dataDoEmial = null, string bodyEmail = null)
+        public async Task<IList<FileStorange>> ProcessarArquivos(IFormFile[] files, OrigemArquivo origem, EmailRecebido emailRecebido = null)
         {
 
             IList<FileStorange> fileStoranges = new List<FileStorange>();
 
             foreach (IFormFile file in files)
             {
+                if (file == null)
+                    continue;
+
                 #region Monta o FileStorange
                 byte[] fileByte = new byte[file.Length];
                 string fileName = file.FileName;
@@ -55,9 +59,10 @@ namespace CrossCuting.Factorys
                     FileType = extension,
                     Processado = false,
                     OrigemId = origem,
-                    RemetenteEmail = remetenteEmail,
-                    DataRecebimetoEmail = dataDoEmial != null && dataDoEmial.HasValue ? dataDoEmial.Value : DateTime.Now,
-                    CorpoDoEmail = bodyEmail
+                    //RemetenteEmail = remetenteEmail,
+                    //DataRecebimetoEmail = dataDoEmial != null && dataDoEmial.HasValue ? dataDoEmial.Value : DateTime.Now,
+                    //CorpoDoEmail = bodyEmail
+                    EmailRecebido = emailRecebido
                 };
 
                 using (MemoryStream mStream = new MemoryStream())
@@ -115,7 +120,8 @@ namespace CrossCuting.Factorys
                     FileStorange arquivoGravado = await fileStorangeDAO.GetAll()
                                                   .Where(x => x.MD5 == fileToStore.MD5)
                                                   .FirstOrDefaultAsync();
-                    fileToStore.Id = arquivoGravado.Id;
+                    if (arquivoGravado != null)
+                        fileToStore.Id = arquivoGravado.Id;
                 }
                 catch (Exception ex)
                 {

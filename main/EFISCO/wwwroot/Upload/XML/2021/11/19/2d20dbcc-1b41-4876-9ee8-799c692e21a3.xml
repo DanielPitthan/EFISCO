@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<ConsultarNfseResposta xmlns:ns2="http://www.w3.org/2000/09/xmldsig#">
+    <ListaNfse>
+        <CompNfse>
+            <Nfse>
+                <InfNfse>
+                    <Numero>18456</Numero>
+                    <CodigoVerificacao>JU9W0SGTX</CodigoVerificacao>
+                    <DataEmissao>2021-11-19T12:59:29.990-03:00</DataEmissao>
+                    <IdentificacaoRps>
+                        <Numero>18456</Numero>
+                        <Serie>4</Serie>
+                        <Tipo>1</Tipo>
+                    </IdentificacaoRps>
+                    <DataEmissaoRps>2021-11-19T00:00:00-03:00</DataEmissaoRps>
+                    <NaturezaOperacao>1</NaturezaOperacao>
+                    <OptanteSimplesNacional>2</OptanteSimplesNacional>
+                    <Competencia>2021-11-01T00:00:00-03:00</Competencia>
+                    <OutrasInformacoes>Obs.: Cond. Pagto = 15 DIAS - VALOR LIQUIDO DEDUZIDO O ISS:230,47 ** 
+ https://e-gov.betha.com.br/e-nota/visualizarnotaeletronica?link=1637337569991184562629963406957187164001312270676877155</OutrasInformacoes>
+                    <Servico>
+                        <Valores>
+                            <ValorServicos>237.6</ValorServicos>
+                            <ValorDeducoes>0.00</ValorDeducoes>
+                            <IssRetido>3</IssRetido>
+                            <BaseCalculo>237.6</BaseCalculo>
+                            <Aliquota>3</Aliquota>
+                            <ValorLiquidoNfse>230.47</ValorLiquidoNfse>
+                            <ValorIssRetido>7.13</ValorIssRetido>
+                            <DescontoCondicionado>0.00</DescontoCondicionado>
+                            <DescontoIncondicionado>0.00</DescontoIncondicionado>
+                        </Valores>
+                        <ItemListaServico>1305</ItemListaServico>
+                        <Discriminacao>{[[Descricao=TELA SERIGRAF. PLANA Q100X100 # 18 N TELA 18][ItemServico=1305][Quantidade=1][ValorUnitario=237.6][ValorServico=237.6][ValorBaseCalculo=237.6][Aliquota=3][Deducoes=0][DescontoCondicionado=0][DescontoIncondicionado=0]]}</Discriminacao>
+                        <CodigoMunicipio>4204608</CodigoMunicipio>
+                    </Servico>
+                    <PrestadorServico>
+                        <IdentificacaoPrestador>
+                            <Cnpj>71798151000185</Cnpj>
+                            <InscricaoMunicipal>18569</InscricaoMunicipal>
+                        </IdentificacaoPrestador>
+                        <RazaoSocial>SRS DO BRASIL COMERCIAL LTDA</RazaoSocial>
+                        <Endereco>
+                            <Endereco>ROD OTÁVIO DASSOLER</Endereco>
+                            <Numero>6295</Numero>
+                            <Complemento>GALPAO01</Complemento>
+                            <Bairro>dos Imigrantes</Bairro>
+                            <CodigoMunicipio>4204608</CodigoMunicipio>
+                            <Cep>88813762</Cep>
+                        </Endereco>
+                        <Contato>
+                            <Telefone>4834617399</Telefone>
+                            <Email>daniel@grupposrs.com.br</Email>
+                        </Contato>
+                    </PrestadorServico>
+                    <TomadorServico>
+                        <IdentificacaoTomador>
+                            <CpfCnpj>
+                                <Cnpj>47939855000227</Cnpj>
+                            </CpfCnpj>
+                        </IdentificacaoTomador>
+                        <RazaoSocial>COLOROBBIA BRASIL PROD P/ CERAMICA LTDA</RazaoSocial>
+                        <Endereco>
+                            <Endereco>ROD LUIZ ROSSO - KM. 08 3. E 4. LINHA  S/N.</Endereco>
+                            <Numero>S/N</Numero>
+                            <Complemento>DAIANE.CAHIN@COLOROBBIA.COM.BR</Complemento>
+                            <Bairro>SANGAO</Bairro>
+                            <CodigoMunicipio>4204608</CodigoMunicipio>
+                            <Uf>SC</Uf>
+                            <Cep>88803470</Cep>
+                        </Endereco>
+                        <Contato>
+                            <Telefone>4834780044</Telefone>
+                            <Email>nfe@colorobbia.com.br</Email>
+                        </Contato>
+                    </TomadorServico>
+                    <IntermediarioServico/>
+                    <ConstrucaoCivil/>
+                    <CondicaoPagamento>
+                        <Condicao>1</Condicao>
+                        <QtdParcela>1</QtdParcela>
+                        <Parcelas>
+                            <Parcela>1</Parcela>
+                            <Valor>230.47</Valor>
+                        </Parcelas>
+                    </CondicaoPagamento>
+                </InfNfse>
+            </Nfse>
+            <NfseCancelamento>
+                <Confirmacao>
+                    <Pedido>
+                        <InfPedidoCancelamento/>
+                        <ns2:Signature/>
+                    </Pedido>
+                    <InfConfirmacaoCancelamento>
+                        <Sucesso>false</Sucesso>
+                    </InfConfirmacaoCancelamento>
+                </Confirmacao>
+            </NfseCancelamento>
+            <NfseSubstituicao>
+                <SubstituicaoNfse/>
+            </NfseSubstituicao>
+        </CompNfse>
+    </ListaNfse>
+    <ListaMensagemRetorno/>
+</ConsultarNfseResposta>

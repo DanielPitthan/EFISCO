@@ -1,5 +1,6 @@
 ﻿using BLL.Infra.Interface;
 using DAL.FileStoranges.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Models.FileStoranges;
 using System;
 using System.Collections.Generic;
@@ -18,11 +19,13 @@ namespace BLL.Infra.Services
             this.fileStorangeDAO = _fileStorangeDAO;
         }
         public IQueryable<FileStorange> GetByOrigem(OrigemArquivo origemArquivo)
-        {          
+        {
 
             var query = fileStorangeDAO.GetAll()
                                        .Where(x => x.OrigemId.Value == origemArquivo)
-                                       .Where(x=> x.Processado==false);
+                                       .Where(x => x.Processado == false)
+                                       .Include(x => x.EmailRecebido);
+                                     
             return query;
         }
 

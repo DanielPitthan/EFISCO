@@ -44,7 +44,7 @@ namespace BLL.NFE.Services
         private readonly IEmitenteIntegradoService emitenteService;
         private readonly IProdutoIntegradoService produtoIntegradoService;
 
-     
+
 
         public NFeXmlService(INFeDAO _nFeDAO,
                              INFeFilesDAO _nFeFilesDAO,
@@ -141,7 +141,7 @@ namespace BLL.NFE.Services
             return arquivos;
         }
 
-        public async Task<bool> ProcessarArquivos(int? id=null)
+        public async Task<bool> ProcessarArquivos(int? id = null)
         {
 
 
@@ -151,10 +151,10 @@ namespace BLL.NFE.Services
             if (id.HasValue)
                 query = query.Where(x => x.Id == id.Value);
 
-                                    
-            List<FileStorange> arquivosAProcessar =await  query.ToListAsync();
 
- 
+            List<FileStorange> arquivosAProcessar = await query.ToListAsync();
+
+
 
             bool existeCTENoProcessamento = false;
 
@@ -164,7 +164,7 @@ namespace BLL.NFE.Services
                 #region Faz todos os loads
                 List<NFeFilesMensagens> mensagensDeErro = new List<NFeFilesMensagens>();
                 XmlDocument documento = new XmlDocument();
-                
+
                 if (arquivo.XmlString == null)
                     continue;
 
@@ -172,7 +172,7 @@ namespace BLL.NFE.Services
 
                 bool typeIsNfe = documento.GetElementsByTagName("NFe").Count > 0;
                 bool typeIsCte = documento.GetElementsByTagName("CTe").Count > 0;
-              
+
                 NFe notaFiscalLidaXML = new NFe();
 
                 if (typeIsNfe)
@@ -183,24 +183,26 @@ namespace BLL.NFE.Services
                 if (typeIsCte)
                 {
                     existeCTENoProcessamento = typeIsCte;
-                    continue;                   
+                    continue;
                 }
 
-                if(typeIsCte==false && typeIsNfe == false)
+                if (typeIsCte == false && typeIsNfe == false)
                 {
-                    
+
                     existeCTENoProcessamento = true;
                     continue;
                 }
 
-                NFe notaImportada = await nFeDAO.GetAll()
+
+
+                NFe nfeImportada = await nFeDAO.GetAll()
                                                 .Where(x => x.infNFe.Id == notaFiscalLidaXML.infNFe.Id)//Chave da NF
                                                 .FirstOrDefaultAsync();
 
 
 
 
-                NFeFiles arquivoJaExiste = await nFeFilesDAO
+                NFeFiles nfeFilesImportado = await nFeFilesDAO
                                                  .GetAll()
                                                  .Where(x => x.ChaveAcesso == notaFiscalLidaXML.infNFe.Id)
                                                  .FirstOrDefaultAsync();
@@ -212,12 +214,12 @@ namespace BLL.NFE.Services
                 string[] pathSplited = arquivo.Path.Split('\\');
                 NFeFiles nfeFiles = new NFeFiles
                 {
-                    Id = arquivoJaExiste == null ? 0 : arquivoJaExiste.Id,
+                    Id = nfeFilesImportado == null ? 0 : nfeFilesImportado.Id,
                     Arquivo = pathSplited[pathSplited.Length - 1],
                     Path = arquivo.Path,
                     ChaveAcesso = notaFiscalLidaXML.infNFe.Id,
                     CnpjFornecedor = notaFiscalLidaXML.infNFe.emit.CNPJ,
-                    DataEmnissaoNfe = notaFiscalLidaXML.infNFe.ide.dhEmi ==null ? notaFiscalLidaXML.infNFe.ide.dEmi.Value.Date : notaFiscalLidaXML.infNFe.ide.dhEmi.Value.DateTime,
+                    DataEmnissaoNfe = notaFiscalLidaXML.infNFe.ide.dhEmi == null ? notaFiscalLidaXML.infNFe.ide.dEmi.Value.Date : notaFiscalLidaXML.infNFe.ide.dhEmi.Value.DateTime,
                     Fornecedor = notaFiscalLidaXML.infNFe.emit.xNome,
                     NumeroNota = notaFiscalLidaXML.infNFe.ide.nNF.ToString().PadLeft(9, '0'),
                     Serie = notaFiscalLidaXML.infNFe.ide.serie,
@@ -232,9 +234,9 @@ namespace BLL.NFE.Services
 
 
                 //Importa o NF-e
-                if (notaImportada != null)
+                if (nfeImportada != null)
                 {
-                    notaFiscalLidaXML.Id = notaImportada.Id;
+                    notaFiscalLidaXML.Id = nfeImportada.Id;
                     await nFeDAO.UpdateAsync(notaFiscalLidaXML);
                 }
                 else
@@ -242,7 +244,7 @@ namespace BLL.NFE.Services
                     await nFeDAO.AddAsync(notaFiscalLidaXML);
 
                     //Após a inclusão preciso recuperar a nota para a validações
-                    notaImportada = await nFeDAO.GetAll()
+                    nfeImportada = await nFeDAO.GetAll()
                                                 .Where(x => x.infNFe.Id == notaFiscalLidaXML.infNFe.Id)//Chave da NF
                                                 .SingleOrDefaultAsync();
                 }
@@ -252,14 +254,14 @@ namespace BLL.NFE.Services
                 #region Validações
                 //Validação após gravar  Nf-e               
 
-                mensagensDeErro.AddRange(await ValidaNFE(notaImportada, nfeFiles));
+                mensagensDeErro.AddRange(await ValidaNFE(nfeImportada, nfeFiles));
                 nfeFiles.AutoValidado = !(mensagensDeErro.Count > 0);
 
                 #endregion
 
 
                 //Atualiza ou insere NFeFile
-                if (arquivoJaExiste != null)
+                if (nfeFilesImportado != null)
                 {
                     nFeFilesDAO.Update(nfeFiles);
                 }
@@ -278,11 +280,11 @@ namespace BLL.NFE.Services
                     await nFeFilesMensagensService.Adcionar(mensagem).ConfigureAwait(false);
                 }
             }
-            
+
             if (existeCTENoProcessamento)
             {
                 throw new Exception($"O Sistema não está preparado para importar o tipo selecionado ");
-              
+
             }
             return true;
         }
@@ -327,10 +329,10 @@ namespace BLL.NFE.Services
             try
             {
                 // Sem Tem xPed ?
-                if (notaXml.infNFe.det.Any(x => !string.IsNullOrEmpty(x.prod.xPed)))
-                {
-                    mensagensIntegracao.AddRange(await ValidaPedido(notaXml, nfeFiles));
-                }
+                //if (notaXml.infNFe.det.Any(x => !string.IsNullOrEmpty(x.prod.xPed)))
+                //{
+                mensagensIntegracao.AddRange(await ValidaPedido(notaXml, nfeFiles));
+                //  }
             }
             catch (Exception ex)
             {
@@ -381,6 +383,8 @@ namespace BLL.NFE.Services
         /// <returns></returns>
         private async Task<IList<NFeFilesMensagens>> ValidaPedido(NFe notaXml, NFeFiles nfeFiles)
         {
+            nfeFiles.TemXPed = true;
+
             IList<NFeFilesMensagens> mensagens = new List<NFeFilesMensagens>();
             foreach (det detalhe in notaXml.infNFe.det)
             {
@@ -394,11 +398,12 @@ namespace BLL.NFE.Services
                         Texto = $"Item sem pedido de compras {detalhe.prod.cProd} - {detalhe.prod.xProd} ",
                         ChaveNFe = nfeFiles.ChaveAcesso
                     });
+                    nfeFiles.TemXPed = false;
                     continue;
                 }
 
-                IList<PedidoDeCompraTotvs> pedidos = await pedidoTotvsService.GetByPedido(detalhe.prod.xPed);
-                if (pedidos == null)
+                IList<PedidoDeCompraTotvs> pedidoCompra = await pedidoTotvsService.GetByPedido(detalhe.prod.xPed);
+                if (pedidoCompra == null)
                 {
                     mensagens.Add(new NFeFilesMensagens()
                     {
@@ -408,17 +413,19 @@ namespace BLL.NFE.Services
                         Texto = $"Pedido de compras {detalhe.prod.xPed} não localizado na base do Protheus",
                         ChaveNFe = nfeFiles.ChaveAcesso
                     });
+                    nfeFiles.TemXPed = false;
                     continue;
                 }
 
-                ProdutoVersusFornecedorTotvs produtoFornecedor = await produtoVersusFornecedorTotvsService.Get(nfeFiles.Empresa.CodigoTotvsEmpresaFilial,
+                
+                ProdutoVersusFornecedorTotvs produtoVsFornecedor = await produtoVersusFornecedorTotvsService.Get(nfeFiles.Empresa.CodigoTotvsEmpresaFilial,
                                                                                                                  nfeFiles.CnpjFornecedor,
                                                                                                                  detalhe.prod.cProd).ConfigureAwait(false);
-                if (produtoFornecedor != null)
+                if (produtoVsFornecedor != null)
                 {
-                    PedidoDeCompraTotvs pedido = pedidos
-                       .Where(x => x.C7_PRODUTO.Equals(produtoFornecedor.A5_PRODUTO))
-                       .SingleOrDefault();
+                    PedidoDeCompraTotvs pedido = pedidoCompra
+                                                   .Where(x => x.C7_PRODUTO.Equals(produtoVsFornecedor.A5_PRODUTO))
+                                                   .SingleOrDefault();
 
                     if (pedido == null)
                     {
@@ -427,9 +434,10 @@ namespace BLL.NFE.Services
                             NFeFiles = nfeFiles,
                             Ativo = true,
                             DataInclusao = DateTime.Now,
-                            Texto = $"Item {produtoFornecedor.A5_PRODUTO} não localizado no pedido de compras. Pedido: {detalhe.prod.xPed}",
+                            Texto = $"Item {produtoVsFornecedor.A5_PRODUTO} não localizado no pedido de compras. Pedido: {detalhe.prod.xPed}",
                             ChaveNFe = nfeFiles.ChaveAcesso
                         });
+                        nfeFiles.TemXPed = false;
                         continue;
                     }
 
@@ -443,15 +451,12 @@ namespace BLL.NFE.Services
                             NFeFiles = nfeFiles,
                             Ativo = true,
                             DataInclusao = DateTime.Now,
-                            Texto = $"Item {produtoFornecedor.A5_PRODUTO} com preço divergente do pedido de compras. Pedido: {detalhe.prod.xPed} Unitário no pedido R$ {pedido.C7_PRECO} Unitário na NF {detalhe.prod.vUnCom}",
+                            Texto = $"Item {produtoVsFornecedor.A5_PRODUTO} com preço divergente do pedido de compras({detalhe.prod.xPed}). Preço unitário no pedido R$ {pedido.C7_PRECO}  preço unitário na NF {detalhe.prod.vUnCom}.  ",
                             ChaveNFe = nfeFiles.ChaveAcesso
                         });
                         continue;
                     }
-
-
                 }
-
             }
             return mensagens;
         }
@@ -472,6 +477,11 @@ namespace BLL.NFE.Services
 
             foreach (det produto in notaXml.infNFe.det)
             {
+                if (nfeFiles.Empresa == null)
+                {
+                    return null;
+                }
+
                 IList<ProdutoTotvs> produtos = await produtoTotvsService
                                                          .GetAllByNCM(nfeFiles.Empresa.CodigoTotvsEmpresaFilial, produto.prod.NCM);
 
@@ -542,6 +552,12 @@ namespace BLL.NFE.Services
         private async Task<List<NFeFilesMensagens>> ValidaFornecedor(NFeFiles nfeFiles, NFe notaXml)
         {
             List<NFeFilesMensagens> mensagensIntegracao = new List<NFeFilesMensagens>();
+
+            if (nfeFiles.Empresa == null)
+            {
+                return null;
+            }
+
 
             FornecedorTotvs fornecedorExiste = await fornecedorService.LocateByCnpjAsync(nfeFiles.Empresa.CodigoTotvsEmpresaFilial, nfeFiles.CnpjFornecedor);
             if (fornecedorExiste == null)
