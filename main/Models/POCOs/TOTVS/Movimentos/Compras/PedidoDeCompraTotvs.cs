@@ -1,8 +1,10 @@
-﻿namespace Models.TOTVS.Movimentos
+﻿using System;
+
+namespace Models.TOTVS.Movimentos
 {
     public class PedidoDeCompraTotvs
     {
-
+        public string D_E_L_E_T_ { get; set; } 
         public string C7_FILIAL { get; set; }
 
         public double C7_TIPO { get; set; }

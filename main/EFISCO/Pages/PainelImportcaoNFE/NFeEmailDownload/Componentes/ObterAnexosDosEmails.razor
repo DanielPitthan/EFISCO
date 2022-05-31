@@ -125,7 +125,7 @@ else
                             <RadzenButton Icon="publish" Click="@(async ()=> await Processar(fileStorange))"></RadzenButton>
                         </Template>
                     </RadzenGridColumn>
-                    <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange._processando)">
+                    <RadzenGridColumn TItem="FileStorange" Property="@nameof(FileStorange._processando)" Title="Status de processamento">
                         <Template>
                             @if (context._processando)
                             {
@@ -206,7 +206,7 @@ else
         pendentesDeProcessamentoNFE = query.Where(x => x.TipoXml == "NFE")
                                            .Count();
 
-        pendentesDeProcessamentoNFE = query.Where(x => x.TipoXml == "CTE")
+        pendentesDeProcessamentoCTE = query.Where(x => x.TipoXml == "CTE")
                                            .Count();
 
         emailPendentes = emailControl.EmailsPendentes();
@@ -257,6 +257,8 @@ else
     private void OpenMail(FileStorange fileStorange)
     {
         email = emailService.GetById(fileStorange.EmailRecebido.Id);
+        email.Corpo=email.Corpo.Replace("\r\n", "<br />");
+
         isOpenEmail = true;
         this.StateHasChanged();
     }

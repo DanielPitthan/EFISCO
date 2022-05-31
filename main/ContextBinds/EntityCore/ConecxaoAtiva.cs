@@ -26,7 +26,7 @@ namespace ContextBinds.EntityCore
                      .AddEnvironmentVariables();
 
             IConfiguration configuration = builder.Build();
-            IConfigurationSection conecxaoAtiva = configuration.GetSection("ConecxaoAtivaBaseNfe");
+            IConfigurationSection conecxaoAtiva = configuration.GetSection("ProducaoNFeXML");
 
             return configuration.GetConnectionString(conecxaoAtiva.Value);
         }
@@ -39,7 +39,7 @@ namespace ContextBinds.EntityCore
                      .AddEnvironmentVariables();
 
             IConfiguration configuration = builder.Build();
-            IConfigurationSection conecxaoAtiva = configuration.GetSection("ConecxaoAtivaProtheus");
+            IConfigurationSection conecxaoAtiva = configuration.GetSection("ProducaoProtheuss");
 
             return configuration.GetConnectionString(conecxaoAtiva.Value);
         }

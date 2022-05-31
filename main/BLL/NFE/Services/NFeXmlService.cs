@@ -270,7 +270,7 @@ namespace BLL.NFE.Services
                     await nFeFilesDAO.AddSysnc(nfeFiles);
                 }
 
-                //Atualiza o arquivo processado 
+                //Atualiza o arquivo processado FileStorange 
                 arquivo.Processado = true;
                 await fileStorangeDAO.UpdateAsync(arquivo);
 
@@ -388,8 +388,32 @@ namespace BLL.NFE.Services
             IList<NFeFilesMensagens> mensagens = new List<NFeFilesMensagens>();
             foreach (det detalhe in notaXml.infNFe.det)
             {
+
+                //Não tem pedido de Compras 
                 if (string.IsNullOrEmpty(detalhe.prod.xPed))
                 {
+
+                    //Tenta encontrar algum pedido de compras em aberto 
+                    FornecedorTotvs fornecedor = await fornecedorService
+                                                        .LocateByCnpjAsync(nfeFiles.Empresa.CodigoTotvsEmpresaFilial, 
+                                                                            nfeFiles.CnpjFornecedor);
+
+                    if (fornecedor != null)
+                    {
+                        ProdutoVersusFornecedorTotvs produto = await produtoVersusFornecedorTotvsService
+                                                               .Get(nfeFiles.Empresa.CodigoTotvsEmpresaFilial,
+                                                                   fornecedor.A2_COD,
+                                                                   detalhe.prod.cProd);
+                        if (produto != null)
+                        {
+                            IList<PedidoDeCompraTotvs> pedidos = await pedidoTotvsService
+                                                                                .BuscaEmAberto(nfeFiles.Empresa.CodigoTotvsEmpresaFilial,
+                                                                                                nfeFiles.CnpjFornecedor, produto.A5_PRODUTO);
+
+                            /*Grava a recomendação dos pedidos para visualizar em tela*/
+                        }
+                    }
+
                     mensagens.Add(new NFeFilesMensagens()
                     {
                         NFeFiles = nfeFiles,
@@ -402,7 +426,10 @@ namespace BLL.NFE.Services
                     continue;
                 }
 
+
                 IList<PedidoDeCompraTotvs> pedidoCompra = await pedidoTotvsService.GetByPedido(detalhe.prod.xPed);
+
+                //Tem pedido mas não é nosso 
                 if (pedidoCompra == null)
                 {
                     mensagens.Add(new NFeFilesMensagens()
@@ -417,7 +444,8 @@ namespace BLL.NFE.Services
                     continue;
                 }
 
-                
+
+
                 ProdutoVersusFornecedorTotvs produtoVsFornecedor = await produtoVersusFornecedorTotvsService.Get(nfeFiles.Empresa.CodigoTotvsEmpresaFilial,
                                                                                                                  nfeFiles.CnpjFornecedor,
                                                                                                                  detalhe.prod.cProd).ConfigureAwait(false);
@@ -427,6 +455,8 @@ namespace BLL.NFE.Services
                                                    .Where(x => x.C7_PRODUTO.Equals(produtoVsFornecedor.A5_PRODUTO))
                                                    .SingleOrDefault();
 
+
+                    //Tem pedido é nosso, mas o produto não está no pedido de compras
                     if (pedido == null)
                     {
                         mensagens.Add(new NFeFilesMensagens()
@@ -441,6 +471,8 @@ namespace BLL.NFE.Services
                         continue;
                     }
 
+
+                    //O Preço do produto diverge com o pedido de compras
                     double minValue = (double)detalhe.prod.vUnCom - 0.01;
                     double maxValue = (double)detalhe.prod.vUnCom + 0.01;
 
