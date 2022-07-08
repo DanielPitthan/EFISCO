@@ -41,11 +41,10 @@ namespace BLL.TOTVS.Cadastros.Servicos
             //Grava o fornecedor
             bool success = await fornecedorTotvsDAO.AddRawSql(fornecedor);
 
-            if (success)
-            {
-                Emitente.IntegradaoTOTVS = true;
-                success = await emitenteService.AtualizarAsync(Emitente);
-            }
+
+            Emitente.IntegradaoTOTVS = true;
+            success = await emitenteService.AtualizarAsync(Emitente);
+
 
             return success;
         }

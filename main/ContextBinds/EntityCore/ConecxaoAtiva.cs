@@ -28,7 +28,7 @@ namespace ContextBinds.EntityCore
             IConfiguration configuration = builder.Build();
             IConfigurationSection conecxaoAtiva = configuration.GetSection("ProducaoNFeXML");
 
-            return configuration.GetConnectionString(conecxaoAtiva.Value);
+            return configuration.GetConnectionString("Server=192.168.1.252;Database=NFeXML;User Id=EFISCO;Password=Imperador; MultipleActiveResultSets=True;");
         }
 
         public static string StringConnectionBaseTotvs()
@@ -39,7 +39,7 @@ namespace ContextBinds.EntityCore
                      .AddEnvironmentVariables();
 
             IConfiguration configuration = builder.Build();
-            IConfigurationSection conecxaoAtiva = configuration.GetSection("ProducaoProtheuss");
+            IConfigurationSection conecxaoAtiva = configuration.GetSection("ProducaoProtheus");
 
             return configuration.GetConnectionString(conecxaoAtiva.Value);
         }

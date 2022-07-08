@@ -331,7 +331,7 @@ namespace BLL.NFE.Services
                 // Sem Tem xPed ?
                 //if (notaXml.infNFe.det.Any(x => !string.IsNullOrEmpty(x.prod.xPed)))
                 //{
-                mensagensIntegracao.AddRange(await ValidaPedido(notaXml, nfeFiles));
+                //mensagensIntegracao.AddRange(await ValidaPedido(notaXml, nfeFiles));
                 //  }
             }
             catch (Exception ex)
