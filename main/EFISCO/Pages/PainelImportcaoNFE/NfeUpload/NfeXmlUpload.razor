@@ -2,12 +2,13 @@
 
 @inject BLL.NFE.Interfaces.INFeXmlService xmlNfeService;
 @inject NavigationManager navigationService;
+@inject BLL.Infra.Interface.IParametroService parametroService;
 
 <style>
     span.ui-fileupload-choose.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left {
         height: 50px;
         background-color: @cssButtonUpload;
-        color:@cssButtonUploadColor;
+        color: @cssButtonUploadColor;
     }
 </style>
 
@@ -17,8 +18,7 @@
                   Progress="@(async (args) =>  await OnProgress(args, ""))"
                   Url="upload/multiple"
                   ChooseText="@textButtonUpload" Style="width:100%;" Auto="true"
-                  Complete="UploadFinish"
-                  >
+                  Complete="UploadFinish">
     </RadzenUpload>
 
 
@@ -28,6 +28,21 @@
             @Error
         </Div>
     }
+    @if (sucesso)
+    {
+        <br />
+        <div class="alert alert-success">
+            <b>Sucesso!</b> Arquivo carregado com sucesso.
+        </div>
+    }
+    @if (IsRunning.Valor.Equals("S"))
+    {
+        <br />
+        <div class="alert alert-warning">
+            <b>Processando</b> Arquivos em processamento.
+        </div>
+    }
+
 </div>
 
 
@@ -45,12 +60,20 @@
     private string cssButtonUpload = "";
     private string cssButtonUploadColor = "white";
     private string Error = "";
+    private bool sucesso = false;
+    private Parametro IsRunning = new Parametro();
 
     protected override void OnInitialized()
     {
+
+        base.OnInitialized();
+
         textButtonUpload = "Solte os arquivos aqui";
         cssButtonUpload = "dodgerblue";
-        base.OnInitialized();
+        IsRunning = new Parametro()
+            {
+                Valor = "N"
+            };
     }
 
 
@@ -61,7 +84,14 @@
 
         if ((int)args.Progress >= 100)
         {
-            textButtonUpload = "Arquivos carregados com sucesso. Processando...";
+
+            var IsRunning = await parametroService.ObterParametro("IsRunning");
+
+            sucesso = true;
+
+
+
+            textButtonUpload = "Arquivos carregados com sucesso.";
             cssButtonUpload = "#ffcf00";
             cssButtonUploadColor = "black";
             this.StateHasChanged();

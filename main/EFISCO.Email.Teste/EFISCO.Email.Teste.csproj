@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mail.dll" Version="3.0.21294.1630" />
+    <PackageReference Include="Mail.dll" Version="3.0.22269.1117" />
   </ItemGroup>
 
 </Project>

@@ -11,6 +11,9 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Infra.Interfaces;
+using DAL.Infra.DAO;
+using Models.Infra;
 
 namespace CrossCuting.Factorys
 {
@@ -20,19 +23,28 @@ namespace CrossCuting.Factorys
         private static string pathToSaveofTheDay;
         private IHostEnvironment enviroment;
         private IFileStorangeDAO fileStorangeDAO;
-
+        private readonly IParametrosDAO parametroDAO;
 
         public UploadFactory(IHostEnvironment _enviroment,
-                    IFileStorangeDAO _fileStorange)
+                    IFileStorangeDAO _fileStorange,
+                    IParametrosDAO _parametroDAO)
         {
             enviroment = _enviroment;
             fileStorangeDAO = _fileStorange;
-
+            this.parametroDAO = _parametroDAO;
             pathToSaveofTheDay = PrepareEnviroment();
         }
 
         public async Task<IList<FileStorange>> ProcessarArquivos(IFormFile[] files, OrigemArquivo origem, EmailRecebido emailRecebido = null)
         {
+            Parametro IsRunning = await parametroDAO.GetAll()
+                                        .Where(x => x.Codigo.Equals("IsRunning"))
+                                        .FirstOrDefaultAsync();
+
+            IsRunning.Valor = "S";
+
+            await parametroDAO.UpdateAsync(IsRunning);
+                                
 
             IList<FileStorange> fileStoranges = new List<FileStorange>();
 
@@ -129,6 +141,11 @@ namespace CrossCuting.Factorys
                 }
                 fileStoranges.Add(fileToStore);
             }
+
+            IsRunning.Valor = "N";
+
+            await parametroDAO.UpdateAsync(IsRunning);
+
 
             return fileStoranges;
         }

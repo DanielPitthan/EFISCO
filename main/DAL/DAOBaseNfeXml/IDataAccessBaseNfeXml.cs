@@ -6,7 +6,7 @@ namespace DAL.DAOBaseNfeXml
     public interface IDataAccessBaseNfeXml
     {
         public Task<bool> AddSysnc<TSource>(TSource item);
-        public Task<bool> UpdateAsync<TSource>(TSource item);
+        public Task<bool> UpdateAsync<TSource>(TSource item) where TSource : class, IIdentifier;
         public abstract bool Update<TSource>(TSource item);
         public Task<bool> DeleteAsync<TSource>(TSource item);
 

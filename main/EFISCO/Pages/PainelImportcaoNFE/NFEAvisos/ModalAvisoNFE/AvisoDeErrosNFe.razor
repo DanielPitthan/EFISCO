@@ -1,6 +1,4 @@
-﻿
-
-@inject BLL.NFE.Interfaces.INFeXmlService nfeXmlService
+﻿@inject BLL.NFE.Interfaces.INFeXmlService nfeXmlService
 @inject BLL.NFE.Interfaces.INFeFilesMensagensService mensagensService
 @inject NavigationManager navigationManager;
 
@@ -43,6 +41,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-dark" @onclick="Fechar">OK</button>
                     <button type="button" class="btn btn-outline-secondary" @onclick="VizualizarNF">Visualizar NF</button>
+                    <button type="button" class="btn btn-outline-secondary" @onclick="IgnorarNF">Ignorar</button>
                     <button type="button" class="btn btn-outline-primary" @onclick="Revalidar">
                         @if (validando)
                         {
@@ -63,10 +62,10 @@
 }
 @if (!string.IsNullOrEmpty(exceptionError))
 {
-<div class="alert alert-danger">
-    @exceptionError;
-</div>
-  
+    <div class="alert alert-danger">
+        @exceptionError;
+    </div>
+
 }
 
 
@@ -91,7 +90,7 @@
     [Parameter]
     public string ChaveNfe { get; set; }
 
-    private string _chaveNfe="";
+    private string _chaveNfe = "";
 
 
     private bool validando;
@@ -106,6 +105,19 @@
 
     }
 
+    private async void IgnorarNF()
+    {
+        try
+        {
+            await nfeXmlService.IgnorarNF(_chaveNfe);
+            await Fechar();
+        }
+        catch (Exception ex)
+        {
+            exceptionError = ex.Message;
+        }
+        this.StateHasChanged();
+    }
 
     private void VizualizarNF()
     {
@@ -120,7 +132,8 @@
         try
         {
             await nfeXmlService.Revalidar(_chaveNfe);
-        }catch(Exception ex)
+        }
+        catch (Exception ex)
         {
             exceptionError = ex.Message;
         }

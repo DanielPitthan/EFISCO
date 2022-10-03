@@ -50,7 +50,6 @@ namespace EFISCO
             services
                  .AddBlazorise(options =>
                  {
-                     options.ChangeTextOnKeyPress = true; // optional
                  })
                  .AddBootstrapProviders();
 

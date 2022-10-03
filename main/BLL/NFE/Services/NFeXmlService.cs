@@ -395,7 +395,7 @@ namespace BLL.NFE.Services
 
                     //Tenta encontrar algum pedido de compras em aberto 
                     FornecedorTotvs fornecedor = await fornecedorService
-                                                        .LocateByCnpjAsync(nfeFiles.Empresa.CodigoTotvsEmpresaFilial, 
+                                                        .LocateByCnpjAsync(nfeFiles.Empresa.CodigoTotvsEmpresaFilial,
                                                                             nfeFiles.CnpjFornecedor);
 
                     if (fornecedor != null)
@@ -829,7 +829,17 @@ namespace BLL.NFE.Services
             return nFeFilesDAO.GetAll();
         }
 
-
+        public async Task<bool> IgnorarNF(string chave)
+        {
+            NFeFiles nfeFiles = await nFeFilesDAO.GetAll()
+                                        .Where(n => n.ChaveAcesso == chave)
+                                        .AsNoTracking()
+                                        .FirstOrDefaultAsync();
+            nfeFiles.AutoValidado = true;
+            nfeFiles.Validado = true;
+            bool result = nFeFilesDAO.Update(nfeFiles);
+            return result;
+        }
     }
 }
 

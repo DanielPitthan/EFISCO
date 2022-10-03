@@ -34,8 +34,20 @@ namespace DAL.DAOBaseNfeXml
             }
         }
 
-        public virtual async Task<bool> UpdateAsync<TSource>(TSource item)
+        public virtual async Task<bool> UpdateAsync<TSource>(TSource item) where TSource : class, IIdentifier
         {
+            var local = this.Contexto.Set<TSource>()
+                               .Local
+                               .FirstOrDefault(entry => entry.Id.Equals(entry.Id));
+
+
+            if (local != null)
+            {
+                this.Contexto.Entry(local).State = EntityState.Detached;
+            }
+
+
+
             Contexto.Entry(item).State = EntityState.Modified;
 
             try
