@@ -39,6 +39,7 @@
   <ItemGroup>
     <Folder Include="Pages\Relatorios\" />
     <Folder Include="wwwroot\Upload\XML\" />
+    <Folder Include="wwwroot\Upload\XML\2022\10\3\" />
   </ItemGroup>
 
   <ItemGroup>

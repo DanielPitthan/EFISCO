@@ -17,8 +17,7 @@
     <RadzenUpload Multiple="true"
                   Progress="@(async (args) =>  await OnProgress(args, ""))"
                   Url="upload/multiple"
-                  ChooseText="@textButtonUpload" Style="width:100%;" Auto="true"
-                  Complete="UploadFinish">
+                  ChooseText="@textButtonUpload" Style="width:100%;" Auto="true">
     </RadzenUpload>
 
 
@@ -31,18 +30,19 @@
     @if (sucesso)
     {
         <br />
-        <div class="alert alert-success">
-            <b>Sucesso!</b> Arquivo carregado com sucesso.
-        </div>
-    }
-    @if (IsRunning.Valor.Equals("S"))
-    {
         <br />
         <div class="alert alert-warning">
-            <b>Processando</b> Arquivos em processamento.
+            <b>Sucesso, arquivos importados!</b> Processando....
         </div>
     }
-
+    @if (processadoOK)
+    {
+       
+        <br />
+        <div class="alert alert-success">
+            <b>Sucesso!</b> Arquivos processados.
+        </div>
+    }
 </div>
 
 
@@ -61,7 +61,7 @@
     private string cssButtonUploadColor = "white";
     private string Error = "";
     private bool sucesso = false;
-    private Parametro IsRunning = new Parametro();
+    private bool processadoOK = false;
 
     protected override void OnInitialized()
     {
@@ -70,10 +70,7 @@
 
         textButtonUpload = "Solte os arquivos aqui";
         cssButtonUpload = "dodgerblue";
-        IsRunning = new Parametro()
-            {
-                Valor = "N"
-            };
+
     }
 
 
@@ -85,17 +82,14 @@
         if ((int)args.Progress >= 100)
         {
 
-            var IsRunning = await parametroService.ObterParametro("IsRunning");
-
             sucesso = true;
-
-
 
             textButtonUpload = "Arquivos carregados com sucesso.";
             cssButtonUpload = "#ffcf00";
             cssButtonUploadColor = "black";
             this.StateHasChanged();
 
+            await UploadFinish();
         }
     }
 
@@ -103,7 +97,9 @@
     {
         try
         {
-            await xmlNfeService.ProcessarArquivos();
+            processadoOK = await xmlNfeService.ProcessarArquivos();
+
+
         }
         catch (Exception ex)
         {

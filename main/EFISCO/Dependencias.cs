@@ -54,9 +54,6 @@ namespace EFISCO
         {
             services = serviceCollection;
 
-
-
-            
             services.AddTransient<IEmailDAO, EmailDAO>();
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IFileStorangeService, FileStorangeService>();

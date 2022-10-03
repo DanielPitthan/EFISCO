@@ -111,8 +111,6 @@ else
     private async Task ListarXML()
     {
         Arquivos = await nfeXmlService.ListarXMLSNaoProcessados(ListarApenasValidados, ListarApenasAuditados);
-
-
         await ArquivosCarregados.InvokeAsync(Arquivos);
         this.StateHasChanged();
     }

@@ -23,27 +23,20 @@ namespace CrossCuting.Factorys
         private static string pathToSaveofTheDay;
         private IHostEnvironment enviroment;
         private IFileStorangeDAO fileStorangeDAO;
-        private readonly IParametrosDAO parametroDAO;
+       // private readonly IParametrosDAO parametroDAO;
 
         public UploadFactory(IHostEnvironment _enviroment,
-                    IFileStorangeDAO _fileStorange,
-                    IParametrosDAO _parametroDAO)
+                    IFileStorangeDAO _fileStorange)
         {
             enviroment = _enviroment;
             fileStorangeDAO = _fileStorange;
-            this.parametroDAO = _parametroDAO;
+       //     this.parametroDAO = _parametroDAO;
             pathToSaveofTheDay = PrepareEnviroment();
         }
 
         public async Task<IList<FileStorange>> ProcessarArquivos(IFormFile[] files, OrigemArquivo origem, EmailRecebido emailRecebido = null)
         {
-            Parametro IsRunning = await parametroDAO.GetAll()
-                                        .Where(x => x.Codigo.Equals("IsRunning"))
-                                        .FirstOrDefaultAsync();
-
-            IsRunning.Valor = "S";
-
-            await parametroDAO.UpdateAsync(IsRunning);
+            
                                 
 
             IList<FileStorange> fileStoranges = new List<FileStorange>();
@@ -141,10 +134,6 @@ namespace CrossCuting.Factorys
                 }
                 fileStoranges.Add(fileToStore);
             }
-
-            IsRunning.Valor = "N";
-
-            await parametroDAO.UpdateAsync(IsRunning);
 
 
             return fileStoranges;

@@ -239,3 +239,7 @@ a, .btn-link {
 a.nav-link.active {
     margin-right: 8em;
 }
+
+.components-reconnect-show, .components-reconnect-failed, .components-reconnect-rejected {
+    display: none;
+}
