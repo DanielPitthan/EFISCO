@@ -28,7 +28,7 @@ namespace ContextBinds.EntityCore
             IConfiguration configuration = builder.Build();
             IConfigurationSection conecxaoAtiva = configuration.GetSection("ProducaoNFeXML");
 
-            return configuration.GetConnectionString("Server=192.168.1.252;Database=NFeXML;User Id=EFISCO;Password=Imperador; MultipleActiveResultSets=True;");
+            return configuration.GetConnectionString("Server=192.168.1.252;Database=NFeXML;User Id=EFISCO;Password=Imperador; MultipleActiveResultSets=True; Encrypt=False;");
         }
 
         public static string StringConnectionBaseTotvs()

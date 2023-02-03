@@ -31,7 +31,7 @@ namespace DAL.XmlDAL.DAO
                 .Include(infNFe => infNFe.infNFe)
                 .Include(inf => inf.infNFe.ide)
                 .Include(inf => inf.infNFe.emit)
-                    .ThenInclude(emit => emit.enderEmit)
+                   .ThenInclude(emit => emit.enderEmit)
 
                 .Include(inf => inf.infNFe.dest)
                     .ThenInclude(dest => dest.enderDest)
@@ -100,6 +100,7 @@ namespace DAL.XmlDAL.DAO
 
                 .AsNoTracking();
 
+            string query = notas.ToQueryString();
 
             return notas;
         }

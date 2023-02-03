@@ -37,13 +37,13 @@ namespace EFISCO
 
             services.AddDbContext<ContextEFNFeXml>(options =>
             {
-                options.UseSqlServer(@"Server=192.168.1.252;Database=NFeXML;User Id=EFISCO;Password=Imperador; MultipleActiveResultSets=True;")
+                options.UseSqlServer(@"Server=192.168.1.252;Database=NFeXML;User Id=EFISCO;Password=Imperador; MultipleActiveResultSets=True; Encrypt=False;")
                  .EnableSensitiveDataLogging();
             }, ServiceLifetime.Transient);
 
             services.AddDbContext<ContextTOTVS>(options =>
             {
-                options.UseSqlServer(@"Server=192.168.1.252;Database=PROTHEUS_PRODUCAO;User ID=totvs;Password=totvs#741; Connect Timeout=3000; MultipleActiveResultSets=True;")
+                options.UseSqlServer(@"Server=192.168.1.252;Database=PROTHEUS_PRODUCAO;User ID=totvs;Password=totvs#741; Connect Timeout=3000; MultipleActiveResultSets=True; Encrypt=False;")
                  .EnableSensitiveDataLogging();
             }, ServiceLifetime.Transient);
 

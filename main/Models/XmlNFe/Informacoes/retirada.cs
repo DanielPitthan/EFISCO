@@ -146,7 +146,7 @@ namespace XmlNFe.Nfes.Informacoes
 
         public string xPais { get; set; }
 
-        public string fone { get; set; }
+        public long fone { get; set; }
 
         public string email { get; set; }
 

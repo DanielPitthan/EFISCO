@@ -160,124 +160,133 @@ namespace BLL.NFE.Services
 
             foreach (FileStorange arquivo in arquivosAProcessar)
             {
-
-                #region Faz todos os loads
-                List<NFeFilesMensagens> mensagensDeErro = new List<NFeFilesMensagens>();
-                XmlDocument documento = new XmlDocument();
-
-                if (arquivo.XmlString == null)
-                    continue;
-
-                documento.LoadXml(arquivo.XmlString);
-
-                bool typeIsNfe = documento.GetElementsByTagName("NFe").Count > 0;
-                bool typeIsCte = documento.GetElementsByTagName("CTe").Count > 0;
-
-                NFe notaFiscalLidaXML = new NFe();
-
-                if (typeIsNfe)
+                try
                 {
-                    notaFiscalLidaXML = await nFeDAO.CarregarXML(documento.GetElementsByTagName("NFe")[0].OuterXml);
+
+                    #region Faz todos os loads
+                    List<NFeFilesMensagens> mensagensDeErro = new List<NFeFilesMensagens>();
+                    XmlDocument documento = new XmlDocument();
+
+                    if (arquivo.XmlString == null)
+                        continue;
+
+                    documento.LoadXml(arquivo.XmlString);
+
+                    bool typeIsNfe = documento.GetElementsByTagName("NFe").Count > 0;
+                    bool typeIsCte = documento.GetElementsByTagName("CTe").Count > 0;
+
+                    NFe notaFiscalLidaXML = new NFe();
+
+                    if (typeIsNfe)
+                    {
+                        notaFiscalLidaXML = await nFeDAO.CarregarXML(documento.GetElementsByTagName("NFe")[0].OuterXml);
+                    }
+
+                    if (typeIsCte)
+                    {
+                        existeCTENoProcessamento = typeIsCte;
+                        continue;
+                    }
+
+                    if (typeIsCte == false && typeIsNfe == false)
+                    {
+
+                        existeCTENoProcessamento = true;
+                        continue;
+                    }
+
+
+
+                    IQueryable<NFe> queryNfe = nFeDAO.GetAll()
+                                                      .Where(x => x.infNFe.Id == notaFiscalLidaXML.infNFe.Id);//Chave da NF
+                    string queryNfeDubbug = queryNfe.ToQueryString();
+                    NFe nfeImportada = await queryNfe.FirstOrDefaultAsync();
+
+
+
+
+                    NFeFiles nfeFilesImportado = await nFeFilesDAO
+                                                     .GetAll()
+                                                     .Where(x => x.ChaveAcesso == notaFiscalLidaXML.infNFe.Id)
+                                                     .FirstOrDefaultAsync();
+
+                    #endregion
+
+
+
+                    string[] pathSplited = arquivo.Path.Split('\\');
+                    NFeFiles nfeFiles = new NFeFiles
+                    {
+                        Id = nfeFilesImportado == null ? 0 : nfeFilesImportado.Id,
+                        Arquivo = pathSplited[pathSplited.Length - 1],
+                        Path = arquivo.Path,
+                        ChaveAcesso = notaFiscalLidaXML.infNFe.Id,
+                        CnpjFornecedor = notaFiscalLidaXML.infNFe.emit.CNPJ,
+                        DataEmnissaoNfe = notaFiscalLidaXML.infNFe.ide.dhEmi == null ? notaFiscalLidaXML.infNFe.ide.dEmi.Value.Date : notaFiscalLidaXML.infNFe.ide.dhEmi.Value.DateTime,
+                        Fornecedor = notaFiscalLidaXML.infNFe.emit.xNome,
+                        NumeroNota = notaFiscalLidaXML.infNFe.ide.nNF.ToString().PadLeft(9, '0'),
+                        Serie = notaFiscalLidaXML.infNFe.ide.serie,
+                        ValorTotal = notaFiscalLidaXML.infNFe.total.ICMSTot.vNF,
+                        DataInclusao = DateTime.Now,
+                        Empresa = await empresaService.GetByCnpjsync(notaFiscalLidaXML.infNFe.dest.CNPJ),
+                        AutoValidado = false,
+                        Validado = false
+                    };
+
+
+
+
+                    //Importa o NF-e
+                    if (nfeImportada != null)
+                    {
+                        notaFiscalLidaXML.Id = nfeImportada.Id;
+                        await nFeDAO.UpdateAsync(notaFiscalLidaXML);
+                    }
+                    else
+                    {
+                        await nFeDAO.AddAsync(notaFiscalLidaXML);
+
+                        //Após a inclusão preciso recuperar a nota para a validações
+                        nfeImportada = await nFeDAO.GetAll()
+                                                    .Where(x => x.infNFe.Id == notaFiscalLidaXML.infNFe.Id)//Chave da NF
+                                                    .SingleOrDefaultAsync();
+                    }
+
+
+
+                    #region Validações
+                    //Validação após gravar  Nf-e               
+
+                    mensagensDeErro.AddRange(await ValidaNFE(nfeImportada, nfeFiles));
+                    nfeFiles.AutoValidado = !(mensagensDeErro.Count > 0);
+
+                    #endregion
+
+
+                    //Atualiza ou insere NFeFile
+                    if (nfeFilesImportado != null)
+                    {
+                        nFeFilesDAO.Update(nfeFiles);
+                    }
+                    else
+                    {
+                        await nFeFilesDAO.AddSysnc(nfeFiles);
+                    }
+
+                    //Atualiza o arquivo processado FileStorange 
+                    arquivo.Processado = true;
+                    await fileStorangeDAO.UpdateAsync(arquivo);
+
+                    //Grava as mensagens de erro 
+                    foreach (NFeFilesMensagens mensagem in mensagensDeErro)
+                    {
+                        await nFeFilesMensagensService.Adcionar(mensagem).ConfigureAwait(false);
+                    }
                 }
-
-                if (typeIsCte)
-                {
-                    existeCTENoProcessamento = typeIsCte;
-                    continue;
-                }
-
-                if (typeIsCte == false && typeIsNfe == false)
+                catch (Exception ex)
                 {
 
-                    existeCTENoProcessamento = true;
-                    continue;
-                }
-
-
-
-                NFe nfeImportada = await nFeDAO.GetAll()
-                                                .Where(x => x.infNFe.Id == notaFiscalLidaXML.infNFe.Id)//Chave da NF
-                                                .FirstOrDefaultAsync();
-
-
-
-
-                NFeFiles nfeFilesImportado = await nFeFilesDAO
-                                                 .GetAll()
-                                                 .Where(x => x.ChaveAcesso == notaFiscalLidaXML.infNFe.Id)
-                                                 .FirstOrDefaultAsync();
-
-                #endregion
-
-
-
-                string[] pathSplited = arquivo.Path.Split('\\');
-                NFeFiles nfeFiles = new NFeFiles
-                {
-                    Id = nfeFilesImportado == null ? 0 : nfeFilesImportado.Id,
-                    Arquivo = pathSplited[pathSplited.Length - 1],
-                    Path = arquivo.Path,
-                    ChaveAcesso = notaFiscalLidaXML.infNFe.Id,
-                    CnpjFornecedor = notaFiscalLidaXML.infNFe.emit.CNPJ,
-                    DataEmnissaoNfe = notaFiscalLidaXML.infNFe.ide.dhEmi == null ? notaFiscalLidaXML.infNFe.ide.dEmi.Value.Date : notaFiscalLidaXML.infNFe.ide.dhEmi.Value.DateTime,
-                    Fornecedor = notaFiscalLidaXML.infNFe.emit.xNome,
-                    NumeroNota = notaFiscalLidaXML.infNFe.ide.nNF.ToString().PadLeft(9, '0'),
-                    Serie = notaFiscalLidaXML.infNFe.ide.serie,
-                    ValorTotal = notaFiscalLidaXML.infNFe.total.ICMSTot.vNF,
-                    DataInclusao = DateTime.Now,
-                    Empresa = await empresaService.GetByCnpjsync(notaFiscalLidaXML.infNFe.dest.CNPJ),
-                    AutoValidado = false,
-                    Validado = false
-                };
-
-
-
-
-                //Importa o NF-e
-                if (nfeImportada != null)
-                {
-                    notaFiscalLidaXML.Id = nfeImportada.Id;
-                    await nFeDAO.UpdateAsync(notaFiscalLidaXML);
-                }
-                else
-                {
-                    await nFeDAO.AddAsync(notaFiscalLidaXML);
-
-                    //Após a inclusão preciso recuperar a nota para a validações
-                    nfeImportada = await nFeDAO.GetAll()
-                                                .Where(x => x.infNFe.Id == notaFiscalLidaXML.infNFe.Id)//Chave da NF
-                                                .SingleOrDefaultAsync();
-                }
-
-
-
-                #region Validações
-                //Validação após gravar  Nf-e               
-
-                mensagensDeErro.AddRange(await ValidaNFE(nfeImportada, nfeFiles));
-                nfeFiles.AutoValidado = !(mensagensDeErro.Count > 0);
-
-                #endregion
-
-
-                //Atualiza ou insere NFeFile
-                if (nfeFilesImportado != null)
-                {
-                    nFeFilesDAO.Update(nfeFiles);
-                }
-                else
-                {
-                    await nFeFilesDAO.AddSysnc(nfeFiles);
-                }
-
-                //Atualiza o arquivo processado FileStorange 
-                arquivo.Processado = true;
-                await fileStorangeDAO.UpdateAsync(arquivo);
-
-                //Grava as mensagens de erro 
-                foreach (NFeFilesMensagens mensagem in mensagensDeErro)
-                {
-                    await nFeFilesMensagensService.Adcionar(mensagem).ConfigureAwait(false);
+                   
                 }
             }
 
